@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background: #f1f1f1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.row {
+  display: block;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.colQuarter {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 1rem 0;
+  float: left;
+}
+
+.select-box {
+  color: #555;
+  border: 1px solid #fff;
+  position: relative;
+  cursor: pointer;
+  height: 44px;
+  line-height: 44px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.2);
+}
+
+.select-box:focus {
+  outline: 0;
+  border: 1px solid #8bc34a;
+}
+
+.select-box > .options-container {
+  background: #fff;
+  position: absolute;
+  z-index: 2;
+  border: 1px solid #8bc34a;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 2px 2px;
+  top: 42px;
+  left: -1px;
+  right: -1px;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.2);
+}
+
+.select-box.options-container-visible > .options-container {
+  height: auto;
+  visibility: visible;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 200px;
+}
+
+.option {
+  padding: 0 1rem;
+  border-top: #eee 1px solid;
+}
+
+.option:hover {
+  background: #f5f5f5;
+}
+
+.option:active {
+  background: #f1f8e9;
+}
+
+.option.selected {
+  background: #eee;
+}
+
+.label-container {
+  padding: 0 2rem 0 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.label {
+  font-size: inherit;
+  background: transparent;
+  border: 0;
+}
+
+.icon {
+  color: #999;
+  position: absolute;
+  line-height: 1;
+  font-size: 1.5rem;
+  right: 1rem;
+  top: 10px;
+}
+
+@media (min-width: 600px) {
+  .colQuarter {
+    width: 25%;
+    margin: 0;
+  }
+}
