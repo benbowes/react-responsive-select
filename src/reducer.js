@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-// import deepFreeze from 'deep-freeze';
 
 export const initialState = {
   isDragging: false,

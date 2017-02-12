@@ -8,7 +8,23 @@
     "build": "webpack -p",
     "deploy": ".bin/deploy.sh",
     "test": "mocha --compilers js:babel-register --require test/jsdom-setup.js 'src/**/*__test__.js'",
-    "coverage": "rm -rf coverage && babel-istanbul cover _mocha --require test/jsdom-setup.js 'src/**/*__test__.js' -- -R spec"
+    "coverage": "rm -rf coverage && NODE_ENV=test nyc mocha 'src/**/*__test__.js'"
+  },
+
+  "nyc": {
+    "require": [ "babel-register", "./test/jsdom-setup.js" ],
+    "exclude": [ "src/**/*__test__.js", "test" ],
+    "reporter": [ "lcov", "text-summary" ],
+    "report-dir": "./coverage",
+    "sourceMap": false,
+    "instrument": false,
+    "check-coverage": true,
+    "watermarks": {
+      "lines": [100, 100],
+      "functions": [100, 100],
+      "branches": [100, 100],
+      "statements": [100, 100]
+    }
   },
 
   "author": "Ben Bowes <bb@benbowes.com>",
@@ -45,13 +61,12 @@
     "mocha": "3.0.x",
     "sinon": "1.17.x",
     "chai": "3.5.x",
-    "babel-istanbul": "0.12.x",
     "enzyme": "2.7.x",
+    "babel-plugin-istanbul": "3.1.x",
+    "nyc": "10.1.x",
 
     "webpack": "1.12.x",
-    "webpack-dev-server": "1.14.x",
-
-    "deep-freeze": "0.0.x"
+    "webpack-dev-server": "1.14.x"
 
   }
 }
