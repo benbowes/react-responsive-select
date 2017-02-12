@@ -19,8 +19,8 @@ class Form extends Component {
       <form ref={r => this.form = r}>
         <h3>Custom Selects</h3>
         <div className="row">
-          <div className="colQuarter">
 
+          <div className="colQuarter">
             <SelectBox
               prefix="Make"
               name="make"
@@ -28,8 +28,38 @@ class Form extends Component {
               options={options}
               onSubmit={() => { this.form.submit(); }}
             />
-
           </div>
+
+          <div className="colQuarter">
+            <SelectBox
+              prefix="Make"
+              name="make"
+              selectedValue="fiat"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
+            />
+          </div>
+
+          <div className="colQuarter">
+            <SelectBox
+              prefix="Make"
+              name="make"
+              selectedValue="fiat"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
+            />
+          </div>
+
+          <div className="colQuarter">
+            <SelectBox
+              prefix="Make"
+              name="make"
+              selectedValue="fiat"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
+            />
+          </div>
+
         </div>
       </form>
     );
