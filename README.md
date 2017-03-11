@@ -1,5 +1,7 @@
 # React Responsive Select
 
+![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
+
 A keyboard accessible React custom select - **alpha version**.
 
 <img src="https://media1.giphy.com/media/401CMO1Du5cju/giphy.gif" width="40%" /> <img src="https://media1.giphy.com/media/D4aqbOMrQnHxK/giphy.gif" width="30%" />
@@ -10,7 +12,7 @@ A keyboard accessible React custom select - **alpha version**.
 - `npm start`
 
 ## Select Box Keyboard Accessibility Tests
- 
+
 #### When not focused
 - Select Input receives focus when **TABBED** to
 
