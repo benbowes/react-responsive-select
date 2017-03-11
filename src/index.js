@@ -17,7 +17,7 @@ class Form extends Component {
   render() {
     return (
       <form ref={r => this.form = r}>
-        <h3>Custom Selects</h3>
+        <h3>React Responsive Selects</h3>
         <div className="row">
 
           <div className="colQuarter">

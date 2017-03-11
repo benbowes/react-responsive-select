@@ -5,13 +5,13 @@ import * as actionTypes from './actionTypes';
 import reducer, { initialState } from './reducer';
 import isTouchDevice from './isTouchDevice';
 import getNextIndex from './getNextIndex';
+import SelectBoxComponent from './SelectBoxComponent';
 
 export default class SelectBox extends Component {
 
   constructor() {
     super();
     this.state = initialState;
-    this.reducer = reducer;
     return this;
   }
 
@@ -20,108 +20,52 @@ export default class SelectBox extends Component {
 
     this.updateState({
       type: actionTypes.BOOTSTRAP_STATE,
-      value: {
-        options,
-        selectedValue,
-        name
-      }
+      value: { options, selectedValue, name }
     });
 
     this.OPTION_NODES_LENGTH = options.length;
-
     this.handleSelectBoxBlur = this.handleSelectBoxBlur.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.handleSelectBoxClick = this.handleSelectBoxClick.bind(this);
     this.handleSelectBoxKeyEvent = this.handleSelectBoxKeyEvent.bind(this);
     this.listeners = (isTouchDevice())
-        ? {
-          onBlur: this.handleSelectBoxBlur,
-          onTouchMove: this.handleTouchMove,
-          onTouchStart: this.handleTouchStart,
-          onTouchEnd: this.handleSelectBoxClick
-        }
-        : {
-          onBlur: this.handleSelectBoxBlur,
-          onMouseDown: this.handleSelectBoxClick,
-          onKeyDown: this.handleSelectBoxKeyEvent
-        };
-
-  }
-
-  componentDidUpdate(){
-    if(this.state.isDragging === false) {
-      const { selectedIndex } = this.state;
-      // Scroll to keep the selected option in view
-      this.optionsContainer.scrollTop = this[`option_${selectedIndex}`].offsetTop;
-    }
+      ? {
+        onBlur: this.handleSelectBoxBlur,
+        onTouchMove: this.handleTouchMove,
+        onTouchStart: this.handleTouchStart,
+        onTouchEnd: this.handleSelectBoxClick
+      }
+      : {
+        onBlur: this.handleSelectBoxBlur,
+        onMouseDown: this.handleSelectBoxClick,
+        onKeyDown: this.handleSelectBoxKeyEvent
+      };
   }
 
   render() {
     const { prefix } = this.props;
-    const { name, selectedOption, selectedIndex, isOptionsPanelOpen, options } = this.state;
+    const { name, isDragging, selectedOption, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
 
     return (
-      <div
-        className={`select-box ${(isOptionsPanelOpen === true) ? 'options-container-visible' : ''}`}
-        role="listbox"
-        tabIndex="0"
-        ref={(r) => { this.selectBox = r; }}
-        {...this.listeners}
-      >
-
-        <div className="label-container">
-          {prefix}:
-          <span className="label"> {selectedOption.displayText}</span>
-          <i className="icon fa fa-angle-down" aria-hidden="true"></i>
-        </div>
-
-        <div className="options-container" ref={(r) => { this.optionsContainer = r; }}>
-          {
-            options.length > 0 &&
-            options.map((option, index) => (
-              <div
-                key={index}
-                role="option"
-                className={`option ${(selectedIndex === index) ? 'selected' : ''}`}
-                data-key={index}
-                ref={(r) => {this[`option_${index}`] = r;}}
-              >
-                {option.displayText}
-              </div>
-            ))
-          }
-        </div>
-
-        {name &&
-        <input type="hidden" name={name} value={selectedOption.value} />
-        }
-
+      <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
+        <SelectBoxComponent
+          prefix={prefix}
+          name={name}
+          selectedOption={selectedOption}
+          selectedIndex={selectedIndex}
+          nextSelectedIndex={nextSelectedIndex}
+          isOptionsPanelOpen={isOptionsPanelOpen}
+          options={options}
+          isDragging={isDragging}
+        />
       </div>
     );
   }
 
   updateState(action) {
-    this.setState( this.reducer(this.state, action) );
+    this.setState( reducer(this.state, action) );
   }
-
-  toggleOptionsPanel(mode) {
-    switch (mode) {
-    case 'open':
-      // Open the options panel
-      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN, value: true });
-
-    case 'close':
-      // Close the options panel
-      return  this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN, value: false });
-
-    default:
-      // Toggle the options panel open or closed based on this.state.isOptionsPanelOpen
-      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN, value: !this.state.isOptionsPanelOpen });
-    }
-  }
-
-  // HANDLERS
 
   handleTouchStart() {
     // initially it's assumed that the user is not dragging
@@ -129,7 +73,7 @@ export default class SelectBox extends Component {
   }
 
   handleTouchMove() {
-    // if touchmove fired - User is dragging, this disables ability for
+    // if touchmove fired - User is dragging, this disables touchend/click
     this.updateState({ type: actionTypes.SET_IS_DRAGGING, value: true });
   }
 
@@ -138,6 +82,13 @@ export default class SelectBox extends Component {
     this.preventDefaultForKeyCodes([13, 32, 27, 38, 40], e);
 
     switch (e.keyCode) {
+    case 9: // Tab
+      /*
+      * dont blur selectbox when the panel is open
+      */
+      if (this.state.isOptionsPanelOpen) e.preventDefault();
+      return e;
+
     case 13: // Enter
       /*
       * can close the panel when open and focussed
@@ -149,13 +100,15 @@ export default class SelectBox extends Component {
       /*
       * open or close the panel when focussed
       */
-      return this.toggleOptionsPanel();
+      return (this.state.isOptionsPanelOpen)
+        ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
+        : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
 
     case 27: // Esc
       /*
       * remove focus from the panel when focussed
       */
-      return this.selectBox.blur();
+      return this.selectBox.firstChild.blur();
 
     case 38: // Up
       /*
@@ -181,25 +134,29 @@ export default class SelectBox extends Component {
     if(this.state.isDragging === false) {
       e.preventDefault();
 
-      this.selectBox.focus();
+      this.selectBox.firstChild.focus();
 
       if (e && e.target.classList.contains('option')) {
         this.updateState({
           type: actionTypes.SET_SELECTED_INDEX,
           value: parseFloat(e.target.getAttribute('data-key'))
         });
+
+        return this.forceUpdate(() => {
+          this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+        });
       }
 
       // Open panel if closed, close panel if open
-      this.toggleOptionsPanel();
+      return (this.state.isOptionsPanelOpen)
+        ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
+        : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
   }
 
   handleSelectBoxBlur() {
-    this.toggleOptionsPanel('close');
+    this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
   }
-
-  // HANDLER HELPERS
 
   // Disable native functionality if keyCode match
   preventDefaultForKeyCodes(keyCodes, e) {
@@ -211,22 +168,22 @@ export default class SelectBox extends Component {
   enterPressed(e) {
     if (this.state.isOptionsPanelOpen === true) {
       e.stopPropagation(); // Do not submit form
-      return this.toggleOptionsPanel('close'); // Close the panel
+      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
     }
     return this.props.onSubmit(); // Submit the form
   }
 
   keyUpOrDownPressed(type) {
-    const { isOptionsPanelOpen, selectedIndex } = this.state;
+    const { isOptionsPanelOpen, nextSelectedIndex } = this.state;
 
     this.updateState({
-      type: actionTypes.SET_SELECTED_INDEX,
-      value: getNextIndex(type, isOptionsPanelOpen, selectedIndex, this.OPTION_NODES_LENGTH)
+      type: actionTypes.SET_NEXT_SELECTED_INDEX,
+      value: getNextIndex(type, isOptionsPanelOpen, nextSelectedIndex, this.OPTION_NODES_LENGTH)
     });
 
     // Open the options panel
     if (this.state.isOptionsPanelOpen === false) {
-      this.toggleOptionsPanel('open');
+      this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
   }
 

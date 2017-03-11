@@ -58,6 +58,7 @@ describe('reducer', () => {
 
     expect(result).to.eql({
       ...initialState,
+      nextSelectedIndex: 7,
       selectedIndex: 7
     });
   });
