@@ -6,6 +6,11 @@ A keyboard accessible React custom select - **alpha version**.
 
 <img src="https://media1.giphy.com/media/401CMO1Du5cju/giphy.gif" width="40%" /> <img src="https://media1.giphy.com/media/D4aqbOMrQnHxK/giphy.gif" width="30%" />
 
+## Demo
+
+https://benbowes.github.io/react-responsive-select/
+
+
 ## Setup
 
 - `npm i`
