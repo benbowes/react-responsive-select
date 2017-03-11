@@ -11,6 +11,7 @@ describe('reducer', () => {
 
   it('should update state when BOOTSTRAP_STATE is fired', () => {
     const result = reducer(
+      initialState,
       {
         type: BOOTSTRAP_STATE,
         value: {
@@ -19,8 +20,7 @@ describe('reducer', () => {
           selectedValue: 'fiat',
           name: 'thing'
         }
-      },
-      initialState
+      }
     );
     expect(result.name).to.eql('thing');
     expect(result.selectedOption).to.eql({ displayText: 'Fiat', value: 'fiat' });
@@ -28,8 +28,8 @@ describe('reducer', () => {
 
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
     const result = reducer(
-      { type: SET_IS_DRAGGING, value: true },
-      initialState
+      initialState,
+      { type: SET_IS_DRAGGING, value: true }
     );
 
     expect(result).to.eql({
@@ -40,8 +40,8 @@ describe('reducer', () => {
 
   it('should update state.isOptionsPanelOpen when SET_OPTIONS_PANEL_OPEN is fired', () => {
     const result = reducer(
-      { type: SET_OPTIONS_PANEL_OPEN, value: true },
-      initialState
+      initialState,
+      { type: SET_OPTIONS_PANEL_OPEN, value: true }
     );
 
     expect(result).to.eql({
@@ -52,8 +52,8 @@ describe('reducer', () => {
 
   it('should update state.selectedIndex when SET_SELECTED_INDEX is fired', () => {
     const result = reducer(
-      { type: SET_SELECTED_INDEX, value: 7 },
-      initialState
+      initialState,
+      { type: SET_SELECTED_INDEX, value: 7 }
     );
 
     expect(result).to.eql({

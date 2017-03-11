@@ -9,12 +9,6 @@ export const initialState = {
   selectedOption: {}
 };
 
-let state = { ...initialState };
-
-export const resetState = () => {
-  state = { ...initialState };
-};
-
 export const getSelectedValueIndex = (options, selectedValue) => {
   const index = options.map(option => option.value).indexOf(selectedValue);
   return (index > -1)
@@ -22,9 +16,7 @@ export const getSelectedValueIndex = (options, selectedValue) => {
     : 0;
 };
 
-const reducer = (action, overrrideState = undefined) => {
-
-  state = overrrideState || state;
+const reducer = (state = initialState, action) => {
 
   switch(action.type) {
 
@@ -49,16 +41,16 @@ const reducer = (action, overrrideState = undefined) => {
   case actionTypes.SET_OPTIONS_PANEL_OPEN:
     return state = {
       ...state,
-      isOptionsPanelOpen: action.value
+      isOptionsPanelOpen: action.value,
+      selectedOption: {
+        ...state.options[ state.selectedIndex ]
+      }
     };
 
   case actionTypes.SET_SELECTED_INDEX:
     return state = {
       ...state,
-      selectedIndex: action.value,
-      selectedOption: {
-        ...state.options[ action.value ]
-      }
+      selectedIndex: action.value
     };
 
   }
