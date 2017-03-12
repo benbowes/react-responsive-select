@@ -1,5 +1,3 @@
-import 'babel-polyfill'; // For IE 11
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SelectBox from './SelectBox';
