@@ -15,10 +15,8 @@ body {
 h1 {
   font-weight: 600;
   line-height: 1.25;
-  padding-bottom: 0.25em;
-  margin: 1rem 0 2rem 0;
-  font-size: 2em;
-  border-bottom: 1px solid #fff;
+  margin: 1rem 0;
+  font-size: 2rem;
 }
 
 h2 {
@@ -26,7 +24,7 @@ h2 {
  line-height: 1.25;
  padding-bottom: 0;
  margin: 0 0 1rem 0;
- font-size: 1.5em;
+ font-size: 1.25em;
 }
 
 h3 {
@@ -39,16 +37,13 @@ ul {
 }
 
 .wrapper {
-  margin: 1rem;
-  border-radius: 0.5rem;
-  background: #f1f1f1;
+  background: #f5f5f5;
   padding: 1.5rem;
 }
 
 .inset {
   background: white;
-  border-radius: 0.25rem;
-  margin: 4rem 0 0 0;
+  margin: 3rem -28px 0 -28px;
   padding: 2rem;
 }
 

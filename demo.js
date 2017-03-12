@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import SelectBox from './SelectBox';
+import SelectBox from './src/SelectBox';
 
 const options = [
   { displayText: 'Any', value: 'null' },
@@ -25,7 +25,6 @@ class Form extends Component {
   render() {
     return (
       <form ref={r => this.form = r}>
-        <h3>Example</h3>
         <div className="row">
 
           <div className="colQuarter">

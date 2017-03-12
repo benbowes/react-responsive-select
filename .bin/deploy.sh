@@ -6,11 +6,14 @@ then echo "ERROR! You have uncommited changes..." && exit 1;
 else echo "Deploy in progress...";
 fi
 
-# Build JS into dist/app.js
-webpack --config webpack.config.js
+# Build demo JS
+webpack --config webpack.config.react-responsive-select.js
+
+# Build SelectBox JS
+webpack --config webpack.config.demo.js
 
 # git add new dist/ assets
-git add dist/index.js dist/SelectBox.js dist/index.html dist/styles.css
+git add .
 
 # Commit dist/ changes
 git commit -m "Deploy to gh-pages..."
@@ -19,4 +22,4 @@ git commit -m "Deploy to gh-pages..."
 git push origin master
 
 # Push dist folder to gh-pages branch
-git subtree push --prefix dist origin gh-pages
+git push origin gh-pages

@@ -2,17 +2,18 @@
   "name": "react-responsive-select",
   "version": "0.0.1",
   "description": "React Responsive Select",
-  "main": "index.js",
+  "main": "./dist/SelectBox.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --content-base dist/ --host 0.0.0.0 --port 3001",
-    "build": "webpack -p",
+    "start": "webpack-dev-server --progress --host 0.0.0.0 --port 3001",
+    "build": "webpack -p --config webpack.config.demo.js && webpack -p --config webpack.config.react-responsive-select.js ",
+    "demo": "npm run build && serve --port 3002",
     "deploy": ".bin/deploy.sh",
-    "test": "mocha --compilers js:babel-register --require test/jsdom-setup.js 'src/**/*__test__.js'",
+    "test": "mocha --compilers js:babel-register --require mocha/jsdom-setup.js 'src/**/*__test__.js'",
     "coverage": "rm -rf coverage && NODE_ENV=test nyc mocha 'src/**/*__test__.js'"
   },
 
   "nyc": {
-    "require": [ "babel-register", "./test/jsdom-setup.js" ],
+    "require": [ "babel-register", "./mocha/jsdom-setup.js" ],
     "exclude": [ "src/**/*__test__.js", "test" ],
     "reporter": [ "lcov", "text-summary" ],
     "report-dir": "./coverage",
@@ -63,7 +64,9 @@
     "nyc": "10.1.x",
 
     "webpack": "2.2.x",
-    "webpack-dev-server": "2.3.x"
+    "webpack-dev-server": "2.3.x",
+
+    "serve": "5.0.x"
 
   }
 }

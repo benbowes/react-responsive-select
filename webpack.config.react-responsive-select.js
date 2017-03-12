@@ -9,17 +9,17 @@ module.exports = {
   devtool: 'eval',
 
   entry: {
-    index: './src/index.js'
+    index: './src/SelectBox.js'
   },
 
   output: {
-    filename: '[name].js',
+    filename: 'SelectBox.js',
     path: path.resolve(__dirname, 'dist')
   },
 
   module: {
     rules: [{
-      test: /src\/.*\.js/,
+      test: /\.js$/,
       loader: 'babel-loader'
     }]
   }

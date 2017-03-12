@@ -4,11 +4,16 @@
 <title>Select Box</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="styles.css" rel="stylesheet">
+<link href="../dist/SelectBox.css" rel="stylesheet">
 </head>
 <body>
 
   <div class="wrapper">
+
+    <a class="" href="https://github.com/benbowes/react-responsive-select/" target="_blank" title="View on Github" style="
+    float: right;
+">View on Github</a>
+
     <h1>React Responsive Select</h1>
 
     <div id="root"></div>
@@ -17,42 +22,6 @@
     <div class="inset">
 
       <h2>Keyboard Accessibility Tests</h2>
-
-      <form id="customSelectForm">
-        <h3>Native Select boxes</h3>
-
-        <div class="row">
-
-          <select name="native1">
-            <option selected value="null">Any</option>
-            <option value="fiat">Fiat</option>
-            <option value="subaru">Subaru</option>
-            <option value="bmw">BMW</option>
-            <option value="tesla">Tesla</option>
-          </select>
-
-          <select name="native2">
-            <option selected value="null">Any</option>
-            <option value="fiat">Fiat</option>
-            <option value="subaru">Subaru</option>
-            <option value="bmw">BMW</option>
-            <option value="tesla">Tesla</option>
-          </select>
-
-          <select name="native3">
-            <option selected value="null">Any</option>
-            <option value="fiat">Fiat</option>
-            <option value="subaru">Subaru</option>
-            <option value="bmw">BMW</option>
-            <option value="tesla">Tesla</option>
-          </select>
-
-          <button type="submit">Submit</button>
-        </div>
-
-      </form>
-
-      <p>&nbsp;</p>
 
       <h3>When not focused</h3>
 
@@ -81,11 +50,48 @@
         <li>hitting SPACE key should select the current signified option and close the options panel</li>
         <li>hitting ESC key should close the options panel and keep current selection</li>
     </ul>
+
+    <p>&nbsp;</p>
+
+    <form id="customSelectForm">
+      <h3>Native Select boxes</h3>
+
+      <div class="row">
+
+        <select name="native1">
+          <option selected value="null">Any</option>
+          <option value="fiat">Fiat</option>
+          <option value="subaru">Subaru</option>
+          <option value="bmw">BMW</option>
+          <option value="tesla">Tesla</option>
+        </select>
+
+        <select name="native2">
+          <option selected value="null">Any</option>
+          <option value="fiat">Fiat</option>
+          <option value="subaru">Subaru</option>
+          <option value="bmw">BMW</option>
+          <option value="tesla">Tesla</option>
+        </select>
+
+        <select name="native3">
+          <option selected value="null">Any</option>
+          <option value="fiat">Fiat</option>
+          <option value="subaru">Subaru</option>
+          <option value="bmw">BMW</option>
+          <option value="tesla">Tesla</option>
+        </select>
+
+        <button type="submit">Submit</button>
+      </div>
+
+    </form>
+
   </div>
 
 </div>
 
-<script src="index.js"></script>
+<script src="./demo.js"></script>
 
 </body>
 </html>
