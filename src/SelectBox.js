@@ -3,8 +3,8 @@ import 'babel-polyfill'; // For IE 11
 import React, { Component, PropTypes } from 'react';
 import * as actionTypes from './actionTypes';
 import reducer, { initialState } from './reducer';
-import isTouchDevice from './isTouchDevice';
-import getNextIndex from './getNextIndex';
+import isTouchDevice from './utils/isTouchDevice';
+import getNextIndex from './utils/getNextIndex';
 import SelectBoxComponent from './SelectBoxComponent';
 
 export default class SelectBox extends Component {
@@ -12,6 +12,7 @@ export default class SelectBox extends Component {
   constructor() {
     super();
     this.state = initialState;
+    this.reducer = reducer;
     return this;
   }
 
@@ -43,6 +44,15 @@ export default class SelectBox extends Component {
       };
   }
 
+  componentDidUpdate( prevProps, prevState ) {
+    const { selectedOption } = this.state;
+    const { onChange } = this.props;
+
+    if(prevState.selectedOption.value && prevState.selectedOption.value !== selectedOption.value) {
+      return onChange(selectedOption.value);
+    }
+  }
+
   render() {
     const { prefix } = this.props;
     const { name, isDragging, selectedOption, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
@@ -64,7 +74,7 @@ export default class SelectBox extends Component {
   }
 
   updateState(action) {
-    this.setState( reducer(this.state, action) );
+    this.setState( this.reducer(this.state, action) );
   }
 
   handleTouchStart() {
@@ -196,8 +206,9 @@ SelectBox.propTypes = {
       value: PropTypes.string
     })
   ),
-  prefix: PropTypes.string.isRequired,
+  prefix: PropTypes.string,
   name: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
   selectedValue: PropTypes.string
 };

@@ -14,18 +14,41 @@ const options = [
 
 
 class Form extends Component {
+
+  constructor() {
+    super();
+    this.reportChange = this.reportChange.bind(this);
+  }
+
+  reportChange(v) {
+    console.log(v);
+  }
+
   render() {
     return (
       <form ref={r => this.form = r}>
-        <h3>React Responsive Selects</h3>
+        <h3>Example</h3>
         <div className="row">
 
           <div className="colQuarter">
             <SelectBox
               prefix="Make"
               name="make"
-              selectedValue="fiat"
-              options={options}
+              selectedValue="mazda"
+              options={[
+                { displayText: 'Any', value: 'null' },
+                { displayText: 'Oldsmobile', value: 'oldsmobile' },
+                { displayText: 'Ford', value: 'ford' },
+                { displayText: 'Mazda', value: 'mazda' },
+                { displayText: 'Toyota', value: 'toyota' },
+                { displayText: 'AMC', value: 'amc' },
+                { displayText: 'Delorean', value: 'delorean' },
+                { displayText: 'Fiat', value: 'fiat' },
+                { displayText: 'Subaru', value: 'subaru' },
+                { displayText: 'BMW', value: 'bmw' },
+                { displayText: 'Tesla', value: 'tesla' }
+              ]}
+              onChange={this.reportChange}
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
@@ -36,6 +59,7 @@ class Form extends Component {
               name="make"
               selectedValue="fiat"
               options={options}
+              onChange={this.reportChange}
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
@@ -46,6 +70,7 @@ class Form extends Component {
               name="make"
               selectedValue="fiat"
               options={options}
+              onChange={this.reportChange}
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
@@ -56,6 +81,7 @@ class Form extends Component {
               name="make"
               selectedValue="fiat"
               options={options}
+              onChange={this.reportChange}
               onSubmit={() => { this.form.submit(); }}
             />
           </div>

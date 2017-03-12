@@ -4,6 +4,7 @@ export default class SelectBoxComponent extends Component {
 
   componentDidUpdate(){
     const { nextSelectedIndex, isDragging } = this.props;
+
     // Scroll to keep the selected option in view
     if(isDragging === false)
       this.optionsContainer.scrollTop = this[`option_${nextSelectedIndex}`].offsetTop;

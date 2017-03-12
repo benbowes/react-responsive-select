@@ -8,12 +8,14 @@ import SelectBox from './SelectBox';
 import * as actionTypes from './actionTypes';
 
 const submitSpy = sinon.spy();
+const changeSpy = sinon.spy();
 
 const initialProps = {
   prefix: 'Make',
   name: 'make',
   selectedValue: 'fiat',
   onSubmit: submitSpy,
+  onChange: changeSpy,
   options: [
     { displayText: 'Any', value: 'null' },
     { displayText: 'Fiat', value: 'fiat' },
@@ -69,6 +71,27 @@ describe('SelectBox', () => {
       };
 
       expect(selectBox.state()).to.eql( expectedState );
+    });
+
+    it('should not mutate state', () => {
+      expect(selectBox.state()).to.eql( {
+        isDragging: false,
+        isOptionsPanelOpen: false,
+        nextSelectedIndex: 1,
+        selectedIndex: 1,
+        name: 'make',
+        options: [
+          { displayText: 'Any', value: 'null' },
+          { displayText: 'Fiat', value: 'fiat' },
+          { displayText: 'Subaru', value: 'subaru' },
+          { displayText: 'BMW', value: 'bmw' },
+          { displayText: 'Tesla', value: 'tesla' }
+        ],
+        selectedOption: {
+          displayText: 'Fiat',
+          value: 'fiat'
+        }
+      } );
     });
 
     it('should setup mousedown, keyup and blur on desktop', () => {
@@ -167,10 +190,18 @@ describe('SelectBox', () => {
     beforeEach(() => {
       selectBox = setup();
       selectBoxInstance = selectBox.instance();
+
       selectBoxContainer = selectBox.find('.select-box');
       updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
       enterPressedSpy = sinon.spy(selectBoxInstance, 'enterPressed');
       keyUpOrDownPressedSpy = sinon.spy(selectBoxInstance, 'keyUpOrDownPressed');
+    });
+
+    afterEach(() => {
+      selectBoxInstance.updateState.restore();
+      selectBoxInstance.enterPressed.restore();
+      selectBoxInstance.keyUpOrDownPressed.restore();
+      selectBox.unmount();
     });
 
     it('handleTouchStart() should set isDragging to false', () => {
@@ -237,32 +268,35 @@ describe('SelectBox', () => {
       expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('decrement');
     });
 
-    xit('handleSelectBoxKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
+    it('handleSelectBoxKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
       selectBoxContainer.simulate('keyDown', { keyCode: 38 });
-      // expect(toggleOptionsPanelSpy.calledOnce).to.equal(true);
-      console.log(updateStateSpy.args[0][0]);
       expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
-      // expect(toggleOptionsPanelSpy.args[0][0]).to.equal('open');
+      expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
-    xit('handleSelectBoxKeyEvent() - keyDown "DOWN" calls enterPressed("increment")', () => {
+    it('handleSelectBoxKeyEvent() - keyDown "DOWN" calls enterPressed("increment")', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: 40 });
       expect(keyUpOrDownPressedSpy.calledOnce).to.equal(true);
       expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('increment');
     });
 
-    xit('handleSelectBoxKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {
-      selectBoxContainer.simulate('keyDown', { keyCode: 40 });
+    it('handleSelectBoxKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
-      // expect(toggleOptionsPanelSpy.calledOnce).to.equal(true);
-      // expect(toggleOptionsPanelSpy.args[0][0]).to.equal('open');
-      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_OPTIONS_PANEL_OPEN }]);
+      selectBoxContainer.simulate('keyDown', { keyCode: 40 });
+      expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
+      expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
-    xit('handleSelectBoxKeyEvent() - keyDown "DOWN" does NOT try to open the options panel when already open', () => {
+    it('handleSelectBoxKeyEvent() - keyDown "DOWN" does NOT open the options panel when open', () => {
       selectBox.setState({ isOptionsPanelOpen: true });
       selectBoxContainer.simulate('keyDown', { keyCode: 40 });
+      expect(updateStateSpy.calledWith({ type: 'SET_OPTIONS_PANEL_OPEN' })).to.equal(false);
+    });
+
+    it('handleSelectBoxKeyEvent() - keyDown "TAB" does NOT move focus away from options panel when open', () => {
+      selectBox.setState({ isOptionsPanelOpen: true });
+      selectBoxContainer.simulate('keyDown', { keyCode: 9 });
       expect(updateStateSpy.calledOnce).to.equal(false);
     });
 
@@ -286,14 +320,6 @@ describe('SelectBox', () => {
           window.close();
         }
       });
-    });
-
-    afterEach(() => {
-      selectBoxInstance.updateState.restore();
-      selectBoxInstance.enterPressed.restore();
-      // selectBoxInstance.toggleOptionsPanel.restore();
-      selectBoxInstance.keyUpOrDownPressed.restore();
-      selectBox.unmount();
     });
 
   });

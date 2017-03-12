@@ -83,14 +83,14 @@ ul {
 
 .select-box:focus {
   outline: 0;
-  border: 1px solid #9c27b0;
+  border: 1px solid #666;
 }
 
 .select-box > .options-container {
   background: #fff;
   position: absolute;
   z-index: 2;
-  border: 1px solid #9c27b0;
+  border: 1px solid #666;
   border-top: 1px solid #eee;
   border-radius: 0 0 2px 2px;
   top: 42px;
@@ -107,7 +107,7 @@ ul {
   visibility: visible;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  max-height: 200px;
+  max-height: 230px;
 }
 
 .option {
@@ -117,17 +117,16 @@ ul {
 
 .option:hover,
 .option.nextSelection {
-  background: #f3e5f5;
-  color: #9c27b0;
+  background: #f1f8fb;
+  color: #03a9f4;
 }
 
 .option:active {
-  background: #f1f8e9;
+  background: #e1f5fe;
 }
 
 .option.selected {
   background: #f1f1f1;
-  font-weight: bold;
   /*color: #555;*/
 }
 
