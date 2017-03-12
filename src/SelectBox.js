@@ -1,5 +1,3 @@
-import 'babel-polyfill'; // For IE 11
-
 import React, { Component, PropTypes } from 'react';
 import * as actionTypes from './actionTypes';
 import reducer, { initialState } from './reducer';
