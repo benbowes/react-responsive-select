@@ -22,4 +22,4 @@ git commit -m "Deploy to gh-pages..."
 git push origin master
 
 # Push dist folder to gh-pages branch
-git push origin gh-pages
+git push -f origin master:gh-pages
