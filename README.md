@@ -8,7 +8,7 @@ A keyboard accessible React custom select - **alpha version**.
 
 ## Demo
 
-https://benbowes.github.io/react-responsive-select/
+https://benbowes.github.io/react-responsive-select/demo/
 
 
 ## Setup
