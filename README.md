@@ -58,6 +58,8 @@ https://benbowes.github.io/react-responsive-select/demo/
 ##### When not focused
 - Select Input receives focus when **TABBED** to
 
+---
+
 ## Touch Device Tests
 
 - tapping on a select will open it's options
