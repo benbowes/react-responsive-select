@@ -10,9 +10,7 @@ const options = [
   { displayText: 'Tesla', value: 'tesla' }
 ];
 
-
 class Form extends Component {
-
   constructor() {
     super();
     this.reportChange = this.reportChange.bind(this);
@@ -26,12 +24,11 @@ class Form extends Component {
     return (
       <form ref={r => this.form = r}>
         <div className="row">
-
           <div className="colQuarter">
             <SelectBox
-              prefix="Make"
+              // prefix="Make:"
               name="make"
-              selectedValue="mazda"
+              // selectedValue="mazda"
               options={[
                 { displayText: 'Any', value: 'null' },
                 { displayText: 'Oldsmobile', value: 'oldsmobile' },
@@ -49,10 +46,9 @@ class Form extends Component {
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
-
           <div className="colQuarter">
             <SelectBox
-              prefix="Make"
+              prefix="Make:"
               name="make"
               selectedValue="fiat"
               options={options}
@@ -60,10 +56,9 @@ class Form extends Component {
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
-
           <div className="colQuarter">
             <SelectBox
-              prefix="Make"
+              prefix="Make:"
               name="make"
               selectedValue="fiat"
               options={options}
@@ -71,10 +66,9 @@ class Form extends Component {
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
-
           <div className="colQuarter">
             <SelectBox
-              prefix="Make"
+              prefix="Make:"
               name="make"
               selectedValue="fiat"
               options={options}
@@ -82,7 +76,6 @@ class Form extends Component {
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
-
         </div>
 
         <br/>
@@ -90,7 +83,6 @@ class Form extends Component {
         <div className="row">
           <button type="submit" className={'button'}>Submit form</button>
         </div>
-
       </form>
     );
   }

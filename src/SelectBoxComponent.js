@@ -6,43 +6,43 @@ export default class SelectBoxComponent extends Component {
     const { nextSelectedIndex, isDragging } = this.props;
 
     // Scroll to keep the selected option in view
-    if(isDragging === false)
+    if(isDragging === false) {
       this.optionsContainer.scrollTop = this[`option_${nextSelectedIndex}`].offsetTop;
+    }
   }
 
   render(){
     const { prefix, name, selectedOption, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.props;
     return (
       <div
-        className={`
-          select-box
-          ${(isOptionsPanelOpen === true) ? 'options-container-visible' : ''}
-        `}
+        className={`select-box ${(isOptionsPanelOpen === true) ? 'options-container-visible' : ''}`}
         role="listbox"
         tabIndex="0"
       >
         <div className="label-container">
-          {prefix}:
+          {prefix &&
+          <span>{prefix}</span>
+          }
           <span className="label"> {selectedOption.displayText}</span>
           <i className="icon fa fa-angle-down" aria-hidden="true"></i>
         </div>
         <div className="options-container" ref={(r) => { this.optionsContainer = r; }}>
           {options.length > 0 &&
-          options.map((option, index) => (
-            <div
-              key={index}
-              role="option"
-              data-key={index}
-              ref={(r) => { this[`option_${index}`] = r; }}
-              className={`
-                option
-                ${(selectedIndex === index) ? 'selected' : ''}
-                ${(nextSelectedIndex === index) ? 'nextSelection' : ''}
-              `}
-            >
-              {option.displayText}
-            </div>
-          ))
+            options.map((option, index) => (
+              <div
+                key={index}
+                role="option"
+                data-key={index}
+                ref={(r) => { this[`option_${index}`] = r; }}
+                className={`
+                  option
+                  ${(selectedIndex === index) ? 'selected' : ''}
+                  ${(nextSelectedIndex === index) ? 'nextSelection' : ''}
+                `}
+              >
+                {option.displayText}
+              </div>
+            ))
           }
         </div>
 
@@ -58,12 +58,13 @@ export default class SelectBoxComponent extends Component {
 SelectBoxComponent.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      displayText: PropTypes.string,
-      value: PropTypes.string
+      displayText: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
     })
-  ),
-  prefix: PropTypes.string.isRequired,
+  ).isRequired,
+  prefix: PropTypes.string,
   name: PropTypes.string,
+  onSubmit: PropTypes.func,
   selectedValue: PropTypes.string,
   selectedOption: PropTypes.shape({
     displayText: PropTypes.string,

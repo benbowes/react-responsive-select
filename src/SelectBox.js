@@ -200,10 +200,10 @@ export default class SelectBox extends Component {
 SelectBox.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      displayText: PropTypes.string,
-      value: PropTypes.string
+      displayText: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
     })
-  ),
+  ).isRequired,
   prefix: PropTypes.string,
   name: PropTypes.string.isRequired,
   onSubmit: PropTypes.func,
