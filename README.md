@@ -1,8 +1,9 @@
 # React Responsive Select
 
-![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
+**Alpha version**  - ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
 
-A keyboard accessible React custom select - **alpha version**.
+A React custom select that is keyboard accessible on desktop.
+And tappable and draggable on touch devices.
 
 <img src="https://media1.giphy.com/media/401CMO1Du5cju/giphy.gif" width="40%" /> <img src="https://media1.giphy.com/media/D4aqbOMrQnHxK/giphy.gif" width="30%" />
 
@@ -10,45 +11,60 @@ A keyboard accessible React custom select - **alpha version**.
 
 https://benbowes.github.io/react-responsive-select/demo/
 
+---
 
-## Setup
+## Local Development
+
+##### Setup
 
 - `npm i`
 - `npm start`
 -  `visit http://localhost:3001/demo`
 
-## Test
+##### Test
 
 - `npm test`
 
-## Coverage
+##### Coverage
 
 - `npm run coverage`
 
-## Run demo
+##### Run demo
 
 - `npm run demo`
 
+---
 
-## Keyboard Accessibility Tests
+## Desktop Keyboard Accessibility Tests
 
-#### When not focused
+##### When not focused
 - Select Input receives focus when **TABBED** to
 
-#### When focused and closed
+##### When focused and closed
 - hitting **TAB** key should blur Select Input
 - hitting **DOWN** key should open the options panel and signify selected item
 - hitting **UP** key should open the options panel and signify selected item
 - hitting **SPACE** key should open the options panel and signify selected item
 - hitting **ENTER** key should submit the form
 
-#### When focused and open
+##### When focused and open
 - hitting **TAB** key should not blur Select Input
 - hitting **DOWN** key should signify selected item and decrement down the options panel - signifying next potential selection
 - hitting **UP** key should signify selected item and increment up the options panel - signifying next potential selection
 - hitting **ENTER** key should select the current signified option and close the options panel
 - hitting **SPACE** key should select the current signified option and close the options panel
 - hitting **ESC** key should close the options panel and keep current selection
+
+##### When not focused
+- Select Input receives focus when **TABBED** to
+
+## Touch Device Tests
+
+- tapping on a select will open it's options
+- tapping on an option will select it's value
+- dragging on an options panel that is scrollable, will scroll the options panel
+
+---
 
 ## Device tests
 
