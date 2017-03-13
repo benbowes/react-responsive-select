@@ -8,15 +8,29 @@ A keyboard accessible React custom select - **alpha version**.
 
 ## Demo
 
-https://benbowes.github.io/react-responsive-select/
+https://benbowes.github.io/react-responsive-select/demo/
 
 
 ## Setup
 
 - `npm i`
 - `npm start`
+-  `visit http://localhost:3001/`
 
-## Select Box Keyboard Accessibility Tests
+## Test
+
+- `npm test`
+
+## Coverage
+
+- `npm run coverage`
+
+## Run demo
+
+- `npm run demo`
+
+
+## Keyboard Accessibility Tests
 
 #### When not focused
 - Select Input receives focus when **TABBED** to
