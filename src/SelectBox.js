@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as actionTypes from './actionTypes';
 import reducer, { initialState } from './reducer';
 import isTouchDevice from './utils/isTouchDevice';
-import getNextIndex from './utils/getNextIndex';
+import getNextIndex from './getNextIndex';
 import SelectBoxComponent from './SelectBoxComponent';
 
 export default class SelectBox extends Component {

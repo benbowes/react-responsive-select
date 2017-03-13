@@ -147,6 +147,27 @@ ul {
   top: 10px;
 }
 
+.button {
+  outline: 0;
+  -moz-apperance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 0;
+  border-radius: 3px;
+  padding: 1rem 2rem;
+  font-size: inherit;
+  font-weight: bold;
+  color: #fff;
+  background: #2196f3;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.2);
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  background: #1565c0;
+}
+
 @media (min-width: 600px) {
   .colQuarter {
     width: 25%;

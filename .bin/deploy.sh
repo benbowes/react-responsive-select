@@ -6,6 +6,9 @@ then echo "ERROR! You have uncommited changes..." && exit 1;
 else echo "Deploy in progress...";
 fi
 
+# eslint and test
+npm run test
+
 # Build demo JS
 webpack --config webpack.config.react-responsive-select.js
 

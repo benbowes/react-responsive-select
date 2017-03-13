@@ -14,13 +14,15 @@ module.exports = {
 
   output: {
     filename: 'demo.js',
-    path: path.resolve(__dirname, 'demo')
+    path: path.resolve(__dirname, 'demo'),
+    publicPath: 'demo'
   },
 
   module: {
     rules: [{
       test: /\.js$/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
+      exclude: path.resolve(__dirname, 'node_modules')
     }]
   }
 
