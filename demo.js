@@ -85,8 +85,10 @@ class Form extends Component {
 
         </div>
 
+        <br/>
+
         <div className="row">
-          <button type="submit" className={'button'}>SUBMIT</button>
+          <button type="submit" className={'button'}>Submit form</button>
         </div>
 
       </form>
