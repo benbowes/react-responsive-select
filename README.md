@@ -17,7 +17,7 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ##### Setup
 
-`npm i` then `npm start` then visit http://localhost:3001/demo
+`npm i` then `npm start` then visit `http://localhost:3001/demo`
 
 ##### Test
 
