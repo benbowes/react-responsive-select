@@ -15,7 +15,7 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 - `npm i`
 - `npm start`
--  `visit http://localhost:3001/`
+-  `visit http://localhost:3001/demo`
 
 ## Test
 
