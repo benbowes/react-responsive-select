@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 import jsdom from 'jsdom';
 
-import SelectBox from './SelectBox';
+import ReactResponsiveSelect from './ReactResponsiveSelect';
 import * as actionTypes from './actionTypes';
 
 const submitSpy = sinon.spy();
@@ -30,10 +30,10 @@ const setup = ((overrideProps, customProps = undefined) => {
     ...initialProps,
     ...overrideProps
   };
-  return mount(<SelectBox {...props}/>);
+  return mount(<ReactResponsiveSelect {...props}/>);
 });
 
-describe('SelectBox', () => {
+describe('ReactResponsiveSelect', () => {
 
   describe('Initialise', () => {
 
@@ -46,14 +46,15 @@ describe('SelectBox', () => {
     });
 
     it('should render correct amount of options and have an onSubmit function', () => {
-      expect(selectBox.find('.options-container .option').length).to.equal(5);
-      expect(selectBox.find('SelectBox').props().onSubmit).to.equal(submitSpy);
+      expect(selectBox.find('.rrs__options-container .rrs__option').length).to.equal(5);
+      expect(selectBox.find('ReactResponsiveSelect').props().onSubmit).to.equal(submitSpy);
     });
 
     it('should setup state', () => {
       const expectedState = {
         isDragging: false,
         isOptionsPanelOpen: false,
+        initialIndex: 1,
         nextSelectedIndex: 1,
         selectedIndex: 1,
         name: 'make',
@@ -77,6 +78,7 @@ describe('SelectBox', () => {
       expect(selectBox.state()).to.eql( {
         isDragging: false,
         isOptionsPanelOpen: false,
+        initialIndex: 1,
         nextSelectedIndex: 1,
         selectedIndex: 1,
         name: 'make',
@@ -130,24 +132,24 @@ describe('SelectBox', () => {
 
     beforeEach(() => {
       selectBox = setup();
-      selectBoxContainer = selectBox.find('.select-box');
+      selectBoxContainer = selectBox.find('.rrs__select-container');
       selectBoxDOM = selectBoxContainer.getDOMNode();
     });
 
-    it('mousedown on select-box container should toggle the options panel open and closed', () => {
+    it('mousedown on rrs__select-container container should toggle the options panel open and closed', () => {
       // Open
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('options-container-visible')).to.equal(true);
+      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(true);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
 
       // Closed
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('options-container-visible')).to.equal(false);
+      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
 
       // Open
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('options-container-visible')).to.equal(true);
+      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(true);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
     });
 
@@ -159,16 +161,16 @@ describe('SelectBox', () => {
       selectBoxInstance.updateState.restore();
     });
 
-    it('blur on select-box container should close the options panel', () => {
+    it('blur on rrs__select-container container should close the options panel', () => {
 
-      expect(selectBoxContainer.hasClass('options-container-visible')).to.equal(false);
+      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
 
       selectBoxDOM.focus();
 
       // Close
       selectBoxContainer.simulate('blur');
-      expect(selectBoxContainer.hasClass('options-container-visible')).to.equal(false);
+      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
     });
 
@@ -178,7 +180,7 @@ describe('SelectBox', () => {
 
   });
 
-  describe('SelectBox functions', () => {
+  describe('ReactResponsiveSelect functions', () => {
 
     let selectBox;
     let selectBoxInstance;
@@ -191,7 +193,7 @@ describe('SelectBox', () => {
       selectBox = setup();
       selectBoxInstance = selectBox.instance();
 
-      selectBoxContainer = selectBox.find('.select-box');
+      selectBoxContainer = selectBox.find('.rrs__select-container');
       updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
       enterPressedSpy = sinon.spy(selectBoxInstance, 'enterPressed');
       keyUpOrDownPressedSpy = sinon.spy(selectBoxInstance, 'keyUpOrDownPressed');
@@ -216,12 +218,12 @@ describe('SelectBox', () => {
       updateStateSpy.reset();
     });
 
-    it('Enter key calls handleSelectBoxKeyEvent() enterPressed()', () => {
+    it('Enter key calls handleKeyEvent() enterPressed()', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: 13 });
       expect(enterPressedSpy.called).to.equal(true);
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "ENTER" calls enterPressed() and onSubmit() when options panel closed', () => {
+    it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and onSubmit() when options panel closed', () => {
       submitSpy.reset();
 
       selectBoxContainer.simulate('keyDown', { keyCode: 13 });
@@ -230,7 +232,7 @@ describe('SelectBox', () => {
       expect(enterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "ENTER" calls enterPressed() and toggleOptionsPanel("close") when options panel open', () => {
+    it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and toggleOptionsPanel("close") when options panel open', () => {
       submitSpy.reset();
 
       selectBoxContainer.simulate('mouseDown'); // open
@@ -243,7 +245,7 @@ describe('SelectBox', () => {
       expect(enterPressedSpy.args[0][0].isPropagationStopped()).to.equal(true);
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "SPACE" toggles the options panel open/closed with toggleOptionsPanel()', () => {
+    it('handleKeyEvent() - keyDown "SPACE" toggles the options panel open/closed with toggleOptionsPanel()', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: 32 }); // space pressed
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( true );
 
@@ -251,50 +253,50 @@ describe('SelectBox', () => {
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( false );
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "ESCAPE" closes the options panel by blurring it', () => {
+    it('handleKeyEvent() - keyDown "ESCAPE" closes the options panel by blurring it', () => {
       selectBoxContainer.simulate('mouseDown'); // open
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( true );
 
       // ensure its focussed
-      expect(document.activeElement.classList.contains('select-box')).to.equal(true);
+      expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(true);
 
       selectBoxContainer.simulate('keyDown', { keyCode: 27 }); // escape pressed
-      expect(document.activeElement.classList.contains('select-box')).to.equal(false);
+      expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(false);
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "UP" calls enterPressed("decrement")', () => {
+    it('handleKeyEvent() - keyDown "UP" calls enterPressed("decrement")', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: 38 });
       expect(keyUpOrDownPressedSpy.calledOnce).to.equal(true);
       expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('decrement');
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
+    it('handleKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
       selectBoxContainer.simulate('keyDown', { keyCode: 38 });
       expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
       expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "DOWN" calls enterPressed("increment")', () => {
+    it('handleKeyEvent() - keyDown "DOWN" calls enterPressed("increment")', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: 40 });
       expect(keyUpOrDownPressedSpy.calledOnce).to.equal(true);
       expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('increment');
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {
+    it('handleKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
       selectBoxContainer.simulate('keyDown', { keyCode: 40 });
       expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
       expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "DOWN" does NOT open the options panel when open', () => {
+    it('handleKeyEvent() - keyDown "DOWN" does NOT open the options panel when open', () => {
       selectBox.setState({ isOptionsPanelOpen: true });
       selectBoxContainer.simulate('keyDown', { keyCode: 40 });
       expect(updateStateSpy.calledWith({ type: 'SET_OPTIONS_PANEL_OPEN' })).to.equal(false);
     });
 
-    it('handleSelectBoxKeyEvent() - keyDown "TAB" does NOT move focus away from options panel when open', () => {
+    it('handleKeyEvent() - keyDown "TAB" does NOT move focus away from options panel when open', () => {
       selectBox.setState({ isOptionsPanelOpen: true });
       selectBoxContainer.simulate('keyDown', { keyCode: 9 });
       expect(updateStateSpy.calledOnce).to.equal(false);
@@ -307,7 +309,7 @@ describe('SelectBox', () => {
           window['ontouchstart'] = 'fakeEvent';
 
           const selectBoxMobile = setup();
-          const selectBoxMobileContainer = selectBoxMobile.find('.select-box');
+          const selectBoxMobileContainer = selectBoxMobile.find('.rrs__select-container');
 
           selectBoxMobileContainer.simulate('touchStart');
           // expect(toggleOptionsPanelSpy.calledOnce).to.equal(true);
@@ -325,21 +327,21 @@ describe('SelectBox', () => {
   });
 
 
-  describe('option list selectedValue .selected class', () => {
+  describe('option list selectedValue .rrs__option--selected class', () => {
 
     let selectBox;
 
-    it('should add .selected class to option if selectedValue prop found in options', () => {
+    it('should add .rrs__option--selected class to option if selectedValue prop found in options', () => {
       selectBox = setup();
-      expect(selectBox.find('.options-container .option.selected').props()['children']).to.equal('Fiat');
+      expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props()['children']).to.equal('Fiat');
     });
 
-    it('should add .selected class to first option when unrecognised selectedValue prop', () => {
+    it('should add .rrs__option--selected class to first option when unrecognised selectedValue prop', () => {
       selectBox = setup({selectedValue: 'blahblah'});
-      expect(selectBox.find('.options-container .option.selected').props().children).to.equal('Any');
+      expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props().children).to.equal('Any');
     });
 
-    it('should add .selected class to first option when no selectedValue prop', () => {
+    it('should add .rrs__option--selected class to first option when no selectedValue prop', () => {
       const props = {
         prefix: 'Make',
         name: 'make',
@@ -347,7 +349,7 @@ describe('SelectBox', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect(selectBox.find('.options-container .option.selected').props().children).to.equal('Any');
+      expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props().children).to.equal('Any');
     });
 
     afterEach(() => {

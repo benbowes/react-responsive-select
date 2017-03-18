@@ -9,11 +9,11 @@ module.exports = {
   devtool: 'eval',
 
   entry: {
-    index: './src/SelectBox.js'
+    index: './src/ReactResponsiveSelect.js'
   },
 
   output: {
-    filename: 'SelectBox.js',
+    filename: 'ReactResponsiveSelect.js',
     path: path.resolve(__dirname, 'dist')
   },
 

@@ -24,6 +24,7 @@ const reducer = (state = initialState, action) => {
   case actionTypes.BOOTSTRAP_STATE:
     return {
       ...state,
+      initialIndex: getSelectedValueIndex(action.value.options, action.value.selectedValue),
       name: action.value.name,
       options: action.value.options,
       selectedIndex: getSelectedValueIndex(action.value.options, action.value.selectedValue),

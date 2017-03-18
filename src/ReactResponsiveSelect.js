@@ -3,12 +3,27 @@ import * as actionTypes from './actionTypes';
 import reducer, { initialState } from './reducer';
 import isTouchDevice from './utils/isTouchDevice';
 import getNextIndex from './getNextIndex';
-import SelectBoxComponent from './SelectBoxComponent';
+import ReactResponsiveSelectComponent from './ReactResponsiveSelectComponent';
 
-export default class SelectBox extends Component {
+export default class ReactResponsiveSelect extends Component {
 
-  constructor() {
-    super();
+  static propTypes = {
+    options: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      })
+    ).isRequired,
+    dropdownIcon: PropTypes.element,
+    prefix: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func,
+    onChange: PropTypes.func,
+    selectedValue: PropTypes.string
+  }
+
+  constructor(props) {
+    super(props);
     this.state = initialState;
     this.reducer = reducer;
     return this;
@@ -23,22 +38,22 @@ export default class SelectBox extends Component {
     });
 
     this.OPTION_NODES_LENGTH = options.length;
-    this.handleSelectBoxBlur = this.handleSelectBoxBlur.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.handleSelectBoxClick = this.handleSelectBoxClick.bind(this);
-    this.handleSelectBoxKeyEvent = this.handleSelectBoxKeyEvent.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleKeyEvent = this.handleKeyEvent.bind(this);
     this.listeners = (isTouchDevice())
       ? {
-        onBlur: this.handleSelectBoxBlur,
+        onBlur: this.handleBlur,
         onTouchMove: this.handleTouchMove,
         onTouchStart: this.handleTouchStart,
-        onTouchEnd: this.handleSelectBoxClick
+        onTouchEnd: this.handleClick
       }
       : {
-        onBlur: this.handleSelectBoxBlur,
-        onMouseDown: this.handleSelectBoxClick,
-        onKeyDown: this.handleSelectBoxKeyEvent
+        onBlur: this.handleBlur,
+        onMouseDown: this.handleClick,
+        onKeyDown: this.handleKeyEvent
       };
   }
 
@@ -53,11 +68,13 @@ export default class SelectBox extends Component {
 
   render() {
     const { prefix } = this.props;
-    const { name, isDragging, selectedOption, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
+    const { name, isDragging, dropdownIcon, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
 
     return (
       <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
-        <SelectBoxComponent
+        <ReactResponsiveSelectComponent
+          initialIndex={initialIndex}
+          dropdownIcon={dropdownIcon}
           prefix={prefix}
           name={name}
           selectedOption={selectedOption}
@@ -85,7 +102,7 @@ export default class SelectBox extends Component {
     this.updateState({ type: actionTypes.SET_IS_DRAGGING, value: true });
   }
 
-  handleSelectBoxKeyEvent(e) {
+  handleKeyEvent(e) {
     // Apply e.preventDefault for these keyCodes
     this.preventDefaultForKeyCodes([13, 32, 27, 38, 40], e);
 
@@ -137,14 +154,14 @@ export default class SelectBox extends Component {
     }
   }
 
-  handleSelectBoxClick(e) {
+  handleClick(e) {
     // Ignore click and touchend if user is dragging
     if(this.state.isDragging === false) {
       e.preventDefault();
 
       this.selectBox.firstChild.focus();
 
-      if (e && e.target.classList.contains('option')) {
+      if (e && e.target.classList.contains('rrs__option')) {
         this.updateState({
           type: actionTypes.SET_SELECTED_INDEX,
           value: parseFloat(e.target.getAttribute('data-key'))
@@ -162,7 +179,7 @@ export default class SelectBox extends Component {
     }
   }
 
-  handleSelectBoxBlur() {
+  handleBlur() {
     this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
   }
 
@@ -196,17 +213,3 @@ export default class SelectBox extends Component {
   }
 
 }
-
-SelectBox.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  prefix: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func,
-  onChange: PropTypes.func,
-  selectedValue: PropTypes.string
-};

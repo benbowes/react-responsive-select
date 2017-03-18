@@ -12,7 +12,7 @@ npm run test
 # Build demo JS
 webpack --config webpack.config.react-responsive-select.js
 
-# Build SelectBox JS
+# Build ReactResponsiveSelect JS
 webpack --config webpack.config.demo.js
 
 # git add new dist/ assets

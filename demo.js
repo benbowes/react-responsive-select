@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import SelectBox from './src/SelectBox';
+import ReactResponsiveSelect from './src/ReactResponsiveSelect';
 
 const options = [{
   value: 'null',
@@ -9,19 +9,19 @@ const options = [{
 }, {
   value: 'fiat',
   text: 'Fiat',
-  markup: <span><span className="badge" aria-hidden="true">F</span>Fiat</span>
+  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
 }, {
   value: 'subaru',
   text: 'Subaru',
-  markup: <span><span className="badge" aria-hidden="true">S</span>Subaru</span>
+  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
 }, {
   value: 'bmw',
   text: 'BMW',
-  markup: <span><span className="badge" aria-hidden="true">B</span>BMW</span>
+  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
 }, {
   value: 'tesla',
   text: 'Tesla',
-  markup: <span><span className="badge" aria-hidden="true">T</span>Tesla</span>
+  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
 }];
 
 class Form extends Component {
@@ -38,8 +38,9 @@ class Form extends Component {
     return (
       <form ref={r => this.form = r}>
         <div className="row">
-          <div className="colQuarter">
-            <SelectBox
+          <div className="col-1-4">
+            <ReactResponsiveSelect
+              dropdownIcon={<i className="rrs__icon fa fa-angle-down" aria-hidden="true"></i>}
               // prefix="Make:"
               name="make"
               // selectedValue="mazda"
@@ -60,8 +61,8 @@ class Form extends Component {
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
-          <div className="colQuarter">
-            <SelectBox
+          <div className="col-1-4">
+            <ReactResponsiveSelect
               prefix="Make:"
               name="make"
               selectedValue="fiat"
@@ -70,8 +71,9 @@ class Form extends Component {
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
-          <div className="colQuarter">
-            <SelectBox
+          <div className="col-1-4">
+            <ReactResponsiveSelect
+              dropdownIcon={<i className="rrs__icon fa fa-angle-down" aria-hidden="true"></i>}
               prefix="Make:"
               name="make"
               selectedValue="fiat"
@@ -80,8 +82,9 @@ class Form extends Component {
               onSubmit={() => { this.form.submit(); }}
             />
           </div>
-          <div className="colQuarter">
-            <SelectBox
+          <div className="col-1-4">
+            <ReactResponsiveSelect
+              dropdownIcon={<i className="rrs__icon fa fa-angle-down" aria-hidden="true"></i>}
               prefix="Make:"
               name="make"
               selectedValue="fiat"
@@ -91,9 +94,7 @@ class Form extends Component {
             />
           </div>
         </div>
-
         <br/>
-
         <div className="row">
           <button type="submit" className={'button'}>Submit form</button>
         </div>
