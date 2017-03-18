@@ -2,13 +2,27 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SelectBox from './src/SelectBox';
 
-const options = [
-  { displayText: 'Any', value: 'null' },
-  { displayText: 'Fiat', value: 'fiat' },
-  { displayText: 'Subaru', value: 'subaru' },
-  { displayText: 'BMW', value: 'bmw' },
-  { displayText: 'Tesla', value: 'tesla' }
-];
+const options = [{
+  value: 'null',
+  text: 'Any',
+  markup: <span>Any</span>
+}, {
+  value: 'fiat',
+  text: 'Fiat',
+  markup: <span><span className="badge" aria-hidden="true">F</span>Fiat</span>
+}, {
+  value: 'subaru',
+  text: 'Subaru',
+  markup: <span><span className="badge" aria-hidden="true">S</span>Subaru</span>
+}, {
+  value: 'bmw',
+  text: 'BMW',
+  markup: <span><span className="badge" aria-hidden="true">B</span>BMW</span>
+}, {
+  value: 'tesla',
+  text: 'Tesla',
+  markup: <span><span className="badge" aria-hidden="true">T</span>Tesla</span>
+}];
 
 class Form extends Component {
   constructor() {
@@ -30,17 +44,17 @@ class Form extends Component {
               name="make"
               // selectedValue="mazda"
               options={[
-                { displayText: 'Any', value: 'null' },
-                { displayText: 'Oldsmobile', value: 'oldsmobile' },
-                { displayText: 'Ford', value: 'ford' },
-                { displayText: 'Mazda', value: 'mazda' },
-                { displayText: 'Toyota', value: 'toyota' },
-                { displayText: 'AMC', value: 'amc' },
-                { displayText: 'Delorean', value: 'delorean' },
-                { displayText: 'Fiat', value: 'fiat' },
-                { displayText: 'Subaru', value: 'subaru' },
-                { displayText: 'BMW', value: 'bmw' },
-                { displayText: 'Tesla', value: 'tesla' }
+                { text: 'Any', value: 'null' },
+                { text: 'Oldsmobile', value: 'oldsmobile' },
+                { text: 'Ford', value: 'ford' },
+                { text: 'Mazda', value: 'mazda' },
+                { text: 'Toyota', value: 'toyota' },
+                { text: 'AMC', value: 'amc' },
+                { text: 'Delorean', value: 'delorean' },
+                { text: 'Fiat', value: 'fiat' },
+                { text: 'Subaru', value: 'subaru' },
+                { text: 'BMW', value: 'bmw' },
+                { text: 'Tesla', value: 'tesla' }
               ]}
               onChange={this.reportChange}
               onSubmit={() => { this.form.submit(); }}

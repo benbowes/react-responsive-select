@@ -23,7 +23,7 @@ export default class SelectBoxComponent extends Component {
           {prefix &&
           <span>{prefix}</span>
           }
-          <span className="label"> {selectedOption.displayText}</span>
+          <span className="label"> {selectedOption.text}</span>
           <i className="icon fa fa-angle-down" aria-hidden="true"></i>
         </div>
         <div className="options-container" ref={(r) => { this.optionsContainer = r; }}>
@@ -40,7 +40,7 @@ export default class SelectBoxComponent extends Component {
                   ${(nextSelectedIndex === index) ? 'nextSelection' : ''}
                 `}
               >
-                {option.displayText}
+                {option.markup || option.text}
               </div>
             ))
           }
@@ -58,7 +58,7 @@ export default class SelectBoxComponent extends Component {
 SelectBoxComponent.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      displayText: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired
     })
   ).isRequired,
@@ -67,7 +67,7 @@ SelectBoxComponent.propTypes = {
   onSubmit: PropTypes.func,
   selectedValue: PropTypes.string,
   selectedOption: PropTypes.shape({
-    displayText: PropTypes.string,
+    text: PropTypes.string,
     value: PropTypes.string
   }),
   selectedIndex: PropTypes.number,

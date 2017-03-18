@@ -16,14 +16,14 @@ describe('reducer', () => {
         type: BOOTSTRAP_STATE,
         value: {
           ...initialState,
-          options: [{ displayText: 'Any', value: 'null' }, { displayText: 'Fiat', value: 'fiat' }],
+          options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
           selectedValue: 'fiat',
           name: 'thing'
         }
       }
     );
     expect(result.name).to.eql('thing');
-    expect(result.selectedOption).to.eql({ displayText: 'Fiat', value: 'fiat' });
+    expect(result.selectedOption).to.eql({ text: 'Fiat', value: 'fiat' });
   });
 
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {

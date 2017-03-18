@@ -200,7 +200,7 @@ export default class SelectBox extends Component {
 SelectBox.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      displayText: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired
     })
   ).isRequired,

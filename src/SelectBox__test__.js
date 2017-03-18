@@ -17,11 +17,11 @@ const initialProps = {
   onSubmit: submitSpy,
   onChange: changeSpy,
   options: [
-    { displayText: 'Any', value: 'null' },
-    { displayText: 'Fiat', value: 'fiat' },
-    { displayText: 'Subaru', value: 'subaru' },
-    { displayText: 'BMW', value: 'bmw' },
-    { displayText: 'Tesla', value: 'tesla' }
+    { text: 'Any', value: 'null' },
+    { text: 'Fiat', value: 'fiat' },
+    { text: 'Subaru', value: 'subaru' },
+    { text: 'BMW', value: 'bmw' },
+    { text: 'Tesla', value: 'tesla' }
   ]
 };
 
@@ -58,14 +58,14 @@ describe('SelectBox', () => {
         selectedIndex: 1,
         name: 'make',
         options: [
-          { displayText: 'Any', value: 'null' },
-          { displayText: 'Fiat', value: 'fiat' },
-          { displayText: 'Subaru', value: 'subaru' },
-          { displayText: 'BMW', value: 'bmw' },
-          { displayText: 'Tesla', value: 'tesla' }
+          { text: 'Any', value: 'null' },
+          { text: 'Fiat', value: 'fiat' },
+          { text: 'Subaru', value: 'subaru' },
+          { text: 'BMW', value: 'bmw' },
+          { text: 'Tesla', value: 'tesla' }
         ],
         selectedOption: {
-          displayText: 'Fiat',
+          text: 'Fiat',
           value: 'fiat'
         }
       };
@@ -81,14 +81,14 @@ describe('SelectBox', () => {
         selectedIndex: 1,
         name: 'make',
         options: [
-          { displayText: 'Any', value: 'null' },
-          { displayText: 'Fiat', value: 'fiat' },
-          { displayText: 'Subaru', value: 'subaru' },
-          { displayText: 'BMW', value: 'bmw' },
-          { displayText: 'Tesla', value: 'tesla' }
+          { text: 'Any', value: 'null' },
+          { text: 'Fiat', value: 'fiat' },
+          { text: 'Subaru', value: 'subaru' },
+          { text: 'BMW', value: 'bmw' },
+          { text: 'Tesla', value: 'tesla' }
         ],
         selectedOption: {
-          displayText: 'Fiat',
+          text: 'Fiat',
           value: 'fiat'
         }
       } );
@@ -344,7 +344,7 @@ describe('SelectBox', () => {
         prefix: 'Make',
         name: 'make',
         onSubmit: submitSpy,
-        options: [{ displayText: 'Any', value: 'null' }, { displayText: 'Fiat', value: 'fiat' }]
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
       expect(selectBox.find('.options-container .option.selected').props().children).to.equal('Any');

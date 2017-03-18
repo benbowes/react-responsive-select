@@ -147,6 +147,13 @@ ul {
   top: 10px;
 }
 
+.badge {
+  background: #B3E5FC;
+  padding: 0.25rem 1rem;
+  margin: 2px 10px 2px 0;
+  border-radius: 3px;
+}
+
 .button {
   outline: 0;
   -moz-apperance: none;
