@@ -1,6 +1,6 @@
 # React Responsive Select
 
-**Alpha version**  - ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
+**WIP**  - ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
 
 A React custom select that is keyboard accessible on desktop.
 And tappable / draggable on touch devices.
