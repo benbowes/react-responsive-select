@@ -45,6 +45,10 @@ describe('ReactResponsiveSelect', () => {
       selectBoxInstance = selectBox.instance();
     });
 
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
     it('should render correct amount of options and have an onSubmit function', () => {
       expect(selectBox.find('.rrs__options-container .rrs__option').length).to.equal(5);
       expect(selectBox.find('ReactResponsiveSelect').props().onSubmit).to.equal(submitSpy);
@@ -118,10 +122,6 @@ describe('ReactResponsiveSelect', () => {
       });
     });
 
-    afterEach(() => {
-      selectBox.unmount();
-    });
-
   });
 
   describe('Events', () => {
@@ -134,6 +134,10 @@ describe('ReactResponsiveSelect', () => {
       selectBox = setup();
       selectBoxContainer = selectBox.find('.rrs__select-container');
       selectBoxDOM = selectBoxContainer.getDOMNode();
+    });
+
+    afterEach(() => {
+      selectBox.unmount();
     });
 
     it('mousedown on rrs__select-container container should toggle the options panel open and closed', () => {
@@ -172,10 +176,6 @@ describe('ReactResponsiveSelect', () => {
       selectBoxContainer.simulate('blur');
       expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
-    });
-
-    afterEach(() => {
-      selectBox.unmount();
     });
 
   });
@@ -331,6 +331,10 @@ describe('ReactResponsiveSelect', () => {
 
     let selectBox;
 
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
     it('should add .rrs__option--selected class to option if selectedValue prop found in options', () => {
       selectBox = setup();
       expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props()['children']).to.equal('Fiat');
@@ -352,10 +356,5 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props().children).to.equal('Any');
     });
 
-    afterEach(() => {
-      selectBox.unmount();
-    });
-
   });
-
 });
