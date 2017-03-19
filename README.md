@@ -1,13 +1,10 @@
 # React Responsive Select
 
-## This is a WIP
+## This is a well tested WIP / ALPHA
 
 ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
 
-A React custom select that is keyboard accessible on desktop.
-And tappable / draggable on touch devices.
-
-<img src="https://media1.giphy.com/media/401CMO1Du5cju/giphy.gif" width="40%" /> <img src="https://media1.giphy.com/media/D4aqbOMrQnHxK/giphy.gif" width="30%" />
+A React custom select control, that is both keyboard accessible like a native `<select/>` on desktop. And also tappable / draggable on touch devices.
 
 ## Demo
 
@@ -15,10 +12,10 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ---
 
-## Todo
+## Todos - items coming soon
 
-- Add `how to use` documentation
-- Add screen reader accessibility
+- how to use documentation
+- screen reader accessibility
 
 ---
 
@@ -59,11 +56,5 @@ More info to come... but if you are interested, check out the `demo.js` file on 
 
 ##### When not focused
 - Select Input receives focus when **TABBED** to
-
----
-
-## Local Development Guide
-
-See https://benbowes.github.io/react-responsive-select/README_DEVELOPMENT.md
 
 ---

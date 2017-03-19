@@ -21,18 +21,19 @@ const reducer = (state = initialState, action) => {
 
   switch(action.type) {
 
-  case actionTypes.BOOTSTRAP_STATE:
+  case actionTypes.BOOTSTRAP_STATE: {
+    const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
+
     return {
       ...state,
-      initialIndex: getSelectedValueIndex(action.value.options, action.value.selectedValue),
+      initialIndex: initialSelectedIndex,
       name: action.value.name,
       options: action.value.options,
-      selectedIndex: getSelectedValueIndex(action.value.options, action.value.selectedValue),
-      nextSelectedIndex: getSelectedValueIndex(action.value.options, action.value.selectedValue),
-      selectedOption: {
-        ...action.value.options[ getSelectedValueIndex(action.value.options, action.value.selectedValue) ]
-      }
+      selectedIndex: initialSelectedIndex,
+      nextSelectedIndex: initialSelectedIndex,
+      selectedOption: { ...action.value.options[ initialSelectedIndex ] }
     };
+  }
 
   case actionTypes.SET_IS_DRAGGING:
     return {
