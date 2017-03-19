@@ -12,27 +12,29 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ---
 
-## Todos - items coming soon
+## In Progress
 
-- how to use documentation
-- screen reader accessibility
+- How to use documentation
+- Screen reader accessibility
 
 ---
 
-## Usage
+## How to use
 
-More info to come... but if you are interested, check out the `demo.js` file on the root level of the project :)
+More info to come...
+
+For now check out the `demo.js` file on the root level of the project
  https://github.com/benbowes/react-responsive-select/blob/master/demo.js
 
-... and include `./dist/ReactResponsiveSelect.css` to your project.
+And include `./dist/ReactResponsiveSelect.css` in your project.
 
 ---
 
 ## Touch Device Tests
 
-- tapping on a select will open it's options
-- tapping on an option will select it's value
-- dragging on an options panel that is scrollable, will scroll the options panel
+- **TAPPING** on a select will open it's options
+- **TAPPING** on an option will select it's value
+- **DRAGGING** on an options panel that is scrollable, will scroll the options panel
 
 ---
 
