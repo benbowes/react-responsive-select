@@ -22,6 +22,13 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ---
 
+## Usage
+
+More info to come... but if you are interested, check out the `demo.js` file on the root level of the project :)
+ https://github.com/benbowes/react-responsive-select/blob/master/demo.js
+
+---
+
 ## Touch Device Tests
 
 - tapping on a select will open it's options
