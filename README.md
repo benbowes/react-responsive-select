@@ -1,6 +1,8 @@
 # React Responsive Select
 
-**WIP**  - ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
+## This is a WIP
+
+![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
 
 A React custom select that is keyboard accessible on desktop.
 And tappable / draggable on touch devices.
@@ -13,23 +15,18 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ---
 
-## Local Development
+## Todo
 
-##### Setup
+- Add `how to use` documentation
+- Add screen reader accessibility
 
-`npm i` then `npm start` then visit `http://localhost:3001/demo`
+---
 
-##### Test
+## Touch Device Tests
 
-`npm test`
-
-##### Coverage
-
-`npm run coverage`
-
-##### Run demo
-
-`npm run demo`
+- tapping on a select will open it's options
+- tapping on an option will select it's value
+- dragging on an options panel that is scrollable, will scroll the options panel
 
 ---
 
@@ -58,34 +55,8 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ---
 
-## Touch Device Tests
+## Local Development Guide
 
-- tapping on a select will open it's options
-- tapping on an option will select it's value
-- dragging on an options panel that is scrollable, will scroll the options panel
+See https://benbowes.github.io/react-responsive-select/README_DEVELOPMENT.md
 
 ---
-
-## Device tests
-
-#### Destop browsers
-- :white_check_mark: Chrome latest
-- :white_check_mark: Safari latest
-- :white_check_mark: Firefox latest
-- :white_check_mark: IE 11.
-
-#### Android
-- :white_check_mark: Nexus 5 - Android 4.4 (Chrome)
-- ? Samsung Galaxy S3 - Android 4 (Native)
-
-#### iPhone
-- :white_check_mark: iPhone 6+ - iOS 9 (Safari)
-- :white_check_mark: iPhone 5 - iOS 6 (Safari)
-
-#### iPad
-- :white_check_mark: iPad Pro - iOS 10
-- :white_check_mark: iPad Air 2 - iOS 9.3
-- :white_check_mark: iPad Mini - iOS 7
-- :white_check_mark: iPad 3 - iOS 6
-- :x: iPad 3 - iOS 5.1
-- :x: iPad 2 - iOS 5
