@@ -34,8 +34,7 @@
     "type": "git",
     "url": "https://github.com/benbowes/react-responsive-select"
   },
-  "license": "MIT",
-  "private": true,
+  "license": "GNU",
 
   "devDependencies": {
 
