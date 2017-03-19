@@ -23,7 +23,7 @@
   background: #fff;
   position: absolute;
   z-index: 2;
-  border: 1px solid #666;
+  border: 1px solid #999;
   border-top: 1px solid #eee;
   border-radius: 0 0 2px 2px;
   top: 44px;
@@ -80,7 +80,7 @@
 
 .rrs__select-container:focus .rrs__label-container {
   outline: 0;
-  border: 1px solid #666;
+  border: 1px solid #999;
 }
 
 .rrs__select-container.rrs__options-container--visible:focus .rrs__label-container {
