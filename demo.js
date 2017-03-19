@@ -63,6 +63,7 @@ class Form extends Component {
           </div>
           <div className="col-1-4">
             <ReactResponsiveSelect
+              dropdownIcon={<i className="rrs__icon fa fa-angle-down" aria-hidden="true"></i>}
               prefix="Make:"
               name="make"
               selectedValue="fiat"

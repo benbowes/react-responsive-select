@@ -67,8 +67,8 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   render() {
-    const { prefix } = this.props;
-    const { name, isDragging, dropdownIcon, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
+    const { prefix, dropdownIcon } = this.props;
+    const { name, isDragging, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
 
     return (
       <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
