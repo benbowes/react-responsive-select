@@ -85,6 +85,17 @@ ul {
   background: #1565c0;
 }
 
+.dropdown-icon {
+  position: absolute;
+  right: 1rem;
+  top: 1.25rem;
+  fill: #999;
+}
+
+.rrs__options-container--visible .dropdown-icon {
+  transform: rotate(180deg);
+}
+
 
 /*
 

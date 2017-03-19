@@ -14,7 +14,7 @@ export default class ReactResponsiveSelect extends Component {
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    dropdownIcon: PropTypes.element,
+    caretIcon: PropTypes.element,
     prefix: PropTypes.string,
     name: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
@@ -67,14 +67,14 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   render() {
-    const { prefix, dropdownIcon } = this.props;
+    const { prefix, caretIcon } = this.props;
     const { name, isDragging, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
 
     return (
       <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
         <ReactResponsiveSelectComponent
           initialIndex={initialIndex}
-          dropdownIcon={dropdownIcon}
+          caretIcon={caretIcon}
           prefix={prefix}
           name={name}
           selectedOption={selectedOption}

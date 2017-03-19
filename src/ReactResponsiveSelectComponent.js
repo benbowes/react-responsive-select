@@ -9,7 +9,7 @@ export default class ReactResponsiveSelectComponent extends Component {
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    dropdownIcon: PropTypes.element,
+    caretIcon: PropTypes.element,
     prefix: PropTypes.string,
     name: PropTypes.string,
     onSubmit: PropTypes.func,
@@ -35,7 +35,7 @@ export default class ReactResponsiveSelectComponent extends Component {
   }
 
   render(){
-    const { prefix, name, dropdownIcon, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.props;
+    const { prefix, name, caretIcon, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.props;
     return (
       <div
         className={`
@@ -51,7 +51,7 @@ export default class ReactResponsiveSelectComponent extends Component {
           <span>{prefix}</span>
           }
           <span className="rrs__label"> {selectedOption.text}</span>
-          {dropdownIcon && dropdownIcon}
+          {caretIcon && caretIcon}
         </div>
         <div className="rrs__options-container" ref={(r) => { this.optionsContainer = r; }}>
           {options.length > 0 &&

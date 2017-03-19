@@ -96,16 +96,3 @@
 .rrs__has-changed .rrs__label-container {
   color: #03a9f4;
 }
-
-.rrs__icon {
-  color: #999;
-  position: absolute;
-  line-height: 1;
-  font-size: 1.5rem;
-  right: 1rem;
-  top: 10px;
-}
-
-.rrs__options-container--visible .rrs__icon {
-  transform: rotate(180deg);
-}
