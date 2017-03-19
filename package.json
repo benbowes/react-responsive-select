@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React Responsive Select",
   "main": "./dist/ReactResponsiveSelect.js",
   "scripts": {
