@@ -12,7 +12,7 @@
   line-height: 44px;
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.2);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .rrs__select-container:focus {
@@ -31,7 +31,7 @@
   height: 0;
   visibility: hidden;
   overflow: hidden;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.2);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .rrs__select-container.rrs__options-container--visible > .rrs__options-container {
@@ -71,6 +71,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rrs__select-container:focus .rrs__label-container {
