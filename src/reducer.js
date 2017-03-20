@@ -50,6 +50,7 @@ const reducer = (state = initialState, action) => {
       isOptionsPanelOpen: true,
       nextSelectedIndex: state.selectedIndex,
       selectedOption: {
+        altered: state.selectedIndex !== state.initialIndex,
         name: state.name,
         ...state.options[ state.selectedIndex ]
       }
@@ -62,6 +63,7 @@ const reducer = (state = initialState, action) => {
       selectedIndex: state.nextSelectedIndex,
       selectedOption: {
         name: state.name,
+        altered: state.nextSelectedIndex !== state.initialIndex,
         ...state.options[ state.nextSelectedIndex ]
       }
     };
