@@ -62,7 +62,7 @@ export default class ReactResponsiveSelect extends Component {
     const { onChange } = this.props;
 
     if(prevState.selectedOption.value && prevState.selectedOption.value !== selectedOption.value) {
-      return onChange(selectedOption.value);
+      return onChange(selectedOption);
     }
   }
 

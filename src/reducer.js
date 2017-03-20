@@ -31,7 +31,10 @@ const reducer = (state = initialState, action) => {
       options: action.value.options,
       selectedIndex: initialSelectedIndex,
       nextSelectedIndex: initialSelectedIndex,
-      selectedOption: { ...action.value.options[ initialSelectedIndex ] }
+      selectedOption: {
+        name: action.value.name,
+        ...action.value.options[ initialSelectedIndex ]
+      }
     };
   }
 
@@ -47,6 +50,7 @@ const reducer = (state = initialState, action) => {
       isOptionsPanelOpen: true,
       nextSelectedIndex: state.selectedIndex,
       selectedOption: {
+        name: state.name,
         ...state.options[ state.selectedIndex ]
       }
     };
@@ -57,6 +61,7 @@ const reducer = (state = initialState, action) => {
       isOptionsPanelOpen: false,
       selectedIndex: state.nextSelectedIndex,
       selectedOption: {
+        name: state.name,
         ...state.options[ state.nextSelectedIndex ]
       }
     };

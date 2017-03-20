@@ -16,14 +16,14 @@ describe('reducer', () => {
         type: BOOTSTRAP_STATE,
         value: {
           ...initialState,
-          options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
+          options: [{ name: 'make1', text: 'Any', value: 'null' }, { name: 'make2', text: 'Fiat', value: 'fiat' }],
           selectedValue: 'fiat',
           name: 'thing'
         }
       }
     );
     expect(result.name).to.eql('thing');
-    expect(result.selectedOption).to.eql({ text: 'Fiat', value: 'fiat' });
+    expect(result.selectedOption).to.eql({ name: 'make2', text: 'Fiat', value: 'fiat' });
   });
 
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
@@ -39,13 +39,24 @@ describe('reducer', () => {
   });
 
   it('should update state.isOptionsPanelOpen when SET_OPTIONS_PANEL_OPEN is fired', () => {
+    const mockInitialState = {
+      nextSelectedIndex: 0,
+      selectedIndex: 0,
+      name: 'make1',
+      options: [{ text: 'Any', value: 'null' }]
+    };
     const result = reducer(
-      initialState,
+      mockInitialState,
       { type: SET_OPTIONS_PANEL_OPEN, value: true }
     );
 
     expect(result).to.eql({
-      ...initialState,
+      ...mockInitialState,
+      selectedOption: {
+        name: 'make1',
+        text: 'Any',
+        value: 'null'
+      },
       isOptionsPanelOpen: true
     });
   });

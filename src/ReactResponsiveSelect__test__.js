@@ -70,6 +70,7 @@ describe('ReactResponsiveSelect', () => {
           { text: 'Tesla', value: 'tesla' }
         ],
         selectedOption: {
+          name: 'make',
           text: 'Fiat',
           value: 'fiat'
         }
@@ -94,6 +95,7 @@ describe('ReactResponsiveSelect', () => {
           { text: 'Tesla', value: 'tesla' }
         ],
         selectedOption: {
+          name: 'make',
           text: 'Fiat',
           value: 'fiat'
         }

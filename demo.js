@@ -32,13 +32,11 @@ const caretIcon = (
 );
 
 class Form extends Component {
-  constructor() {
-    super();
-    this.reportChange = this.reportChange.bind(this);
-  }
 
-  reportChange(v) {
-    console.log(v);
+  reportChange = this.reportChange.bind(this);
+
+  reportChange(newValue) {
+    console.log(newValue);
   }
 
   render() {
@@ -48,7 +46,9 @@ class Form extends Component {
           <div className="col-1-4">
             <ReactResponsiveSelect
               caretIcon={caretIcon} // (Optional) add you own icon by using markup here
-              name="make" // (Required) the value to submit
+              prefix="Make1:" // (Optional) Prefix for the select label. e.g `Make: SomeOptionText`
+              name="make1" // (Required) the value to submit
+              selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               options={[ // (Required) an array of options - see above const options
                 { text: 'Any', value: 'null' },
                 { text: 'Oldsmobile', value: 'oldsmobile' },
@@ -56,7 +56,7 @@ class Form extends Component {
                 { text: 'Mazda', value: 'mazda' },
                 { text: 'Toyota', value: 'toyota' },
                 { text: 'AMC', value: 'amc' },
-                { text: 'Delorean', value: 'delorean' },
+                { text: 'Delorean', value: 'delorean', markup: <span><span className="badge" aria-hidden="true">D</span> Delorean</span> },
                 { text: 'Fiat', value: 'fiat' },
                 { text: 'Subaru', value: 'subaru' },
                 { text: 'BMW', value: 'bmw' },
@@ -64,15 +64,13 @@ class Form extends Component {
               ]}
               onChange={this.reportChange} // (Optional) listen for changes in a select
               onSubmit={() => { this.form.submit(); }} // (Required) form submit function
-              prefix="Make:" // (Optional) Prefix for the select label. e.g `Make: SomeOptionText`
-              selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
             />
           </div>
           <div className="col-1-4">
             <ReactResponsiveSelect
               caretIcon={caretIcon}
-              prefix="Make:"
-              name="make"
+              prefix="Make2:"
+              name="make2"
               selectedValue="fiat"
               options={options}
               onChange={this.reportChange}
@@ -82,8 +80,8 @@ class Form extends Component {
           <div className="col-1-4">
             <ReactResponsiveSelect
               caretIcon={caretIcon}
-              prefix="Make:"
-              name="make"
+              prefix="Make3:"
+              name="make3"
               selectedValue="fiat"
               options={options}
               onChange={this.reportChange}
@@ -93,8 +91,8 @@ class Form extends Component {
           <div className="col-1-4">
             <ReactResponsiveSelect
               caretIcon={caretIcon}
-              prefix="Make:"
-              name="make"
+              prefix="Make4:"
+              name="make4"
               selectedValue="fiat"
               options={options}
               onChange={this.reportChange}
