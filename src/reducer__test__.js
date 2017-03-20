@@ -54,6 +54,7 @@ describe('reducer', () => {
       ...mockInitialState,
       selectedOption: {
         name: 'make1',
+        altered: true,
         text: 'Any',
         value: 'null'
       },
