@@ -47,6 +47,10 @@
   border-top: #eee 1px solid;
 }
 
+.rrs__option * {
+  pointer-events: none;
+}
+
 .rrs__option:first-of-type {
   border-top: 0;
 }
