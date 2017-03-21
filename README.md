@@ -106,7 +106,7 @@ A more detailed usage example can be found here:
     <td>onChange</td>
     <td>Function</td>
     <td><p>Listen for changes on select option change</p>
-    <p>returns `{ altered: true||false, name: option.name, value: option.value, text: option.text, markup: JSX Object }`</p>
+    <p>returns <code>{ altered: true||false, name: option.name, value: option.value, text: option.text, markup: JSX Object }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
     </td>
     <td></td>
   </tr>
@@ -119,7 +119,7 @@ A more detailed usage example can be found here:
   <tr>
     <td>selectedValue</td>
     <td>String</td>
-    <td>Pre-select an option with this value - should match an existing `option.value`, or if omitted the first item will be selected</td>
+    <td>Pre-select an option with this value - should match an existing <code>option.value</code>, or if omitted the first item will be selected</td>
     <td></td>
   </tr>
   <tr>
