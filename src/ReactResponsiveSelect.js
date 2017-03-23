@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import * as actionTypes from './actionTypes';
 import reducer, { initialState } from './reducer';
-import isTouchDevice from './utils/isTouchDevice';
+import isTouchableDevice from './utils/isTouchableDevice';
 import getNextIndex from './getNextIndex';
 import ReactResponsiveSelectComponent from './ReactResponsiveSelectComponent';
 
@@ -31,10 +31,11 @@ export default class ReactResponsiveSelect extends Component {
 
   componentDidMount() {
     const { options, selectedValue, name } = this.props;
+    const isTouchDevice = isTouchableDevice();
 
     this.updateState({
       type: actionTypes.BOOTSTRAP_STATE,
-      value: { options, selectedValue, name }
+      value: { options, selectedValue, name, isTouchDevice }
     });
 
     this.OPTION_NODES_LENGTH = options.length;
@@ -43,7 +44,7 @@ export default class ReactResponsiveSelect extends Component {
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyEvent = this.handleKeyEvent.bind(this);
-    this.listeners = (isTouchDevice())
+    this.listeners = (isTouchDevice)
       ? {
         onBlur: this.handleBlur,
         onTouchMove: this.handleTouchMove,
@@ -68,11 +69,12 @@ export default class ReactResponsiveSelect extends Component {
 
   render() {
     const { prefix, caretIcon } = this.props;
-    const { name, isDragging, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
+    const { name, isTouchDevice, isDragging, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.state;
 
     return (
       <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
         <ReactResponsiveSelectComponent
+          isTouchDevice={isTouchDevice}
           initialIndex={initialIndex}
           caretIcon={caretIcon}
           prefix={prefix}

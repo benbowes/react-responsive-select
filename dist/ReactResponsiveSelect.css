@@ -55,7 +55,8 @@
   border-top: 0;
 }
 
-.rrs__option:hover {
+.rrs__is-desktop .rrs__option:hover {
+  /* Don't hover on touch devices */
   background: #f1f8fb;
   color: #03a9f4;
 }

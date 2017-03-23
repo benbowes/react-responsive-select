@@ -22,7 +22,8 @@ export default class ReactResponsiveSelectComponent extends Component {
     selectedIndex: PropTypes.number,
     nextSelectedIndex: PropTypes.number,
     isOptionsPanelOpen: PropTypes.bool,
-    isDragging: PropTypes.bool
+    isDragging: PropTypes.bool,
+    isTouchDevice: PropTypes.bool
   }
 
   componentDidUpdate(){
@@ -35,11 +36,12 @@ export default class ReactResponsiveSelectComponent extends Component {
   }
 
   render(){
-    const { prefix, name, caretIcon, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isOptionsPanelOpen, options } = this.props;
+    const { prefix, name, caretIcon, selectedOption, initialIndex, selectedIndex, nextSelectedIndex, isTouchDevice, isOptionsPanelOpen, options } = this.props;
     return (
       <div
         className={`
           rrs__select-container
+          ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
           ${(initialIndex !== selectedIndex) ? 'rrs__has-changed': ''}
         `}

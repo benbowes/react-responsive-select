@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 export const initialState = {
+  isTouchDevice: false,
   isDragging: false,
   isOptionsPanelOpen: false,
   nextSelectedIndex: 0,
@@ -26,6 +27,7 @@ const reducer = (state = initialState, action) => {
 
     return {
       ...state,
+      isTouchDevice: action.value.isTouchDevice,
       initialIndex: initialSelectedIndex,
       name: action.value.name,
       options: action.value.options,
