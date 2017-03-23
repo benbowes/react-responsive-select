@@ -61,7 +61,7 @@
   color: #03a9f4;
 }
 
-.rrs__option:active {
+.rrs__is-desktop .rrs__option:active {
   background: #e1f5fe;
 }
 
