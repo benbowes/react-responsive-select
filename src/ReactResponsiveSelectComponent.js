@@ -27,10 +27,10 @@ export default class ReactResponsiveSelectComponent extends Component {
   }
 
   componentDidUpdate(){
-    const { nextSelectedIndex, isDragging } = this.props;
+    const { nextSelectedIndex, isDragging, isTouchDevice } = this.props;
 
-    // Scroll to keep the selected option in view
-    if(isDragging === false) {
+    // Scroll to keep the selected option in view if on desktop
+    if(isDragging === false && !isTouchDevice) {
       this.optionsContainer.scrollTop = this[`option_${nextSelectedIndex}`].offsetTop;
     }
   }
