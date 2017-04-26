@@ -10,12 +10,12 @@
     "console": false
   },
   "rules": {
-    "indent": [2, 2],
+    "indent": [2, 2, { "SwitchCase": 1 }],
     "brace-style": [2, "1tbs", {
       "allowSingleLine": true
     }],
     "quotes": [2, "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
-    "complexity": [1, 7],
+    "complexity": [1, 10],
     "no-mixed-spaces-and-tabs": 2,
     "no-console": [1, { "allow": ["warn", "error"] }],
     "no-debugger": 1,

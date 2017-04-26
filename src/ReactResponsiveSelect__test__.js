@@ -5,7 +5,8 @@ import { expect } from 'chai';
 import jsdom from 'jsdom';
 
 import ReactResponsiveSelect from './ReactResponsiveSelect';
-import * as actionTypes from './actionTypes';
+import * as actionTypes from './constants/actionTypes';
+import keyCodes from './constants/keyCodes';
 
 const submitSpy = sinon.spy();
 const changeSpy = sinon.spy();
@@ -223,14 +224,14 @@ describe('ReactResponsiveSelect', () => {
     });
 
     it('Enter key calls handleKeyEvent() enterPressed()', () => {
-      selectBoxContainer.simulate('keyDown', { keyCode: 13 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
       expect(enterPressedSpy.called).to.equal(true);
     });
 
     it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and onSubmit() when options panel closed', () => {
       submitSpy.reset();
 
-      selectBoxContainer.simulate('keyDown', { keyCode: 13 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
       expect(enterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(true);
       expect(enterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
@@ -240,7 +241,7 @@ describe('ReactResponsiveSelect', () => {
       submitSpy.reset();
 
       selectBoxContainer.simulate('mouseDown'); // open
-      selectBoxContainer.simulate('keyDown', { keyCode: 13 }); // enter pressed
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
 
       expect(enterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(false);
@@ -250,10 +251,10 @@ describe('ReactResponsiveSelect', () => {
     });
 
     it('handleKeyEvent() - keyDown "SPACE" toggles the options panel open/closed with toggleOptionsPanel()', () => {
-      selectBoxContainer.simulate('keyDown', { keyCode: 32 }); // space pressed
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.SPACE });
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( true );
 
-      selectBoxContainer.simulate('keyDown', { keyCode: 32 }); // space pressed
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.SPACE });
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( false );
     });
 
@@ -264,45 +265,45 @@ describe('ReactResponsiveSelect', () => {
       // ensure its focussed
       expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(true);
 
-      selectBoxContainer.simulate('keyDown', { keyCode: 27 }); // escape pressed
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESC });
       expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(false);
     });
 
     it('handleKeyEvent() - keyDown "UP" calls enterPressed("decrement")', () => {
-      selectBoxContainer.simulate('keyDown', { keyCode: 38 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.UP });
       expect(keyUpOrDownPressedSpy.calledOnce).to.equal(true);
       expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('decrement');
     });
 
     it('handleKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
-      selectBoxContainer.simulate('keyDown', { keyCode: 38 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.UP });
       expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
       expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
     it('handleKeyEvent() - keyDown "DOWN" calls enterPressed("increment")', () => {
-      selectBoxContainer.simulate('keyDown', { keyCode: 40 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.DOWN });
       expect(keyUpOrDownPressedSpy.calledOnce).to.equal(true);
       expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('increment');
     });
 
     it('handleKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
-      selectBoxContainer.simulate('keyDown', { keyCode: 40 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.DOWN });
       expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
       expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
     it('handleKeyEvent() - keyDown "DOWN" does NOT open the options panel when open', () => {
       selectBox.setState({ isOptionsPanelOpen: true });
-      selectBoxContainer.simulate('keyDown', { keyCode: 40 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.DOWN });
       expect(updateStateSpy.calledWith({ type: 'SET_OPTIONS_PANEL_OPEN' })).to.equal(false);
     });
 
     it('handleKeyEvent() - keyDown "TAB" does NOT move focus away from options panel when open', () => {
       selectBox.setState({ isOptionsPanelOpen: true });
-      selectBoxContainer.simulate('keyDown', { keyCode: 9 });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.TAB });
       expect(updateStateSpy.calledOnce).to.equal(false);
     });
 

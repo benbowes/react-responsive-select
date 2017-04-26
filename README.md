@@ -95,7 +95,7 @@ A more detailed usage example can be found here:
     <td><p><code>[{
         text: "Fiat",
         value: "fiat",
-        markup: <span>Fiat</span>
+        markup: &lt;span&gt;Fiat&lt;/span&gt;
         }]</code></p><p><code>text</code> (Required) display value for select and the default for option label</p><p><code>value</code> (Required) value that is submitted</p><p><code>markup</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
   </tr>
   <tr>

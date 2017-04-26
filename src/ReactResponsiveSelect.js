@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import * as actionTypes from './actionTypes';
+import * as actionTypes from './constants/actionTypes';
+import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducer';
 import isTouchableDevice from './utils/isTouchableDevice';
 import getNextIndex from './getNextIndex';
@@ -91,76 +92,78 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   updateState(action) {
-    this.setState( this.reducer(this.state, action) );
+    const nextState = this.reducer(this.state, action);
+    this.setState( nextState );
   }
 
   handleTouchStart() {
-    // initially it's assumed that the user is not dragging
-    this.updateState({ type: actionTypes.SET_IS_DRAGGING, value: false });
+    /* initially it's assumed that the user is not dragging */
+    this.updateState({
+      type: actionTypes.SET_IS_DRAGGING,
+      value: false
+    });
   }
 
   handleTouchMove() {
-    // if touchmove fired - User is dragging, this disables touchend/click
-    this.updateState({ type: actionTypes.SET_IS_DRAGGING, value: true });
+    /* if touchmove fired - User is dragging, this disables touchend/click */
+    this.updateState({
+      type: actionTypes.SET_IS_DRAGGING,
+      value: true
+    });
   }
 
   handleKeyEvent(e) {
-    // Apply e.preventDefault for these keyCodes
-    this.preventDefaultForKeyCodes([13, 32, 27, 38, 40], e);
+    this.preventDefaultForKeyCodes([
+      keyCodes.ENTER,
+      keyCodes.SPACE,
+      keyCodes.ESCAPE,
+      keyCodes.UP,
+      keyCodes.DOWN
+    ], e);
 
-    switch (e.keyCode) {
-    case 9: // Tab
-      /*
-      * dont blur selectbox when the panel is open
-      */
+    if ( e.keyCode === keyCodes.TAB ) {
+      /* dont blur selectbox when the panel is open */
       if (this.state.isOptionsPanelOpen) e.preventDefault();
       return e;
+    }
 
-    case 13: // Enter
-      /*
-      * can close the panel when open and focussed
-      * can submit the form when closed and focussed
-      */
+    if ( e.keyCode === keyCodes.ENTER ) {
+      /* can close the panel when open and focussed
+       * can submit the form when closed and focussed */
       return this.enterPressed(e);
+    }
 
-    case 32: // Space
-      /*
-      * open or close the panel when focussed
-      */
+    if ( e.keyCode === keyCodes.SPACE ) {
+      /* open or close the panel when focussed */
       return (this.state.isOptionsPanelOpen)
         ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
         : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
+    }
 
-    case 27: // Esc
-      /*
-      * remove focus from the panel when focussed
-      */
+    if ( e.keyCode === keyCodes.ESC ) {
+      /* remove focus from the panel when focussed */
       return this.selectBox.firstChild.blur();
+    }
 
-    case 38: // Up
-      /*
-      * will open the options panel if closed
-      * will not decrement selection if options panel closed
-      * if panel open will decrement up the options list and update ui
-      */
+    if ( e.keyCode === keyCodes.UP ) {
+      /* will open the options panel if closed
+       * will not decrement selection if options panel closed
+       * if panel open, will decrement up the options list */
       return this.keyUpOrDownPressed('decrement');
+    }
 
-    case 40: // Down
-      /*
-      * will open the options panel if closed
-      * will not increment selection if options panel closed
-      * if panel open will increment down the options list and update ui
-      */
+    if ( e.keyCode === keyCodes.DOWN ) {
+      /* will open the options panel if closed
+       * will not increment selection if options panel closed
+       * if panel open, will increment down the options list */
       return this.keyUpOrDownPressed('increment');
-
     }
   }
 
   handleClick(e) {
-    // Ignore click and touchend if user is dragging
+    /* Ignore click and touchend if user is dragging */
     if(this.state.isDragging === false) {
       e.preventDefault();
-
       this.selectBox.firstChild.focus();
 
       if (e && e.target.classList.contains('rrs__option')) {
@@ -174,7 +177,7 @@ export default class ReactResponsiveSelect extends Component {
         });
       }
 
-      // Open panel if closed, close panel if open
+      /* Open panel if closed, close panel if open */
       return (this.state.isOptionsPanelOpen)
         ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
         : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
@@ -185,7 +188,7 @@ export default class ReactResponsiveSelect extends Component {
     this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
   }
 
-  // Disable native functionality if keyCode match
+  /* Disable native functionality if keyCode match */
   preventDefaultForKeyCodes(keyCodes, e) {
     keyCodes.forEach(keyCode => {
       if(keyCode === e.keyCode) e.preventDefault();
@@ -208,7 +211,7 @@ export default class ReactResponsiveSelect extends Component {
       value: getNextIndex(type, isOptionsPanelOpen, nextSelectedIndex, this.OPTION_NODES_LENGTH)
     });
 
-    // Open the options panel
+    /* Open the options panel */
     if (this.state.isOptionsPanelOpen === false) {
       this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }

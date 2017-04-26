@@ -5,7 +5,7 @@ import {
   SET_IS_DRAGGING,
   SET_OPTIONS_PANEL_OPEN,
   SET_SELECTED_INDEX
-} from './actionTypes';
+} from './constants/actionTypes';
 
 describe('reducer', () => {
 
