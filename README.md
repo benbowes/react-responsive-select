@@ -1,7 +1,5 @@
 # React Responsive Select
 
-## This is a well tested WIP / ALPHA
-
 ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg)
 
 A React custom select control, that is both keyboard accessible like a native `<select/>` on desktop. And also tappable / draggable on touch devices.
@@ -14,7 +12,6 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ## In Progress
 
-- How to use documentation
 - Screen reader accessibility
 
 ---
@@ -73,6 +70,15 @@ ReactDOM.render(
 
 A more detailed usage example can be found here:
  https://github.com/benbowes/react-responsive-select/blob/master/demo.js
+
+ ---
+
+ ## Altering styling
+
+The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Include it in your project via an import or copy/paste it's contents into your stylesheet.
+Customisations can be done via overriding the styles or rewriting the classes.
+
+Note: The class names are not configurable.
 
 ---
 
