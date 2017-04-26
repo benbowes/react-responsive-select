@@ -23,7 +23,7 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 Install the dependency
 
-`npm install react-responsive-select`
+`npm install react-responsive-select --save-dev`
 
 Include the css file in your project. `./dist/ReactResponsiveSelect.css`
 
@@ -32,11 +32,11 @@ And add **ReactResponsiveSelect.js**
 Example usage:
 
 ```js
-import ReactResponsiveSelect from 'ReactResponsiveSelect';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import ReactResponsiveSelect from 'react-responsive-select';
 
 class Form extends Component {
-
-  this.reportChange = this.reportChange.bind(this);
 
   reportChange(newValue) {
     console.log(newValue);
@@ -47,7 +47,7 @@ class Form extends Component {
       <form ref={r => this.form = r}>
 
         <ReactResponsiveSelect
-          caretIcon={<i className="caret fa fa-car" aria-hidden="true" />}
+          caretIcon={<span style={{float:'right'}}>+</span>}
           name="make"
           options={[
             { text: 'Any', value: 'null' },
@@ -64,6 +64,11 @@ class Form extends Component {
     );
   }
 }
+
+ReactDOM.render(
+  <Form />,
+  document.getElementById('root')
+);
 ```
 
 A more detailed usage example can be found here:
@@ -78,29 +83,25 @@ A more detailed usage example can be found here:
     <td><b>prop</b></td>
     <td><b>type</b></td>
     <td><b>description</b></td>
-    <td><b>required</b></td>
   </tr>
   <tr>
-    <td>name</td>
+    <td>name (required)</td>
     <td>String</td>
     <td>The name to send with the selected option value on form submit</td>
-    <td>Required</td>
   </tr>
   <tr>
-    <td>options</td>
+    <td>options (required)</td>
     <td>Array of objects</td>
     <td><p><code>[{
         text: "Fiat",
         value: "fiat",
         markup: <span>Fiat</span>
         }]</code></p><p><code>text</code> (Required) display value for select and the default for option label</p><p><code>value</code> (Required) value that is submitted</p><p><code>markup</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
-    <td>Required</td>
   </tr>
   <tr>
-    <td>onSubmit</td>
+    <td>onSubmit (required)</td>
     <td>Function</td>
     <td>Some function submits your form</td>
-    <td>Required</td>
   </tr>
   <tr>
     <td>onChange</td>
@@ -108,25 +109,21 @@ A more detailed usage example can be found here:
     <td><p>Listen for changes on select option change</p>
     <p>returns <code>{ altered: true||false, name: option.name, value: option.value, text: option.text, markup: JSX Object }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
     </td>
-    <td></td>
   </tr>
   <tr>
     <td>caretIcon</td>
     <td>JSX</td>
     <td>Add a dropdown icon by using JSX markup</td>
-    <td></td>
   </tr>
   <tr>
     <td>selectedValue</td>
     <td>String</td>
     <td>Pre-select an option with this value - should match an existing <code>option.value</code>, or if omitted the first item will be selected</td>
-    <td></td>
   </tr>
   <tr>
     <td>prefix</td>
     <td>String</td>
     <td>Prefix for the select label</td>
-    <td></td>
   </tr>
 </table>
 

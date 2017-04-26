@@ -2,19 +2,14 @@ const path = require('path');
 
 module.exports = {
 
-  devServer: {
-    inline: true
-  },
-
-  devtool: 'eval',
-
-  entry: {
-    index: './src/ReactResponsiveSelect.js'
-  },
+  entry: './src/ReactResponsiveSelect.js',
 
   output: {
     filename: 'ReactResponsiveSelect.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    library: 'ReactResponsiveSelect',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
 
   module: {

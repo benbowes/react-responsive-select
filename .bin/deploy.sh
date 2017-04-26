@@ -9,11 +9,8 @@ fi
 # eslint and test
 npm run test
 
-# Build demo JS
-webpack --config webpack.config.react-responsive-select.js
-
-# Build ReactResponsiveSelect JS
-webpack --config webpack.config.demo.js
+# Build ReactResponsiveSelect JS && Build demo JS
+npm run build
 
 # git add new dist/ assets
 git add .

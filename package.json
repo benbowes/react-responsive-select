@@ -1,12 +1,15 @@
 {
   "name": "react-responsive-select",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "React Responsive Select",
-  "main": "./dist/ReactResponsiveSelect.js",
+  "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.demo.js --progress --host 0.0.0.0 --port 3001",
-    "build": "webpack -p --config webpack.config.demo.js && webpack -p --config webpack.config.react-responsive-select.js ",
-    "demo": "npm run build && serve --port 3002",
+    "start": "npm run start:dev",
+    "start:dev": "webpack-dev-server --config webpack.config.demo.js --progress --host 0.0.0.0 --port 3001",
+    "start:demo": "npm run build:rrs && npm run build:demo && serve --port 3002",
+    "build": "npm run build:rrs && npm run build:demo",
+    "build:rrs": "webpack -p --config webpack.config.react-responsive-select.js",
+    "build:demo": "webpack -p --config webpack.config.demo.js",
     "deploy": ".bin/deploy.sh",
     "eslint": "eslint demo.js src/**",
     "test": "npm run eslint && mocha --compilers js:babel-register --require mocha/jsdom-setup.js 'src/**/*__test__.js'",
@@ -34,7 +37,7 @@
     "type": "git",
     "url": "https://github.com/benbowes/react-responsive-select"
   },
-  "license": "GNU",
+  "license": "MIT",
 
   "devDependencies": {
 
