@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class ReactResponsiveSelectComponent extends Component {
+export default class ReactResponsiveMultiSelectComponent extends Component {
 
   static propTypes = {
     options: PropTypes.arrayOf(
@@ -41,7 +41,7 @@ export default class ReactResponsiveSelectComponent extends Component {
 
   render(){
     const {
-      prefix, name, caretIcon, selectedOption, initialIndex, selectedIndex,
+      prefix, name, caretIcon, multiSelectOptions, multiSelectIndexes,
       nextSelectedIndex, isTouchDevice, isOptionsPanelOpen, options, customLabelText
     } = this.props;
     return (
@@ -50,7 +50,6 @@ export default class ReactResponsiveSelectComponent extends Component {
           rrs__select-container
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${(initialIndex !== selectedIndex) ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"
@@ -68,7 +67,10 @@ export default class ReactResponsiveSelectComponent extends Component {
           {prefix &&
           <span>{prefix}</span>
           }
-          <span className="rrs__label"> {selectedOption.text}</span>
+          <span className="rrs__label">
+            {multiSelectOptions.length > 0 && ` ${multiSelectOptions[0].text}`}
+            {multiSelectOptions.length > 1 && `(+${multiSelectOptions.length-1})`}
+          </span>
           {caretIcon && caretIcon}
         </div>
         }
@@ -83,8 +85,7 @@ export default class ReactResponsiveSelectComponent extends Component {
                 ref={(r) => { this[`option_${index}`] = r; }}
                 className={`
                   rrs__option
-                  ${(selectedIndex === index) ? 'rrs__option--selected' : ''}
-                  ${(nextSelectedIndex === index) ? 'rrs__option--next-selection' : ''}
+                  ${(multiSelectIndexes.some(i => i === index)) ? 'rrs__option--selected' : ''}
                 `}
               >
                 {option.markup || option.text}
@@ -94,7 +95,7 @@ export default class ReactResponsiveSelectComponent extends Component {
         </div>
 
         {name &&
-        <input type="hidden" name={name} value={selectedOption.value} />
+        <input type="hidden" name={name} value={[multiSelectOptions.map(v => v.value)].join(',')} />
         }
 
       </div>

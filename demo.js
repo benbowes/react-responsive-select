@@ -45,10 +45,8 @@ class Form extends Component {
         <div className="row">
           <div className="col-1-4">
             <ReactResponsiveSelect
-              caretIcon={caretIcon} // (Optional) add you own icon by using markup here
-              prefix="Make1:" // (Optional) Prefix for the select label. e.g `Make: SomeOptionText`
+              multiselect
               name="make1" // (Required) the value to submit
-              selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               options={[ // (Required) an array of options - see above const options
                 { text: 'Any', value: 'null' },
                 { text: 'Oldsmobile', value: 'oldsmobile' },
@@ -62,41 +60,44 @@ class Form extends Component {
                 { text: 'BMW', value: 'bmw' },
                 { text: 'Tesla', value: 'tesla' }
               ]}
-              onChange={this.reportChange} // (Optional) listen for changes in a select
               onSubmit={() => { this.form.submit(); }} // (Required) form submit function
+              caretIcon={caretIcon} // (Optional) add you own icon by using markup here
+              prefix="Make1:"
+              selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+              onChange={this.reportChange} // (Optional) listen for changes in a select
             />
           </div>
           <div className="col-1-4">
             <ReactResponsiveSelect
-              caretIcon={caretIcon}
-              prefix="Make2:"
               name="make2"
-              selectedValue="fiat"
               options={options}
-              onChange={this.reportChange}
               onSubmit={() => { this.form.submit(); }}
+              caretIcon={caretIcon}
+              customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`} // (Optional) format your own label text like this
+              selectedValue="fiat"
+              onChange={this.reportChange}
             />
           </div>
           <div className="col-1-4">
             <ReactResponsiveSelect
+              name="make3"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
               prefix="Make3:"
-              name="make3"
               selectedValue="fiat"
-              options={options}
               onChange={this.reportChange}
-              onSubmit={() => { this.form.submit(); }}
             />
           </div>
           <div className="col-1-4">
             <ReactResponsiveSelect
+              name="make4"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
               prefix="Make4:"
-              name="make4"
               selectedValue="fiat"
-              options={options}
               onChange={this.reportChange}
-              onSubmit={() => { this.form.submit(); }}
             />
           </div>
         </div>

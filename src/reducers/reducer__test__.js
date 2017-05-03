@@ -1,11 +1,6 @@
 import { expect } from 'chai';
 import reducer, { initialState } from './reducer';
-import {
-  BOOTSTRAP_STATE,
-  SET_IS_DRAGGING,
-  SET_OPTIONS_PANEL_OPEN,
-  SET_SELECTED_INDEX
-} from './constants/actionTypes';
+import * as actionTypes from './constants/actionTypes';
 
 describe('reducer', () => {
 
@@ -13,7 +8,7 @@ describe('reducer', () => {
     const result = reducer(
       initialState,
       {
-        type: BOOTSTRAP_STATE,
+        type: actionTypes.BOOTSTRAP_STATE,
         value: {
           ...initialState,
           options: [{ name: 'make1', text: 'Any', value: 'null' }, { name: 'make2', text: 'Fiat', value: 'fiat' }],
@@ -29,7 +24,7 @@ describe('reducer', () => {
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
     const result = reducer(
       initialState,
-      { type: SET_IS_DRAGGING, value: true }
+      { type: actionTypes.SET_IS_DRAGGING, value: true }
     );
 
     expect(result).to.eql({
@@ -47,7 +42,7 @@ describe('reducer', () => {
     };
     const result = reducer(
       mockInitialState,
-      { type: SET_OPTIONS_PANEL_OPEN, value: true }
+      { type: actionTypes.SET_OPTIONS_PANEL_OPEN, value: true }
     );
 
     expect(result).to.eql({
@@ -65,7 +60,7 @@ describe('reducer', () => {
   it('should update state.selectedIndex when SET_SELECTED_INDEX is fired', () => {
     const result = reducer(
       initialState,
-      { type: SET_SELECTED_INDEX, value: 7 }
+      { type: actionTypes.SET_SELECTED_INDEX, value: 7 }
     );
 
     expect(result).to.eql({

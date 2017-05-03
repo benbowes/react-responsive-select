@@ -1,4 +1,4 @@
-import * as actionTypes from './constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 
 export const initialState = {
   isTouchDevice: false,
@@ -8,7 +8,9 @@ export const initialState = {
   selectedIndex: 0,
   name: undefined,
   options: [],
-  selectedOption: {}
+  selectedOption: {},
+  multiSelectOptions: [],
+  multiSelectIndexes: []
 };
 
 export const getSelectedValueIndex = (options, selectedValue) => {
@@ -16,6 +18,31 @@ export const getSelectedValueIndex = (options, selectedValue) => {
   return (index > -1)
     ? index
     : 0;
+};
+
+const addMultiSelectIndex = (state, index) => {
+  return [ ...state.multiSelectIndexes, index ];
+};
+
+const removeMultiSelectIndex = (state, indexLocation) => {
+  return [
+    ...state.multiSelectIndexes.slice( 0, indexLocation ),
+    ...state.multiSelectIndexes.slice( indexLocation + 1 )
+  ];
+};
+
+const addMultiSelectOption = (state, index) => {
+  return [
+    ...state.multiSelectOptions,
+    { name: state.name, ...state.options[ index ] }
+  ];
+};
+
+const removeMultiSelectOption = (state, indexLocation) => {
+  return [
+    ...state.multiSelectOptions.slice( 0, indexLocation ),
+    ...state.multiSelectOptions.slice( indexLocation + 1 )
+  ];
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,7 +63,12 @@ const reducer = (state = initialState, action) => {
         selectedOption: {
           name: action.value.name,
           ...action.value.options[ initialSelectedIndex ]
-        }
+        },
+        multiSelectOptions: [{
+          name: action.value.name,
+          ...action.value.options[ initialSelectedIndex ]
+        }],
+        multiSelectIndexes: [initialSelectedIndex]
       };
     }
 
@@ -69,6 +101,19 @@ const reducer = (state = initialState, action) => {
           ...state.options[ state.nextSelectedIndex ]
         }
       };
+
+    case actionTypes.SET_MULTISELECT_OPTIONS: {
+      const indexLocation = state.multiSelectIndexes.indexOf(action.value);
+      return {
+        ...state,
+        multiSelectIndexes: indexLocation === -1
+          ? addMultiSelectIndex(state, action.value)
+          : removeMultiSelectIndex(state, indexLocation),
+        multiSelectOptions: indexLocation === -1
+          ? addMultiSelectOption(state, action.value)
+          : removeMultiSelectOption(state, indexLocation)
+      };
+    }
 
     case actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION:
       return {
