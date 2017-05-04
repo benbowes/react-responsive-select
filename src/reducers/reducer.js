@@ -104,8 +104,34 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_MULTISELECT_OPTIONS: {
       const indexLocation = state.multiSelectIndexes.indexOf(action.value);
-      return {
+
+      // Deselect first option when any other value is selected
+      if (
+        state.multiSelectIndexes.length === 1 &&
+        state.multiSelectIndexes[0] === 0 &&
+        action.value !== 0
+      ) {
+        state.multiSelectIndexes = [];
+        state.multiSelectOptions = [];
+      }
+
+      // If any thing selected, deselect all then select first option
+      if (
+        state.multiSelectIndexes.length > 0 &&
+        action.value === 0
+      ) {
+        return {
+          ...state,
+          multiSelectIndexes: [0],
+          multiSelectOptions: [{ name: state.name, ...state.options[ 0 ] }],
+          nextSelectedIndex: 0
+        };
+      }
+
+      // If requested item does not exist, add it. Else remove it
+      let newState = {
         ...state,
+        nextSelectedIndex: action.value,
         multiSelectIndexes: indexLocation === -1
           ? addMultiSelectIndex(state, action.value)
           : removeMultiSelectIndex(state, indexLocation),
@@ -113,6 +139,20 @@ const reducer = (state = initialState, action) => {
           ? addMultiSelectOption(state, action.value)
           : removeMultiSelectOption(state, indexLocation)
       };
+
+      // Select first if none selected
+      if (newState.multiSelectOptions.length === 0) {
+        newState = {
+          ...state,
+          nextSelectedIndex: 0,
+          multiSelectIndexes: [0],
+          multiSelectOptions: [{
+            ...state.options[0]
+          }]
+        };
+      }
+
+      return newState;
     }
 
     case actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION:

@@ -31,7 +31,18 @@ const caretIcon = (
   </svg>
 );
 
-class Form extends Component {
+const multiSelectOptionMarkup = (text) => (
+  <div>
+    <span className="checkbox">
+      <svg className="check-icon" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 488.878 488.878">
+        <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 "/></g>
+      </svg>
+    </span>
+    <span> {text}</span>
+  </div>
+);
+
+class Form extends Component { // eslint-disable-line
 
   reportChange = this.reportChange.bind(this);
 
@@ -48,22 +59,22 @@ class Form extends Component {
               multiselect
               name="make1" // (Required) the value to submit
               options={[ // (Required) an array of options - see above const options
-                { text: 'Any', value: 'null' },
-                { text: 'Oldsmobile', value: 'oldsmobile' },
-                { text: 'Ford', value: 'ford' },
-                { text: 'Mazda', value: 'mazda' },
-                { text: 'Toyota', value: 'toyota' },
-                { text: 'AMC', value: 'amc' },
-                { text: 'Delorean', value: 'delorean', markup: <span><span className="badge" aria-hidden="true">D</span> Delorean</span> },
-                { text: 'Fiat', value: 'fiat' },
-                { text: 'Subaru', value: 'subaru' },
-                { text: 'BMW', value: 'bmw' },
-                { text: 'Tesla', value: 'tesla' }
+                { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+                { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
+                { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+                { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
+                { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
+                { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
+                { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
               ]}
               onSubmit={() => { this.form.submit(); }} // (Required) form submit function
               caretIcon={caretIcon} // (Optional) add you own icon by using markup here
               prefix="Make1:"
-              selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+              // selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               onChange={this.reportChange} // (Optional) listen for changes in a select
             />
           </div>

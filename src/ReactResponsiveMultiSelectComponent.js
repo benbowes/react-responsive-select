@@ -3,31 +3,42 @@ import React, { Component, PropTypes } from 'react';
 export default class ReactResponsiveMultiSelectComponent extends Component {
 
   static propTypes = {
+    caretIcon: PropTypes.element,
+    customLabelText: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool
+    ]),
+    initialIndex: PropTypes.number,
+    isDragging: PropTypes.bool,
+    isOptionsPanelOpen: PropTypes.bool,
+    isTouchDevice: PropTypes.bool,
+    multiSelectIndexes: PropTypes.arrayOf(
+      PropTypes.number
+    ),
+    multiSelectOptions: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        text: PropTypes.string,
+        value: PropTypes.string,
+        markup: PropTypes.object
+      })
+    ),
+    name: PropTypes.string,
+    nextSelectedIndex: PropTypes.number,
+    onSubmit: PropTypes.func,
     options: PropTypes.arrayOf(
       PropTypes.shape({
         text: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    caretIcon: PropTypes.element,
     prefix: PropTypes.string,
-    name: PropTypes.string,
-    onSubmit: PropTypes.func,
-    selectedValue: PropTypes.string,
+    selectedIndex: PropTypes.number,
     selectedOption: PropTypes.shape({
       text: PropTypes.string,
       value: PropTypes.string
     }),
-    customLabelText: PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.bool
-    ]),
-    initialIndex: PropTypes.number,
-    selectedIndex: PropTypes.number,
-    nextSelectedIndex: PropTypes.number,
-    isOptionsPanelOpen: PropTypes.bool,
-    isDragging: PropTypes.bool,
-    isTouchDevice: PropTypes.bool
+    selectedValue: PropTypes.string
   }
 
   componentDidUpdate(){
@@ -41,13 +52,23 @@ export default class ReactResponsiveMultiSelectComponent extends Component {
 
   render(){
     const {
-      prefix, name, caretIcon, multiSelectOptions, multiSelectIndexes,
-      nextSelectedIndex, isTouchDevice, isOptionsPanelOpen, options, customLabelText
+      caretIcon,
+      customLabelText,
+      isOptionsPanelOpen,
+      isTouchDevice,
+      multiSelectIndexes,
+      multiSelectOptions,
+      name,
+      nextSelectedIndex,
+      options,
+      prefix
     } = this.props;
+
     return (
       <div
         className={`
           rrs__select-container
+          rrs__select-container--multiselect
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
         `}
@@ -69,7 +90,7 @@ export default class ReactResponsiveMultiSelectComponent extends Component {
           }
           <span className="rrs__label">
             {multiSelectOptions.length > 0 && ` ${multiSelectOptions[0].text}`}
-            {multiSelectOptions.length > 1 && `(+${multiSelectOptions.length-1})`}
+            {multiSelectOptions.length > 1 && ` (+${multiSelectOptions.length-1})`}
           </span>
           {caretIcon && caretIcon}
         </div>
@@ -86,6 +107,7 @@ export default class ReactResponsiveMultiSelectComponent extends Component {
                 className={`
                   rrs__option
                   ${(multiSelectIndexes.some(i => i === index)) ? 'rrs__option--selected' : ''}
+                  ${(nextSelectedIndex === index) ? 'rrs__option--next-selection' : ''}
                 `}
               >
                 {option.markup || option.text}

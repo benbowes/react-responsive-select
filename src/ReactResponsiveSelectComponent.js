@@ -3,31 +3,31 @@ import React, { Component, PropTypes } from 'react';
 export default class ReactResponsiveSelectComponent extends Component {
 
   static propTypes = {
+    caretIcon: PropTypes.element,
+    customLabelText: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool
+    ]),
+    initialIndex: PropTypes.number,
+    isDragging: PropTypes.bool,
+    isOptionsPanelOpen: PropTypes.bool,
+    isTouchDevice: PropTypes.bool,
+    name: PropTypes.string,
+    nextSelectedIndex: PropTypes.number,
+    onSubmit: PropTypes.func,
     options: PropTypes.arrayOf(
       PropTypes.shape({
         text: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    caretIcon: PropTypes.element,
     prefix: PropTypes.string,
-    name: PropTypes.string,
-    onSubmit: PropTypes.func,
-    selectedValue: PropTypes.string,
+    selectedIndex: PropTypes.number,
     selectedOption: PropTypes.shape({
       text: PropTypes.string,
       value: PropTypes.string
     }),
-    customLabelText: PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.bool
-    ]),
-    initialIndex: PropTypes.number,
-    selectedIndex: PropTypes.number,
-    nextSelectedIndex: PropTypes.number,
-    isOptionsPanelOpen: PropTypes.bool,
-    isDragging: PropTypes.bool,
-    isTouchDevice: PropTypes.bool
+    selectedValue: PropTypes.string
   }
 
   componentDidUpdate(){
@@ -41,9 +41,19 @@ export default class ReactResponsiveSelectComponent extends Component {
 
   render(){
     const {
-      prefix, name, caretIcon, selectedOption, initialIndex, selectedIndex,
-      nextSelectedIndex, isTouchDevice, isOptionsPanelOpen, options, customLabelText
+      caretIcon,
+      customLabelText,
+      initialIndex,
+      isOptionsPanelOpen,
+      isTouchDevice,
+      name,
+      nextSelectedIndex,
+      options,
+      prefix,
+      selectedIndex,
+      selectedOption
     } = this.props;
+
     return (
       <div
         className={`

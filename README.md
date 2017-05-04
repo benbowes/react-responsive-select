@@ -12,7 +12,7 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ## In Progress
 
-- Screen reader accessibility
+- MultiSelect Mode
 
 ---
 
@@ -71,14 +71,40 @@ ReactDOM.render(
 A more detailed usage example can be found here:
  https://github.com/benbowes/react-responsive-select/blob/master/demo.js
 
- ---
+---
 
- ## Altering styling
+## Altering styling
 
 The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Include it in your project via an import or copy/paste it's contents into your stylesheet.
 Customisations can be done via overriding the styles or rewriting the classes.
 
 Note: The class names are not configurable.
+
+To aid in styling the hover/selected states in the options list I would suggest overriding the class that hides the options temporarily e.g.
+
+```
+.rrs__select-container > .rrs__options-container {
+  /* height: 0;
+  visibility: hidden; */
+  height: auto;
+  visibility: visible;
+}
+```
+---
+
+## Custom labeling
+
+As of version `0.2.0` you can hook into the onChange function via the `customLabelRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
+
+```
+<ReactResponsiveSelect
+  name="make2"
+  options={options}
+  onSubmit={() => { this.form.submit(); }}
+  // (Optional) format your own label text like this
+  customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`}
+/>
+```
 
 ---
 
@@ -113,7 +139,7 @@ Note: The class names are not configurable.
     <td>onChange</td>
     <td>Function</td>
     <td><p>Listen for changes on select option change</p>
-    <p>returns <code>{ altered: true||false, name: option.name, value: option.value, text: option.text, markup: JSX Object }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
+    <p>returns <code>{ altered: true||false, name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
     </td>
   </tr>
   <tr>
@@ -130,6 +156,12 @@ Note: The class names are not configurable.
     <td>prefix</td>
     <td>String</td>
     <td>Prefix for the select label</td>
+  </tr>
+  <tr>
+    <td>customLabelRenderer</td>
+    <td>Function</td>
+    <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
+    </td>
   </tr>
 </table>
 

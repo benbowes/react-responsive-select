@@ -65,10 +65,6 @@
   background: #e1f5fe;
 }
 
-.rrs__option.rrs__option--selected {
-  background: #f1f1f1;
-}
-
 .rrs__option.rrs__option--next-selection {
   background: #f1f8fb;
   color: #03a9f4;
@@ -100,4 +96,14 @@
 
 .rrs__has-changed .rrs__label-container {
   color: #03a9f4;
+}
+
+/*
+
+  Multiselect overrides
+
+*/
+
+.rrs__select-container--multiselect .rrs__option.rrs__option--next-selection {
+  background: transparent;
 }

@@ -10,20 +10,20 @@ import ReactResponsiveMultiSelectComponent from './ReactResponsiveMultiSelectCom
 export default class ReactResponsiveSelect extends Component {
 
   static propTypes = {
+    caretIcon: PropTypes.element,
+    customLabelRenderer: PropTypes.func,
+    multiselect: PropTypes.bool,
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
     options: PropTypes.arrayOf(
       PropTypes.shape({
         text: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    customLabelRenderer: PropTypes.func,
-    caretIcon: PropTypes.element,
-    prefix: PropTypes.string,
-    name: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
-    onChange: PropTypes.func,
-    selectedValue: PropTypes.string,
-    multiselect: PropTypes.bool
+    prefix: PropTypes.string,
+    selectedValue: PropTypes.string
   }
 
   constructor(props) {
@@ -71,7 +71,10 @@ export default class ReactResponsiveSelect extends Component {
         return onChange(multiSelectOptions);
       }
     } else {
-      if(prevState.selectedOption.value && prevState.selectedOption.value !== selectedOption.value) {
+      if(
+        prevState.selectedOption.value &&
+        prevState.selectedOption.value !== selectedOption.value
+      ) {
         return onChange(selectedOption);
       }
     }
@@ -80,9 +83,19 @@ export default class ReactResponsiveSelect extends Component {
   render() {
     const { multiselect, prefix, caretIcon, customLabelRenderer } = this.props;
     const {
-      name, isTouchDevice, isDragging, selectedOption, initialIndex, selectedIndex,
-      nextSelectedIndex, isOptionsPanelOpen, options, multiSelectIndexes, multiSelectOptions
+      initialIndex,
+      isDragging,
+      isOptionsPanelOpen,
+      isTouchDevice,
+      multiSelectIndexes,
+      multiSelectOptions,
+      name,
+      nextSelectedIndex,
+      options,
+      selectedIndex,
+      selectedOption
     } = this.state;
+
     const customLabelText = customLabelRenderer && customLabelRenderer(selectedOption) || false;
 
     if (multiselect) {
@@ -148,6 +161,8 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleKeyEvent(e) {
+    const { multiselect } = this.props;
+
     this.preventDefaultForKeyCodes([
       keyCodes.ENTER,
       keyCodes.SPACE,
@@ -158,7 +173,7 @@ export default class ReactResponsiveSelect extends Component {
 
     if ( e.keyCode === keyCodes.TAB ) {
       /* dont blur selectbox when the panel is open */
-      if (this.state.isOptionsPanelOpen) e.preventDefault();
+      if (this.state.isOptionsPanelOpen && !multiselect) e.preventDefault();
       return e;
     }
 
@@ -236,6 +251,13 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   enterPressed(e) {
+    if(this.props.multiselect) {
+      return this.updateState({
+        type: actionTypes.SET_MULTISELECT_OPTIONS,
+        value: this.state.nextSelectedIndex
+      });
+    }
+
     if (this.state.isOptionsPanelOpen === true) {
       e.stopPropagation(); // Do not submit form
       return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });

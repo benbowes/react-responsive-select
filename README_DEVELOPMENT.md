@@ -19,3 +19,7 @@
 ##### Run demo
 
 `npm run demo`
+
+##### Deploy
+
+`npm run deploy`
