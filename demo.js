@@ -135,7 +135,7 @@ class Form extends Component { // eslint-disable-line
           </div>
 
         </div>
-        <div className="row centered">
+        <div className="row">
           <button type="submit" className={'button'}>Submit</button>
         </div>
       </form>
