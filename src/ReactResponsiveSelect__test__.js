@@ -71,6 +71,12 @@ describe('ReactResponsiveSelect', () => {
           { text: 'BMW', value: 'bmw' },
           { text: 'Tesla', value: 'tesla' }
         ],
+        'multiSelectIndexes': [ 1 ],
+        'multiSelectOptions': [{
+          'name': 'make',
+          'text': 'Fiat',
+          'value': 'fiat'
+        }],
         selectedOption: {
           name: 'make',
           text: 'Fiat',
@@ -97,6 +103,12 @@ describe('ReactResponsiveSelect', () => {
           { text: 'BMW', value: 'bmw' },
           { text: 'Tesla', value: 'tesla' }
         ],
+        'multiSelectIndexes': [ 1 ],
+        'multiSelectOptions': [{
+          'name': 'make',
+          'text': 'Fiat',
+          'value': 'fiat'
+        }],
         selectedOption: {
           name: 'make',
           text: 'Fiat',

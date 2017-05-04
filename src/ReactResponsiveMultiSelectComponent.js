@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class ReactResponsiveSelectComponent extends Component {
+export default class ReactResponsiveMultiSelectComponent extends Component {
 
   static propTypes = {
     caretIcon: PropTypes.element,
@@ -12,6 +12,17 @@ export default class ReactResponsiveSelectComponent extends Component {
     isDragging: PropTypes.bool,
     isOptionsPanelOpen: PropTypes.bool,
     isTouchDevice: PropTypes.bool,
+    multiSelectIndexes: PropTypes.arrayOf(
+      PropTypes.number
+    ),
+    multiSelectOptions: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        text: PropTypes.string,
+        value: PropTypes.string,
+        markup: PropTypes.object
+      })
+    ),
     name: PropTypes.string,
     nextSelectedIndex: PropTypes.number,
     onSubmit: PropTypes.func,
@@ -43,24 +54,23 @@ export default class ReactResponsiveSelectComponent extends Component {
     const {
       caretIcon,
       customLabelText,
-      initialIndex,
       isOptionsPanelOpen,
       isTouchDevice,
+      multiSelectIndexes,
+      multiSelectOptions,
       name,
       nextSelectedIndex,
       options,
-      prefix,
-      selectedIndex,
-      selectedOption
+      prefix
     } = this.props;
 
     return (
       <div
         className={`
           rrs__select-container
+          rrs__select-container--multiselect
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${(initialIndex !== selectedIndex) ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"
@@ -78,7 +88,10 @@ export default class ReactResponsiveSelectComponent extends Component {
           {prefix &&
           <span>{prefix}</span>
           }
-          <span className="rrs__label"> {selectedOption.text}</span>
+          <span className="rrs__label">
+            {multiSelectOptions.length > 0 && ` ${multiSelectOptions[0].text}`}
+            {multiSelectOptions.length > 1 && ` (+${multiSelectOptions.length-1})`}
+          </span>
           {caretIcon && caretIcon}
         </div>
         }
@@ -93,7 +106,7 @@ export default class ReactResponsiveSelectComponent extends Component {
                 ref={(r) => { this[`option_${index}`] = r; }}
                 className={`
                   rrs__option
-                  ${(selectedIndex === index) ? 'rrs__option--selected' : ''}
+                  ${(multiSelectIndexes.some(i => i === index)) ? 'rrs__option--selected' : ''}
                   ${(nextSelectedIndex === index) ? 'rrs__option--next-selection' : ''}
                 `}
               >
@@ -104,7 +117,7 @@ export default class ReactResponsiveSelectComponent extends Component {
         </div>
 
         {name &&
-        <input type="hidden" name={name} value={selectedOption.value} />
+        <input type="hidden" name={name} value={[multiSelectOptions.map(v => v.value)].join(',')} />
         }
 
       </div>
