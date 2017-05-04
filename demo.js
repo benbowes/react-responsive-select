@@ -55,6 +55,61 @@ class Form extends Component { // eslint-disable-line
       <form ref={r => this.form = r}>
         <div className="row">
           <div className="col-1-4">
+            <p className="label">Basic</p>
+            <ReactResponsiveSelect
+              name="make4"
+              options={[{
+                value: 'null',
+                text: 'Any'
+              }, {
+                value: 'fiat',
+                text: 'Fiat'
+              }, {
+                value: 'subaru',
+                text: 'Subaru'
+              }, {
+                value: 'bmw',
+                text: 'BMW'
+              }, {
+                value: 'tesla',
+                text: 'Tesla'
+              }]}
+              onSubmit={() => { this.form.submit(); }}
+              caretIcon={caretIcon}
+              prefix="Make4:"
+              selectedValue="fiat"
+              onChange={this.reportChange}
+            />
+          </div>
+
+          <div className="col-1-4">
+            <p className="label">Custom options</p>
+            <ReactResponsiveSelect
+              name="make3"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
+              caretIcon={caretIcon}
+              prefix="Make3:"
+              selectedValue="fiat"
+              onChange={this.reportChange}
+            />
+          </div>
+
+          <div className="col-1-4">
+            <p className="label">Custom label and options</p>
+            <ReactResponsiveSelect
+              name="make2"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
+              caretIcon={caretIcon}
+              customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`} // (Optional) format your own label text like this
+              selectedValue="fiat"
+              onChange={this.reportChange}
+            />
+          </div>
+
+          <div className="col-1-4">
+            <p className="label">MultiSelect mode (soon)</p>
             <ReactResponsiveSelect
               multiselect
               name="make1" // (Required) the value to submit
@@ -78,43 +133,10 @@ class Form extends Component { // eslint-disable-line
               onChange={this.reportChange} // (Optional) listen for changes in a select
             />
           </div>
-          <div className="col-1-4">
-            <ReactResponsiveSelect
-              name="make2"
-              options={options}
-              onSubmit={() => { this.form.submit(); }}
-              caretIcon={caretIcon}
-              customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`} // (Optional) format your own label text like this
-              selectedValue="fiat"
-              onChange={this.reportChange}
-            />
-          </div>
-          <div className="col-1-4">
-            <ReactResponsiveSelect
-              name="make3"
-              options={options}
-              onSubmit={() => { this.form.submit(); }}
-              caretIcon={caretIcon}
-              prefix="Make3:"
-              selectedValue="fiat"
-              onChange={this.reportChange}
-            />
-          </div>
-          <div className="col-1-4">
-            <ReactResponsiveSelect
-              name="make4"
-              options={options}
-              onSubmit={() => { this.form.submit(); }}
-              caretIcon={caretIcon}
-              prefix="Make4:"
-              selectedValue="fiat"
-              onChange={this.reportChange}
-            />
-          </div>
+
         </div>
-        <br/>
-        <div className="row">
-          <button type="submit" className={'button'}>Submit form</button>
+        <div className="row centered">
+          <button type="submit" className={'button'}>Submit</button>
         </div>
       </form>
     );
