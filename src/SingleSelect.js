@@ -41,6 +41,7 @@ export default class SingleSelect extends Component {
       initialIndex,
       isOptionsPanelOpen,
       isTouchDevice,
+      isDragging,
       name,
       nextSelectedIndex,
       options,
@@ -89,6 +90,7 @@ export default class SingleSelect extends Component {
                 scrollIntoViewElementSelector={'rrs__option--next-selection'}
                 key={index}
                 index={index}
+                isDragging={isDragging}
                 option={option}
                 selectedIndex={selectedIndex}
                 nextSelectedIndex={nextSelectedIndex}

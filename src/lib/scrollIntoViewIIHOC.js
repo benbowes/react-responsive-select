@@ -18,6 +18,7 @@ const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
     this.scrollPaneDOM = this.scrollPaneDOM || this.props.scrollIntoViewScrollPaneRef();
     this.elementDOM = this.elementDOM || ReactDOM.findDOMNode(this);
     if (
+      !this.props.isDragging &&
       this.elementDOM.classList.contains(this.props.scrollIntoViewElementSelector) &&
       this.scrollPaneDOM
     ) {

@@ -57,6 +57,7 @@ export default class MultiSelect extends Component {
       customLabelText,
       isOptionsPanelOpen,
       isTouchDevice,
+      isDragging,
       multiSelectIndexes,
       initialSelectedIndexes,
       multiSelectOptions,
@@ -111,6 +112,7 @@ export default class MultiSelect extends Component {
                 key={index}
                 index={index}
                 option={option}
+                isDragging={isDragging}
                 multiSelectIndexes={multiSelectIndexes}
                 nextSelectedIndex={nextSelectedIndex}
               />
