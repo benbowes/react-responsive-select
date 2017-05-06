@@ -47,7 +47,7 @@ class Form extends Component { // eslint-disable-line
   reportChange = this.reportChange.bind(this);
 
   reportChange(newValue) {
-    console.log(newValue);
+    console.log('reportChange', newValue);
   }
 
   render() {
@@ -57,7 +57,7 @@ class Form extends Component { // eslint-disable-line
           <div className="col-1-4">
             <p className="label">Basic</p>
             <ReactResponsiveSelect
-              name="make4"
+              name="make1"
               options={[{
                 value: 'null',
                 text: 'Any'
@@ -73,10 +73,22 @@ class Form extends Component { // eslint-disable-line
               }, {
                 value: 'tesla',
                 text: 'Tesla'
+              }, {
+                value: 'fiat',
+                text: 'Fiat'
+              }, {
+                value: 'subaru',
+                text: 'Subaru'
+              }, {
+                value: 'bmw',
+                text: 'BMW'
+              }, {
+                value: 'tesla',
+                text: 'Tesla'
               }]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
-              prefix="Make4:"
+              prefix="Make1:"
               selectedValue="fiat"
               onChange={this.reportChange}
             />
@@ -85,11 +97,11 @@ class Form extends Component { // eslint-disable-line
           <div className="col-1-4">
             <p className="label">Custom options</p>
             <ReactResponsiveSelect
-              name="make3"
+              name="make2"
               options={options}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
-              prefix="Make3:"
+              prefix="Make2:"
               selectedValue="fiat"
               onChange={this.reportChange}
             />
@@ -98,7 +110,7 @@ class Form extends Component { // eslint-disable-line
           <div className="col-1-4">
             <p className="label">Custom label and options</p>
             <ReactResponsiveSelect
-              name="make2"
+              name="make3"
               options={options}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
@@ -112,7 +124,7 @@ class Form extends Component { // eslint-disable-line
             <p className="label">MultiSelect mode (soon)</p>
             <ReactResponsiveSelect
               multiselect
-              name="make1" // (Required) the value to submit
+              name="make4" // (Required) the value to submit
               options={[ // (Required) an array of options - see above const options
                 { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
                 { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
@@ -128,14 +140,14 @@ class Form extends Component { // eslint-disable-line
               ]}
               onSubmit={() => { this.form.submit(); }} // (Required) form submit function
               caretIcon={caretIcon} // (Optional) add you own icon by using markup here
-              prefix="Make1:"
+              prefix="Make4:"
               // selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               onChange={this.reportChange} // (Optional) listen for changes in a select
             />
           </div>
 
         </div>
-        <div className="row">
+        <div className="row centered">
           <button type="submit" className={'button'}>Submit</button>
         </div>
       </form>

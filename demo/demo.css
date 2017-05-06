@@ -17,10 +17,10 @@ h1 {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -0.75px;
-  margin: 5rem 0 4rem;
+  margin: 4rem 0 4rem;
   padding: 0 0 1rem 0;
   border-bottom: 1px solid #ccc;
-  font-size: 2.5rem;
+  font-size: 2rem;
   display: inline-block;
 }
 
@@ -31,12 +31,14 @@ h1 {
 }
 
 h2 {
-  font-family: Georgia;
   line-height: 1.25;
   padding-bottom: 0;
   margin: 0 0 1rem 0;
   font-size: 1.25em;
-  color: #999
+  font-weight: 100;
+  color: #999;
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
 }
 
 h3 {
@@ -60,12 +62,20 @@ ul {
   text-align: left;
 }
 
+.inset code {
+  font-weight: bold;
+}
+
 .github-link {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
   color: #333;
   font-size: 0.75rem;
+}
+
+.github-link svg {
+  fill: #BDBDBD;
 }
 
 .label {
@@ -96,18 +106,20 @@ ul {
   -webkit-appearance: none;
   appearance: none;
   border: 0;
-  border-radius: 3px;
-  padding: 0.5rem 3rem;
+  border-radius: 20px;
+  padding: 0.5rem 2rem;
   font-size: inherit;
   color: #fff;
-  background: #2196f3;
+  background: #BDBDBD;
   cursor: pointer;
-  margin: 2rem 0 3rem 0;
+  margin: 5rem 0 0rem 0;
+  transition: all 0.3s ease-in-out;
 }
 
 .button:hover,
 .button:focus {
   background: #42a5f5;
+  transition: all 0.1s ease-in-out;
 }
 
 .dropdown-icon {

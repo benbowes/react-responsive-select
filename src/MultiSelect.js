@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import scrollIntoViewIIHOC from './lib/scrollIntoViewIIHOC';
+import MultiSelectOption from './MultiSelectOption';
 
-export default class ReactResponsiveSelectComponent extends Component {
+const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
+
+export default class MultiSelect extends Component {
 
   static propTypes = {
     caretIcon: PropTypes.element,
@@ -9,9 +13,26 @@ export default class ReactResponsiveSelectComponent extends Component {
       PropTypes.bool
     ]),
     initialIndex: PropTypes.number,
+    initialSelectedIndexes: PropTypes.arrayOf(
+      PropTypes.number
+    ),
     isDragging: PropTypes.bool,
     isOptionsPanelOpen: PropTypes.bool,
     isTouchDevice: PropTypes.bool,
+    multiSelectIndexes: PropTypes.arrayOf(
+      PropTypes.number
+    ),
+    multiSelectOptions: PropTypes.shape({
+      altered: PropTypes.bool,
+      options: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          text: PropTypes.string,
+          value: PropTypes.string,
+          markup: PropTypes.object
+        })
+      )
+    }),
     name: PropTypes.string,
     nextSelectedIndex: PropTypes.number,
     onSubmit: PropTypes.func,
@@ -30,37 +51,29 @@ export default class ReactResponsiveSelectComponent extends Component {
     selectedValue: PropTypes.string
   }
 
-  componentDidUpdate(){
-    const { nextSelectedIndex, isDragging, isTouchDevice } = this.props;
-
-    // Scroll to keep the selected option in view if on desktop
-    if(isDragging === false && !isTouchDevice) {
-      this.optionsContainer.scrollTop = this[`option_${nextSelectedIndex}`].offsetTop;
-    }
-  }
-
   render(){
     const {
       caretIcon,
       customLabelText,
-      initialIndex,
       isOptionsPanelOpen,
       isTouchDevice,
+      multiSelectIndexes,
+      initialSelectedIndexes,
+      multiSelectOptions,
       name,
-      nextSelectedIndex,
       options,
-      prefix,
-      selectedIndex,
-      selectedOption
+      nextSelectedIndex,
+      prefix
     } = this.props;
 
     return (
       <div
         className={`
           rrs__select-container
+          rrs__select-container--multiselect
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${(initialIndex !== selectedIndex) ? 'rrs__has-changed': ''}
+          ${(multiSelectIndexes.sort().toString() !== initialSelectedIndexes.sort().toString()) ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"
@@ -78,33 +91,39 @@ export default class ReactResponsiveSelectComponent extends Component {
           {prefix &&
           <span>{prefix}</span>
           }
-          <span className="rrs__label"> {selectedOption.text}</span>
+          <span className="rrs__label">
+            {multiSelectOptions.options.length > 0 && ` ${multiSelectOptions.options[0].text}`}
+            {multiSelectOptions.options.length > 1 && ` (+${multiSelectOptions.options.length-1})`}
+          </span>
           {caretIcon && caretIcon}
         </div>
         }
 
-        <div className="rrs__options-container" ref={(r) => { this.optionsContainer = r; }}>
+        <div
+          className="rrs__options-container"
+          ref={(r) => { if (r) { return this.optionsContainer = r; }}}
+        >
           {options.length > 0 &&
             options.map((option, index) => (
-              <div
+              <MultiSelectOptionHOC
+                scrollIntoViewScrollPaneRef={() => this.optionsContainer}
+                scrollIntoViewElementSelector={'rrs__option--next-selection'}
                 key={index}
-                role="option"
-                data-key={index}
-                ref={(r) => { this[`option_${index}`] = r; }}
-                className={`
-                  rrs__option
-                  ${(selectedIndex === index) ? 'rrs__option--selected' : ''}
-                  ${(nextSelectedIndex === index) ? 'rrs__option--next-selection' : ''}
-                `}
-              >
-                {option.markup || option.text}
-              </div>
+                index={index}
+                option={option}
+                multiSelectIndexes={multiSelectIndexes}
+                nextSelectedIndex={nextSelectedIndex}
+              />
             ))
           }
         </div>
 
         {name &&
-        <input type="hidden" name={name} value={selectedOption.value} />
+        <input
+          type="hidden"
+          name={name}
+          value={[multiSelectOptions.options.map(v => v.value)].join(',')}
+        />
         }
 
       </div>

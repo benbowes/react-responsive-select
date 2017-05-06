@@ -9,7 +9,8 @@ export const initialState = {
   name: undefined,
   options: [],
   selectedOption: {},
-  multiSelectOptions: [],
+  isMultiSelect: false,
+  multiSelectOptions: { altered: false, options: [] },
   multiSelectIndexes: []
 };
 
@@ -32,18 +33,36 @@ const removeMultiSelectIndex = (state, indexLocation) => {
 };
 
 const addMultiSelectOption = (state, index) => {
-  return [
-    ...state.multiSelectOptions,
-    { name: state.name, ...state.options[ index ] }
-  ];
+  return {
+    altered: state.initialSelectedIndexes.sort().toString() !== state.multiSelectIndexes.sort().toString(),
+    options: [
+      ...state.multiSelectOptions.options,
+      { name: state.name, ...state.options[ index ] }
+    ]
+  };
 };
 
 const removeMultiSelectOption = (state, indexLocation) => {
-  return [
-    ...state.multiSelectOptions.slice( 0, indexLocation ),
-    ...state.multiSelectOptions.slice( indexLocation + 1 )
-  ];
+  return {
+    altered: state.initialSelectedIndexes.sort().toString() !== state.multiSelectIndexes.sort().toString(),
+    options: [
+      ...state.multiSelectOptions.options.slice( 0, indexLocation ),
+      ...state.multiSelectOptions.options.slice( indexLocation + 1 )
+    ]
+  };
 };
+
+const getInitialOption = (state) => ({
+  multiSelectIndexes: [0],
+  multiSelectOptions: {
+    altered: false,
+    options: [{
+      name: state.name,
+      ...state.options[ 0 ]
+    }]
+  },
+  nextSelectedIndex: 0
+});
 
 const reducer = (state = initialState, action) => {
 
@@ -51,11 +70,11 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.BOOTSTRAP_STATE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
-
       return {
         ...state,
         isTouchDevice: action.value.isTouchDevice,
         initialIndex: initialSelectedIndex,
+        initialSelectedIndexes: [initialSelectedIndex],
         name: action.value.name,
         options: action.value.options,
         selectedIndex: initialSelectedIndex,
@@ -64,10 +83,14 @@ const reducer = (state = initialState, action) => {
           name: action.value.name,
           ...action.value.options[ initialSelectedIndex ]
         },
-        multiSelectOptions: [{
-          name: action.value.name,
-          ...action.value.options[ initialSelectedIndex ]
-        }],
+        isMultiSelect: action.value.multiselect || false,
+        multiSelectOptions: {
+          altered: false,
+          options: [{
+            name: action.value.name,
+            ...action.value.options[ initialSelectedIndex ]
+          }]
+        },
         multiSelectIndexes: [initialSelectedIndex]
       };
     }
@@ -107,15 +130,26 @@ const reducer = (state = initialState, action) => {
 
       // Deselect first option when any other value is selected
       if (
+        // Something is selected
         state.multiSelectIndexes.length === 1 &&
+        // And that something is the first item
         state.multiSelectIndexes[0] === 0 &&
+        // And the user is not clicking first item
         action.value !== 0
       ) {
-        state.multiSelectIndexes = [];
-        state.multiSelectOptions = [];
+        // Clear all options
+        state = {
+          ...state,
+          multiSelectIndexes: [],
+          multiSelectOptions: {
+            altered: false,
+            options: []
+          }
+        };
       }
 
-      // If any thing selected, deselect all then select first option
+      // If any thing selected and first option was selected,
+      // deselect all, then select first option
       if (
         state.multiSelectIndexes.length > 0 &&
         action.value === 0
@@ -123,7 +157,13 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           multiSelectIndexes: [0],
-          multiSelectOptions: [{ name: state.name, ...state.options[ 0 ] }],
+          multiSelectOptions: {
+            altered: false,
+            options: [{
+              name: state.name,
+              ...state.options[ 0 ]
+            }]
+          },
           nextSelectedIndex: 0
         };
       }
@@ -140,15 +180,11 @@ const reducer = (state = initialState, action) => {
           : removeMultiSelectOption(state, indexLocation)
       };
 
-      // Select first if none selected
-      if (newState.multiSelectOptions.length === 0) {
+      // Select first option if user has deselected all other items
+      if (newState.multiSelectOptions.options.length === 0) {
         newState = {
           ...state,
-          nextSelectedIndex: 0,
-          multiSelectIndexes: [0],
-          multiSelectOptions: [{
-            ...state.options[0]
-          }]
+          ...getInitialOption(state)
         };
       }
 

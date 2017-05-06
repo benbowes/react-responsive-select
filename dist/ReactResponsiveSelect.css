@@ -103,7 +103,3 @@
   Multiselect overrides
 
 */
-
-.rrs__select-container--multiselect .rrs__option.rrs__option--next-selection {
-  background: transparent;
-}
