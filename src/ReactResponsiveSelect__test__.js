@@ -60,7 +60,9 @@ describe('ReactResponsiveSelect', () => {
         isDragging: false,
         isOptionsPanelOpen: false,
         initialIndex: 1,
+        initialSelectedIndexes: [ 1 ],
         isTouchDevice: false,
+        isMultiSelect: false,
         nextSelectedIndex: 1,
         selectedIndex: 1,
         name: 'make',
@@ -72,11 +74,14 @@ describe('ReactResponsiveSelect', () => {
           { text: 'Tesla', value: 'tesla' }
         ],
         'multiSelectIndexes': [ 1 ],
-        'multiSelectOptions': [{
-          'name': 'make',
-          'text': 'Fiat',
-          'value': 'fiat'
-        }],
+        'multiSelectOptions': {
+          altered: false,
+          options: [{
+            name: 'make',
+            text: 'Fiat',
+            value: 'fiat'
+          }]
+        },
         selectedOption: {
           name: 'make',
           text: 'Fiat',
@@ -92,7 +97,9 @@ describe('ReactResponsiveSelect', () => {
         isDragging: false,
         isOptionsPanelOpen: false,
         initialIndex: 1,
+        initialSelectedIndexes: [ 1 ],
         isTouchDevice: false,
+        isMultiSelect: false,
         nextSelectedIndex: 1,
         selectedIndex: 1,
         name: 'make',
@@ -104,11 +111,14 @@ describe('ReactResponsiveSelect', () => {
           { text: 'Tesla', value: 'tesla' }
         ],
         'multiSelectIndexes': [ 1 ],
-        'multiSelectOptions': [{
-          'name': 'make',
-          'text': 'Fiat',
-          'value': 'fiat'
-        }],
+        'multiSelectOptions': {
+          altered: false,
+          options: [{
+            name: 'make',
+            text: 'Fiat',
+            value: 'fiat'
+          }]
+        },
         selectedOption: {
           name: 'make',
           text: 'Fiat',
