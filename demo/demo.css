@@ -94,10 +94,20 @@ ul {
 */
 
 .badge {
-  background: #B3E5FC;
+  background: #f1f1f1;
   padding: 0.25rem 1rem;
   margin: 2px 10px 2px 0;
   border-radius: 3px;
+}
+
+.badge--multiselect {
+  border: 1px solid #ccc;
+  padding: 1px 6px;
+  margin: 0 0 0 4px;
+  border-radius: 8px;
+  color: #666;
+  font-size: 11px;
+  vertical-align: middle;
 }
 
 .button {

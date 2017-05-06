@@ -1,4 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
+import _ from 'lodash';
 
 export const initialState = {
   isTouchDevice: false,
@@ -10,7 +11,10 @@ export const initialState = {
   options: [],
   selectedOption: {},
   isMultiSelect: false,
-  multiSelectOptions: { altered: false, options: [] },
+  multiSelectOptions: {
+    altered: false,
+    options: []
+  },
   multiSelectIndexes: []
 };
 
@@ -21,33 +25,43 @@ export const getSelectedValueIndex = (options, selectedValue) => {
     : 0;
 };
 
+const isAltered = (state) => {
+  return !_.isEqual(state.initialSelectedIndexes, state.multiSelectIndexes);
+};
+
 const addMultiSelectIndex = (state, index) => {
-  return [ ...state.multiSelectIndexes, index ];
+  return [
+    ...state.multiSelectIndexes,
+    index
+  ];
 };
 
 const removeMultiSelectIndex = (state, indexLocation) => {
   return [
-    ...state.multiSelectIndexes.slice( 0, indexLocation ),
-    ...state.multiSelectIndexes.slice( indexLocation + 1 )
+    ...state.multiSelectIndexes.slice(0, indexLocation),
+    ...state.multiSelectIndexes.slice(indexLocation + 1)
   ];
 };
 
 const addMultiSelectOption = (state, index) => {
   return {
-    altered: state.initialSelectedIndexes.sort().toString() !== state.multiSelectIndexes.sort().toString(),
+    altered: isAltered(state),
     options: [
       ...state.multiSelectOptions.options,
-      { name: state.name, ...state.options[ index ] }
+      {
+        name: state.name,
+        ...state.options[index]
+      }
     ]
   };
 };
 
 const removeMultiSelectOption = (state, indexLocation) => {
   return {
-    altered: state.initialSelectedIndexes.sort().toString() !== state.multiSelectIndexes.sort().toString(),
+    altered: isAltered(state),
     options: [
-      ...state.multiSelectOptions.options.slice( 0, indexLocation ),
-      ...state.multiSelectOptions.options.slice( indexLocation + 1 )
+      ...state.multiSelectOptions.options.slice(0, indexLocation),
+      ...state.multiSelectOptions.options.slice(indexLocation + 1)
     ]
   };
 };
@@ -58,15 +72,14 @@ const getInitialOption = (state) => ({
     altered: false,
     options: [{
       name: state.name,
-      ...state.options[ 0 ]
+      ...state.options[0]
     }]
   },
   nextSelectedIndex: 0
 });
 
 const reducer = (state = initialState, action) => {
-
-  switch(action.type) {
+  switch (action.type) {
 
     case actionTypes.BOOTSTRAP_STATE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
@@ -121,21 +134,16 @@ const reducer = (state = initialState, action) => {
         selectedOption: {
           name: state.name,
           altered: state.nextSelectedIndex !== state.initialIndex,
-          ...state.options[ state.nextSelectedIndex ]
+          ...state.options[state.nextSelectedIndex]
         }
       };
 
     case actionTypes.SET_MULTISELECT_OPTIONS: {
-      const indexLocation = state.multiSelectIndexes.indexOf(action.value);
-
       // Deselect first option when any other value is selected
       if (
-        // Something is selected
-        state.multiSelectIndexes.length === 1 &&
-        // And that something is the first item
-        state.multiSelectIndexes[0] === 0 &&
-        // And the user is not clicking first item
-        action.value !== 0
+        state.multiSelectIndexes.length === 1 && // Something is selected
+        state.multiSelectIndexes[0] === 0 && // And that something is the first item
+        action.value !== 0 // And the user is not clicking first item
       ) {
         // Clear all options
         state = {
@@ -161,12 +169,14 @@ const reducer = (state = initialState, action) => {
             altered: false,
             options: [{
               name: state.name,
-              ...state.options[ 0 ]
+              ...state.options[0]
             }]
           },
           nextSelectedIndex: 0
         };
       }
+
+      const indexLocation = state.multiSelectIndexes.indexOf(action.value);
 
       // If requested item does not exist, add it. Else remove it
       let newState = {

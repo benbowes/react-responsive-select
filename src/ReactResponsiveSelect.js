@@ -104,9 +104,9 @@ export default class ReactResponsiveSelect extends Component {
       isMultiSelect
     } = this.state;
 
-    const customLabelText = customLabelRenderer && customLabelRenderer(selectedOption) || false;
-
     if (isMultiSelect) {
+      const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectOptions) || false;
+
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <MultiSelect
@@ -128,6 +128,8 @@ export default class ReactResponsiveSelect extends Component {
         </div>
       );
     } else {
+      const customLabelText = customLabelRenderer && customLabelRenderer(selectedOption) || false;
+
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <SingleSelect

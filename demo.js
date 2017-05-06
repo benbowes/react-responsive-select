@@ -58,34 +58,17 @@ class Form extends Component { // eslint-disable-line
             <p className="label">Basic</p>
             <ReactResponsiveSelect
               name="make1"
-              options={[{
-                value: 'null',
-                text: 'Any'
-              }, {
-                value: 'fiat',
-                text: 'Fiat'
-              }, {
-                value: 'subaru',
-                text: 'Subaru'
-              }, {
-                value: 'bmw',
-                text: 'BMW'
-              }, {
-                value: 'tesla',
-                text: 'Tesla'
-              }, {
-                value: 'fiat',
-                text: 'Fiat'
-              }, {
-                value: 'subaru',
-                text: 'Subaru'
-              }, {
-                value: 'bmw',
-                text: 'BMW'
-              }, {
-                value: 'tesla',
-                text: 'Tesla'
-              }]}
+              options={[
+                { value: 'null', text: 'Any' },
+                { value: 'fiat', text: 'Fiat' },
+                { value: 'subaru', text: 'Subaru' },
+                { value: 'bmw', text: 'BMW' },
+                { value: 'tesla', text: 'Tesla' },
+                { value: 'fiat', text: 'Fiat' },
+                { value: 'subaru', text: 'Subaru' },
+                { value: 'bmw', text: 'BMW' },
+                { value: 'tesla', text: 'Tesla' }
+              ]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
               prefix="Make1:"
@@ -143,6 +126,22 @@ class Form extends Component { // eslint-disable-line
               prefix="Make4:"
               // selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               onChange={this.reportChange} // (Optional) listen for changes in a select
+              customLabelRenderer={selectedOptions => {
+                if (!selectedOptions.altered) {
+                  return 'Make4: Any selected';
+                } else {
+                  return (
+                    <span>
+                      {`Make4: ${selectedOptions.options[0].text}`}
+                      {selectedOptions.options.length > 1 &&
+                      <span className='badge--multiselect'>
+                        {`+ ${selectedOptions.options.length-1}`}
+                      </span>
+                      }
+                    </span>
+                  );
+                }
+              }}
             />
           </div>
 
