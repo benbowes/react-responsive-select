@@ -4,10 +4,10 @@ export default class MultiSelectOption extends Component {
 
   static propTypes = {
     index: PropTypes.number.isRequired,
-    multiSelectIndexes: PropTypes.arrayOf(
+    multiSelectSelectedIndexes: PropTypes.arrayOf(
       PropTypes.number
     ),
-    nextSelectedIndex: PropTypes.number,
+    potentialOptionSelectionIndex: PropTypes.number,
     option: PropTypes.shape({
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
@@ -17,10 +17,10 @@ export default class MultiSelectOption extends Component {
 
   render(){
     const {
-      nextSelectedIndex,
+      potentialOptionSelectionIndex,
       option,
       index,
-      multiSelectIndexes
+      multiSelectSelectedIndexes
     } = this.props;
 
     return (
@@ -30,8 +30,8 @@ export default class MultiSelectOption extends Component {
         ref={(r) => { this[`option_${index}`] = r; }}
         className={`
           rrs__option
-          ${(multiSelectIndexes.some(i => i === index)) ? 'rrs__option--selected' : ''}
-          ${(nextSelectedIndex === index) ? 'rrs__option--next-selection' : ''}
+          ${(multiSelectSelectedIndexes.some(i => i === index)) ? 'rrs__option--selected' : ''}
+          ${(potentialOptionSelectionIndex === index) ? 'rrs__option--next-selection' : ''}
         `}
       >
         {option.markup || option.text}

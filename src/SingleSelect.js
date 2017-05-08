@@ -13,12 +13,12 @@ export default class SingleSelect extends Component {
       PropTypes.bool,
       PropTypes.element
     ]),
-    initialIndex: PropTypes.number,
+    singleSelectInitialIndex: PropTypes.number,
     isDragging: PropTypes.bool,
     isOptionsPanelOpen: PropTypes.bool,
     isTouchDevice: PropTypes.bool,
     name: PropTypes.string,
-    nextSelectedIndex: PropTypes.number,
+    potentialOptionSelectionIndex: PropTypes.number,
     onSubmit: PropTypes.func,
     options: PropTypes.arrayOf(
       PropTypes.shape({
@@ -27,8 +27,8 @@ export default class SingleSelect extends Component {
       })
     ).isRequired,
     prefix: PropTypes.string,
-    selectedIndex: PropTypes.number,
-    selectedOption: PropTypes.shape({
+    singleSelectSelectedIndex: PropTypes.number,
+    singleSelectSelectedOption: PropTypes.shape({
       text: PropTypes.string,
       value: PropTypes.string
     }),
@@ -39,16 +39,16 @@ export default class SingleSelect extends Component {
     const {
       caretIcon,
       customLabelText,
-      initialIndex,
+      singleSelectInitialIndex,
       isOptionsPanelOpen,
       isTouchDevice,
       isDragging,
       name,
-      nextSelectedIndex,
+      potentialOptionSelectionIndex,
       options,
       prefix,
-      selectedIndex,
-      selectedOption
+      singleSelectSelectedIndex,
+      singleSelectSelectedOption
     } = this.props;
 
     return (
@@ -57,7 +57,7 @@ export default class SingleSelect extends Component {
           rrs__select-container
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${(initialIndex !== selectedIndex) ? 'rrs__has-changed': ''}
+          ${(singleSelectInitialIndex !== singleSelectSelectedIndex) ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"
@@ -75,7 +75,7 @@ export default class SingleSelect extends Component {
           {prefix &&
           <span>{prefix}</span>
           }
-          <span className="rrs__label"> {selectedOption.text}</span>
+          <span className="rrs__label"> {singleSelectSelectedOption.text}</span>
           {caretIcon && caretIcon}
         </div>
         }
@@ -93,15 +93,15 @@ export default class SingleSelect extends Component {
                 index={index}
                 isDragging={isDragging}
                 option={option}
-                selectedIndex={selectedIndex}
-                nextSelectedIndex={nextSelectedIndex}
+                singleSelectSelectedIndex={singleSelectSelectedIndex}
+                potentialOptionSelectionIndex={potentialOptionSelectionIndex}
               />
             ))
           }
         </div>
 
         {name &&
-        <input type="hidden" name={name} value={selectedOption.value} />
+        <input type="hidden" name={name} value={singleSelectSelectedOption.value} />
         }
 
       </div>

@@ -18,7 +18,7 @@ describe('reducer', () => {
       }
     );
     expect(result.name).to.eql('thing');
-    expect(result.selectedOption).to.eql({ name: 'make2', text: 'Fiat', value: 'fiat' });
+    expect(result.singleSelectSelectedOption).to.eql({ name: 'make2', text: 'Fiat', value: 'fiat' });
   });
 
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
@@ -35,8 +35,8 @@ describe('reducer', () => {
 
   it('should update state.isOptionsPanelOpen when SET_OPTIONS_PANEL_OPEN is fired', () => {
     const mockInitialState = {
-      nextSelectedIndex: 0,
-      selectedIndex: 0,
+      potentialOptionSelectionIndex: 0,
+      singleSelectSelectedIndex: 0,
       name: 'make1',
       options: [{ text: 'Any', value: 'null' }]
     };
@@ -47,7 +47,7 @@ describe('reducer', () => {
 
     expect(result).to.eql({
       ...mockInitialState,
-      selectedOption: {
+      singleSelectSelectedOption: {
         name: 'make1',
         altered: true,
         text: 'Any',
@@ -57,7 +57,7 @@ describe('reducer', () => {
     });
   });
 
-  it('should update state.selectedIndex when SET_SELECTED_INDEX is fired', () => {
+  it('should update state.singleSelectSelectedIndex when SET_SELECTED_INDEX is fired', () => {
     const result = reducer(
       initialState,
       { type: actionTypes.SET_SELECTED_INDEX, value: 7 }
@@ -65,8 +65,8 @@ describe('reducer', () => {
 
     expect(result).to.eql({
       ...initialState,
-      nextSelectedIndex: 7,
-      selectedIndex: 7
+      potentialOptionSelectionIndex: 7,
+      singleSelectSelectedIndex: 7
     });
   });
 

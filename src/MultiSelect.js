@@ -13,17 +13,16 @@ export default class MultiSelect extends Component {
       PropTypes.bool,
       PropTypes.element
     ]),
-    initialIndex: PropTypes.number,
-    initialSelectedIndexes: PropTypes.arrayOf(
+    multiSelectInitialSelectedIndexes: PropTypes.arrayOf(
       PropTypes.number
     ),
     isDragging: PropTypes.bool,
     isOptionsPanelOpen: PropTypes.bool,
     isTouchDevice: PropTypes.bool,
-    multiSelectIndexes: PropTypes.arrayOf(
+    multiSelectSelectedIndexes: PropTypes.arrayOf(
       PropTypes.number
     ),
-    multiSelectOptions: PropTypes.shape({
+    multiSelectSelectedOptions: PropTypes.shape({
       altered: PropTypes.bool,
       options: PropTypes.arrayOf(
         PropTypes.shape({
@@ -35,7 +34,7 @@ export default class MultiSelect extends Component {
       )
     }),
     name: PropTypes.string,
-    nextSelectedIndex: PropTypes.number,
+    potentialOptionSelectionIndex: PropTypes.number,
     onSubmit: PropTypes.func,
     options: PropTypes.arrayOf(
       PropTypes.shape({
@@ -43,13 +42,7 @@ export default class MultiSelect extends Component {
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    prefix: PropTypes.string,
-    selectedIndex: PropTypes.number,
-    selectedOption: PropTypes.shape({
-      text: PropTypes.string,
-      value: PropTypes.string
-    }),
-    selectedValue: PropTypes.string
+    prefix: PropTypes.string
   }
 
   render(){
@@ -59,11 +52,11 @@ export default class MultiSelect extends Component {
       isOptionsPanelOpen,
       isTouchDevice,
       isDragging,
-      multiSelectIndexes,
-      multiSelectOptions,
+      multiSelectSelectedIndexes,
+      multiSelectSelectedOptions,
       name,
       options,
-      nextSelectedIndex,
+      potentialOptionSelectionIndex,
       prefix
     } = this.props;
 
@@ -74,7 +67,7 @@ export default class MultiSelect extends Component {
           rrs__select-container--multiselect
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${multiSelectOptions.altered ? 'rrs__has-changed': ''}
+          ${multiSelectSelectedOptions.altered ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"
@@ -93,8 +86,8 @@ export default class MultiSelect extends Component {
           <span>{prefix}</span>
           }
           <span className="rrs__label">
-            {multiSelectOptions.options.length > 0 && ` ${multiSelectOptions.options[0].text}`}
-            {multiSelectOptions.options.length > 1 && ` (+${multiSelectOptions.options.length-1})`}
+            {multiSelectSelectedOptions.options.length > 0 && ` ${multiSelectSelectedOptions.options[0].text}`}
+            {multiSelectSelectedOptions.options.length > 1 && ` (+${multiSelectSelectedOptions.options.length-1})`}
           </span>
           {caretIcon && caretIcon}
         </div>
@@ -113,8 +106,8 @@ export default class MultiSelect extends Component {
                 index={index}
                 option={option}
                 isDragging={isDragging}
-                multiSelectIndexes={multiSelectIndexes}
-                nextSelectedIndex={nextSelectedIndex}
+                multiSelectSelectedIndexes={multiSelectSelectedIndexes}
+                potentialOptionSelectionIndex={potentialOptionSelectionIndex}
               />
             ))
           }
@@ -124,7 +117,7 @@ export default class MultiSelect extends Component {
         <input
           type="hidden"
           name={name}
-          value={[multiSelectOptions.options.map(v => v.value)].join(',')}
+          value={[multiSelectSelectedOptions.options.map(v => v.value)].join(',')}
         />
         }
 

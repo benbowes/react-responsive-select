@@ -59,12 +59,12 @@ describe('ReactResponsiveSelect', () => {
       const expectedState = {
         isDragging: false,
         isOptionsPanelOpen: false,
-        initialIndex: 1,
-        initialSelectedIndexes: [ 1 ],
+        singleSelectInitialIndex: 1,
+        multiSelectInitialSelectedIndexes: [ 1 ],
         isTouchDevice: false,
         isMultiSelect: false,
-        nextSelectedIndex: 1,
-        selectedIndex: 1,
+        potentialOptionSelectionIndex: 1,
+        singleSelectSelectedIndex: 1,
         name: 'make',
         options: [
           { text: 'Any', value: 'null' },
@@ -73,8 +73,8 @@ describe('ReactResponsiveSelect', () => {
           { text: 'BMW', value: 'bmw' },
           { text: 'Tesla', value: 'tesla' }
         ],
-        'multiSelectIndexes': [ 1 ],
-        'multiSelectOptions': {
+        'multiSelectSelectedIndexes': [ 1 ],
+        'multiSelectSelectedOptions': {
           altered: false,
           options: [{
             name: 'make',
@@ -82,7 +82,7 @@ describe('ReactResponsiveSelect', () => {
             value: 'fiat'
           }]
         },
-        selectedOption: {
+        singleSelectSelectedOption: {
           name: 'make',
           text: 'Fiat',
           value: 'fiat'
@@ -96,12 +96,12 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state()).to.eql( {
         isDragging: false,
         isOptionsPanelOpen: false,
-        initialIndex: 1,
-        initialSelectedIndexes: [ 1 ],
+        singleSelectInitialIndex: 1,
+        multiSelectInitialSelectedIndexes: [ 1 ],
         isTouchDevice: false,
         isMultiSelect: false,
-        nextSelectedIndex: 1,
-        selectedIndex: 1,
+        potentialOptionSelectionIndex: 1,
+        singleSelectSelectedIndex: 1,
         name: 'make',
         options: [
           { text: 'Any', value: 'null' },
@@ -110,8 +110,8 @@ describe('ReactResponsiveSelect', () => {
           { text: 'BMW', value: 'bmw' },
           { text: 'Tesla', value: 'tesla' }
         ],
-        'multiSelectIndexes': [ 1 ],
-        'multiSelectOptions': {
+        'multiSelectSelectedIndexes': [ 1 ],
+        'multiSelectSelectedOptions': {
           altered: false,
           options: [{
             name: 'make',
@@ -119,7 +119,7 @@ describe('ReactResponsiveSelect', () => {
             value: 'fiat'
           }]
         },
-        selectedOption: {
+        singleSelectSelectedOption: {
           name: 'make',
           text: 'Fiat',
           value: 'fiat'

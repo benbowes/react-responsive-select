@@ -63,25 +63,25 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   componentDidUpdate( prevProps, prevState ) {
-    const { selectedOption, multiSelectOptions, isMultiSelect } = this.state;
+    const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect } = this.state;
     const { onChange } = this.props;
 
     if (isMultiSelect) {
       if(
-        prevState.multiSelectOptions.options.length &&
+        prevState.multiSelectSelectedOptions.options.length &&
         (
-          prevState.multiSelectOptions.options.length !== multiSelectOptions.options.length ||
-          prevState.multiSelectOptions.options[0].value !== multiSelectOptions.options[0].value
+          prevState.multiSelectSelectedOptions.options.length !== multiSelectSelectedOptions.options.length ||
+          prevState.multiSelectSelectedOptions.options[0].value !== multiSelectSelectedOptions.options[0].value
         )
       ) {
-        return onChange(multiSelectOptions);
+        return onChange(multiSelectSelectedOptions);
       }
     } else {
       if(
-        prevState.selectedOption.value &&
-        prevState.selectedOption.value !== selectedOption.value
+        prevState.singleSelectSelectedOption.value &&
+        prevState.singleSelectSelectedOption.value !== singleSelectSelectedOption.value
       ) {
-        return onChange(selectedOption);
+        return onChange(singleSelectSelectedOption);
       }
     }
   }
@@ -89,59 +89,59 @@ export default class ReactResponsiveSelect extends Component {
   render() {
     const { prefix, caretIcon, customLabelRenderer } = this.props;
     const {
-      initialIndex,
-      initialSelectedIndexes,
+      singleSelectInitialIndex,
+      multiSelectInitialSelectedIndexes,
       isDragging,
       isOptionsPanelOpen,
       isTouchDevice,
-      multiSelectIndexes,
-      multiSelectOptions,
+      multiSelectSelectedIndexes,
+      multiSelectSelectedOptions,
       name,
-      nextSelectedIndex,
+      potentialOptionSelectionIndex,
       options,
-      selectedIndex,
-      selectedOption,
+      singleSelectSelectedIndex,
+      singleSelectSelectedOption,
       isMultiSelect
     } = this.state;
 
     if (isMultiSelect) {
-      const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectOptions) || false;
+      const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectSelectedOptions) || false;
 
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <MultiSelect
             isTouchDevice={isTouchDevice}
-            initialIndex={initialIndex}
+            singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}
             name={name}
             customLabelText={customLabelText}
-            initialSelectedIndexes={initialSelectedIndexes}
-            multiSelectOptions={multiSelectOptions}
-            multiSelectIndexes={multiSelectIndexes}
-            nextSelectedIndex={nextSelectedIndex}
+            multiSelectInitialSelectedIndexes={multiSelectInitialSelectedIndexes}
+            multiSelectSelectedOptions={multiSelectSelectedOptions}
+            multiSelectSelectedIndexes={multiSelectSelectedIndexes}
+            potentialOptionSelectionIndex={potentialOptionSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
             isDragging={isDragging}
-            selectedOption={selectedOption}
+            singleSelectSelectedOption={singleSelectSelectedOption}
             options={options}
           />
         </div>
       );
     } else {
-      const customLabelText = customLabelRenderer && customLabelRenderer(selectedOption) || false;
+      const customLabelText = customLabelRenderer && customLabelRenderer(singleSelectSelectedOption) || false;
 
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <SingleSelect
             isTouchDevice={isTouchDevice}
-            initialIndex={initialIndex}
+            singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}
             name={name}
             customLabelText={customLabelText}
-            selectedOption={selectedOption}
-            selectedIndex={selectedIndex}
-            nextSelectedIndex={nextSelectedIndex}
+            singleSelectSelectedOption={singleSelectSelectedOption}
+            singleSelectSelectedIndex={singleSelectSelectedIndex}
+            potentialOptionSelectionIndex={potentialOptionSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
             options={options}
             isDragging={isDragging}
@@ -266,7 +266,7 @@ export default class ReactResponsiveSelect extends Component {
     if(this.state.isMultiSelect) {
       return this.updateState({
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        value: this.state.nextSelectedIndex
+        value: this.state.potentialOptionSelectionIndex
       });
     }
 
@@ -278,11 +278,11 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   keyUpOrDownPressed(type) {
-    const { isOptionsPanelOpen, nextSelectedIndex } = this.state;
+    const { isOptionsPanelOpen, potentialOptionSelectionIndex } = this.state;
 
     this.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX,
-      value: getNextIndex(type, isOptionsPanelOpen, nextSelectedIndex, this.OPTION_NODES_LENGTH)
+      value: getNextIndex(type, isOptionsPanelOpen, potentialOptionSelectionIndex, this.OPTION_NODES_LENGTH)
     });
 
     /* Open the options panel */

@@ -97,7 +97,7 @@ class Form extends Component { // eslint-disable-line
               options={options}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
-              customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`} // (Optional) format your own label text like this
+              customLabelRenderer={singleSelectSelectedOption => `Selected make is ${singleSelectSelectedOption.text} :)`} // (Optional) format your own label text like this
               selectedValue="fiat"
               onChange={this.reportChange}
             />
@@ -126,16 +126,16 @@ class Form extends Component { // eslint-disable-line
               prefix="Make4:"
               // selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               onChange={this.reportChange} // (Optional) listen for changes in a select
-              customLabelRenderer={selectedOptions => {
-                if (!selectedOptions.altered) {
+              customLabelRenderer={singleSelectSelectedOptions => {
+                if (!singleSelectSelectedOptions.altered) {
                   return 'Make4: Any selected';
                 } else {
                   return (
                     <span className='rrs__multiselect__label'>
-                      <span className='rrs__multiselect__label-text'>{`Make4: ${selectedOptions.options[0].text}`}</span>
-                      {selectedOptions.options.length > 1 &&
+                      <span className='rrs__multiselect__label-text'>{`Make4: ${singleSelectSelectedOptions.options[0].text}`}</span>
+                      {singleSelectSelectedOptions.options.length > 1 &&
                       <span className='rrs__multiselect__label-badge'>
-                        {`+ ${selectedOptions.options.length-1}`}
+                        {`+ ${singleSelectSelectedOptions.options.length-1}`}
                       </span>
                       }
                     </span>
