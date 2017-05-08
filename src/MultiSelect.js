@@ -10,7 +10,8 @@ export default class MultiSelect extends Component {
     caretIcon: PropTypes.element,
     customLabelText: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.bool
+      PropTypes.bool,
+      PropTypes.element
     ]),
     initialIndex: PropTypes.number,
     initialSelectedIndexes: PropTypes.arrayOf(
@@ -59,7 +60,6 @@ export default class MultiSelect extends Component {
       isTouchDevice,
       isDragging,
       multiSelectIndexes,
-      initialSelectedIndexes,
       multiSelectOptions,
       name,
       options,
@@ -74,7 +74,7 @@ export default class MultiSelect extends Component {
           rrs__select-container--multiselect
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${(multiSelectIndexes.sort().toString() !== initialSelectedIndexes.sort().toString()) ? 'rrs__has-changed': ''}
+          ${multiSelectOptions.altered ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"

@@ -10,7 +10,8 @@ export default class SingleSelect extends Component {
     caretIcon: PropTypes.element,
     customLabelText: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.bool
+      PropTypes.bool,
+      PropTypes.element
     ]),
     initialIndex: PropTypes.number,
     isDragging: PropTypes.bool,

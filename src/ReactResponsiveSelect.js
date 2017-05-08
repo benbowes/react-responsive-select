@@ -237,7 +237,7 @@ export default class ReactResponsiveSelect extends Component {
           value: parseFloat(e.target.getAttribute('data-key'))
         });
 
-        if (isMultiSelect) return this.forceUpdate();
+        if (isMultiSelect) return;
 
         return this.forceUpdate(() => {
           return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
