@@ -18,32 +18,32 @@ export const initialState = {
   multiSelectIndexes: []
 };
 
-export const getSelectedValueIndex = (options, selectedValue) => {
+function getSelectedValueIndex(options, selectedValue) {
   const index = options.map(option => option.value).indexOf(selectedValue);
   return (index > -1)
     ? index
     : 0;
-};
+}
 
-const isAltered = (state) => {
+function isAltered(state) {
   return !_.isEqual(state.initialSelectedIndexes, state.multiSelectIndexes);
-};
+}
 
-const addMultiSelectIndex = (state, index) => {
+function addMultiSelectIndex(state, index) {
   return [
     ...state.multiSelectIndexes,
     index
   ];
-};
+}
 
-const removeMultiSelectIndex = (state, indexLocation) => {
+function removeMultiSelectIndex(state, indexLocation) {
   return [
     ...state.multiSelectIndexes.slice(0, indexLocation),
     ...state.multiSelectIndexes.slice(indexLocation + 1)
   ];
-};
+}
 
-const addMultiSelectOption = (state, index) => {
+function addMultiSelectOption(state, index) {
   return {
     altered: isAltered(state),
     options: [
@@ -54,9 +54,9 @@ const addMultiSelectOption = (state, index) => {
       }
     ]
   };
-};
+}
 
-const removeMultiSelectOption = (state, indexLocation) => {
+function removeMultiSelectOption(state, indexLocation) {
   return {
     altered: isAltered(state),
     options: [
@@ -64,19 +64,21 @@ const removeMultiSelectOption = (state, indexLocation) => {
       ...state.multiSelectOptions.options.slice(indexLocation + 1)
     ]
   };
-};
+}
 
-const getInitialOption = (state) => ({
-  multiSelectIndexes: [0],
-  multiSelectOptions: {
-    altered: false,
-    options: [{
-      name: state.name,
-      ...state.options[0]
-    }]
-  },
-  nextSelectedIndex: 0
-});
+function getInitialOption(state) {
+  return {
+    multiSelectIndexes: [0],
+    multiSelectOptions: {
+      altered: false,
+      options: [{
+        name: state.name,
+        ...state.options[0]
+      }]
+    },
+    nextSelectedIndex: 0
+  };
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -139,29 +141,29 @@ const reducer = (state = initialState, action) => {
       };
 
     case actionTypes.SET_MULTISELECT_OPTIONS: {
-      // Deselect first option when any other value is selected
-      if (
-        state.multiSelectIndexes.length === 1 && // Something is selected
-        state.multiSelectIndexes[0] === 0 && // And that something is the first item
-        action.value !== 0 // And the user is not clicking first item
-      ) {
-        // Clear all options
-        state = {
-          ...state,
-          multiSelectIndexes: [],
-          multiSelectOptions: {
-            altered: false,
-            options: []
-          }
-        };
-      }
 
-      // If any thing selected and first option was selected,
-      // deselect all, then select first option
-      if (
+      const requestedOptionIndex = action.value;
+
+      const isFirstOptionInListSelected = (
+        state.multiSelectIndexes[0] === 0 &&
+        state.multiSelectIndexes.length === 1
+      );
+
+      // If anything selected and first option was requested, deselect all, then select first option
+      const shouldDeselectAllAndSelectFirstOption = (
         state.multiSelectIndexes.length > 0 &&
-        action.value === 0
-      ) {
+        !isFirstOptionInListSelected &&
+        requestedOptionIndex === 0
+      );
+
+      // Deselect first option when any other value is requested
+      const shouldDeselectFirstOptionAndSelectRequestedOption = (
+        isFirstOptionInListSelected &&
+        requestedOptionIndex !== 0
+      );
+
+      // If any thing selected and first option was requested, deselect all, then select first option
+      if ( shouldDeselectAllAndSelectFirstOption ) {
         return {
           ...state,
           multiSelectIndexes: [0],
@@ -176,21 +178,35 @@ const reducer = (state = initialState, action) => {
         };
       }
 
-      const indexLocation = state.multiSelectIndexes.indexOf(action.value);
+      // Deselect first option when any other value is requested
+      if ( shouldDeselectFirstOptionAndSelectRequestedOption ) {
+        // reset state
+        state = {
+          ...state,
+          multiSelectIndexes: [],
+          multiSelectOptions: {
+            altered: false,
+            options: []
+          }
+        };
+      }
+
+      // Find index of requested option or return -1
+      const indexLocation = state.multiSelectIndexes.indexOf(requestedOptionIndex);
 
       // If requested item does not exist, add it. Else remove it
       let newState = {
         ...state,
-        nextSelectedIndex: action.value,
+        nextSelectedIndex: requestedOptionIndex,
         multiSelectIndexes: indexLocation === -1
-          ? addMultiSelectIndex(state, action.value)
+          ? addMultiSelectIndex(state, requestedOptionIndex)
           : removeMultiSelectIndex(state, indexLocation),
         multiSelectOptions: indexLocation === -1
-          ? addMultiSelectOption(state, action.value)
+          ? addMultiSelectOption(state, requestedOptionIndex)
           : removeMultiSelectOption(state, indexLocation)
       };
 
-      // Select first option if user has deselected all other items
+      // Select first option if user has deselected all items
       if (newState.multiSelectOptions.options.length === 0) {
         newState = {
           ...state,
