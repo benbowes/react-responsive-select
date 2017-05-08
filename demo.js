@@ -124,17 +124,17 @@ class Form extends Component { // eslint-disable-line
               onSubmit={() => { this.form.submit(); }} // (Required) form submit function
               caretIcon={caretIcon} // (Optional) add you own icon by using markup here
               prefix="Make4:"
-              // selectedValue="mazda"  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+              // selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               onChange={this.reportChange} // (Optional) listen for changes in a select
               customLabelRenderer={selectedOptions => {
                 if (!selectedOptions.altered) {
                   return 'Make4: Any selected';
                 } else {
                   return (
-                    <span>
-                      {`Make4: ${selectedOptions.options[0].text}`}
+                    <span className='rrs__multiselect__label'>
+                      <span className='rrs__multiselect__label-text'>{`Make4: ${selectedOptions.options[0].text}`}</span>
                       {selectedOptions.options.length > 1 &&
-                      <span className='badge--multiselect'>
+                      <span className='rrs__multiselect__label-badge'>
                         {`+ ${selectedOptions.options.length-1}`}
                       </span>
                       }
@@ -149,6 +149,8 @@ class Form extends Component { // eslint-disable-line
         <div className="row centered">
           <button type="submit" className={'button'}>Submit</button>
         </div>
+
+        <p className="view-console-message">View the console to see the <code>onChange</code> output</p>
       </form>
     );
   }
