@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 // Inheritence Inversion HOC https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e#5247
 const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
 
+  checkForValidity() {
+    const { scrollIntoViewElementSelector, scrollIntoViewScrollPaneRef } = this.props;
+
+    if ( !scrollIntoViewScrollPaneRef ) throw 'scrollIntoViewIIHOC requires a valid scrollIntoViewScrollPaneRef ref lookup function prop';
+    if ( !scrollIntoViewElementSelector ) throw 'crollIntoViewIIHOC requires a valid scrollIntoViewElementSelector css selector string prop';
+  }
+
+  componentDidMount() {
+    if (super.componentDidMount) super.componentDidMount();
+    this.checkForValidity();
+  }
+
   /*
   * @prop {function} scrollIntoViewScrollPaneRef - react ref lookup function
   * @prop {string} scrollIntoViewElementSelector - a class selector as used by element.querySelector()
@@ -15,13 +27,14 @@ const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
   */
 
   scrollIntoView() {
-    this.scrollPaneDOM = this.scrollPaneDOM || this.props.scrollIntoViewScrollPaneRef();
+    const { scrollIntoViewElementSelector, scrollIntoViewScrollPaneRef, isTouchDevice } = this.props;
+    this.scrollPaneDOM = this.scrollPaneDOM || scrollIntoViewScrollPaneRef();
     this.elementDOM = this.elementDOM || ReactDOM.findDOMNode(this);
+    const isCurrentHighlightedOption = this.elementDOM.classList.contains( scrollIntoViewElementSelector );
 
     if (
-      !this.props.isDragging &&
-      this.elementDOM.classList.contains(this.props.scrollIntoViewElementSelector) &&
-      this.scrollPaneDOM
+      !isTouchDevice &&
+      isCurrentHighlightedOption
     ) {
 
       const topOfScrollPane = this.scrollPaneDOM.getBoundingClientRect().top;
@@ -37,7 +50,7 @@ const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
         this.scrollPaneDOM.scrollTop -= this.elementDOM.offsetHeight;
       }
 
-      // Scroll to show first option if first option selected
+      // Scroll to show first option if first option selected - so as to have it in view
       if (this.elementDOM.getAttribute('data-key') === '0') {
         this.scrollPaneDOM.scrollTop = 0;
       }
