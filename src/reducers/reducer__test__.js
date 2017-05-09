@@ -35,7 +35,7 @@ describe('reducer', () => {
 
   it('should update state.isOptionsPanelOpen when SET_OPTIONS_PANEL_OPEN is fired', () => {
     const mockInitialState = {
-      potentialOptionSelectionIndex: 0,
+      nextPotentialSelectionIndex: 0,
       singleSelectSelectedIndex: 0,
       name: 'make1',
       options: [{ text: 'Any', value: 'null' }]
@@ -65,7 +65,7 @@ describe('reducer', () => {
 
     expect(result).to.eql({
       ...initialState,
-      potentialOptionSelectionIndex: 7,
+      nextPotentialSelectionIndex: 7,
       singleSelectSelectedIndex: 7
     });
   });

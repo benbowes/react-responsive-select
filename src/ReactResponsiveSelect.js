@@ -97,7 +97,7 @@ export default class ReactResponsiveSelect extends Component {
       multiSelectSelectedIndexes,
       multiSelectSelectedOptions,
       name,
-      potentialOptionSelectionIndex,
+      nextPotentialSelectionIndex,
       options,
       singleSelectSelectedIndex,
       singleSelectSelectedOption,
@@ -119,7 +119,7 @@ export default class ReactResponsiveSelect extends Component {
             multiSelectInitialSelectedIndexes={multiSelectInitialSelectedIndexes}
             multiSelectSelectedOptions={multiSelectSelectedOptions}
             multiSelectSelectedIndexes={multiSelectSelectedIndexes}
-            potentialOptionSelectionIndex={potentialOptionSelectionIndex}
+            nextPotentialSelectionIndex={nextPotentialSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
             isDragging={isDragging}
             singleSelectSelectedOption={singleSelectSelectedOption}
@@ -141,7 +141,7 @@ export default class ReactResponsiveSelect extends Component {
             customLabelText={customLabelText}
             singleSelectSelectedOption={singleSelectSelectedOption}
             singleSelectSelectedIndex={singleSelectSelectedIndex}
-            potentialOptionSelectionIndex={potentialOptionSelectionIndex}
+            nextPotentialSelectionIndex={nextPotentialSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
             options={options}
             isDragging={isDragging}
@@ -266,7 +266,7 @@ export default class ReactResponsiveSelect extends Component {
     if(this.state.isMultiSelect) {
       return this.updateState({
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        value: this.state.potentialOptionSelectionIndex
+        value: this.state.nextPotentialSelectionIndex
       });
     }
 
@@ -278,11 +278,11 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   keyUpOrDownPressed(type) {
-    const { isOptionsPanelOpen, potentialOptionSelectionIndex } = this.state;
+    const { isOptionsPanelOpen, nextPotentialSelectionIndex } = this.state;
 
     this.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX,
-      value: getNextIndex(type, isOptionsPanelOpen, potentialOptionSelectionIndex, this.OPTION_NODES_LENGTH)
+      value: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.OPTION_NODES_LENGTH)
     });
 
     /* Open the options panel */

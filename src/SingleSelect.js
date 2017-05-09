@@ -18,7 +18,7 @@ export default class SingleSelect extends Component {
     isOptionsPanelOpen: PropTypes.bool,
     isTouchDevice: PropTypes.bool,
     name: PropTypes.string,
-    potentialOptionSelectionIndex: PropTypes.number,
+    nextPotentialSelectionIndex: PropTypes.number,
     onSubmit: PropTypes.func,
     options: PropTypes.arrayOf(
       PropTypes.shape({
@@ -44,7 +44,7 @@ export default class SingleSelect extends Component {
       isTouchDevice,
       isDragging,
       name,
-      potentialOptionSelectionIndex,
+      nextPotentialSelectionIndex,
       options,
       prefix,
       singleSelectSelectedIndex,
@@ -94,7 +94,7 @@ export default class SingleSelect extends Component {
                 isDragging={isDragging}
                 option={option}
                 singleSelectSelectedIndex={singleSelectSelectedIndex}
-                potentialOptionSelectionIndex={potentialOptionSelectionIndex}
+                nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />
             ))
           }

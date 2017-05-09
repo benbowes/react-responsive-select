@@ -8,6 +8,6 @@ export default function getInitialOption(state) {
         ...state.options[0]
       }]
     },
-    potentialOptionSelectionIndex: 0
+    nextPotentialSelectionIndex: 0
   };
 }

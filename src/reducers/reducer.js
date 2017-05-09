@@ -24,7 +24,7 @@ export const initialState = {
   singleSelectSelectedOption: {},
 
   // For determining highlighted item on Keyboard navigation
-  potentialOptionSelectionIndex: 0,
+  nextPotentialSelectionIndex: 0,
 
   // Multi select
   multiSelectInitialSelectedIndexes: [0],
@@ -60,7 +60,7 @@ export default function reducer(state = initialState, action) {
         },
 
         // For determining highlighted item on Keyboard navigation
-        potentialOptionSelectionIndex: initialSelectedIndex,
+        nextPotentialSelectionIndex: initialSelectedIndex,
 
         // Multi select
         multiSelectInitialSelectedIndexes: [initialSelectedIndex],
@@ -85,7 +85,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isOptionsPanelOpen: true,
-        potentialOptionSelectionIndex: state.singleSelectSelectedIndex,
+        nextPotentialSelectionIndex: state.singleSelectSelectedIndex,
         singleSelectSelectedOption: {
           altered: state.singleSelectSelectedIndex !== state.singleSelectInitialIndex,
           name: state.name,
@@ -97,11 +97,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isOptionsPanelOpen: false,
-        singleSelectSelectedIndex: state.potentialOptionSelectionIndex,
+        singleSelectSelectedIndex: state.nextPotentialSelectionIndex,
         singleSelectSelectedOption: {
           name: state.name,
-          altered: state.potentialOptionSelectionIndex !== state.singleSelectInitialIndex,
-          ...state.options[state.potentialOptionSelectionIndex]
+          altered: state.nextPotentialSelectionIndex !== state.singleSelectInitialIndex,
+          ...state.options[state.nextPotentialSelectionIndex]
         }
       };
 
@@ -114,13 +114,13 @@ export default function reducer(state = initialState, action) {
     case actionTypes.SET_NEXT_SELECTED_INDEX:
       return {
         ...state,
-        potentialOptionSelectionIndex: action.value
+        nextPotentialSelectionIndex: action.value
       };
 
     case actionTypes.SET_SELECTED_INDEX:
       return {
         ...state,
-        potentialOptionSelectionIndex: action.value,
+        nextPotentialSelectionIndex: action.value,
         singleSelectSelectedIndex: action.value
       };
 
@@ -155,7 +155,7 @@ export default function reducer(state = initialState, action) {
             altered: false,
             options: [{ name: state.name, ...state.options[0] }]
           },
-          potentialOptionSelectionIndex: 0
+          nextPotentialSelectionIndex: 0
         };
       }
 
@@ -178,7 +178,7 @@ export default function reducer(state = initialState, action) {
       // If requested item does not exist, add it. Else remove it
       let newState = {
         ...state,
-        potentialOptionSelectionIndex: requestedOptionIndex,
+        nextPotentialSelectionIndex: requestedOptionIndex,
         multiSelectSelectedIndexes: indexLocation === -1
           ? addMultiSelectIndex(state, requestedOptionIndex)
           : removeMultiSelectIndex(state, indexLocation),

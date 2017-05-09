@@ -34,7 +34,7 @@ export default class MultiSelect extends Component {
       )
     }),
     name: PropTypes.string,
-    potentialOptionSelectionIndex: PropTypes.number,
+    nextPotentialSelectionIndex: PropTypes.number,
     onSubmit: PropTypes.func,
     options: PropTypes.arrayOf(
       PropTypes.shape({
@@ -56,7 +56,7 @@ export default class MultiSelect extends Component {
       multiSelectSelectedOptions,
       name,
       options,
-      potentialOptionSelectionIndex,
+      nextPotentialSelectionIndex,
       prefix
     } = this.props;
 
@@ -107,7 +107,7 @@ export default class MultiSelect extends Component {
                 option={option}
                 isDragging={isDragging}
                 multiSelectSelectedIndexes={multiSelectSelectedIndexes}
-                potentialOptionSelectionIndex={potentialOptionSelectionIndex}
+                nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />
             ))
           }

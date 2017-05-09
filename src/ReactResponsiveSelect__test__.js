@@ -63,7 +63,7 @@ describe('ReactResponsiveSelect', () => {
         multiSelectInitialSelectedIndexes: [ 1 ],
         isTouchDevice: false,
         isMultiSelect: false,
-        potentialOptionSelectionIndex: 1,
+        nextPotentialSelectionIndex: 1,
         singleSelectSelectedIndex: 1,
         name: 'make',
         options: [
@@ -100,7 +100,7 @@ describe('ReactResponsiveSelect', () => {
         multiSelectInitialSelectedIndexes: [ 1 ],
         isTouchDevice: false,
         isMultiSelect: false,
-        potentialOptionSelectionIndex: 1,
+        nextPotentialSelectionIndex: 1,
         singleSelectSelectedIndex: 1,
         name: 'make',
         options: [

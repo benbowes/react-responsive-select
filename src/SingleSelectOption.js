@@ -5,7 +5,7 @@ export default class SingleSelectOption extends Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
     singleSelectSelectedIndex: PropTypes.number,
-    potentialOptionSelectionIndex: PropTypes.number,
+    nextPotentialSelectionIndex: PropTypes.number,
     option: PropTypes.shape({
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
@@ -15,7 +15,7 @@ export default class SingleSelectOption extends Component {
 
   render(){
     const {
-      potentialOptionSelectionIndex,
+      nextPotentialSelectionIndex,
       option,
       index,
       singleSelectSelectedIndex
@@ -29,7 +29,7 @@ export default class SingleSelectOption extends Component {
         className={`
           rrs__option
           ${(singleSelectSelectedIndex === index) ? 'rrs__option--selected' : ''}
-          ${(potentialOptionSelectionIndex === index) ? 'rrs__option--next-selection' : ''}
+          ${(nextPotentialSelectionIndex === index) ? 'rrs__option--next-selection' : ''}
         `}
       >
         {option.markup || option.text}
