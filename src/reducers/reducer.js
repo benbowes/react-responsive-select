@@ -78,7 +78,7 @@ export default function reducer(state = initialState, action) {
     case actionTypes.SET_IS_DRAGGING:
       return {
         ...state,
-        isDragging: action.value
+        isDragging: action.boolean
       };
 
     case actionTypes.SET_OPTIONS_PANEL_OPEN:
@@ -114,19 +114,17 @@ export default function reducer(state = initialState, action) {
     case actionTypes.SET_NEXT_SELECTED_INDEX:
       return {
         ...state,
-        nextPotentialSelectionIndex: action.value
+        nextPotentialSelectionIndex: action.optionIndex
       };
 
     case actionTypes.SET_SELECTED_INDEX:
       return {
         ...state,
-        nextPotentialSelectionIndex: action.value,
-        singleSelectSelectedIndex: action.value
+        nextPotentialSelectionIndex: action.optionIndex,
+        singleSelectSelectedIndex: action.optionIndex
       };
 
     case actionTypes.SET_MULTISELECT_OPTIONS: {
-
-      const requestedOptionIndex = action.value;
 
       const isFirstOptionInListSelected = (
         state.multiSelectSelectedIndexes[0] === 0 &&
@@ -137,13 +135,13 @@ export default function reducer(state = initialState, action) {
       const shouldDeselectAllAndSelectFirstOption = (
         state.multiSelectSelectedIndexes.length > 0 &&
         !isFirstOptionInListSelected &&
-        requestedOptionIndex === 0
+        action.optionIndex === 0
       );
 
       // Deselect first option when any other value is requested
       const shouldDeselectFirstOptionAndSelectRequestedOption = (
         isFirstOptionInListSelected &&
-        requestedOptionIndex !== 0
+        action.optionIndex !== 0
       );
 
       // If any thing selected and first option was requested, deselect all, and return first option
@@ -173,17 +171,17 @@ export default function reducer(state = initialState, action) {
       }
 
       // Find index of requested option or return -1
-      const indexLocation = state.multiSelectSelectedIndexes.indexOf(requestedOptionIndex);
+      const indexLocation = state.multiSelectSelectedIndexes.indexOf(action.optionIndex);
 
       // If requested item does not exist, add it. Else remove it
       let newState = {
         ...state,
-        nextPotentialSelectionIndex: requestedOptionIndex,
+        nextPotentialSelectionIndex: action.optionIndex,
         multiSelectSelectedIndexes: indexLocation === -1
-          ? addMultiSelectIndex(state, requestedOptionIndex)
+          ? addMultiSelectIndex(state, action.optionIndex)
           : removeMultiSelectIndex(state, indexLocation),
         multiSelectSelectedOptions: indexLocation === -1
-          ? addMultiSelectOption(state, requestedOptionIndex)
+          ? addMultiSelectOption(state, action.optionIndex)
           : removeMultiSelectOption(state, indexLocation)
       };
 

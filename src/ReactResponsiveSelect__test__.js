@@ -188,7 +188,7 @@ describe('ReactResponsiveSelect', () => {
       const selectBoxInstance = selectBox.instance();
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
       selectBoxContainer.find('[data-key=3]').simulate('mousedown');
-      expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_SELECTED_INDEX, value: 3 });
+      expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_SELECTED_INDEX, optionIndex: 3 });
       selectBoxInstance.updateState.restore();
     });
 
@@ -235,13 +235,13 @@ describe('ReactResponsiveSelect', () => {
 
     it('handleTouchStart() should set isDragging to false', () => {
       selectBoxInstance.handleTouchStart();
-      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, value: false }]);
+      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, boolean: false }]);
       updateStateSpy.reset();
     });
 
     it('handleTouchMove() should set isDragging to true', () => {
       selectBoxInstance.handleTouchMove();
-      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, value: true }]);
+      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, boolean: true }]);
       updateStateSpy.reset();
     });
 
@@ -300,7 +300,7 @@ describe('ReactResponsiveSelect', () => {
     it('handleKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.UP });
-      expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
+      expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', optionIndex: 1 });
       expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
@@ -313,7 +313,7 @@ describe('ReactResponsiveSelect', () => {
     it('handleKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {
       selectBox.setState({ isOptionsPanelOpen: false });
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.DOWN });
-      expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', value: 1 });
+      expect(updateStateSpy.args[0][0]).to.eql({ type: 'SET_NEXT_SELECTED_INDEX', optionIndex: 1 });
       expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 

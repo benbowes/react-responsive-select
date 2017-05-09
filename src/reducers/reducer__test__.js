@@ -24,7 +24,7 @@ describe('reducer', () => {
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
     const result = reducer(
       initialState,
-      { type: actionTypes.SET_IS_DRAGGING, value: true }
+      { type: actionTypes.SET_IS_DRAGGING, boolean: true }
     );
 
     expect(result).to.eql({
@@ -60,7 +60,7 @@ describe('reducer', () => {
   it('should update state.singleSelectSelectedIndex when SET_SELECTED_INDEX is fired', () => {
     const result = reducer(
       initialState,
-      { type: actionTypes.SET_SELECTED_INDEX, value: 7 }
+      { type: actionTypes.SET_SELECTED_INDEX, optionIndex: 7 }
     );
 
     expect(result).to.eql({

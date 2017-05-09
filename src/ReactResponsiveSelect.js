@@ -91,7 +91,6 @@ export default class ReactResponsiveSelect extends Component {
     const {
       singleSelectInitialIndex,
       multiSelectInitialSelectedIndexes,
-      isDragging,
       isOptionsPanelOpen,
       isTouchDevice,
       multiSelectSelectedIndexes,
@@ -121,7 +120,6 @@ export default class ReactResponsiveSelect extends Component {
             multiSelectSelectedIndexes={multiSelectSelectedIndexes}
             nextPotentialSelectionIndex={nextPotentialSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
-            isDragging={isDragging}
             singleSelectSelectedOption={singleSelectSelectedOption}
             options={options}
           />
@@ -144,7 +142,6 @@ export default class ReactResponsiveSelect extends Component {
             nextPotentialSelectionIndex={nextPotentialSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
             options={options}
-            isDragging={isDragging}
           />
         </div>
       );
@@ -160,7 +157,7 @@ export default class ReactResponsiveSelect extends Component {
     /* initially it's assumed that the user is not dragging */
     this.updateState({
       type: actionTypes.SET_IS_DRAGGING,
-      value: false
+      boolean: false
     });
   }
 
@@ -168,7 +165,7 @@ export default class ReactResponsiveSelect extends Component {
     /* if touchmove fired - User is dragging, this disables touchend/click */
     this.updateState({
       type: actionTypes.SET_IS_DRAGGING,
-      value: true
+      boolean: true
     });
   }
 
@@ -223,29 +220,35 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleClick(e) {
-    const { isMultiSelect } = this.state;
-    /* Ignore click and touchend if user is dragging */
-    if(this.state.isDragging === false) {
+    const { isMultiSelect, isOptionsPanelOpen, isDragging } = this.state;
+
+    /* Ignore touchend if user is dragging */
+    if(isDragging === false) {
       e.preventDefault();
+
+      /* Ensure selectBox container has focus */
       this.selectBox.firstChild.focus();
 
+      /* Select option index, if an index was clicked/touchend'd */
       if (e && e.target.classList.contains('rrs__option')) {
         this.updateState({
           type: (isMultiSelect)
             ? actionTypes.SET_MULTISELECT_OPTIONS
             : actionTypes.SET_SELECTED_INDEX,
-          value: parseFloat(e.target.getAttribute('data-key'))
+          optionIndex: parseFloat(e.target.getAttribute('data-key'))
         });
 
+        /* Dont close on selection for multi select */
         if (isMultiSelect) return;
 
+        /* Close on selection for single select */
         return this.forceUpdate(() => {
           return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
         });
       }
 
       /* Open panel if closed, close panel if open */
-      return (this.state.isOptionsPanelOpen)
+      return (isOptionsPanelOpen)
         ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
         : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
@@ -266,7 +269,7 @@ export default class ReactResponsiveSelect extends Component {
     if(this.state.isMultiSelect) {
       return this.updateState({
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        value: this.state.nextPotentialSelectionIndex
+        optionIndex: this.state.nextPotentialSelectionIndex
       });
     }
 
@@ -282,7 +285,7 @@ export default class ReactResponsiveSelect extends Component {
 
     this.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX,
-      value: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.OPTION_NODES_LENGTH)
+      optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.OPTION_NODES_LENGTH)
     });
 
     /* Open the options panel */

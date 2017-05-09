@@ -16,9 +16,6 @@ export default class MultiSelect extends Component {
     multiSelectInitialSelectedIndexes: PropTypes.arrayOf(
       PropTypes.number
     ),
-    isDragging: PropTypes.bool,
-    isOptionsPanelOpen: PropTypes.bool,
-    isTouchDevice: PropTypes.bool,
     multiSelectSelectedIndexes: PropTypes.arrayOf(
       PropTypes.number
     ),
@@ -33,6 +30,8 @@ export default class MultiSelect extends Component {
         })
       )
     }),
+    isTouchDevice: PropTypes.bool,
+    isOptionsPanelOpen: PropTypes.bool,
     name: PropTypes.string,
     nextPotentialSelectionIndex: PropTypes.number,
     onSubmit: PropTypes.func,
@@ -51,7 +50,6 @@ export default class MultiSelect extends Component {
       customLabelText,
       isOptionsPanelOpen,
       isTouchDevice,
-      isDragging,
       multiSelectSelectedIndexes,
       multiSelectSelectedOptions,
       name,
@@ -105,7 +103,7 @@ export default class MultiSelect extends Component {
                 key={index}
                 index={index}
                 option={option}
-                isDragging={isDragging}
+                isTouchDevice={isTouchDevice}
                 multiSelectSelectedIndexes={multiSelectSelectedIndexes}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />

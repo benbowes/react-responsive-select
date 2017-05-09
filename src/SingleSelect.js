@@ -14,9 +14,13 @@ export default class SingleSelect extends Component {
       PropTypes.element
     ]),
     singleSelectInitialIndex: PropTypes.number,
-    isDragging: PropTypes.bool,
-    isOptionsPanelOpen: PropTypes.bool,
+    singleSelectSelectedIndex: PropTypes.number,
+    singleSelectSelectedOption: PropTypes.shape({
+      text: PropTypes.string,
+      value: PropTypes.string
+    }),
     isTouchDevice: PropTypes.bool,
+    isOptionsPanelOpen: PropTypes.bool,
     name: PropTypes.string,
     nextPotentialSelectionIndex: PropTypes.number,
     onSubmit: PropTypes.func,
@@ -27,11 +31,6 @@ export default class SingleSelect extends Component {
       })
     ).isRequired,
     prefix: PropTypes.string,
-    singleSelectSelectedIndex: PropTypes.number,
-    singleSelectSelectedOption: PropTypes.shape({
-      text: PropTypes.string,
-      value: PropTypes.string
-    }),
     selectedValue: PropTypes.string
   }
 
@@ -42,7 +41,6 @@ export default class SingleSelect extends Component {
       singleSelectInitialIndex,
       isOptionsPanelOpen,
       isTouchDevice,
-      isDragging,
       name,
       nextPotentialSelectionIndex,
       options,
@@ -91,7 +89,7 @@ export default class SingleSelect extends Component {
                 scrollIntoViewElementSelector={'rrs__option--next-selection'}
                 key={index}
                 index={index}
-                isDragging={isDragging}
+                isTouchDevice={isTouchDevice}
                 option={option}
                 singleSelectSelectedIndex={singleSelectSelectedIndex}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
