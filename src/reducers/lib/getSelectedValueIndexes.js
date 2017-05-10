@@ -1,4 +1,4 @@
-export default function getSelectedValueIndexes(options, selectedValues) {
+export default function getSelectedValueIndexes(options, selectedValues = []) {
   const result = options.map((option, optionIndex) => {
     /* return the index of the found item, if found */
     return (selectedValues.some(selected => option.value === selected))
