@@ -12,7 +12,6 @@ describe('getInitialOption', () => {
     expect(result).to.eql({
       multiSelectSelectedIndexes: [0],
       multiSelectSelectedOptions: {
-        altered: false,
         options: [{
           name: 'Make 1',
           value: 'null',

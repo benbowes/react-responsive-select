@@ -92,9 +92,9 @@ export default class ReactResponsiveSelect extends Component {
     const {
       altered,
       singleSelectInitialIndex,
-      multiSelectInitialSelectedIndexes,
       isOptionsPanelOpen,
       isTouchDevice,
+      multiSelectInitialSelectedIndexes,
       multiSelectSelectedIndexes,
       multiSelectSelectedOptions,
       name,
@@ -112,7 +112,6 @@ export default class ReactResponsiveSelect extends Component {
           <MultiSelect
             altered={altered}
             isTouchDevice={isTouchDevice}
-            singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}
             name={name}
@@ -121,9 +120,7 @@ export default class ReactResponsiveSelect extends Component {
             multiSelectSelectedIndexes={multiSelectSelectedIndexes}
             nextPotentialSelectionIndex={nextPotentialSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
-            singleSelectSelectedOption={singleSelectSelectedOption}
             options={options}
-
           />
         </div>
       );
@@ -240,11 +237,9 @@ export default class ReactResponsiveSelect extends Component {
         if(isMultiSelect) {
           const optionIndex = parseFloat(e.target.getAttribute('data-key'));
           /* Dont close on selection for multi select */
-          return this.forceUpdate(() => {
-            return this.updateState({
-              type: actionTypes.SET_MULTISELECT_OPTIONS,
-              optionIndex
-            });
+          return this.updateState({
+            type: actionTypes.SET_MULTISELECT_OPTIONS,
+            optionIndex
           });
 
         } else {

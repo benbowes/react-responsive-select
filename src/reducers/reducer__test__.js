@@ -24,7 +24,10 @@ describe('reducer', () => {
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
     const result = reducer(
       initialState,
-      { type: actionTypes.SET_IS_DRAGGING, boolean: true }
+      {
+        type: actionTypes.SET_IS_DRAGGING,
+        boolean: true
+      }
     );
 
     expect(result).to.eql({
@@ -42,7 +45,10 @@ describe('reducer', () => {
     };
     const result = reducer(
       mockInitialState,
-      { type: actionTypes.SET_OPTIONS_PANEL_OPEN, value: true }
+      {
+        type: actionTypes.SET_OPTIONS_PANEL_OPEN,
+        value: true
+      }
     );
 
     expect(result).to.eql({
@@ -60,13 +66,214 @@ describe('reducer', () => {
   it('should update state.singleSelectSelectedIndex when SET_SELECTED_INDEX is fired', () => {
     const result = reducer(
       initialState,
-      { type: actionTypes.SET_SELECTED_INDEX, optionIndex: 7 }
+      {
+        type: actionTypes.SET_SELECTED_INDEX,
+        optionIndex: 7
+      }
     );
 
     expect(result).to.eql({
       ...initialState,
       nextPotentialSelectionIndex: 7,
       singleSelectSelectedIndex: 7
+    });
+  });
+
+  describe('MultiSelect', () => {
+
+    it('should deselect all and select first option when first option requested', () => {
+      const initialState = {
+        isMultiSelect: true,
+        altered: false,
+        options: [
+          { name: 'make1', text: 'Any', value: 'null' },
+          { name: 'make2', text: 'Fiat', value: 'fiat' },
+          { name: 'make2', text: 'Mazda', value: 'mazda' }
+        ],
+        multiSelectInitialSelectedIndexes: [1, 2],
+        multiSelectSelectedIndexes: [1, 2],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }]
+        },
+        nextPotentialSelectionIndex: 2
+      };
+
+      const result = reducer(
+        initialState,
+        {
+          type: actionTypes.SET_MULTISELECT_OPTIONS,
+          optionIndex: 0
+        }
+      );
+
+      expect(result).to.eql({
+        isMultiSelect: true,
+        altered: true,
+        options: [
+          { name: 'make1', text: 'Any', value: 'null' },
+          { name: 'make2', text: 'Fiat', value: 'fiat' },
+          { name: 'make2', text: 'Mazda', value: 'mazda' }
+        ],
+        multiSelectInitialSelectedIndexes: [1, 2],
+        multiSelectSelectedIndexes: [0],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make1', text: 'Any', value: 'null' }]
+        },
+        nextPotentialSelectionIndex: 0
+      });
+    });
+
+    it('should deselect first option and select requested option when NOT first option requested', () => {
+      const initialState = {
+        isMultiSelect: true,
+        altered: false,
+        options: [{ name: 'make1', text: 'Any', value: 'null' }, { name: 'make2', text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [0],
+        multiSelectSelectedIndexes: [0],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make1', text: 'Any', value: 'null' }]
+        },
+        nextPotentialSelectionIndex: 0
+      };
+
+      const result = reducer(
+        initialState,
+        {
+          type: actionTypes.SET_MULTISELECT_OPTIONS,
+          optionIndex: 1
+        }
+      );
+
+      expect(result).to.eql({
+        isMultiSelect: true,
+        altered: true,
+        options: [{ name: 'make1', text: 'Any', value: 'null' }, { name: 'make2', text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [0],
+        multiSelectSelectedIndexes: [1],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }]
+        },
+        nextPotentialSelectionIndex: 1
+      });
+    });
+
+    it('should add to multiselect options when requested item if does not exist', () => {
+      const initialState = {
+        isMultiSelect: true,
+        altered: false,
+        options: [
+          { name: 'make1', text: 'Any', value: 'null' },
+          { name: 'make2', text: 'Fiat', value: 'fiat' },
+          { name: 'make2', text: 'Mazda', value: 'mazda' }
+        ],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [1],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }]
+        },
+        nextPotentialSelectionIndex: 1
+      };
+
+      const result = reducer(
+        initialState,
+        {
+          type: actionTypes.SET_MULTISELECT_OPTIONS,
+          optionIndex: 2
+        }
+      );
+
+      expect(result).to.eql({
+        isMultiSelect: true,
+        altered: true,
+        options: [
+          { name: 'make1', text: 'Any', value: 'null' },
+          { name: 'make2', text: 'Fiat', value: 'fiat' },
+          { name: 'make2', text: 'Mazda', value: 'mazda' }
+        ],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [1, 2],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }]
+        },
+        nextPotentialSelectionIndex: 2
+      });
+    });
+
+    it('should remove from multiselect options when requested item exists', () => {
+      const initialState = {
+        isMultiSelect: true,
+        altered: false,
+        options: [
+          { name: 'make1', text: 'Any', value: 'null' },
+          { name: 'make2', text: 'Fiat', value: 'fiat' },
+          { name: 'make2', text: 'Mazda', value: 'mazda' }
+        ],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [1, 2],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }]
+        },
+        nextPotentialSelectionIndex: 2
+      };
+
+      const result = reducer(
+        initialState,
+        {
+          type: actionTypes.SET_MULTISELECT_OPTIONS,
+          optionIndex: 2
+        }
+      );
+
+      expect(result).to.eql({
+        isMultiSelect: true,
+        altered: false,
+        options: [
+          { name: 'make1', text: 'Any', value: 'null' },
+          { name: 'make2', text: 'Fiat', value: 'fiat' },
+          { name: 'make2', text: 'Mazda', value: 'mazda' }
+        ],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [1],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }]
+        },
+        nextPotentialSelectionIndex: 2
+      });
+    });
+
+    it('should select first item if all options are deselected', () => {
+      const initialState = {
+        isMultiSelect: true,
+        altered: false,
+        options: [{ name: 'make1', text: 'Any', value: 'null' }, { name: 'make2', text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [1],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }]
+        },
+        nextPotentialSelectionIndex: 1
+      };
+
+      const result = reducer(
+        initialState,
+        {
+          type: actionTypes.SET_MULTISELECT_OPTIONS,
+          optionIndex: 1
+        }
+      );
+
+      expect(result).to.eql({
+        isMultiSelect: true,
+        altered: true,
+        options: [{ name: 'make1', text: 'Any', value: 'null' }, { name: 'make2', text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [0],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'make1', text: 'Any', value: 'null' }]
+        },
+        nextPotentialSelectionIndex: 0
+      });
+
     });
   });
 

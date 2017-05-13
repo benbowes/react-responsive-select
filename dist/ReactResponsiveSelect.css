@@ -103,3 +103,26 @@
   Multiselect overrides
 
 */
+
+.rrs__multiselect__label {
+  display: inline-flex;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.rrs__multiselect__label-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rrs__multiselect__label-badge{
+  border: 1px solid #ccc;
+  padding: 1px 6px;
+  margin: 0 0 0 4px;
+  border-radius: 8px;
+  color: #666;
+  font-size: 11px;
+  vertical-align: middle;
+  display: inline-block;
+}

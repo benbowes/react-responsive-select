@@ -17,7 +17,7 @@ h1 {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -0.75px;
-  margin: 2rem 0 4rem;
+  margin: 3rem 0 4rem 0;
   padding: 0 0 0.5rem 0;
   border-bottom: 1px solid #ccc;
   font-size: 2rem;
@@ -109,29 +109,6 @@ code {
 
 */
 
-.rrs__multiselect__label {
-  display: inline-flex;
-  max-width: 100%;
-  line-height: 1;
-}
-
-.rrs__multiselect__label-text {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.rrs__multiselect__label-badge{
-  border: 1px solid #ccc;
-  padding: 1px 6px;
-  margin: 0 0 0 4px;
-  border-radius: 8px;
-  color: #666;
-  font-size: 11px;
-  vertical-align: middle;
-  display: inline-block;
-}
-
 .badge {
   background: #f1f1f1;
   padding: 0.25rem 1rem;
@@ -161,18 +138,15 @@ code {
   transition: all 0.1s ease-in-out;
 }
 
-.dropdown-icon {
+.caret-icon {
   position: absolute;
   right: 1rem;
   top: 1.25rem;
   fill: #999;
 }
 
-.check-icon {
-  fill: #fff;
-  position: absolute;
-  left: 5px;
-  top: 5px;
+.rrs__options-container--visible .caret-icon {
+  transform: rotate(180deg);
 }
 
 .checkbox {
@@ -190,12 +164,15 @@ code {
   border: 1px solid #03a9f4;
 }
 
-.rrs__option.rrs__option--selected .check-icon {
-  fill: #03a9f4;
+.checkbox-icon {
+  fill: #fff;
+  position: absolute;
+  left: 5px;
+  top: 5px;
 }
 
-.rrs__options-container--visible .dropdown-icon {
-  transform: rotate(180deg);
+.rrs__option.rrs__option--selected .checkbox-icon {
+  fill: #03a9f4;
 }
 
 .centered {

@@ -26,12 +26,12 @@ const initialProps = {
   ]
 };
 
-const setup = ((overrideProps, customProps = undefined) => {
+const setup = ((overrideProps, customProps = undefined, state = {}) => {
   const props = customProps || {
     ...initialProps,
     ...overrideProps
   };
-  return mount(<ReactResponsiveSelect {...props} />);
+  return mount(<ReactResponsiveSelect {...props} {...state} />);
 });
 
 describe('ReactResponsiveSelect', () => {
@@ -304,13 +304,9 @@ describe('ReactResponsiveSelect', () => {
           const selectBoxMobileContainer = selectBoxMobile.find('.rrs__select-container');
 
           selectBoxMobileContainer.simulate('touchStart');
-          // expect(toggleOptionsPanelSpy.calledOnce).to.equal(true);
-          //  expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_OPTIONS_PANEL_OPEN }]);
 
           selectBox.setState({ isDragging: true });
           selectBoxMobileContainer.simulate('touchStart');
-          // expect(toggleOptionsPanelSpy.calledTwice).to.equal(false);
-
           window.close();
         }
       });
@@ -346,6 +342,54 @@ describe('ReactResponsiveSelect', () => {
       };
       selectBox = setup(undefined, props);
       expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props().children).to.equal('Any');
+    });
+
+  });
+
+  describe('MultiSelect', () => {
+
+    let selectBox;
+
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
+    it('should render MultiSelect if multiselect mode requested', () => {
+      selectBox = setup(
+        {
+          multiselect: true
+        },
+        undefined,
+        {
+          isMultiSelect: true,
+          multiSelectInitialSelectedIndexes: [1, 2, 3],
+          multiSelectSelectedOptions: {
+            options: [
+              { value: 'fiat', text: 'Fiat' },
+              { value: 'subaru', text: 'Subaru' },
+              { value: 'bmw', text: 'BMW' }
+            ]
+          },
+          multiSelectSelectedIndexes: [1, 2, 3]
+        }
+      );
+      expect(selectBox.find('.rrs__select-container--multiselect').length).to.equal(1);
+    });
+
+    it('should add .rrs__has-changed class to label if select has been altered', () => {
+      selectBox = setup({
+        multiselect: true,
+        caretIcon: '+',
+        selectedValues: ['fiat', 'subaru']
+      });
+      const selectBoxInstance = selectBox.instance();
+
+      selectBoxInstance.updateState({
+        type: actionTypes.SET_MULTISELECT_OPTIONS,
+        optionIndex: 3
+      });
+
+      expect(selectBox.find('.rrs__select-container--multiselect').hasClass('rrs__has-changed')).to.equal(true);
     });
 
   });

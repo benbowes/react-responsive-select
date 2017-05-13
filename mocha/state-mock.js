@@ -25,8 +25,8 @@ export default {
   singleSelectSelectedOption: {},
   nextPotentialSelectionIndex: 0,
   multiSelectInitialSelectedIndexes: [1, 2, 3],
+  altered: false,
   multiSelectSelectedOptions: {
-    altered: false,
     options: [{
       value: 'fiat',
       text: 'Fiat'
@@ -38,5 +38,5 @@ export default {
       text: 'BMW'
     }]
   },
-  multiSelectSelectedIndexes: []
+  multiSelectSelectedIndexes: [1, 2, 3]
 };
