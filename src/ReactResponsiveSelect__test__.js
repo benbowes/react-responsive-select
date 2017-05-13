@@ -31,8 +31,7 @@ const setup = ((overrideProps, customProps = undefined) => {
     ...initialProps,
     ...overrideProps
   };
-  const component =  mount(<ReactResponsiveSelect {...props}/>);
-  console.log('component', component);
+  return mount(<ReactResponsiveSelect {...props} />);
 });
 
 describe('ReactResponsiveSelect', () => {
@@ -43,9 +42,7 @@ describe('ReactResponsiveSelect', () => {
     let selectBoxInstance;
 
     beforeEach(() => {
-      console.log('selectBox 1', selectBox);
       selectBox = setup();
-      console.log('selectBox 2', selectBox);
       selectBoxInstance = selectBox.instance();
     });
 
@@ -58,7 +55,7 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.find('ReactResponsiveSelect').props().onSubmit).to.equal(submitSpy);
     });
 
-    xit('should setup state', () => {
+    it('should setup state', () => {
       const expectedState = {
         isDragging: false,
         isOptionsPanelOpen: false,
@@ -95,12 +92,12 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state()).to.eql( expectedState );
     });
 
-    xit('should setup mousedown, keyup and blur on desktop', () => {
+    it('should setup mousedown, keyup and blur on desktop', () => {
       const listenerKeys = Object.keys(selectBoxInstance.listeners).map(k => k);
       expect(listenerKeys).to.eql(['onBlur', 'onMouseDown', 'onKeyDown']);
     });
 
-    xit('should setup touchmove, touchstart, touchend and blur on a touch device', () => {
+    it('should setup touchmove, touchstart, touchend and blur on a touch device', () => {
       jsdom.env({
         html: '<html></html>',
         done: function (error, window) {
@@ -119,7 +116,7 @@ describe('ReactResponsiveSelect', () => {
 
   });
 
-  xdescribe('Events', () => {
+  describe('Events', () => {
 
     let selectBox;
     let selectBoxContainer;
@@ -175,7 +172,7 @@ describe('ReactResponsiveSelect', () => {
 
   });
 
-  xdescribe('ReactResponsiveSelect functions', () => {
+  describe('ReactResponsiveSelect functions', () => {
 
     let selectBox;
     let selectBoxInstance;
@@ -322,7 +319,7 @@ describe('ReactResponsiveSelect', () => {
   });
 
 
-  xdescribe('option list selectedValue .rrs__option--selected class', () => {
+  describe('option list selectedValue .rrs__option--selected class', () => {
 
     let selectBox;
 

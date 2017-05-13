@@ -89,17 +89,41 @@ export default class ReactResponsiveSelect extends Component {
 
   render() {
     const { prefix, caretIcon, customLabelRenderer } = this.props;
-    const {isMultiSelect, singleSelectSelectedOption } = this.state;
+    const {
+      altered,
+      singleSelectInitialIndex,
+      multiSelectInitialSelectedIndexes,
+      isOptionsPanelOpen,
+      isTouchDevice,
+      multiSelectSelectedIndexes,
+      multiSelectSelectedOptions,
+      name,
+      nextPotentialSelectionIndex,
+      options,
+      singleSelectSelectedIndex,
+      singleSelectSelectedOption,
+      isMultiSelect
+    } = this.state;
 
     if (isMultiSelect) {
 
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <MultiSelect
+            altered={altered}
+            isTouchDevice={isTouchDevice}
+            singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}
             name={name}
-            {...this.state}
+            multiSelectInitialSelectedIndexes={multiSelectInitialSelectedIndexes}
+            multiSelectSelectedOptions={multiSelectSelectedOptions}
+            multiSelectSelectedIndexes={multiSelectSelectedIndexes}
+            nextPotentialSelectionIndex={nextPotentialSelectionIndex}
+            isOptionsPanelOpen={isOptionsPanelOpen}
+            singleSelectSelectedOption={singleSelectSelectedOption}
+            options={options}
+
           />
         </div>
       );
@@ -111,12 +135,18 @@ export default class ReactResponsiveSelect extends Component {
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <SingleSelect
+            altered={altered}
+            isTouchDevice={isTouchDevice}
+            singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}
             name={name}
             customLabelText={customLabelText}
             singleSelectSelectedOption={singleSelectSelectedOption}
-            {...this.state}
+            singleSelectSelectedIndex={singleSelectSelectedIndex}
+            nextPotentialSelectionIndex={nextPotentialSelectionIndex}
+            isOptionsPanelOpen={isOptionsPanelOpen}
+            options={options}
           />
         </div>
       );
