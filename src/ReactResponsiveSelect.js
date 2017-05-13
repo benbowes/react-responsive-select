@@ -23,7 +23,8 @@ export default class ReactResponsiveSelect extends Component {
     ).isRequired,
     onSubmit: PropTypes.func,
     prefix: PropTypes.string,
-    selectedValue: PropTypes.string
+    selectedValue: PropTypes.string,
+    selectedValues: PropTypes.arrayOf( PropTypes.string.isRequired )
   }
 
   constructor(props) {
@@ -34,12 +35,12 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   componentDidMount() {
-    const { options, selectedValue, name, multiselect } = this.props;
+    const { options, selectedValue, selectedValues, name, multiselect } = this.props;
     const isTouchDevice = isTouchableDevice();
 
     this.updateState({
       type: actionTypes.BOOTSTRAP_STATE,
-      value: { options, selectedValue, name, isTouchDevice, multiselect }
+      value: { options, selectedValue, selectedValues, name, isTouchDevice, multiselect }
     });
 
     this.OPTION_NODES_LENGTH = options.length;
@@ -63,7 +64,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   componentDidUpdate( prevProps, prevState ) {
-    const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect } = this.state;
+    const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect, altered } = this.state;
     const { onChange } = this.props;
 
     if (isMultiSelect) {
@@ -74,74 +75,48 @@ export default class ReactResponsiveSelect extends Component {
           prevState.multiSelectSelectedOptions.options[0].value !== multiSelectSelectedOptions.options[0].value
         )
       ) {
-        return onChange(multiSelectSelectedOptions);
+        return onChange({ ...multiSelectSelectedOptions, altered });
       }
     } else {
       if(
         prevState.singleSelectSelectedOption.value &&
         prevState.singleSelectSelectedOption.value !== singleSelectSelectedOption.value
       ) {
-        return onChange(singleSelectSelectedOption);
+        return onChange({ ...singleSelectSelectedOption,  altered });
       }
     }
   }
 
   render() {
     const { prefix, caretIcon, customLabelRenderer } = this.props;
-    const {
-      singleSelectInitialIndex,
-      multiSelectInitialSelectedIndexes,
-      isOptionsPanelOpen,
-      isTouchDevice,
-      multiSelectSelectedIndexes,
-      multiSelectSelectedOptions,
-      name,
-      nextPotentialSelectionIndex,
-      options,
-      singleSelectSelectedIndex,
-      singleSelectSelectedOption,
-      isMultiSelect
-    } = this.state;
+    const {isMultiSelect, singleSelectSelectedOption } = this.state;
 
     if (isMultiSelect) {
-      const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectSelectedOptions) || false;
 
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <MultiSelect
-            isTouchDevice={isTouchDevice}
-            singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}
             name={name}
-            customLabelText={customLabelText}
-            multiSelectInitialSelectedIndexes={multiSelectInitialSelectedIndexes}
-            multiSelectSelectedOptions={multiSelectSelectedOptions}
-            multiSelectSelectedIndexes={multiSelectSelectedIndexes}
-            nextPotentialSelectionIndex={nextPotentialSelectionIndex}
-            isOptionsPanelOpen={isOptionsPanelOpen}
-            singleSelectSelectedOption={singleSelectSelectedOption}
-            options={options}
+            {...this.state}
           />
         </div>
       );
+
     } else {
+
       const customLabelText = customLabelRenderer && customLabelRenderer(singleSelectSelectedOption) || false;
 
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <SingleSelect
-            isTouchDevice={isTouchDevice}
-            singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}
             name={name}
             customLabelText={customLabelText}
             singleSelectSelectedOption={singleSelectSelectedOption}
-            singleSelectSelectedIndex={singleSelectSelectedIndex}
-            nextPotentialSelectionIndex={nextPotentialSelectionIndex}
-            isOptionsPanelOpen={isOptionsPanelOpen}
-            options={options}
+            {...this.state}
           />
         </div>
       );
@@ -231,16 +206,23 @@ export default class ReactResponsiveSelect extends Component {
 
       /* Select option index, if an index was clicked/touchend'd */
       if (e && e.target.classList.contains('rrs__option')) {
-        this.updateState({
-          type: (isMultiSelect)
-            ? actionTypes.SET_MULTISELECT_OPTIONS
-            : actionTypes.SET_SELECTED_INDEX,
-          optionIndex: parseFloat(e.target.getAttribute('data-key'))
-        });
 
-        /* Dont close on selection for multi select */
-        if (isMultiSelect) return;
+        if(isMultiSelect) {
+          const optionIndex = parseFloat(e.target.getAttribute('data-key'));
+          /* Dont close on selection for multi select */
+          return this.forceUpdate(() => {
+            return this.updateState({
+              type: actionTypes.SET_MULTISELECT_OPTIONS,
+              optionIndex
+            });
+          });
 
+        } else {
+          this.updateState({
+            type: actionTypes.SET_SELECTED_INDEX,
+            optionIndex: parseFloat(e.target.getAttribute('data-key'))
+          });
+        }
         /* Close on selection for single select */
         return this.forceUpdate(() => {
           return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });

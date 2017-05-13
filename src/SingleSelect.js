@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import scrollIntoViewIIHOC from './lib/scrollIntoViewIIHOC';
 import SingleSelectOption from './SingleSelectOption';
-
 const SingleSelectOptionHOC = scrollIntoViewIIHOC(SingleSelectOption);
 
 export default class SingleSelect extends Component {
 
   static propTypes = {
+    altered: PropTypes.bool,
     caretIcon: PropTypes.element,
     customLabelText: PropTypes.oneOfType([
       PropTypes.string,
@@ -36,9 +36,10 @@ export default class SingleSelect extends Component {
 
   render(){
     const {
+      altered,
       caretIcon,
       customLabelText,
-      singleSelectInitialIndex,
+      // singleSelectInitialIndex,
       isOptionsPanelOpen,
       isTouchDevice,
       name,
@@ -55,7 +56,7 @@ export default class SingleSelect extends Component {
           rrs__select-container
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${(singleSelectInitialIndex !== singleSelectSelectedIndex) ? 'rrs__has-changed': ''}
+          ${(altered) ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"

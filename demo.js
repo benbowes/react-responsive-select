@@ -124,24 +124,8 @@ class Form extends Component { // eslint-disable-line
               onSubmit={() => { this.form.submit(); }} // (Required) form submit function
               caretIcon={caretIcon} // (Optional) add you own icon by using markup here
               prefix="Make4:"
-              // selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+              selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
               onChange={this.reportChange} // (Optional) listen for changes in a select
-              customLabelRenderer={singleSelectSelectedOptions => {
-                if (!singleSelectSelectedOptions.altered) {
-                  return 'Make4: Any selected';
-                } else {
-                  return (
-                    <span className='rrs__multiselect__label'>
-                      <span className='rrs__multiselect__label-text'>{`Make4: ${singleSelectSelectedOptions.options[0].text}`}</span>
-                      {singleSelectSelectedOptions.options.length > 1 &&
-                      <span className='rrs__multiselect__label-badge'>
-                        {`+ ${singleSelectSelectedOptions.options.length-1}`}
-                      </span>
-                      }
-                    </span>
-                  );
-                }
-              }}
             />
           </div>
 

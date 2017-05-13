@@ -11,7 +11,6 @@ describe('removeMultiSelectOption', () => {
     const result = removeMultiSelectOption({
       ...state,
       multiSelectSelectedOptions: {
-        altered: true,
         options: [{
           value: 'fiat',
           text: 'Fiat'
@@ -29,7 +28,6 @@ describe('removeMultiSelectOption', () => {
     }, 1);
 
     expect(result).to.eql({
-      altered: true,
       options: [{
         value: 'fiat',
         text: 'Fiat'
