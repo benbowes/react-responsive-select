@@ -104,7 +104,7 @@ class Form extends Component { // eslint-disable-line
           </div>
 
           <div className="col-1-4">
-            <p className="label">MultiSelect mode (soon)</p>
+            <p className="label">MultiSelect mode</p>
             <ReactResponsiveSelect
               multiselect
               name="make4" // (Required) the value to submit
