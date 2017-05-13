@@ -31,7 +31,7 @@ const setup = ((overrideProps, customProps = undefined) => {
     ...initialProps,
     ...overrideProps
   };
-  return mount(<ReactResponsiveSelect {...props}/>);
+  return mount(<ReactResponsiveSelect {...props} />);
 });
 
 describe('ReactResponsiveSelect', () => {
@@ -60,7 +60,7 @@ describe('ReactResponsiveSelect', () => {
         isDragging: false,
         isOptionsPanelOpen: false,
         singleSelectInitialIndex: 1,
-        multiSelectInitialSelectedIndexes: [ 1 ],
+        multiSelectInitialSelectedIndexes: [ 0 ],
         isTouchDevice: false,
         isMultiSelect: false,
         nextPotentialSelectionIndex: 1,
@@ -73,13 +73,13 @@ describe('ReactResponsiveSelect', () => {
           { text: 'BMW', value: 'bmw' },
           { text: 'Tesla', value: 'tesla' }
         ],
-        'multiSelectSelectedIndexes': [ 1 ],
+        'multiSelectSelectedIndexes': [ 0 ],
+        altered: false,
         'multiSelectSelectedOptions': {
-          altered: false,
           options: [{
             name: 'make',
-            text: 'Fiat',
-            value: 'fiat'
+            text: 'Any',
+            value: 'null'
           }]
         },
         singleSelectSelectedOption: {
@@ -90,41 +90,6 @@ describe('ReactResponsiveSelect', () => {
       };
 
       expect(selectBox.state()).to.eql( expectedState );
-    });
-
-    it('should not mutate state', () => {
-      expect(selectBox.state()).to.eql( {
-        isDragging: false,
-        isOptionsPanelOpen: false,
-        singleSelectInitialIndex: 1,
-        multiSelectInitialSelectedIndexes: [ 1 ],
-        isTouchDevice: false,
-        isMultiSelect: false,
-        nextPotentialSelectionIndex: 1,
-        singleSelectSelectedIndex: 1,
-        name: 'make',
-        options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
-          { text: 'Subaru', value: 'subaru' },
-          { text: 'BMW', value: 'bmw' },
-          { text: 'Tesla', value: 'tesla' }
-        ],
-        'multiSelectSelectedIndexes': [ 1 ],
-        'multiSelectSelectedOptions': {
-          altered: false,
-          options: [{
-            name: 'make',
-            text: 'Fiat',
-            value: 'fiat'
-          }]
-        },
-        singleSelectSelectedOption: {
-          name: 'make',
-          text: 'Fiat',
-          value: 'fiat'
-        }
-      } );
     });
 
     it('should setup mousedown, keyup and blur on desktop', () => {

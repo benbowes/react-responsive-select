@@ -47,9 +47,9 @@ describe('reducer', () => {
 
     expect(result).to.eql({
       ...mockInitialState,
+      altered: true,
       singleSelectSelectedOption: {
         name: 'make1',
-        altered: true,
         text: 'Any',
         value: 'null'
       },

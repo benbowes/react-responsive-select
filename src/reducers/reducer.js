@@ -1,10 +1,13 @@
 import * as actionTypes from '../constants/actionTypes';
 import getSelectedValueIndex from './lib/getSelectedValueIndex';
+import getSelectedValueIndexes from './lib/getSelectedValueIndexes';
+import getInitialMultiSelectSelectedOptions from './lib/getInitialMultiSelectSelectedOptions';
 import addMultiSelectIndex from './lib/addMultiSelectIndex';
 import removeMultiSelectIndex from './lib/removeMultiSelectIndex';
 import addMultiSelectOption from './lib/addMultiSelectOption';
 import removeMultiSelectOption from './lib/removeMultiSelectOption';
 import getInitialOption from './lib/getInitialOption';
+import isAltered from './lib/isAltered';
 
 export const initialState = {
 
@@ -17,6 +20,7 @@ export const initialState = {
   options: [],
   isDragging: false,
   isOptionsPanelOpen: false,
+  altered: false,
 
   // Single select
   singleSelectInitialIndex: 0,
@@ -28,10 +32,7 @@ export const initialState = {
 
   // Multi select
   multiSelectInitialSelectedIndexes: [0],
-  multiSelectSelectedOptions: {
-    altered: false,
-    options: []
-  },
+  multiSelectSelectedOptions: { options: [] },
   multiSelectSelectedIndexes: []
 };
 
@@ -40,6 +41,8 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.BOOTSTRAP_STATE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
+      const initialSelectedIndexes = getSelectedValueIndexes(action.value.options, action.value.selectedValues);
+      const initialSelectedOptions = getInitialMultiSelectSelectedOptions(action.value.options, action.value.selectedValues, action.value.name);
       return {
         ...state,
 
@@ -50,6 +53,7 @@ export default function reducer(state = initialState, action) {
         // Universal
         name: action.value.name,
         options: action.value.options,
+        altered: false,
 
         // Single select
         singleSelectInitialIndex: initialSelectedIndex,
@@ -63,14 +67,10 @@ export default function reducer(state = initialState, action) {
         nextPotentialSelectionIndex: initialSelectedIndex,
 
         // Multi select
-        multiSelectInitialSelectedIndexes: [initialSelectedIndex],
-        multiSelectSelectedIndexes: [initialSelectedIndex],
+        multiSelectInitialSelectedIndexes: initialSelectedIndexes,
+        multiSelectSelectedIndexes: initialSelectedIndexes,
         multiSelectSelectedOptions: {
-          altered: false,
-          options: [{
-            name: action.value.name,
-            ...action.value.options[ initialSelectedIndex ]
-          }]
+          options: initialSelectedOptions
         }
       };
     }
@@ -86,8 +86,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         isOptionsPanelOpen: true,
         nextPotentialSelectionIndex: state.singleSelectSelectedIndex,
+        altered: isAltered(state),
         singleSelectSelectedOption: {
-          altered: state.singleSelectSelectedIndex !== state.singleSelectInitialIndex,
           name: state.name,
           ...state.options[ state.singleSelectSelectedIndex ]
         }
@@ -97,10 +97,10 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isOptionsPanelOpen: false,
+        altered: isAltered(state),
         singleSelectSelectedIndex: state.nextPotentialSelectionIndex,
         singleSelectSelectedOption: {
           name: state.name,
-          altered: state.nextPotentialSelectionIndex !== state.singleSelectInitialIndex,
           ...state.options[state.nextPotentialSelectionIndex]
         }
       };
@@ -146,14 +146,18 @@ export default function reducer(state = initialState, action) {
 
       // If any thing selected and first option was requested, deselect all, and return first option
       if ( shouldDeselectAllAndSelectFirstOption ) {
-        return {
+        let newState = {
           ...state,
           multiSelectSelectedIndexes: [0],
           multiSelectSelectedOptions: {
-            altered: false,
             options: [{ name: state.name, ...state.options[0] }]
           },
           nextPotentialSelectionIndex: 0
+        };
+
+        return {
+          ...newState,
+          altered: isAltered(newState)
         };
       }
 
@@ -163,10 +167,7 @@ export default function reducer(state = initialState, action) {
         state = {
           ...state,
           multiSelectSelectedIndexes: [],
-          multiSelectSelectedOptions: {
-            altered: false,
-            options: []
-          }
+          multiSelectSelectedOptions: { options: [] }
         };
       }
 
@@ -188,10 +189,15 @@ export default function reducer(state = initialState, action) {
       // Select first option if user has deselected all items
       if (newState.multiSelectSelectedOptions.options.length === 0) {
         newState = {
-          ...state,
+          ...newState,
           ...getInitialOption(state)
         };
       }
+
+      newState = {
+        ...newState,
+        altered: isAltered(newState)
+      };
 
       return newState;
     }

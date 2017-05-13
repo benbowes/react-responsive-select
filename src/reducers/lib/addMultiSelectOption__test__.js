@@ -11,7 +11,6 @@ describe('addMultiSelectOption', () => {
     const result = addMultiSelectOption({
       ...state,
       multiSelectSelectedOptions: {
-        altered: true,
         options: [{
           name: 'Make 1',
           value: 'fiat',
@@ -21,7 +20,6 @@ describe('addMultiSelectOption', () => {
     }, 3);
 
     expect(result).to.eql({
-      altered: true,
       options: [{
         name: 'Make 1',
         value: 'fiat',

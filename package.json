@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "React Responsive Select",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "deploy": ".bin/deploy.sh",
     "eslint": "eslint demo.js src/**",
     "test": "npm run eslint && mocha --compilers js:babel-register --require mocha/jsdom-setup.js 'src/**/*__test__.js'",
+    "testSingle": "echo $test && mocha --compilers js:babel-register --require mocha/jsdom-setup.js src/**/*$test*__test__.js -w",
     "coverage": "rm -rf coverage && NODE_ENV=test nyc mocha 'src/**/*__test__.js'"
   },
   "nyc": {

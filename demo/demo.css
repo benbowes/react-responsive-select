@@ -18,7 +18,7 @@ h1 {
   line-height: 1;
   letter-spacing: -0.75px;
   margin: 2rem 0 4rem;
-  padding: 0 0 1rem 0;
+  padding: 0 0 0.5rem 0;
   border-bottom: 1px solid #ccc;
   font-size: 2rem;
   display: inline-block;
@@ -72,7 +72,7 @@ code {
 
 .inset {
   background: white;
-  margin: 2rem -24px 0 -24px;
+  margin: 1rem -24px 0 -24px;
   padding: 3rem 1.75rem;
   text-align: left;
 }
@@ -100,7 +100,6 @@ code {
 
 .view-console-message{
   font-size: 1rem;
-  text-align: center;
   margin: 5rem 0 0 0;
 }
 
@@ -146,13 +145,13 @@ code {
   -webkit-appearance: none;
   appearance: none;
   border: 0;
-  border-radius: 20px;
-  padding: 0.5rem 2rem;
+  border-radius: 3px;
+  padding: 0.75rem 3rem;
   font-size: inherit;
   color: #fff;
-  background: #BDBDBD;
+  background: #03A9F4;
   cursor: pointer;
-  margin: 3rem 0 0rem 0;
+  margin: 2rem 0 0rem 0;
   transition: all 0.3s ease-in-out;
 }
 
