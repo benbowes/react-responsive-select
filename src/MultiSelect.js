@@ -7,7 +7,10 @@ export default class MultiSelect extends Component {
 
   static propTypes = {
     altered: PropTypes.bool,
-    caretIcon: PropTypes.element,
+    caretIcon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ]),
     multiSelectInitialSelectedIndexes: PropTypes.arrayOf(
       PropTypes.number
     ),

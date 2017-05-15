@@ -36,7 +36,7 @@ h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5em;
   font-weight: 400;
-  display: inline-block;
+  display: block;
 }
 
 h3 {
@@ -71,6 +71,7 @@ code {
 
 .code-block {
   display: block;
+  width: 100%;
   padding: 0.5rem 1rem;
   overflow: auto;
   margin: 1rem 0;
@@ -166,10 +167,6 @@ code {
   fill: #999;
 }
 
-.rrs__select-container {
-  max-width: 300px;
-}
-
 .rrs__options-container--visible .caret-icon {
   transform: rotate(180deg);
 }
@@ -222,27 +219,10 @@ code {
   clear: both;
 }
 
-.col-1-4,
-.col-2-4,
-.col-3-4 {
+.col {
   display: inline-block;
   width: 100%;
+  max-width: 300px;
   margin: 0 0 1rem 0;
   float: left;
-  padding-right: 8px;
-}
-
-@media (min-width: 600px) {
-  .col-1-4 {
-    width: 25%;
-    margin: 0;
-  }
-  .col-2-4 {
-    width: 50%;
-    margin: 0;
-  }
-  .col-3-4 {
-    width: 75%;
-    margin: 0;
-  }
 }

@@ -7,7 +7,10 @@ export default class SingleSelect extends Component {
 
   static propTypes = {
     altered: PropTypes.bool,
-    caretIcon: PropTypes.element,
+    caretIcon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ]),
     customLabelText: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool,

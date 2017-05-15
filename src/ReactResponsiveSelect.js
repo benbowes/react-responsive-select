@@ -10,7 +10,10 @@ import MultiSelect from './MultiSelect';
 export default class ReactResponsiveSelect extends Component {
 
   static propTypes = {
-    caretIcon: PropTypes.element,
+    caretIcon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ]),
     customLabelRenderer: PropTypes.func,
     multiselect: PropTypes.bool,
     name: PropTypes.string.isRequired,
