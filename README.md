@@ -6,13 +6,9 @@ A React custom select control, that is both keyboard accessible like a native `<
 
 ## Demo
 
+It has some implementation examples
+
 https://benbowes.github.io/react-responsive-select/demo/
-
----
-
-## In Progress
-
-- MultiSelect Mode
 
 ---
 
@@ -161,6 +157,24 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td>multiselect (MultiSelect mode)</td>
+    <td>Boolean</td>
+    <td>Makes the selectbox handle multiple selections. Please see an implementation example here: https://benbowes.github.io/react-responsive-select/demo/</td>
+  </tr>
+  <tr>
+    <td>selectedValues (MultiSelect mode)</td>
+    <td>Array of String values</td>
+    <td>Pre-select several options with this value - should match against existing <code>option.value</code>, or if omitted the first item will be selected.
+    e.g. <code>selectedValues={['mazda','ford']}</code>
     </td>
   </tr>
 </table>

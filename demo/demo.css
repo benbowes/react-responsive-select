@@ -57,6 +57,10 @@ li {
   margin: 0 0 4px 0;
 }
 
+hr {
+  margin: 4rem 0;
+}
+
 code {
   background: #f1f1f1;
   border: 1px solid #ccc;
@@ -65,8 +69,17 @@ code {
   padding: 0px 4px;
 }
 
+.code-block {
+  display: block;
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  margin: 1rem 0;
+  color: #f1f1f1;
+  background: #333;
+}
+
 .wrapper {
-  background: #f5f5f5;
+  background: #f1f1f1;
 }
 
 .demo-form {
@@ -151,6 +164,10 @@ code {
   right: 1rem;
   top: 1.25rem;
   fill: #999;
+}
+
+.rrs__select-container {
+  max-width: 300px;
 }
 
 .rrs__options-container--visible .caret-icon {
