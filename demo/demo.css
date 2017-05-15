@@ -59,6 +59,8 @@ li {
 
 hr {
   margin: 4rem 0;
+  border: 0;
+  border-top: 1px solid #15394b;
 }
 
 code {

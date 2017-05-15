@@ -171,7 +171,7 @@ export default function reducer(state, action) {
         };
       }
 
-      // Find index of requested option or return -1
+      // Find index of requested option
       const indexLocation = state.multiSelectSelectedIndexes.indexOf(action.optionIndex);
 
       // If requested item does not exist, add it. Else remove it
@@ -194,6 +194,7 @@ export default function reducer(state, action) {
         };
       }
 
+      // Set altered state
       newState = {
         ...newState,
         altered: isAltered(newState)

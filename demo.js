@@ -103,7 +103,6 @@ const caretIcon = (
 </code>
 
         </div>
-
         <hr />
 
         <div className="row">
@@ -148,7 +147,6 @@ const caretIcon = (
 </code>
 
         </div>
-
         <hr />
 
         <div className="row">
@@ -167,7 +165,8 @@ const caretIcon = (
 
 <code className="code-block">
 <pre>{`<ReactResponsiveSelect
-  name="make2"
+  name="make3"
+  customLabelRenderer={selectedOption => { console.log(selectedOption); }} // return a string to format your own label text
   options={[
       value: 'null',
       text: 'Any',
@@ -185,7 +184,7 @@ const caretIcon = (
   ]}
   onSubmit={() => { console.log("Handle form submit here") }}
   caretIcon={caretIcon}
-  prefix="Make2:"
+  prefix="Make3:"
   selectedValue="fiat"
   onChange={this.reportChange}
 />`}
@@ -193,7 +192,6 @@ const caretIcon = (
 </code>
 
         </div>
-
         <hr />
 
         <div className="row">
