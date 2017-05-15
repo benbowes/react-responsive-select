@@ -103,7 +103,6 @@ const caretIcon = (
 </code>
 
         </div>
-        <hr />
 
         <div className="row">
           <h2>Custom option markup implementation</h2>
@@ -147,7 +146,6 @@ const caretIcon = (
 </code>
 
         </div>
-        <hr />
 
         <div className="row">
           <h2>Custom label and options implementation</h2>
@@ -192,7 +190,6 @@ const caretIcon = (
 </code>
 
         </div>
-        <hr />
 
         <div className="row">
           <h2>MultiSelect mode implementation</h2>

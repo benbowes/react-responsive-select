@@ -36,6 +36,13 @@ export const initialState = {
   multiSelectSelectedIndexes: []
 };
 
+function mergeIsAlteredState(newState) {
+  return {
+    ...newState,
+    altered: isAltered(newState)
+  };
+}
+
 export default function reducer(state, action) {
 
   switch (action.type) {
@@ -81,29 +88,33 @@ export default function reducer(state, action) {
         isDragging: action.boolean
       };
 
-    case actionTypes.SET_OPTIONS_PANEL_OPEN:
-      return {
+    case actionTypes.SET_OPTIONS_PANEL_OPEN: {
+      const newState = {
         ...state,
         isOptionsPanelOpen: true,
         nextPotentialSelectionIndex: state.singleSelectSelectedIndex,
-        altered: isAltered(state),
         singleSelectSelectedOption: {
           name: state.name,
           ...state.options[ state.singleSelectSelectedIndex ]
         }
       };
 
-    case actionTypes.SET_OPTIONS_PANEL_CLOSED:
-      return {
+      return mergeIsAlteredState(newState);
+    }
+
+    case actionTypes.SET_OPTIONS_PANEL_CLOSED: {
+      const newState = {
         ...state,
         isOptionsPanelOpen: false,
-        altered: isAltered(state),
         singleSelectSelectedIndex: state.nextPotentialSelectionIndex,
         singleSelectSelectedOption: {
           name: state.name,
           ...state.options[state.nextPotentialSelectionIndex]
         }
       };
+
+      return mergeIsAlteredState(newState);
+    }
 
     case actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION:
       return {
@@ -155,10 +166,7 @@ export default function reducer(state, action) {
           nextPotentialSelectionIndex: 0
         };
 
-        return {
-          ...newState,
-          altered: isAltered(newState)
-        };
+        return mergeIsAlteredState(newState);
       }
 
       // Deselect first option when first option selected and another option is requested
@@ -195,12 +203,7 @@ export default function reducer(state, action) {
       }
 
       // Set altered state
-      newState = {
-        ...newState,
-        altered: isAltered(newState)
-      };
-
-      return newState;
+      return mergeIsAlteredState(newState);
     }
   }
 
