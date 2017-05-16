@@ -77,6 +77,8 @@ class Form extends Component { // eslint-disable-line
             />
           </div>
 
+          <div className="view-console-message">View the onChange object via the console</div>
+
 <code className="code-block">
 <pre>{`// By default no caret icon is supplied - any valid jsx markup will do
 const caretIcon = (
@@ -117,6 +119,8 @@ const caretIcon = (
               onChange={this.reportChange}
             />
           </div>
+
+          <div className="view-console-message">View the onChange object via the console</div>
 
 <code className="code-block">
 <pre>{`<ReactResponsiveSelect
@@ -160,6 +164,8 @@ const caretIcon = (
               onChange={this.reportChange}
             />
           </div>
+
+          <div className="view-console-message">View the onChange object via the console</div>
 
 <code className="code-block">
 <pre>{`<ReactResponsiveSelect
@@ -218,6 +224,8 @@ const caretIcon = (
             />
           </div>
 
+          <div className="view-console-message">View the onChange object via the console</div>
+
 <code className="code-block">
 <pre>
 {`const multiSelectOptionMarkup = (text) => (
@@ -254,8 +262,6 @@ const caretIcon = (
         <div className="row centered">
           <button type="submit" className={'button'}>Submit</button>
         </div>
-
-        <p className="view-console-message">View the console to see the <code>onChange</code> output</p>
       </form>
     );
   }

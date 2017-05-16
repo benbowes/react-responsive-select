@@ -123,8 +123,10 @@ code {
 }
 
 .view-console-message{
-  font-size: 1rem;
-  margin: 5rem 0 0 0;
+  display: inline-block;
+  padding: 12px 0;
+  color: #999;
+  font-style: italic;
 }
 
 /*
@@ -152,7 +154,7 @@ code {
   color: #fff;
   background: #03A9F4;
   cursor: pointer;
-  margin: 2rem 0 0rem 0;
+  margin: 0 0 3rem 0;
   transition: all 0.3s ease-in-out;
 }
 
@@ -225,6 +227,6 @@ code {
   display: inline-block;
   width: 100%;
   max-width: 300px;
-  margin: 0 0 1rem 0;
+  margin: 0 1rem 1rem 0;
   float: left;
 }

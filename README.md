@@ -168,7 +168,7 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
   <tr>
     <td>multiselect (MultiSelect mode)</td>
     <td>Boolean</td>
-    <td>Makes the selectbox handle multiple selections. Please see an implementation example here: https://benbowes.github.io/react-responsive-select/demo/</td>
+    <td>Makes the selectbox handle multiple selections. Check the implementation example here: https://benbowes.github.io/react-responsive-select/demo/</td>
   </tr>
   <tr>
     <td>selectedValues (MultiSelect mode)</td>
