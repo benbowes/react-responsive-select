@@ -74,10 +74,12 @@ export default class SingleSelect extends Component {
 
         {!customLabelText &&
         <div className="rrs__label-container">
-          {prefix &&
-          <span>{prefix}</span>
-          }
-          <span className="rrs__label"> {singleSelectSelectedOption.text}</span>
+          <span className="rrs__label">
+            {prefix &&
+              <span>{prefix}</span>
+            }
+            {singleSelectSelectedOption.text}
+          </span>
           {caretIcon && caretIcon}
         </div>
         }

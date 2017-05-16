@@ -74,9 +74,9 @@
 .rrs__label-container {
   padding: 0 2rem 0 1rem;
   border: 1px solid #f1f1f1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  display: inline-flex;
+  width: 100%;
+  max-width: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -93,6 +93,9 @@
   font-size: inherit;
   background: transparent;
   border: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .rrs__has-changed .rrs__label-container {
