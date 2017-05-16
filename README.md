@@ -127,7 +127,7 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
         }]</code></p><p><code>text</code> (Required) display value for select and the default for option label</p><p><code>value</code> (Required) value that is submitted</p><p><code>markup</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
   </tr>
   <tr>
-    <td>onSubmit (required)</td>
+    <td>onSubmit</td>
     <td>Function</td>
     <td>Some function submits your form</td>
   </tr>
