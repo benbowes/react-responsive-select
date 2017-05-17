@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import isAltered from './isAltered';
+import { isAltered } from './mergeIsAlteredState';
 import state from '../../../mocha/state-mock';
 import deepFreeze from 'deep-freeze';
 
-describe('isAltered', () => {
+describe('mergeIsAlteredState', () => {
 
   deepFreeze(state);
 
