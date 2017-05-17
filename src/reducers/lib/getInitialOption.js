@@ -1,5 +1,6 @@
 export default function getInitialOption(state) {
   return {
+    ...state,
     multiSelectSelectedIndexes: [0],
     multiSelectSelectedOptions: {
       options: [{

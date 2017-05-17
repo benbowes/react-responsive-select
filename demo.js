@@ -55,29 +55,32 @@ class Form extends Component { // eslint-disable-line
       <form ref={r => this.form = r}>
         <div className="row">
           <h2>Basic implementation</h2>
-          <div className="col">
-            <ReactResponsiveSelect
-              name="make1"
-              options={[
-                { value: 'null', text: 'Any' },
-                { value: 'fiat', text: 'Fiat' },
-                { value: 'subaru', text: 'Subaru' },
-                { value: 'bmw', text: 'BMW' },
-                { value: 'tesla', text: 'Tesla' },
-                { value: 'fiat', text: 'Fiat' },
-                { value: 'subaru', text: 'Subaru' },
-                { value: 'bmw', text: 'BMW' },
-                { value: 'tesla', text: 'Tesla' }
-              ]}
-              onSubmit={() => { this.form.submit(); }}
-              caretIcon={caretIcon}
-              prefix="Make1:"
-              selectedValue="fiat"
-              onChange={this.reportChange}
-            />
-          </div>
 
-          <div className="view-console-message">View the onChange object via the console</div>
+          <div>
+            <div className="col">
+              <ReactResponsiveSelect
+                name="make1"
+                options={[
+                  { value: 'null', text: 'Any' },
+                  { value: 'fiat', text: 'Fiat' },
+                  { value: 'subaru', text: 'Subaru' },
+                  { value: 'bmw', text: 'BMW' },
+                  { value: 'tesla', text: 'Tesla' },
+                  { value: 'fiat', text: 'Fiat' },
+                  { value: 'subaru', text: 'Subaru' },
+                  { value: 'bmw', text: 'BMW' },
+                  { value: 'tesla', text: 'Tesla' }
+                ]}
+                onSubmit={() => { this.form.submit(); }}
+                caretIcon={caretIcon}
+                prefix="Make1:"
+                selectedValue="fiat"
+                onChange={this.reportChange}
+              />
+            </div>
+
+            <div className="view-console-message">View the onChange object via the console</div>
+          </div>
 
 <code className="code-block">
 <pre>{`// By default no caret icon is supplied - any valid jsx markup will do
@@ -108,19 +111,22 @@ const caretIcon = (
 
         <div className="row">
           <h2>Custom option markup implementation</h2>
-          <div className="col">
-            <ReactResponsiveSelect
-              name="make2"
-              options={options}
-              onSubmit={() => { this.form.submit(); }}
-              caretIcon={caretIcon}
-              prefix="Make2:"
-              selectedValue="fiat"
-              onChange={this.reportChange}
-            />
-          </div>
 
-          <div className="view-console-message">View the onChange object via the console</div>
+          <div>
+            <div className="col">
+              <ReactResponsiveSelect
+                name="make2"
+                options={options}
+                onSubmit={() => { this.form.submit(); }}
+                caretIcon={caretIcon}
+                prefix="Make2:"
+                selectedValue="fiat"
+                onChange={this.reportChange}
+              />
+            </div>
+
+            <div className="view-console-message">View the onChange object via the console</div>
+          </div>
 
 <code className="code-block">
 <pre>{`<ReactResponsiveSelect
@@ -153,19 +159,22 @@ const caretIcon = (
 
         <div className="row">
           <h2>Custom label and options implementation</h2>
-          <div className="col">
-            <ReactResponsiveSelect
-              name="make3"
-              options={options}
-              onSubmit={() => { this.form.submit(); }}
-              caretIcon={caretIcon}
-              customLabelRenderer={singleSelectSelectedOption => `Selected make is ${singleSelectSelectedOption.text} :)`} // (Optional) format your own label text like this
-              selectedValue="fiat"
-              onChange={this.reportChange}
-            />
-          </div>
 
-          <div className="view-console-message">View the onChange object via the console</div>
+          <div>
+            <div className="col">
+              <ReactResponsiveSelect
+                name="make3"
+                options={options}
+                onSubmit={() => { this.form.submit(); }}
+                caretIcon={caretIcon}
+                customLabelRenderer={singleSelectSelectedOption => `Selected make is ${singleSelectSelectedOption.text} :)`} // (Optional) format your own label text like this
+                selectedValue="fiat"
+                onChange={this.reportChange}
+              />
+            </div>
+
+            <div className="view-console-message">View the onChange object via the console</div>
+          </div>
 
 <code className="code-block">
 <pre>{`<ReactResponsiveSelect
@@ -199,32 +208,35 @@ const caretIcon = (
 
         <div className="row">
           <h2>MultiSelect mode implementation</h2>
-          <div className="col">
-            <ReactResponsiveSelect
-              multiselect
-              name="make4" // (Required) the value to submit
-              options={[ // (Required) an array of options - see above const options
-                { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
-                { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
-                { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
-                { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
-                { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
-              ]}
-              onSubmit={() => { this.form.submit(); }} // (Required) form submit function
-              caretIcon={caretIcon} // (Optional) add you own icon by using markup here
-              prefix="Make4:"
-              selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
-              onChange={this.reportChange} // (Optional) listen for changes in a select
-            />
-          </div>
 
-          <div className="view-console-message">View the onChange object via the console</div>
+          <div>
+            <div className="col">
+              <ReactResponsiveSelect
+                multiselect
+                name="make4" // (Required) the value to submit
+                options={[ // (Required) an array of options - see above const options
+                  { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
+                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+                  { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                  { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
+                  { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                  { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
+                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
+                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
+                ]}
+                onSubmit={() => { this.form.submit(); }} // (Required) form submit function
+                caretIcon={caretIcon} // (Optional) add you own icon by using markup here
+                prefix="Make4:"
+                selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+                onChange={this.reportChange} // (Optional) listen for changes in a select
+              />
+            </div>
+
+            <div className="view-console-message">View the onChange object via the console</div>
+          </div>
 
 <code className="code-block">
 <pre>

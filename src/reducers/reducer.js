@@ -6,8 +6,8 @@ import addMultiSelectIndex from './lib/addMultiSelectIndex';
 import removeMultiSelectIndex from './lib/removeMultiSelectIndex';
 import addMultiSelectOption from './lib/addMultiSelectOption';
 import removeMultiSelectOption from './lib/removeMultiSelectOption';
+import mergeIsAlteredState from './lib/mergeIsAlteredState';
 import getInitialOption from './lib/getInitialOption';
-import isAltered from './lib/isAltered';
 
 export const initialState = {
 
@@ -36,10 +36,11 @@ export const initialState = {
   multiSelectSelectedIndexes: []
 };
 
-function mergeIsAlteredState(newState) {
-  return {
-    ...newState,
-    altered: isAltered(newState)
+function resetMultiSelectState(state) {
+  return { // reset multiSelect state
+    ...state,
+    multiSelectSelectedIndexes: [ ...initialState.multiSelectSelectedIndexes ],
+    multiSelectSelectedOptions: { ...initialState.multiSelectSelectedOptions }
   };
 }
 
@@ -98,7 +99,6 @@ export default function reducer(state, action) {
           ...state.options[ state.singleSelectSelectedIndex ]
         }
       };
-
       return mergeIsAlteredState(newState);
     }
 
@@ -112,7 +112,6 @@ export default function reducer(state, action) {
           ...state.options[state.nextPotentialSelectionIndex]
         }
       };
-
       return mergeIsAlteredState(newState);
     }
 
@@ -157,53 +156,37 @@ export default function reducer(state, action) {
 
       // If any thing selected and first option was requested, deselect all, and return first option
       if ( shouldDeselectAllAndSelectFirstOption ) {
-        let newState = {
-          ...state,
-          multiSelectSelectedIndexes: [0],
-          multiSelectSelectedOptions: {
-            options: [{ name: state.name, ...state.options[0] }]
-          },
-          nextPotentialSelectionIndex: 0
-        };
-
-        return mergeIsAlteredState(newState);
+        const nextState = getInitialOption(state);
+        return mergeIsAlteredState(nextState);
       }
 
       // Deselect first option when first option selected and another option is requested
       if ( shouldDeselectFirstOptionAndSelectRequestedOption ) {
-        // reset multiSelect state
-        state = {
-          ...state,
-          multiSelectSelectedIndexes: [],
-          multiSelectSelectedOptions: { options: [] }
-        };
+        state = resetMultiSelectState(state);
       }
 
       // Find index of requested option
       const indexLocation = state.multiSelectSelectedIndexes.indexOf(action.optionIndex);
 
       // If requested item does not exist, add it. Else remove it
-      let newState = {
+      let nextState = {
         ...state,
         nextPotentialSelectionIndex: action.optionIndex,
-        multiSelectSelectedIndexes: indexLocation === -1
+        multiSelectSelectedIndexes: (indexLocation === -1)
           ? addMultiSelectIndex(state, action.optionIndex)
           : removeMultiSelectIndex(state, indexLocation),
-        multiSelectSelectedOptions: indexLocation === -1
+        multiSelectSelectedOptions: (indexLocation === -1)
           ? addMultiSelectOption(state, action.optionIndex)
           : removeMultiSelectOption(state, indexLocation)
       };
 
       // Select first option if user has deselected all items
-      if (newState.multiSelectSelectedOptions.options.length === 0) {
-        newState = {
-          ...newState,
-          ...getInitialOption(state)
-        };
+      if (nextState.multiSelectSelectedOptions.options.length === 0) {
+        nextState = getInitialOption(state);
       }
 
       // Set altered state
-      return mergeIsAlteredState(newState);
+      return mergeIsAlteredState(nextState);
     }
   }
 

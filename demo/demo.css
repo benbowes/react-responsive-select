@@ -63,11 +63,11 @@ hr {
   border-top: 1px solid #15394b;
 }
 
-code {
+.code-inline {
   background: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 3px;
-  color: #F44336;
+  color: #333;
   padding: 0px 4px;
 }
 
@@ -205,7 +205,6 @@ code {
   text-align: center;
 }
 
-
 /*
 
   Demo Grid
@@ -228,5 +227,4 @@ code {
   width: 100%;
   max-width: 300px;
   margin: 0 1rem 1rem 0;
-  float: left;
 }
