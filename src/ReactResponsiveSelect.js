@@ -66,6 +66,7 @@ export default class ReactResponsiveSelect extends Component {
       };
   }
 
+  /* Broadcast change when there has been one */
   componentDidUpdate( prevProps, prevState ) {
     const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect, altered } = this.state;
     const { onChange } = this.props;
@@ -118,12 +119,15 @@ export default class ReactResponsiveSelect extends Component {
 
     if (isMultiSelect) {
 
+      const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectSelectedOptions) || false;
+
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <MultiSelect
             altered={altered}
             isTouchDevice={isTouchDevice}
             caretIcon={caretIcon}
+            customLabelText={customLabelText}
             prefix={prefix}
             name={name}
             multiSelectInitialSelectedIndexes={multiSelectInitialSelectedIndexes}

@@ -11,6 +11,11 @@ export default class MultiSelect extends Component {
       PropTypes.string,
       PropTypes.element
     ]),
+    customLabelText: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+      PropTypes.element
+    ]),
     multiSelectInitialSelectedIndexes: PropTypes.arrayOf(
       PropTypes.number
     ),
@@ -46,6 +51,7 @@ export default class MultiSelect extends Component {
     const {
       altered,
       caretIcon,
+      customLabelText,
       isOptionsPanelOpen,
       isTouchDevice,
       multiSelectSelectedIndexes,
@@ -68,6 +74,15 @@ export default class MultiSelect extends Component {
         role="listbox"
         tabIndex="0"
       >
+
+        {customLabelText &&
+        <div className="rrs__label-container">
+          <span className="rrs__label">{customLabelText}</span>
+          {caretIcon && caretIcon}
+        </div>
+        }
+
+        {!customLabelText &&
         <div className="rrs__label-container">
           <span className="rrs__label">
             <span className='rrs__multiselect__label'>
@@ -81,6 +96,7 @@ export default class MultiSelect extends Component {
           </span>
           {caretIcon && caretIcon}
         </div>
+        }
 
         <div
           className="rrs__options-container"

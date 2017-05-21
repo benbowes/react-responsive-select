@@ -115,7 +115,7 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
   <tr>
     <td>name (required)</td>
     <td>String</td>
-    <td>The name to send with the selected option value on form submit</td>
+    <td>The name to send with the selected option value(s) on form submit</td>
   </tr>
   <tr>
     <td>options (required)</td>
@@ -124,7 +124,7 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
         text: "Fiat",
         value: "fiat",
         markup: &lt;span&gt;Fiat&lt;/span&gt;
-        }]</code></p><p><code>text</code> (Required) display value for select and the default for option label</p><p><code>value</code> (Required) value that is submitted</p><p><code>markup</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
+        }]</code></p><p><code>text</code> (Required) display value for the select and the default for the option label</p><p><code>value</code> (Required) value that is submitted</p><p><code>markup</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
   </tr>
   <tr>
     <td>onSubmit</td>
@@ -134,7 +134,7 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
   <tr>
     <td>onChange</td>
     <td>Function</td>
-    <td><p>Listen for changes on select option change</p>
+    <td><p>Listen for changes on selected option change</p>
     <p>returns <code>{ altered: true||false, name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
     </td>
   </tr>

@@ -102,7 +102,7 @@ const caretIcon = (
   caretIcon={caretIcon}
   prefix="Make1:"
   selectedValue="fiat"
-  onChange={this.reportChange}
+  onChange={() => { console.log("Handle select change here") }}
 />`}
 </pre>
 </code>
@@ -150,7 +150,7 @@ const caretIcon = (
   caretIcon={caretIcon}
   prefix="Make2:"
   selectedValue="fiat"
-  onChange={this.reportChange}
+  onChange={() => { console.log("Handle select change here") }}
 />`}
 </pre>
 </code>
@@ -199,7 +199,7 @@ const caretIcon = (
   caretIcon={caretIcon}
   prefix="Make3:"
   selectedValue="fiat"
-  onChange={this.reportChange}
+  onChange={() => { console.log("Handle select change here") }}
 />`}
 </pre>
 </code>
@@ -264,7 +264,76 @@ const caretIcon = (
   caretIcon={caretIcon}
   prefix="Make4:"
   selectedValues={['mazda','ford']}
-  onChange={this.reportChange}
+  onChange={() => { console.log("Handle select change here") }}
+/>`}
+</pre>
+</code>
+
+        </div>
+
+        <div className="row">
+          <h2>MultiSelect mode implementation with custom renderer</h2>
+
+          <div>
+            <div className="col">
+              <ReactResponsiveSelect
+                multiselect
+                name="make5" // (Required) the value to submit
+                options={[ // (Required) an array of options - see above const options
+                  { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
+                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+                  { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                  { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
+                  { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                  { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
+                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
+                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
+                ]}
+                onSubmit={() => { this.form.submit(); }} // (Required) form submit function
+                caretIcon={caretIcon} // (Optional) add you own icon by using markup here
+                customLabelRenderer={multiSelectSelectedOptions => {
+                  return multiSelectSelectedOptions.options
+                    && multiSelectSelectedOptions.options.length
+                    && multiSelectSelectedOptions.options.map(v => v.text).join(', ');
+                }} // (Optional) format your own label text like this
+                selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+                onChange={this.reportChange} // (Optional) listen for changes in a select
+              />
+            </div>
+
+            <div className="view-console-message">View the onChange object via the console</div>
+          </div>
+
+<code className="code-block">
+<pre>
+{`const multiSelectOptionMarkup = (text) => (
+  <div>
+    <span className="checkbox">
+      <svg className="checkbox-icon" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 488.878 488.878">
+        <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 "/></g>
+      </svg>
+    </span>
+    <span> {text}</span>
+  </div>
+);
+
+<ReactResponsiveSelect
+  multiselect
+  name="make5" // (Required) the value to submit
+  options={[ // (Required) an array of options - see above const options
+    { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+    { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
+    { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+    ...
+  ]}
+  onSubmit={() => { console.log("Handle form submit here") }}
+  caretIcon={caretIcon} // (Optional) add you own icon by using markup here
+  customLabelRenderer={multiSelectSelectedOptions => { console.log(multiSelectSelectedOptions); }} // return a string to format your own label text
+  selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this value, or if ommited the first item will be selected
+  onChange={() => { console.log("Handle select change here") }}
 />`}
 </pre>
 </code>
