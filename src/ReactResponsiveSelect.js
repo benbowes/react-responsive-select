@@ -71,22 +71,30 @@ export default class ReactResponsiveSelect extends Component {
     const { onChange } = this.props;
 
     if (isMultiSelect) {
-      if(
-        prevState.multiSelectSelectedOptions.options.length &&
-        (
-          prevState.multiSelectSelectedOptions.options.length !== multiSelectSelectedOptions.options.length ||
-          prevState.multiSelectSelectedOptions.options[0].value !== multiSelectSelectedOptions.options[0].value
-        )
-      ) {
+
+      const { options: prevOptions } = prevState.multiSelectSelectedOptions;
+      const { options: currOptions } = multiSelectSelectedOptions;
+      const shouldBroadcastChange = (
+        prevOptions.length &&
+        (prevOptions.length !== currOptions.length || prevOptions[0].value !== currOptions[0].value)
+      );
+
+      if( shouldBroadcastChange ) {
         return onChange({ ...multiSelectSelectedOptions, altered });
       }
+
     } else {
-      if(
-        prevState.singleSelectSelectedOption.value &&
-        prevState.singleSelectSelectedOption.value !== singleSelectSelectedOption.value
-      ) {
+
+      const { value: prevValue } = prevState.singleSelectSelectedOption;
+      const { value: currValue } = singleSelectSelectedOption;
+      const shouldBroadcastChange = (
+        prevValue && prevValue !== currValue
+      );
+
+      if( shouldBroadcastChange ) {
         return onChange({ ...singleSelectSelectedOption,  altered });
       }
+
     }
   }
 
