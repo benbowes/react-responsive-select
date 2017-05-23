@@ -237,6 +237,20 @@ describe('ReactResponsiveSelect', () => {
       expect(enterPressedSpy.args[0][0].isPropagationStopped()).to.equal(true);
     });
 
+    it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and selects nextPotentialSelectionIndex when multiselect', () => {
+      submitSpy.reset();
+      selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3 });
+
+      selectBoxContainer.simulate('mouseDown'); // open
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
+
+      selectBox.find('.rrs__options-container .rrs__option').at(3).simulate('keyDown', { keyCode: keyCodes.ENTER });
+
+      expect(enterPressedSpy.called).to.equal(true);
+      expect(submitSpy.called).to.equal(false);
+      expect(updateStateSpy.firstCall.args[0]).to.eql({ type: actionTypes.SET_MULTISELECT_OPTIONS, optionIndex: 3 });
+    });
+
     it('handleKeyEvent() - keyDown "SPACE" toggles the options panel open/closed with toggleOptionsPanel()', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.SPACE });
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( true );
@@ -390,6 +404,44 @@ describe('ReactResponsiveSelect', () => {
       });
 
       expect(selectBox.find('.rrs__select-container--multiselect').hasClass('rrs__has-changed')).to.equal(true);
+    });
+
+  });
+
+  describe('customLabelRenderer', () => {
+
+    let selectBox;
+
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
+    it('should handle customLabelRenderer on single select', () => {
+      const props = {
+        prefix: 'Make',
+        name: 'make',
+        customLabelRenderer: (option) => `${option.text} selected`,
+        onSubmit: submitSpy,
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
+      };
+      selectBox = setup(undefined, props);
+      expect(selectBox.find('.rrs__select-container .rrs__label').props().children).to.equal('Any selected');
+    });
+
+    it('should handle customLabelRenderer on multi select', () => {
+      const props = {
+        multiselect: true,
+        prefix: 'Make',
+        name: 'make',
+        selectedValues: ['fiat'],
+        customLabelRenderer: (option) => {
+          return `${option.options ? option.options.map(o => o.text).join(', ') : 'Nothing'} selected`;
+        },
+        onSubmit: submitSpy,
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
+      };
+      selectBox = setup(undefined, props);
+      expect(selectBox.find('.rrs__select-container .rrs__label').props().children).to.equal('Fiat selected');
     });
 
   });
