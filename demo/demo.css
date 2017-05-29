@@ -17,7 +17,7 @@ h1 {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -0.75px;
-  margin: 4rem 0 4rem 0;
+  margin: 4rem 0 0 0;
   padding: 0 0 0.5rem 0;
   border-bottom: 1px solid #ccc;
   font-size: 2rem;
@@ -63,6 +63,14 @@ hr {
   border-top: 1px solid #15394b;
 }
 
+.subh1p {
+  margin-bottom: 4rem;
+}
+
+.subh1p strong {
+  font-weight: normal;
+}
+
 .code-inline {
   background: #f1f1f1;
   border: 1px solid #ccc;
@@ -98,8 +106,10 @@ hr {
   overflow: hidden;
 }
 
-.github-link {
+.logos {
   display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   background: #fff;
   color: #f2fbfe;
   font-size: 0.75rem;
@@ -108,9 +118,17 @@ hr {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
+.github-link {
+
+}
+
 .github-link svg {
   fill: #999;
   fill-opacity: 0.8;
+}
+
+.npm-link {
+
 }
 
 .label {
