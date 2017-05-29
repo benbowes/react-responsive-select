@@ -6,44 +6,11 @@ const SingleSelectOptionHOC = scrollIntoViewIIHOC(SingleSelectOption);
 
 export default class SingleSelect extends Component {
 
-  static propTypes = {
-    altered: PropTypes.bool,
-    caretIcon: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element
-    ]),
-    customLabelText: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-      PropTypes.element
-    ]),
-    singleSelectInitialIndex: PropTypes.number,
-    singleSelectSelectedIndex: PropTypes.number,
-    singleSelectSelectedOption: PropTypes.shape({
-      text: PropTypes.string,
-      value: PropTypes.string
-    }),
-    isTouchDevice: PropTypes.bool,
-    isOptionsPanelOpen: PropTypes.bool,
-    name: PropTypes.string,
-    nextPotentialSelectionIndex: PropTypes.number,
-    onSubmit: PropTypes.func,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    prefix: PropTypes.string,
-    selectedValue: PropTypes.string
-  }
-
   render(){
     const {
       altered,
       caretIcon,
       customLabelText,
-      // singleSelectInitialIndex,
       isOptionsPanelOpen,
       isTouchDevice,
       name,
@@ -113,3 +80,35 @@ export default class SingleSelect extends Component {
     );
   }
 }
+
+SingleSelect.propTypes = {
+  altered: PropTypes.bool,
+  caretIcon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+  ]),
+  customLabelText: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.element
+  ]),
+  singleSelectInitialIndex: PropTypes.number,
+  singleSelectSelectedIndex: PropTypes.number,
+  singleSelectSelectedOption: PropTypes.shape({
+    text: PropTypes.string,
+    value: PropTypes.string
+  }),
+  isTouchDevice: PropTypes.bool,
+  isOptionsPanelOpen: PropTypes.bool,
+  name: PropTypes.string,
+  nextPotentialSelectionIndex: PropTypes.number,
+  onSubmit: PropTypes.func,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  prefix: PropTypes.string,
+  selectedValue: PropTypes.string
+};

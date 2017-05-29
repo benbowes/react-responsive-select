@@ -10,27 +10,6 @@ import MultiSelect from './MultiSelect';
 
 export default class ReactResponsiveSelect extends Component {
 
-  static propTypes = {
-    caretIcon: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element
-    ]),
-    customLabelRenderer: PropTypes.func,
-    multiselect: PropTypes.bool,
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    onSubmit: PropTypes.func,
-    prefix: PropTypes.string,
-    selectedValue: PropTypes.string,
-    selectedValues: PropTypes.arrayOf( PropTypes.string.isRequired )
-  }
-
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -318,3 +297,24 @@ export default class ReactResponsiveSelect extends Component {
   }
 
 }
+
+ReactResponsiveSelect.propTypes = {
+  caretIcon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+  ]),
+  customLabelRenderer: PropTypes.func,
+  multiselect: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  onSubmit: PropTypes.func,
+  prefix: PropTypes.string,
+  selectedValue: PropTypes.string,
+  selectedValues: PropTypes.arrayOf( PropTypes.string.isRequired )
+};

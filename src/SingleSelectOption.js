@@ -3,22 +3,11 @@ import PropTypes from 'prop-types';
 
 export default class SingleSelectOption extends Component {
 
-  static propTypes = {
-    index: PropTypes.number.isRequired,
-    singleSelectSelectedIndex: PropTypes.number,
-    nextPotentialSelectionIndex: PropTypes.number,
-    option: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-      markup: PropTypes.element
-    }).isRequired
-  }
-
   render(){
     const {
+      index,
       nextPotentialSelectionIndex,
       option,
-      index,
       singleSelectSelectedIndex
     } = this.props;
 
@@ -38,3 +27,14 @@ export default class SingleSelectOption extends Component {
     );
   }
 }
+
+SingleSelectOption.propTypes = {
+  index: PropTypes.number.isRequired,
+  nextPotentialSelectionIndex: PropTypes.number,
+  option: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    markup: PropTypes.element
+  }).isRequired,
+  singleSelectSelectedIndex: PropTypes.number
+};

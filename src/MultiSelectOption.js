@@ -3,25 +3,12 @@ import PropTypes from 'prop-types';
 
 export default class MultiSelectOption extends Component {
 
-  static propTypes = {
-    index: PropTypes.number.isRequired,
-    multiSelectSelectedIndexes: PropTypes.arrayOf(
-      PropTypes.number
-    ),
-    nextPotentialSelectionIndex: PropTypes.number,
-    option: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-      markup: PropTypes.element
-    }).isRequired
-  }
-
   render(){
     const {
-      nextPotentialSelectionIndex,
-      option,
       index,
-      multiSelectSelectedIndexes
+      multiSelectSelectedIndexes,
+      nextPotentialSelectionIndex,
+      option
     } = this.props;
 
     return (
@@ -40,3 +27,16 @@ export default class MultiSelectOption extends Component {
     );
   }
 }
+
+MultiSelectOption.propTypes = {
+  index: PropTypes.number.isRequired,
+  multiSelectSelectedIndexes: PropTypes.arrayOf(
+    PropTypes.number
+  ),
+  nextPotentialSelectionIndex: PropTypes.number,
+  option: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    markup: PropTypes.element
+  }).isRequired
+};
