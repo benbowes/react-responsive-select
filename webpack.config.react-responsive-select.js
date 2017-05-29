@@ -13,7 +13,9 @@ module.exports = {
     umdNamedDefine: true
   },
 
-  externals: [nodeExternals()],
+  externals: [
+    nodeExternals({ whitelist: ['prop-types'] })
+  ],
 
   module: {
     rules: [{
