@@ -1,3 +1,4 @@
+const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 
 module.exports = {
@@ -11,6 +12,8 @@ module.exports = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
+
+  externals: [nodeExternals()],
 
   module: {
     rules: [{
