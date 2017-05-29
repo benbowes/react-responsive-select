@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as actionTypes from './constants/actionTypes';
 import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducers/reducer';
