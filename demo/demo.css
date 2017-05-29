@@ -65,6 +65,7 @@ hr {
 
 .subh1p {
   margin-bottom: 4.5rem;
+  padding: 0 2rem;
 }
 
 .subh1p strong {
@@ -119,7 +120,7 @@ hr {
 }
 
 .github-link {
-  margin-left: 12px;
+  margin-right: 1rem;
 }
 
 .github-link svg {
@@ -128,7 +129,7 @@ hr {
 }
 
 .npm-link {
-  margin-left: 8px;
+  margin-right: 1rem;
 }
 
 .label {
