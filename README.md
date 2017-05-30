@@ -181,5 +181,4 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
 
 ## Interaction Tests
 
-For information about how this select control works on desktop and mobile see the Interaction tests readme [README_INTERACTION_TESTS.md]( https://github.com/benbowes/react-responsive-select/README_INTERACTION_TESTS.md)
----
+For information about how this select control works on desktop and mobile see the Interaction tests readme [README_INTERACTION_TESTS.md](https://github.com/benbowes/react-responsive-select/blob/master/README_INTERACTION_TESTS.md)
