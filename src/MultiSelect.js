@@ -11,6 +11,7 @@ export default class MultiSelect extends Component {
       altered,
       caretIcon,
       customLabelText,
+      disabled,
       isOptionsPanelOpen,
       isTouchDevice,
       multiSelectSelectedIndexes,
@@ -26,6 +27,7 @@ export default class MultiSelect extends Component {
         className={`
           rrs__select-container
           rrs__select-container--multiselect
+          ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
           ${altered ? 'rrs__has-changed': ''}
@@ -101,6 +103,7 @@ MultiSelect.propTypes = {
     PropTypes.bool,
     PropTypes.element
   ]),
+  disabled: PropTypes.bool,
   multiSelectInitialSelectedIndexes: PropTypes.arrayOf(
     PropTypes.number
   ),

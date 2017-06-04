@@ -16,6 +16,12 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.rrs__select-container--disabled {
+  color: #999999;
+  background: #f5f5f5;
+  cursor: default;
+}
+
 .rrs__select-container:focus {
   outline: 0;
 }

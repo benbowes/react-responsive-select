@@ -426,4 +426,45 @@ describe('ReactResponsiveSelect', () => {
     });
 
   });
+
+  describe('disabled', () => {
+    let selectBox;
+
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
+    it('should add disabled class on singleselect', () => {
+      const props = {
+        disabled: true,
+        name: 'make',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
+      };
+      selectBox = setup(undefined, props);
+      expect(selectBox.find('.rrs__select-container--disabled').length).to.equal(1);
+    });
+
+    it('should add disabled class on multiselect', () => {
+      const props = {
+        multiselect: true,
+        disabled: true,
+        name: 'make',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
+      };
+      selectBox = setup(undefined, props);
+      expect(selectBox.find('.rrs__select-container--disabled').length).to.equal(1);
+    });
+
+    it('should not add listeners when disabled', () => {
+      const props = {
+        multiselect: true,
+        disabled: true,
+        name: 'make',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
+      };
+      selectBox = setup(undefined, props);
+      expect( selectBox.instance().listeners ).to.equal( undefined );
+    });
+  });
+
 });

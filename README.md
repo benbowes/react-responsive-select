@@ -155,6 +155,11 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td>Prefix for the select label</td>
   </tr>
   <tr>
+    <td>disabled</td>
+    <td>Boolean</td>
+    <td>Disables the select control</td>
+  </tr>
+  <tr>
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
