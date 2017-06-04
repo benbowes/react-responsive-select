@@ -11,6 +11,7 @@ export default class SingleSelect extends Component {
       altered,
       caretIcon,
       customLabelText,
+      disabled,
       isOptionsPanelOpen,
       isTouchDevice,
       name,
@@ -25,6 +26,7 @@ export default class SingleSelect extends Component {
       <div
         className={`
           rrs__select-container
+          ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
           ${(altered) ? 'rrs__has-changed': ''}
@@ -92,6 +94,7 @@ SingleSelect.propTypes = {
     PropTypes.bool,
     PropTypes.element
   ]),
+  disabled: PropTypes.bool,
   singleSelectInitialIndex: PropTypes.number,
   singleSelectSelectedIndex: PropTypes.number,
   singleSelectSelectedOption: PropTypes.shape({

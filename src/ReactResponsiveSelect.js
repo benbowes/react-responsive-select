@@ -18,7 +18,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   componentDidMount() {
-    const { options, selectedValue, selectedValues, name, multiselect } = this.props;
+    const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
     const isTouchDevice = isTouchableDevice();
 
     this.updateState({
@@ -27,23 +27,26 @@ export default class ReactResponsiveSelect extends Component {
     });
 
     this.OPTION_NODES_LENGTH = options.length;
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleTouchMove = this.handleTouchMove.bind(this);
-    this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleKeyEvent = this.handleKeyEvent.bind(this);
-    this.listeners = (isTouchDevice)
-      ? {
-        onBlur: this.handleBlur,
-        onTouchMove: this.handleTouchMove,
-        onTouchStart: this.handleTouchStart,
-        onTouchEnd: this.handleClick
-      }
-      : {
-        onBlur: this.handleBlur,
-        onMouseDown: this.handleClick,
-        onKeyDown: this.handleKeyEvent
-      };
+
+    if (!disabled) {
+      this.handleBlur = this.handleBlur.bind(this);
+      this.handleTouchMove = this.handleTouchMove.bind(this);
+      this.handleTouchStart = this.handleTouchStart.bind(this);
+      this.handleClick = this.handleClick.bind(this);
+      this.handleKeyEvent = this.handleKeyEvent.bind(this);
+      this.listeners = (isTouchDevice)
+        ? {
+          onBlur: this.handleBlur,
+          onTouchMove: this.handleTouchMove,
+          onTouchStart: this.handleTouchStart,
+          onTouchEnd: this.handleClick
+        }
+        : {
+          onBlur: this.handleBlur,
+          onMouseDown: this.handleClick,
+          onKeyDown: this.handleKeyEvent
+        };
+    }
   }
 
   /* Broadcast change when there has been one */
@@ -80,7 +83,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   render() {
-    const { prefix, caretIcon, customLabelRenderer } = this.props;
+    const { prefix, caretIcon, customLabelRenderer, disabled } = this.props;
     const {
       altered,
       singleSelectInitialIndex,
@@ -104,6 +107,7 @@ export default class ReactResponsiveSelect extends Component {
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <MultiSelect
+            disabled={disabled}
             altered={altered}
             isTouchDevice={isTouchDevice}
             caretIcon={caretIcon}
@@ -127,6 +131,7 @@ export default class ReactResponsiveSelect extends Component {
       return (
         <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
           <SingleSelect
+            disabled={disabled}
             altered={altered}
             isTouchDevice={isTouchDevice}
             singleSelectInitialIndex={singleSelectInitialIndex}
@@ -304,6 +309,7 @@ ReactResponsiveSelect.propTypes = {
     PropTypes.element
   ]),
   customLabelRenderer: PropTypes.func,
+  disabled: PropTypes.bool,
   multiselect: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
