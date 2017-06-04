@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import jsdom from 'jsdom';
 
 import ReactResponsiveSelect from './ReactResponsiveSelect';
 import * as actionTypes from './constants/actionTypes';
@@ -37,7 +36,6 @@ const setup = ((overrideProps, customProps = undefined, state = {}) => {
 describe('ReactResponsiveSelect', () => {
 
   describe('Initialise', () => {
-
     let selectBox;
     let selectBoxInstance;
 
@@ -88,7 +86,6 @@ describe('ReactResponsiveSelect', () => {
           value: 'fiat'
         }
       };
-
       expect(selectBox.state()).to.eql( expectedState );
     });
 
@@ -98,26 +95,20 @@ describe('ReactResponsiveSelect', () => {
     });
 
     it('should setup touchmove, touchstart, touchend and blur on a touch device', () => {
-      jsdom.env({
-        html: '<html></html>',
-        done: function (error, window) {
-          window['ontouchstart'] = 'fakeEvent';
+      window['ontouchstart'] = 'fakeEvent';
 
-          const selectBoxMobile = setup();
-          const selectBoxInstanceMobile = selectBoxMobile.instance();
+      const selectBoxMobile = setup();
+      const selectBoxInstanceMobile = selectBoxMobile.instance();
 
-          const listenerKeys = Object.keys(selectBoxInstanceMobile.listeners).map(k => k);
-          expect(listenerKeys).to.eql(['onBlur', 'onTouchMove', 'onTouchStart', 'onTouchEnd']);
+      const listenerKeys = Object.keys(selectBoxInstanceMobile.listeners).map(k => k);
+      expect(listenerKeys).to.eql(['onBlur', 'onTouchMove', 'onTouchStart', 'onTouchEnd']);
 
-          window.close();
-        }
-      });
+      delete window.ontouchstart;
     });
 
   });
 
   describe('Events', () => {
-
     let selectBox;
     let selectBoxContainer;
     let selectBoxDOM;
@@ -158,7 +149,6 @@ describe('ReactResponsiveSelect', () => {
     });
 
     it('blur on rrs__select-container container should close the options panel', () => {
-
       expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
 
@@ -173,7 +163,6 @@ describe('ReactResponsiveSelect', () => {
   });
 
   describe('ReactResponsiveSelect functions', () => {
-
     let selectBox;
     let selectBoxInstance;
     let selectBoxContainer;
@@ -309,28 +298,22 @@ describe('ReactResponsiveSelect', () => {
     });
 
     it('tapping on selectBox does not close the options panel when a user is dragging - allowing a touch device user to scroll', () => {
-      jsdom.env({
-        html: '<html></html>',
-        done: function (error, window) {
-          window['ontouchstart'] = 'fakeEvent';
+      window['ontouchstart'] = 'fakeEvent';
 
-          const selectBoxMobile = setup();
-          const selectBoxMobileContainer = selectBoxMobile.find('.rrs__select-container');
+      const selectBoxMobile = setup();
+      const selectBoxMobileContainer = selectBoxMobile.find('.rrs__select-container');
 
-          selectBoxMobileContainer.simulate('touchStart');
+      selectBoxMobileContainer.simulate('touchStart');
 
-          selectBox.setState({ isDragging: true });
-          selectBoxMobileContainer.simulate('touchStart');
-          window.close();
-        }
-      });
+      selectBox.setState({ isDragging: true });
+      selectBoxMobileContainer.simulate('touchStart');
+      delete window.ontouchstart;
     });
 
   });
 
 
   describe('option list selectedValue .rrs__option--selected class', () => {
-
     let selectBox;
 
     afterEach(() => {
@@ -361,7 +344,6 @@ describe('ReactResponsiveSelect', () => {
   });
 
   describe('MultiSelect', () => {
-
     let selectBox;
 
     afterEach(() => {
@@ -409,7 +391,6 @@ describe('ReactResponsiveSelect', () => {
   });
 
   describe('customLabelRenderer', () => {
-
     let selectBox;
 
     afterEach(() => {

@@ -18,9 +18,9 @@ Install the dependency
 
 `npm install react-responsive-select --save-dev`
 
-Include the css file in your project. `./dist/ReactResponsiveSelect.css`
+Add **ReactResponsiveSelect.js**
 
-And add **ReactResponsiveSelect.js**
+And include the css file in your project. `./dist/ReactResponsiveSelect.css`
 
 Example usage:
 
@@ -28,6 +28,7 @@ Example usage:
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
+// import './node_modules/react-responsive-select/dist/ReactResponsiveSelect.css'; // To get basic styling (presuming you have an appropriate loader)
 
 class Form extends Component {
 
@@ -74,7 +75,7 @@ A more detailed usage example can be found here:
 The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Include it in your project via an import or copy/paste it's contents into your stylesheet.
 Customisations can be done via overriding the styles or rewriting the classes.
 
-Note: The class names are not configurable.
+The class names themselves are not configurable.
 
 To aid in styling the hover/selected states in the options list I would suggest overriding the class that hides the options temporarily e.g.
 
@@ -90,7 +91,7 @@ To aid in styling the hover/selected states in the options list I would suggest 
 
 ## Custom labeling
 
-As of version `0.2.0` you can hook into the onChange function via the `customLabelRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
+You can hook into the onChange function via the `customLabelRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
 
 ```
 <ReactResponsiveSelect
@@ -168,12 +169,12 @@ As of version `0.2.0` you can hook into the onChange function via the `customLab
   <tr>
     <td>multiselect (MultiSelect mode)</td>
     <td>Boolean</td>
-    <td>Makes the selectbox handle multiple selections. Check the implementation example here: https://benbowes.github.io/react-responsive-select/demo/</td>
+    <td>Makes the select control handle multiple selections. Check the implementation example here: https://benbowes.github.io/react-responsive-select/demo/</td>
   </tr>
   <tr>
     <td>selectedValues (MultiSelect mode)</td>
     <td>Array of String values</td>
-    <td>Pre-select several options with this value - should match against existing <code>option.value</code>, or if omitted the first item will be selected.
+    <td>Pre-select several options with this value - should match against an existing <code>option.value</code>, or if omitted, the first item will be selected.
     e.g. <code>selectedValues={['mazda','ford']}</code>
     </td>
   </tr>
