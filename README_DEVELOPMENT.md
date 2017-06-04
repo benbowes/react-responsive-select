@@ -6,20 +6,20 @@
 
 ##### Setup
 
-`npm i` then `npm start` then visit `http://localhost:3001/demo`
+`yarn` then `yarn start` then visit `http://localhost:3001/demo`
 
 ##### Test
 
-`npm test`
+`yarn test`
 
 ##### Coverage
 
-`npm run coverage`
+`yarn coverage`
 
 ##### Run demo
 
-`npm run demo`
+`yarn demo`
 
 ##### Deploy
 
-`npm run deploy`
+`yarn deploy`
