@@ -29,7 +29,10 @@ PACKAGE_VERSION=$(cat package.json \
 git tag $PACKAGE_VERSION
 
 # Push commited changes to master
-git push origin master
+git push origin master --tags
 
 # Push dist folder to gh-pages branch
 git push -f origin master:gh-pages
+
+# Publish to npm
+# npm publish

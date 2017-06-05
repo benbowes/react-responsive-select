@@ -29,12 +29,12 @@ const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
       const topOfElement = this.elementDOM.getBoundingClientRect().top;
       const bottomOfElement = this.elementDOM.getBoundingClientRect().bottom;
 
-      if (bottomOfElement > bottomOfScrollPane ) {
-        this.scrollPaneDOM.scrollTop += this.elementDOM.offsetHeight;
+      if (bottomOfElement > bottomOfScrollPane) {
+        this.scrollPaneDOM.scrollTop += this.elementDOM.getBoundingClientRect().height;
       }
 
-      if (topOfElement < topOfScrollPane ) {
-        this.scrollPaneDOM.scrollTop -= this.elementDOM.offsetHeight;
+      if (topOfElement < topOfScrollPane) {
+        this.scrollPaneDOM.scrollTop -= this.elementDOM.getBoundingClientRect().height;
       }
 
       // Scroll to show first option if first option selected - so as to have it in view
