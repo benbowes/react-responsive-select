@@ -2,19 +2,6 @@ import ReactDOM from 'react-dom';
 
 // Inheritence Inversion HOC https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e#5247
 const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
-
-  checkForValidity() {
-    const { scrollIntoViewElementSelector, scrollIntoViewScrollPaneRef } = this.props;
-
-    if ( !scrollIntoViewScrollPaneRef ) throw 'scrollIntoViewIIHOC requires a valid scrollIntoViewScrollPaneRef ref lookup function prop';
-    if ( !scrollIntoViewElementSelector ) throw 'crollIntoViewIIHOC requires a valid scrollIntoViewElementSelector css selector string prop';
-  }
-
-  componentDidMount() {
-    if (super.componentDidMount) super.componentDidMount();
-    this.checkForValidity();
-  }
-
   /*
   * @prop {function} scrollIntoViewScrollPaneRef - react ref lookup function
   * @prop {string} scrollIntoViewElementSelector - a class selector as used by element.querySelector()

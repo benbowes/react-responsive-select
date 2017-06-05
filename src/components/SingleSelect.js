@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import scrollIntoViewIIHOC from './lib/scrollIntoViewIIHOC';
-import MultiSelectOption from './MultiSelectOption';
-const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
+import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
+import SingleSelectOption from './SingleSelectOption';
+const SingleSelectOptionHOC = scrollIntoViewIIHOC(SingleSelectOption);
 
-export default class MultiSelect extends Component {
+export default class SingleSelect extends Component {
 
   render(){
     const {
@@ -14,23 +14,22 @@ export default class MultiSelect extends Component {
       disabled,
       isOptionsPanelOpen,
       isTouchDevice,
-      multiSelectSelectedIndexes,
-      multiSelectSelectedOptions,
       name,
-      options,
       nextPotentialSelectionIndex,
-      prefix
+      options,
+      prefix,
+      singleSelectSelectedIndex,
+      singleSelectSelectedOption
     } = this.props;
 
     return (
       <div
         className={`
           rrs__select-container
-          rrs__select-container--multiselect
           ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${altered ? 'rrs__has-changed': ''}
+          ${(altered) ? 'rrs__has-changed': ''}
         `}
         role="listbox"
         tabIndex="0"
@@ -46,14 +45,10 @@ export default class MultiSelect extends Component {
         {!customLabelText &&
         <div className="rrs__label-container">
           <span className="rrs__label">
-            <span className='rrs__multiselect__label'>
-              <span className='rrs__multiselect__label-text'>{`${prefix ? prefix + ' ' : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
-              {multiSelectSelectedOptions.options.length > 1 &&
-              <span className='rrs__multiselect__label-badge'>
-                {`+ ${multiSelectSelectedOptions.options.length-1}`}
-              </span>
-              }
-            </span>
+            {prefix &&
+              <span>{prefix}</span>
+            }
+            {singleSelectSelectedOption.text}
           </span>
           {caretIcon && caretIcon}
         </div>
@@ -65,14 +60,14 @@ export default class MultiSelect extends Component {
         >
           {options.length > 0 &&
             options.map((option, index) => (
-              <MultiSelectOptionHOC
+              <SingleSelectOptionHOC
                 scrollIntoViewScrollPaneRef={() => this.optionsContainer}
                 scrollIntoViewElementSelector={'rrs__option--next-selection'}
                 key={index}
                 index={index}
-                option={option}
                 isTouchDevice={isTouchDevice}
-                multiSelectSelectedIndexes={multiSelectSelectedIndexes}
+                option={option}
+                singleSelectSelectedIndex={singleSelectSelectedIndex}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />
             ))
@@ -80,11 +75,7 @@ export default class MultiSelect extends Component {
         </div>
 
         {name &&
-        <input
-          type="hidden"
-          name={name}
-          value={[multiSelectSelectedOptions.options.map(v => v.value)].join(',')}
-        />
+        <input type="hidden" name={name} value={singleSelectSelectedOption.value} />
         }
 
       </div>
@@ -92,7 +83,7 @@ export default class MultiSelect extends Component {
   }
 }
 
-MultiSelect.propTypes = {
+SingleSelect.propTypes = {
   altered: PropTypes.bool,
   caretIcon: PropTypes.oneOfType([
     PropTypes.string,
@@ -104,22 +95,11 @@ MultiSelect.propTypes = {
     PropTypes.element
   ]),
   disabled: PropTypes.bool,
-  multiSelectInitialSelectedIndexes: PropTypes.arrayOf(
-    PropTypes.number
-  ),
-  multiSelectSelectedIndexes: PropTypes.arrayOf(
-    PropTypes.number
-  ),
-  multiSelectSelectedOptions: PropTypes.shape({
-    altered: PropTypes.bool,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        text: PropTypes.string,
-        value: PropTypes.string,
-        markup: PropTypes.object
-      })
-    )
+  singleSelectInitialIndex: PropTypes.number,
+  singleSelectSelectedIndex: PropTypes.number,
+  singleSelectSelectedOption: PropTypes.shape({
+    text: PropTypes.string,
+    value: PropTypes.string
   }),
   isTouchDevice: PropTypes.bool,
   isOptionsPanelOpen: PropTypes.bool,
@@ -132,5 +112,6 @@ MultiSelect.propTypes = {
       value: PropTypes.string.isRequired
     })
   ).isRequired,
-  prefix: PropTypes.string
+  prefix: PropTypes.string,
+  selectedValue: PropTypes.string
 };

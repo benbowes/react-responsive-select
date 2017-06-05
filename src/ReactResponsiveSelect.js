@@ -5,8 +5,8 @@ import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducers/reducer';
 import isTouchableDevice from './lib/isTouchableDevice';
 import getNextIndex from './lib/getNextIndex';
-import SingleSelect from './SingleSelect';
-import MultiSelect from './MultiSelect';
+import SingleSelect from './components/SingleSelect';
+import MultiSelect from './components/MultiSelect';
 
 export default class ReactResponsiveSelect extends Component {
 
