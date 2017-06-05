@@ -18,6 +18,16 @@ git add .
 # Commit dist/ changes
 git commit -m "Deploy to gh-pages..."
 
+# Tag release with package.json version
+PACKAGE_VERSION=$(cat package.json \
+  | grep version \
+  | head -1 \
+  | awk -F: '{ print $2 }' \
+  | sed 's/[",]//g' \
+  | tr -d '[[:space:]]')
+
+git tag $PACKAGE_VERSION
+
 # Push commited changes to master
 git push origin master
 
