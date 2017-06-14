@@ -130,7 +130,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
   <tr>
     <td>onSubmit</td>
     <td>Function</td>
-    <td>Some function submits your form</td>
+    <td>Some function that submits your form</td>
   </tr>
   <tr>
     <td>onChange</td>
@@ -163,6 +163,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label. See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L170) or the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L297-L301)</p>
     </td>
   </tr>
   <tr>
@@ -177,7 +178,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td>Makes the select control handle multiple selections. Check the implementation example here: https://benbowes.github.io/react-responsive-select/demo/</td>
   </tr>
   <tr>
-    <td>selectedValues (MultiSelect mode)</td>
+    <td>selectedValues (when MultiSelect mode)</td>
     <td>Array of String values</td>
     <td>Pre-select several options with this value - should match against an existing <code>option.value</code>, or if omitted, the first item will be selected.
     e.g. <code>selectedValues={['mazda','ford']}</code>
