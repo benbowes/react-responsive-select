@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A React responsive select and multiselect form control",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "eslint": "eslint demo.js src/**",
     "test": "npm run eslint && mocha --compilers js:babel-register --require mocha/jsdom-setup.js 'src/**/*__test__.js'",
     "testSingle": "echo $test && mocha --compilers js:babel-register --require mocha/jsdom-setup.js src/**/*$test*__test__.js -w",
-    "coverage": "rm -rf coverage && NODE_ENV=test nyc mocha 'src/**/*__test__.js' && echo '\n\n'Coverage reoprt: $(pwd)/coverage/lcov-report/index.html'\n\n'"
+    "coverage": "rm -rf coverage && NODE_ENV=test nyc mocha 'src/**/*__test__.js' && open $(pwd)/coverage/lcov-report/index.html"
   },
   "nyc": {
     "require": [

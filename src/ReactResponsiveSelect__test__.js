@@ -388,6 +388,21 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.find('.rrs__select-container--multiselect').hasClass('rrs__has-changed')).to.equal(true);
     });
 
+    it('should allow multiple selection on click of an option and not close', () => {
+      selectBox = setup({
+        multiselect: true,
+        caretIcon: '+',
+        selectedValues: ['fiat', 'subaru']
+      });
+      const selectBoxInstance = selectBox.instance();
+      const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
+      const selectBoxContainer = selectBox.find('.rrs__select-container');
+
+      selectBoxContainer.find('[data-key=3]').simulate('mousedown');
+      expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_MULTISELECT_OPTIONS, optionIndex: 3 });
+      expect(updateStateSpy.calledOnce).to.equal(true); // does not do anything else .... like close
+    });
+
   });
 
   describe('customLabelRenderer', () => {
@@ -465,6 +480,29 @@ describe('ReactResponsiveSelect', () => {
       selectBox = setup(undefined, props);
       expect( selectBox.instance().listeners ).to.equal( undefined );
     });
+  });
+
+  describe('Scrollbar', () => {
+    let selectBox;
+
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
+    it('should ignore mousedown when user is scrolling', () => {
+      const props = {
+        name: 'make',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
+      };
+      selectBox = setup(undefined, props);
+      const selectBoxInstance = selectBox.instance();
+      const selectBoxContainer = selectBox.find('.rrs__select-container');
+      const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
+
+      selectBoxContainer.find('.rrs__options-container').simulate('mousedown');
+      expect(updateStateSpy.calledOnce).to.equal(false); // does not do anything
+    });
+
   });
 
 });
