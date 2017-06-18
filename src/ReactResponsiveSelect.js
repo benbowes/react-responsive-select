@@ -252,6 +252,9 @@ export default class ReactResponsiveSelect extends Component {
         return this.forceUpdate(() => {
           return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
         });
+
+      } else if (e && e.target.classList.contains('rrs__options-container')) {
+        return false; /* presume user is scrolling by mouse*/
       }
 
       /* Open panel if closed, close panel if open */
