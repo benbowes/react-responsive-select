@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const path = require('path');
+const DEV = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 
@@ -24,6 +26,11 @@ module.exports = {
       loader: 'babel-loader',
       exclude: path.resolve(__dirname, 'node_modules')
     }]
-  }
+  },
 
+  plugins: [
+    new webpack.DefinePlugin({ 'process.env': {
+      'NODE_ENV': JSON.stringify(DEV ? 'development' : 'production')
+    }})
+  ]
 };
