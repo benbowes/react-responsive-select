@@ -71,7 +71,7 @@
   "license": "MIT",
   "dependencies": {
     "singleline": "1.0.x"
-  }
+  },
   "devDependencies": {
     "babel-core": "6.22.x",
     "babel-eslint": "4.1.x",
