@@ -10,12 +10,8 @@ import MultiSelect from './components/MultiSelect';
 
 export default class ReactResponsiveSelect extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = initialState;
-    this.reducer = reducer;
-    return this;
-  }
+  state = initialState;
+  reducer = reducer;
 
   componentDidMount() {
     const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
@@ -64,7 +60,14 @@ export default class ReactResponsiveSelect extends Component {
       );
 
       if( shouldBroadcastChange ) {
-        return onChange({ ...multiSelectSelectedOptions, altered });
+        return onChange({
+          options: multiSelectSelectedOptions.options.map(v => ({
+            name: v.name,
+            text: v.text,
+            value: v.value
+          })),
+          altered
+        });
       }
 
     } else {
@@ -76,7 +79,12 @@ export default class ReactResponsiveSelect extends Component {
       );
 
       if( shouldBroadcastChange ) {
-        return onChange({ ...singleSelectSelectedOption,  altered });
+        return onChange({
+          name: singleSelectSelectedOption.name,
+          text: singleSelectSelectedOption.text,
+          value: singleSelectSelectedOption.value,
+          altered
+        });
       }
 
     }
