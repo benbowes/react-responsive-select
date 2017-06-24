@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import singleline from 'singleline';
 
 export default class MultiSelectOption extends Component {
 
@@ -16,11 +17,11 @@ export default class MultiSelectOption extends Component {
         role="option"
         data-key={index}
         ref={(r) => { this[`option_${index}`] = r; }}
-        className={`
+        className={singleline(`
           rrs__option
           ${(multiSelectSelectedIndexes.some(i => i === index)) ? 'rrs__option--selected' : ''}
           ${(nextPotentialSelectionIndex === index) ? 'rrs__option--next-selection' : ''}
-        `}
+        `)}
       >
         {option.markup || option.text}
       </div>

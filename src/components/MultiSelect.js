@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import singleline from 'singleline';
 import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
 import MultiSelectOption from './MultiSelectOption';
 const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
@@ -24,14 +25,14 @@ export default class MultiSelect extends Component {
 
     return (
       <div
-        className={`
+        className={singleline(`
           rrs__select-container
           rrs__select-container--multiselect
           ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
           ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
           ${altered ? 'rrs__has-changed': ''}
-        `}
+        `)}
         role="listbox"
         tabIndex="0"
       >
