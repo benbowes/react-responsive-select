@@ -59,7 +59,6 @@ describe('ReactResponsiveSelect', () => {
         isOptionsPanelOpen: false,
         singleSelectInitialIndex: 1,
         multiSelectInitialSelectedIndexes: [ 0 ],
-        isTouchDevice: false,
         isMultiSelect: false,
         nextPotentialSelectionIndex: 1,
         singleSelectSelectedIndex: 1,
@@ -89,21 +88,9 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state()).to.eql( expectedState );
     });
 
-    it('should setup mousedown, keyup and blur on desktop', () => {
+    it('should setup listeners', () => {
       const listenerKeys = Object.keys(selectBoxInstance.listeners).map(k => k);
-      expect(listenerKeys).to.eql(['onBlur', 'onMouseDown', 'onKeyDown']);
-    });
-
-    it('should setup touchmove, touchstart, touchend and blur on a touch device', () => {
-      window['ontouchstart'] = 'fakeEvent';
-
-      const selectBoxMobile = setup();
-      const selectBoxInstanceMobile = selectBoxMobile.instance();
-
-      const listenerKeys = Object.keys(selectBoxInstanceMobile.listeners).map(k => k);
-      expect(listenerKeys).to.eql(['onBlur', 'onTouchMove', 'onTouchStart', 'onTouchEnd']);
-
-      delete window.ontouchstart;
+      expect(listenerKeys).to.eql(['onTouchStart', 'onTouchMove', 'onTouchEnd', 'onBlur', 'onMouseDown', 'onKeyDown']);
     });
 
   });

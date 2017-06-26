@@ -12,7 +12,6 @@ import getInitialOption from './lib/getInitialOption';
 export const initialState = {
 
   // Constants
-  isTouchDevice: false,
   isMultiSelect: false,
 
   // Universal
@@ -55,7 +54,6 @@ export default function reducer(state, action) {
         ...state,
 
         // Constants
-        isTouchDevice: action.value.isTouchDevice,
         isMultiSelect: action.value.multiselect || false,
 
         // Universal

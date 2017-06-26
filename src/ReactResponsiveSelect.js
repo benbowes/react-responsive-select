@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import * as actionTypes from './constants/actionTypes';
 import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducers/reducer';
-import isTouchableDevice from './lib/isTouchableDevice';
 import getNextIndex from './lib/getNextIndex';
 import SingleSelect from './components/SingleSelect';
 import MultiSelect from './components/MultiSelect';
@@ -12,36 +11,33 @@ export default class ReactResponsiveSelect extends Component {
 
   state = initialState;
   reducer = reducer;
+  handleBlur = this.handleBlur.bind(this);
+  handleTouchMove = this.handleTouchMove.bind(this);
+  handleTouchStart = this.handleTouchStart.bind(this);
+  handleClick = this.handleClick.bind(this);
+  handleKeyEvent = this.handleKeyEvent.bind(this);
+
+  OPTION_NODES_LENGTH = 0;
 
   componentDidMount() {
     const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
-    const isTouchDevice = isTouchableDevice();
 
     this.updateState({
       type: actionTypes.BOOTSTRAP_STATE,
-      value: { options, selectedValue, selectedValues, name, isTouchDevice, multiselect }
+      value: { options, selectedValue, selectedValues, name, multiselect }
     });
 
     this.OPTION_NODES_LENGTH = options.length;
 
     if (!disabled) {
-      this.handleBlur = this.handleBlur.bind(this);
-      this.handleTouchMove = this.handleTouchMove.bind(this);
-      this.handleTouchStart = this.handleTouchStart.bind(this);
-      this.handleClick = this.handleClick.bind(this);
-      this.handleKeyEvent = this.handleKeyEvent.bind(this);
-      this.listeners = (isTouchDevice)
-        ? {
-          onBlur: this.handleBlur,
-          onTouchMove: this.handleTouchMove,
-          onTouchStart: this.handleTouchStart,
-          onTouchEnd: this.handleClick
-        }
-        : {
-          onBlur: this.handleBlur,
-          onMouseDown: this.handleClick,
-          onKeyDown: this.handleKeyEvent
-        };
+      this.listeners = {
+        onTouchStart: this.handleTouchStart,
+        onTouchMove: this.handleTouchMove,
+        onTouchEnd: this.handleClick,
+        onBlur: this.handleBlur,
+        onMouseDown: this.handleClick,
+        onKeyDown: this.handleKeyEvent
+      };
     }
   }
 
@@ -180,7 +176,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleKeyEvent(e) {
-    const { isMultiSelect } = this.state;
+    const { isMultiSelect, isOptionsPanelOpen } = this.state;
 
     this.preventDefaultForKeyCodes([
       keyCodes.ENTER,
@@ -192,7 +188,7 @@ export default class ReactResponsiveSelect extends Component {
 
     if ( e.keyCode === keyCodes.TAB ) {
       /* dont blur selectbox when the panel is open */
-      if (this.state.isOptionsPanelOpen && !isMultiSelect) e.preventDefault();
+      if (isOptionsPanelOpen && !isMultiSelect) e.preventDefault();
       return e;
     }
 
@@ -204,7 +200,7 @@ export default class ReactResponsiveSelect extends Component {
 
     if ( e.keyCode === keyCodes.SPACE ) {
       /* open or close the panel when focussed */
-      return (this.state.isOptionsPanelOpen)
+      return (isOptionsPanelOpen)
         ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
         : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
@@ -233,7 +229,7 @@ export default class ReactResponsiveSelect extends Component {
     const { isMultiSelect, isOptionsPanelOpen, isDragging } = this.state;
 
     /* Ignore touchend if user is dragging */
-    if(isDragging === false) {
+    if (isDragging === false) {
       e.preventDefault();
 
       /* Ensure selectBox container has focus */
@@ -284,14 +280,15 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   enterPressed(e) {
-    if(this.state.isMultiSelect) {
+    const { isMultiSelect, isOptionsPanelOpen, nextPotentialSelectionIndex } = this.state;
+    if (isMultiSelect) {
       return this.updateState({
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        optionIndex: this.state.nextPotentialSelectionIndex
+        optionIndex: nextPotentialSelectionIndex
       });
     }
 
-    if (this.state.isOptionsPanelOpen === true) {
+    if (isOptionsPanelOpen === true) {
       e.stopPropagation(); // Do not submit form
       return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
     }
@@ -307,7 +304,7 @@ export default class ReactResponsiveSelect extends Component {
     });
 
     /* Open the options panel */
-    if (this.state.isOptionsPanelOpen === false) {
+    if (isOptionsPanelOpen === false) {
       this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
   }
