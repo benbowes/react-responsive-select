@@ -14,7 +14,7 @@ export default class SingleSelect extends Component {
       customLabelText,
       disabled,
       isOptionsPanelOpen,
-      isTouchDevice,
+      isDragging,
       name,
       nextPotentialSelectionIndex,
       options,
@@ -28,7 +28,6 @@ export default class SingleSelect extends Component {
         className={singleline(`
           rrs__select-container
           ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
-          ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
           ${(altered) ? 'rrs__has-changed': ''}
         `)}
@@ -66,7 +65,7 @@ export default class SingleSelect extends Component {
                 scrollIntoViewElementSelector={'rrs__option--next-selection'}
                 key={index}
                 index={index}
-                isTouchDevice={isTouchDevice}
+                isDragging={isDragging}
                 option={option}
                 singleSelectSelectedIndex={singleSelectSelectedIndex}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
@@ -102,7 +101,7 @@ SingleSelect.propTypes = {
     text: PropTypes.string,
     value: PropTypes.string
   }),
-  isTouchDevice: PropTypes.bool,
+  isDragging: PropTypes.bool,
   isOptionsPanelOpen: PropTypes.bool,
   name: PropTypes.string,
   nextPotentialSelectionIndex: PropTypes.number,

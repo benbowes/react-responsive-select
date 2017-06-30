@@ -73,7 +73,7 @@ class Form extends Component { // eslint-disable-line
                 ]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
-                prefix="Make1:"
+                prefix="Make1: "
                 selectedValue="fiat"
                 onChange={this.reportChange}
               />
@@ -100,7 +100,7 @@ const caretIcon = (
   ]}
   onSubmit={() => { console.log("Handle form submit here") }}
   caretIcon={caretIcon}
-  prefix="Make1:"
+  prefix="Make1: "
   selectedValue="fiat"
   onChange={() => { console.log("Handle select change here") }}
 />`}
@@ -119,7 +119,7 @@ const caretIcon = (
                 options={options}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
-                prefix="Make2:"
+                prefix="Make2: "
                 selectedValue="fiat"
                 onChange={this.reportChange}
               />
@@ -148,7 +148,7 @@ const caretIcon = (
   ]}
   onSubmit={() => { console.log("Handle form submit here") }}
   caretIcon={caretIcon}
-  prefix="Make2:"
+  prefix="Make2: "
   selectedValue="fiat"
   onChange={() => { console.log("Handle select change here") }}
 />`}
@@ -229,7 +229,7 @@ const caretIcon = (
                 ]}
                 onSubmit={() => { this.form.submit(); }} // (Required) form submit function
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
-                prefix="Make4:"
+                prefix="Make4: "
                 selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
                 onChange={this.reportChange} // (Optional) listen for changes in a select
               />
