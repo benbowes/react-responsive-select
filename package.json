@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A keyboard accessible React responsive select and multiselect form control",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
