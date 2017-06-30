@@ -92,7 +92,7 @@ export default class ReactResponsiveSelect extends Component {
       altered,
       singleSelectInitialIndex,
       isOptionsPanelOpen,
-      isTouchDevice,
+      isDragging,
       multiSelectInitialSelectedIndexes,
       multiSelectSelectedIndexes,
       multiSelectSelectedOptions,
@@ -113,7 +113,7 @@ export default class ReactResponsiveSelect extends Component {
           <MultiSelect
             disabled={disabled}
             altered={altered}
-            isTouchDevice={isTouchDevice}
+            isDragging={isDragging}
             caretIcon={caretIcon}
             customLabelText={customLabelText}
             prefix={prefix}
@@ -137,7 +137,7 @@ export default class ReactResponsiveSelect extends Component {
           <SingleSelect
             disabled={disabled}
             altered={altered}
-            isTouchDevice={isTouchDevice}
+            isDragging={isDragging}
             singleSelectInitialIndex={singleSelectInitialIndex}
             caretIcon={caretIcon}
             prefix={prefix}

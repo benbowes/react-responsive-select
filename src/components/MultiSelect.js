@@ -13,8 +13,8 @@ export default class MultiSelect extends Component {
       caretIcon,
       customLabelText,
       disabled,
+      isDragging,
       isOptionsPanelOpen,
-      isTouchDevice,
       multiSelectSelectedIndexes,
       multiSelectSelectedOptions,
       name,
@@ -29,7 +29,6 @@ export default class MultiSelect extends Component {
           rrs__select-container
           rrs__select-container--multiselect
           ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
-          ${(isTouchDevice === true) ? 'rrs__is-touch' : 'rrs__is-desktop'}
           ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
           ${altered ? 'rrs__has-changed': ''}
         `)}
@@ -72,7 +71,7 @@ export default class MultiSelect extends Component {
                 key={index}
                 index={index}
                 option={option}
-                isTouchDevice={isTouchDevice}
+                isDragging={isDragging}
                 multiSelectSelectedIndexes={multiSelectSelectedIndexes}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />
@@ -122,7 +121,7 @@ MultiSelect.propTypes = {
       })
     )
   }),
-  isTouchDevice: PropTypes.bool,
+  isDragging: PropTypes.bool,
   isOptionsPanelOpen: PropTypes.bool,
   name: PropTypes.string,
   nextPotentialSelectionIndex: PropTypes.number,

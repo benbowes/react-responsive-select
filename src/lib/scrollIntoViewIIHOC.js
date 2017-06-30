@@ -14,13 +14,14 @@ const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
   */
 
   scrollIntoView() {
-    const { scrollIntoViewElementSelector, scrollIntoViewScrollPaneRef, isTouchDevice } = this.props;
+    const { scrollIntoViewElementSelector, scrollIntoViewScrollPaneRef, isDragging } = this.props;
     this.scrollPaneDOM = this.scrollPaneDOM || scrollIntoViewScrollPaneRef();
     this.elementDOM = this.elementDOM || ReactDOM.findDOMNode(this);
     const isCurrentHighlightedOption = this.elementDOM.classList.contains( scrollIntoViewElementSelector );
 
+    if (isDragging === true) this.dontScrollIntoView = true; // if dragged - kill scrollIntoView
     if (
-      !isTouchDevice &&
+      !this.dontScrollIntoView &&
       isCurrentHighlightedOption
     ) {
 
