@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import _isEqual from 'lodash.isequal';
 
 export function isAltered(newState) {
   return (!newState.isMultiSelect)
     ? newState.singleSelectSelectedIndex !== newState.singleSelectInitialIndex
-    : !_.isEqual(newState.multiSelectInitialSelectedIndexes, newState.multiSelectSelectedIndexes);
+    : !_isEqual(newState.multiSelectInitialSelectedIndexes, newState.multiSelectSelectedIndexes);
 }
 
 export default function mergeIsAlteredState(newState) {
