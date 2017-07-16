@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A keyboard accessible React responsive select and multiselect form control",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -70,7 +70,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "singleline": "1.0.x"
+    "singleline": "1.0.x",
+    "lodash.isequal": "4.5.x"
   },
   "devDependencies": {
     "babel-core": "6.25.x",
@@ -89,7 +90,6 @@
     "eslint-plugin-import": "1.0.x",
     "eslint-plugin-react": "5.0.x",
     "jsdom": "11.x",
-    "lodash.isequal": "4.5.x",
     "mocha": "3.4.x",
     "nyc": "10.1.x",
     "prop-types": "15.5.x",
