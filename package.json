@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "A keyboard accessible React responsive select and multiselect form control",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -70,8 +70,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "singleline": "1.0.x",
-    "lodash.isequal": "4.5.x"
+    "singleline": "1.0.x"
   },
   "devDependencies": {
     "babel-core": "6.25.x",
