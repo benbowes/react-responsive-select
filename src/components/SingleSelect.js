@@ -24,37 +24,58 @@ export default class SingleSelect extends Component {
     } = this.props;
 
     return (
-      <div
-        className={singleline(`
-          rrs__select-container
-          ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
-          ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${(altered) ? 'rrs__has-changed': ''}
-        `)}
-        role="listbox"
-        tabIndex="0"
-      >
-
-        {customLabelText &&
-        <div className="rrs__label-container">
-          <span className="rrs__label">{customLabelText}</span>
-          {caretIcon && caretIcon}
-        </div>
-        }
-
-        {!customLabelText &&
-        <div className="rrs__label-container">
-          <span className="rrs__label">
-            {prefix &&
-              <span>{prefix}</span>
-            }
-            {singleSelectSelectedOption.text}
-          </span>
-          {caretIcon && caretIcon}
-        </div>
-        }
-
+      <div>
         <div
+          role="button"
+          tabIndex="0"
+          aria-haspopup="true"
+          aria-expanded={`${isOptionsPanelOpen}`}
+          aria-controls={`rrs-${name}-menu`}
+          className={singleline(`
+            rrs__select-container
+            ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
+            ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
+            ${(altered) ? 'rrs__has-changed': ''}
+          `)}
+        >
+
+          {customLabelText &&
+          <div className="rrs__label-container">
+            <span
+              className="rrs__label"
+              id={`rrs-${name}-label`}
+            >
+              {customLabelText}
+            </span>
+            {caretIcon && caretIcon}
+          </div>
+          }
+
+          {!customLabelText &&
+          <div className="rrs__label-container">
+            <span
+              className="rrs__label"
+              id={`rrs-${name}-label`}
+            >
+              {prefix &&
+                <span>{prefix}</span>
+              }
+              {singleSelectSelectedOption.text}
+            </span>
+            {caretIcon && caretIcon}
+          </div>
+          }
+
+          {name &&
+          <input type="hidden" name={name} value={singleSelectSelectedOption.value} />
+          }
+
+        </div>
+
+        <ul
+          id={`rrs-${name}-menu`}
+          aria-labelledby={`rrs-${name}-label`}
+          role="menu"
           className="rrs__options-container"
           ref={(r) => { if (r) { return this.optionsContainer = r; }}}
         >
@@ -66,18 +87,14 @@ export default class SingleSelect extends Component {
                 key={index}
                 index={index}
                 isDragging={isDragging}
+                isOptionsPanelOpen={isOptionsPanelOpen}
                 option={option}
                 singleSelectSelectedIndex={singleSelectSelectedIndex}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />
             ))
           }
-        </div>
-
-        {name &&
-        <input type="hidden" name={name} value={singleSelectSelectedOption.value} />
-        }
-
+        </ul>
       </div>
     );
   }

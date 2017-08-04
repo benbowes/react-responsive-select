@@ -17,7 +17,8 @@ export default class ReactResponsiveSelect extends Component {
   handleClick = this.handleClick.bind(this);
   handleKeyEvent = this.handleKeyEvent.bind(this);
 
-  OPTION_NODES_LENGTH = 0;
+  optionNodesLength = 0;
+  listeners = {};
 
   componentDidMount() {
     const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
@@ -27,7 +28,7 @@ export default class ReactResponsiveSelect extends Component {
       value: { options, selectedValue, selectedValues, name, multiselect }
     });
 
-    this.OPTION_NODES_LENGTH = options.length;
+    this.optionNodesLength = options.length;
 
     if (!disabled) {
       this.listeners = {
@@ -109,7 +110,11 @@ export default class ReactResponsiveSelect extends Component {
       const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectSelectedOptions) || false;
 
       return (
-        <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
+        <div
+          className="rrs__select"
+          ref={(r) => { this.selectBox = r; }}
+          {...this.listeners}
+        >
           <MultiSelect
             disabled={disabled}
             altered={altered}
@@ -133,7 +138,11 @@ export default class ReactResponsiveSelect extends Component {
       const customLabelText = customLabelRenderer && customLabelRenderer(singleSelectSelectedOption) || false;
 
       return (
-        <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
+        <div
+          className="rrs__select"
+          ref={(r) => { this.selectBox = r; }}
+          {...this.listeners}
+        >
           <SingleSelect
             disabled={disabled}
             altered={altered}
@@ -154,9 +163,26 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
+  debugReportChange( nextState ) {
+    let cache = [];
+    const stateObj = JSON.stringify(nextState, function(key, value) {
+      if (typeof value === 'object' && value !== null) {
+        if (cache.indexOf(value) !== -1 || (key === 'markup')) return; // Circular reference found, discard key
+        cache.push(value);
+      }
+      return value;
+    }, 2);
+    cache = null;
+    console.log(`${this.props.name}:`, JSON.parse(stateObj));
+  }
+
   updateState(action) {
+    /* Update state in a similar way to Redux - hat tip https://twitter.com/mehdimollaverdi */
     const nextState = this.reducer(this.state, action);
     this.setState( nextState );
+
+    /* Debug in console whilst developing */
+    if ( process.env.NODE_ENV === 'development') this.debugReportChange( nextState );
   }
 
   handleTouchStart() {
@@ -200,14 +226,17 @@ export default class ReactResponsiveSelect extends Component {
 
     if ( e.keyCode === keyCodes.SPACE ) {
       /* open or close the panel when focussed */
-      return (isOptionsPanelOpen)
-        ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
-        : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
+      if (isOptionsPanelOpen) {
+        this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+        return this.focusButton();
+      }
+      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
 
-    if ( e.keyCode === keyCodes.ESC ) {
+    if ( e.keyCode === keyCodes.ESCAPE ) {
       /* remove focus from the panel when focussed */
-      return this.selectBox.firstChild.blur();
+      this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
+      return this.focusButton();
     }
 
     if ( e.keyCode === keyCodes.UP ) {
@@ -254,7 +283,8 @@ export default class ReactResponsiveSelect extends Component {
         }
         /* Close on selection for single select */
         return this.forceUpdate(() => {
-          return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+          this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+          return this.focusButton();
         });
 
       } else if (e && e.target.classList.contains('rrs__options-container')) {
@@ -262,14 +292,18 @@ export default class ReactResponsiveSelect extends Component {
       }
 
       /* Open panel if closed, close panel if open */
-      return (isOptionsPanelOpen)
-        ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
-        : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
+      if (isOptionsPanelOpen) {
+        this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+        return this.focusButton();
+      }
+      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
   }
 
-  handleBlur() {
-    this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
+  handleBlur(e) {
+    if (e.target.role === 'button') {
+      this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
+    }
   }
 
   /* Disable native functionality if keyCode match */
@@ -290,7 +324,8 @@ export default class ReactResponsiveSelect extends Component {
 
     if (isOptionsPanelOpen === true) {
       e.stopPropagation(); // Do not submit form
-      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+      this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+      return this.focusButton();
     }
     return this.props.onSubmit(); // Submit the form
   }
@@ -300,13 +335,17 @@ export default class ReactResponsiveSelect extends Component {
 
     this.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX,
-      optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.OPTION_NODES_LENGTH)
+      optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.optionNodesLength)
     });
 
     /* Open the options panel */
     if (isOptionsPanelOpen === false) {
       this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
+  }
+
+  focusButton() {
+    this.selectBox.querySelector('.rrs__select-container').focus();
   }
 
 }

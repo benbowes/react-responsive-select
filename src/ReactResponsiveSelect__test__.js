@@ -98,11 +98,13 @@ describe('ReactResponsiveSelect', () => {
   describe('Events', () => {
     let selectBox;
     let selectBoxContainer;
+    let optionsContainer;
     let selectBoxDOM;
 
     beforeEach(() => {
       selectBox = setup();
       selectBoxContainer = selectBox.find('.rrs__select-container');
+      optionsContainer = selectBox.find('.rrs__options-container');
       selectBoxDOM = selectBoxContainer.getDOMNode();
     });
 
@@ -130,7 +132,7 @@ describe('ReactResponsiveSelect', () => {
     it('mousedown on option should update state with correct option index', () => {
       const selectBoxInstance = selectBox.instance();
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-      selectBoxContainer.find('[data-key=3]').simulate('mousedown');
+      optionsContainer.find('[data-key=3]').simulate('mousedown');
       expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_SELECTED_INDEX, optionIndex: 3 });
       selectBoxInstance.updateState.restore();
     });
@@ -240,10 +242,10 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( true );
 
       // ensure its focussed
-      expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(true);
+      expect(document.activeElement.classList.contains('rrs__option--selected')).to.equal(true);
 
-      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESC });
-      expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(false);
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
+      expect(document.activeElement.classList.contains('rrs__option--selected')).to.equal(false);
     });
 
     it('handleKeyEvent() - keyDown "UP" calls enterPressed("decrement")', () => {
@@ -465,7 +467,7 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect( selectBox.instance().listeners ).to.equal( undefined );
+      expect( selectBox.instance().listeners ).to.eql({});
     });
   });
 
@@ -483,10 +485,10 @@ describe('ReactResponsiveSelect', () => {
       };
       selectBox = setup(undefined, props);
       const selectBoxInstance = selectBox.instance();
-      const selectBoxContainer = selectBox.find('.rrs__select-container');
+      const optionsContainer = selectBox.find('.rrs__options-container');
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
 
-      selectBoxContainer.find('.rrs__options-container').simulate('mousedown');
+      optionsContainer.find('.rrs__options-container').simulate('mousedown');
       expect(updateStateSpy.calledOnce).to.equal(false); // does not do anything
     });
 

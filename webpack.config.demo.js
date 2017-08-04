@@ -8,7 +8,7 @@ module.exports = {
     inline: true
   },
 
-  devtool: 'eval',
+  devtool: 'source-map',
 
   entry: {
     index: './demo.js'
