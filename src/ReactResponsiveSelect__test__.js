@@ -385,9 +385,9 @@ describe('ReactResponsiveSelect', () => {
       });
       const selectBoxInstance = selectBox.instance();
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-      const selectBoxContainer = selectBox.find('.rrs__select-container');
+      const optionsContainer = selectBox.find('.rrs__options-container');
 
-      selectBoxContainer.find('[data-key=3]').simulate('mousedown');
+      optionsContainer.find('[data-key=3]').simulate('mousedown');
       expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_MULTISELECT_OPTIONS, optionIndex: 3 });
       expect(updateStateSpy.calledOnce).to.equal(true); // does not do anything else .... like close
     });

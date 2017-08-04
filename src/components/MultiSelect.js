@@ -24,42 +24,72 @@ export default class MultiSelect extends Component {
     } = this.props;
 
     return (
-      <div
-        className={singleline(`
-          rrs__select-container
-          rrs__select-container--multiselect
-          ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
-          ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-          ${altered ? 'rrs__has-changed': ''}
-        `)}
-        role="listbox"
-        tabIndex="0"
-      >
-
-        {customLabelText &&
-        <div className="rrs__label-container">
-          <span className="rrs__label">{customLabelText}</span>
-          {caretIcon && caretIcon}
-        </div>
-        }
-
-        {!customLabelText &&
-        <div className="rrs__label-container">
-          <span className="rrs__label">
-            <span className='rrs__multiselect__label'>
-              <span className='rrs__multiselect__label-text'>{`${prefix ? prefix + ' ' : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
-              {multiSelectSelectedOptions.options.length > 1 &&
-              <span className='rrs__multiselect__label-badge'>
-                {`+ ${multiSelectSelectedOptions.options.length-1}`}
-              </span>
-              }
-            </span>
-          </span>
-          {caretIcon && caretIcon}
-        </div>
-        }
-
+      <div>
         <div
+          role="button"
+          tabIndex="0"
+          aria-haspopup="true"
+          aria-expanded={`${isOptionsPanelOpen}`}
+          aria-controls={`rrs-${name}-menu`}
+          className={singleline(`
+            rrs__select-container
+            rrs__select-container--multiselect
+            ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
+            ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
+            ${altered ? 'rrs__has-changed': ''}
+          `)}
+        >
+
+          {customLabelText &&
+          <div className="rrs__label-container">
+            <span
+              aria-label={`${prefix ? prefix + ' ' : ''}${[multiSelectSelectedOptions.options.map(v => v.value)].join(' ,')} selected`}
+              className="rrs__label"
+              id={`rrs-${name}-label`}
+            >
+              {customLabelText}
+            </span>
+            {caretIcon && caretIcon}
+          </div>
+          }
+
+          {!customLabelText &&
+          <div className="rrs__label-container">
+            <span
+              aria-label={`${prefix ? prefix + ' ' : ''}${[multiSelectSelectedOptions.options.map(v => v.value)].join(' ,')} selected`}
+              className="rrs__label"
+              id={`rrs-${name}-label`}
+            >
+              <span className='rrs__multiselect__label'>
+                <span className='rrs__multiselect__label-text'>{`${prefix ? prefix + ' ' : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
+                {multiSelectSelectedOptions.options.length > 1 &&
+                <span className='rrs__multiselect__label-badge'>
+                  {`+ ${multiSelectSelectedOptions.options.length-1}`}
+                </span>
+                }
+              </span>
+            </span>
+            {caretIcon && caretIcon}
+          </div>
+          }
+
+          {name &&
+          <input
+            type="hidden"
+            name={name}
+            value={[multiSelectSelectedOptions.options.map(v => v.value)].join(',')}
+          />
+          }
+
+        </div>
+
+        <ul
+          id={`rrs-${name}-menu`}
+          aria-labelledby={`rrs-${name}-label`}
+          // aria-relevant="additions removals"
+          // aria-live="polite"
+          // aria-atomic="true"
+          role="menu"
           className="rrs__options-container"
           ref={(r) => { if (r) { return this.optionsContainer = r; }}}
         >
@@ -72,21 +102,13 @@ export default class MultiSelect extends Component {
                 index={index}
                 option={option}
                 isDragging={isDragging}
+                isOptionsPanelOpen={isOptionsPanelOpen}
                 multiSelectSelectedIndexes={multiSelectSelectedIndexes}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />
             ))
           }
-        </div>
-
-        {name &&
-        <input
-          type="hidden"
-          name={name}
-          value={[multiSelectSelectedOptions.options.map(v => v.value)].join(',')}
-        />
-        }
-
+        </ul>
       </div>
     );
   }

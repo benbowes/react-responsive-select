@@ -42,6 +42,7 @@ export default class SingleSelect extends Component {
           {customLabelText &&
           <div className="rrs__label-container">
             <span
+              aria-label={`${prefix ? prefix + ' ' : ''}${singleSelectSelectedOption.text} selected`}
               className="rrs__label"
               id={`rrs-${name}-label`}
             >
@@ -54,6 +55,7 @@ export default class SingleSelect extends Component {
           {!customLabelText &&
           <div className="rrs__label-container">
             <span
+              aria-label={`${prefix ? prefix + ' ' : ''}${singleSelectSelectedOption.text} selected`}
               className="rrs__label"
               id={`rrs-${name}-label`}
             >
