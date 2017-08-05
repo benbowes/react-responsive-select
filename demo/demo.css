@@ -39,11 +39,6 @@ h2 {
   display: block;
 }
 
-h3 {
-  font-weight: 400;
-  margin: 0 0 0.5rem 0;
-}
-
 h4 {
   margin: 0 0 0.5rem;
 }
@@ -55,12 +50,6 @@ ul {
 
 li {
   margin: 0 0 4px 0;
-}
-
-hr {
-  margin: 4rem 0;
-  border: 0;
-  border-top: 1px solid #15394b;
 }
 
 .subh1p {
@@ -232,7 +221,27 @@ hr {
 
 .row {
   display: block;
-  margin-right: -8px;
+}
+
+.row--hero {
+  display: block;
+  margin: 0 0 4rem 0;
+}
+
+.row--hero > * {
+  flex: 1;
+  margin: 0 0 1rem 0;
+}
+
+@media only screen and (min-width: 900px) {
+  .row--hero {
+    display: flex;
+  }
+
+  .row--hero > * {
+    flex: 1;
+    margin: 0 0 4rem 0;
+  }
 }
 
 .row:after {

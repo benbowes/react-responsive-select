@@ -1,7 +1,7 @@
 {
   "name": "react-responsive-select",
-  "version": "1.5.3",
-  "description": "A keyboard accessible React responsive select and multiselect form control",
+  "version": "2.0.0",
+  "description": "An accessible React responsive select and multiselect form control",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
     "start": "npm run start:dev",
@@ -21,6 +21,7 @@
       "./mocha/jsdom-setup.js"
     ],
     "exclude": [
+      "src/lib/debugReportChange.js",
       "src/**/*__test__.js",
       "test"
     ],

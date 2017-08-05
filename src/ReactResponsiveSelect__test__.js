@@ -138,13 +138,15 @@ describe('ReactResponsiveSelect', () => {
     });
 
     it('blur on rrs__select-container container should close the options panel', () => {
-      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
-      expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
-
       selectBoxDOM.focus();
 
-      // Close
-      selectBoxContainer.simulate('blur');
+      selectBoxContainer.simulate('mouseDown');
+
+      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(true);
+      expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
+
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
+
       expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
     });

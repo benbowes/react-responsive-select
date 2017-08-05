@@ -6,6 +6,7 @@ import reducer, { initialState } from './reducers/reducer';
 import getNextIndex from './lib/getNextIndex';
 import SingleSelect from './components/SingleSelect';
 import MultiSelect from './components/MultiSelect';
+import debugReportChange from './lib/debugReportChange';
 
 export default class ReactResponsiveSelect extends Component {
 
@@ -163,26 +164,19 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
-  debugReportChange( nextState ) {
-    let cache = [];
-    const stateObj = JSON.stringify(nextState, function(key, value) {
-      if (typeof value === 'object' && value !== null) {
-        if (cache.indexOf(value) !== -1 || (key === 'markup')) return; // Circular reference found, discard key
-        cache.push(value);
-      }
-      return value;
-    }, 2);
-    cache = null;
-    console.log(`${this.props.name}:`, JSON.parse(stateObj));
-  }
-
   updateState(action) {
     /* Update state in a similar way to Redux - hat tip https://twitter.com/mehdimollaverdi */
     const nextState = this.reducer(this.state, action);
     this.setState( nextState );
 
-    /* Debug in console whilst developing */
-    if ( process.env.NODE_ENV === 'development') this.debugReportChange( nextState );
+    /* Debug in console whilst developing - add ?debug=true */
+    if (
+      process.env.NODE_ENV === 'development' &&
+      typeof window !== 'undefined' &&
+      window.location.search.indexOf('debug=true') > -1
+    ) {
+      debugReportChange( this.props.name, action, nextState );
+    }
   }
 
   handleTouchStart() {
@@ -300,9 +294,14 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
-  handleBlur(e) {
-    if (e.target.role === 'button') {
-      this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
+  handleBlur() {
+    const { isOptionsPanelOpen } = this.state;
+
+    /* Handle click outside of selectbox */
+    if ( this.selectBox && !this.selectBox.contains(document.activeElement) && isOptionsPanelOpen ) {
+      this.forceUpdate(() => {
+        return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR });
+      });
     }
   }
 

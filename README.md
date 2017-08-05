@@ -14,9 +14,9 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ## Getting started
 
-Install the dependency
+Install the dependency - https://www.npmjs.com/package/react-responsive-select
 
-`npm install react-responsive-select --save-dev`
+`npm install react-responsive-select -D` or `yarn add -D react-responsive-select`
 
 Add **ReactResponsiveSelect.js**
 
@@ -80,7 +80,7 @@ The class names themselves are not configurable.
 To aid in styling the hover/selected states in the options list I would suggest overriding the class that hides the options temporarily e.g.
 
 ```
-.rrs__select-container > .rrs__options-container {
+.rrs__select-container + .rrs__options-container {
   /* height: 0;
   visibility: hidden; */
   height: auto;
@@ -106,6 +106,8 @@ You can hook into the onChange function via the `customLabelRenderer` function p
 ---
 
 ## API
+
+The external API has not changed with version 2, but the DOM structure and CSS has (hence the major version). Version 1 docs can be found here: https://github.com/benbowes/react-responsive-select/tree/1.5.3.
 
 <table width="100%">
   <tr>
@@ -163,7 +165,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
-    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label. See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L170) or the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L297-L301)</p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label. See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L97) or the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L388)</p>
     </td>
   </tr>
   <tr>

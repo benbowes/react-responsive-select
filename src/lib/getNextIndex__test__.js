@@ -27,7 +27,7 @@ describe('getNextIndex', () => {
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(3);
   });
 
-  it('should return current singleSelectSelectedIndex when options panel is open, mode is "increment" and singleSelectSelectedIndex equals optionNodesLength - 1', () => {
+  it('should return first singleSelectSelectedIndex when options panel is open, mode is "increment" and singleSelectSelectedIndex equals optionNodesLength - 1', () => {
     const ARGS = {
       mode: 'increment',
       isOptionsPanelOpen: true,
@@ -35,7 +35,7 @@ describe('getNextIndex', () => {
       optionNodesLength: 4 // non zero based
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(3);
+    expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(0);
   });
 
   it('should return current singleSelectSelectedIndex +1 when options panel is open, mode is "increment" and singleSelectSelectedIndex is less than optionNodesLength - 1', () => {
@@ -62,7 +62,7 @@ describe('getNextIndex', () => {
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(2);
   });
 
-  it('should return current singleSelectSelectedIndex when options panel is open, mode is "decrement" and singleSelectSelectedIndex equals 0', () => {
+  it('should return last singleSelectSelectedIndex when options panel is open, mode is "decrement" and singleSelectSelectedIndex equals 0', () => {
     const ARGS = {
       mode: 'decrement',
       isOptionsPanelOpen: true,
@@ -70,18 +70,7 @@ describe('getNextIndex', () => {
       optionNodesLength: 4
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(0);
-  });
-
-  it('should return current singleSelectSelectedIndex when options panel is open, mode is "decrement" and singleSelectSelectedIndex equals 0', () => {
-    const ARGS = {
-      mode: 'decrement',
-      isOptionsPanelOpen: true,
-      singleSelectSelectedIndex: 0, // zero base
-      optionNodesLength: 4 // non zero based
-    };
-
-    expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(0);
+    expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(3);
   });
 
   it('should return current singleSelectSelectedIndex +1 when options panel is open, mode is "decrement" and singleSelectSelectedIndex is greater than 0', () => {

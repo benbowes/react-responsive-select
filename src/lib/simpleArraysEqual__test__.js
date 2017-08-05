@@ -3,6 +3,13 @@ import simpleArraysEqual from './simpleArraysEqual';
 
 describe('simpleArraysEqual', () => {
 
+  it('should determine whether 2 empty arrays equal', () => {
+    const arrayA = [];
+    const arrayB = [];
+
+    expect(simpleArraysEqual(arrayA, arrayB)).to.equal(true);
+  });
+
   it('should determine whether an array of numbers has changed', () => {
     const arrayA = [1,2,3];
     const arrayB = [1,2];

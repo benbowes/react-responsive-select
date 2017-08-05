@@ -114,6 +114,7 @@ export default function reducer(state, action) {
     }
 
     case actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION:
+    case actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR:
       return {
         ...state,
         isOptionsPanelOpen: false
