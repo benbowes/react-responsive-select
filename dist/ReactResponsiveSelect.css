@@ -3,6 +3,9 @@
   React Responsive Select - Default styles
 
 */
+.rrs__select {
+  position: relative;
+}
 
 .rrs__select-container {
   color: #555;
@@ -26,7 +29,9 @@
   outline: 0;
 }
 
-.rrs__select-container > .rrs__options-container {
+.rrs__select-container + .rrs__options-container {
+  list-style: none;
+  padding: 0;
   background: #fff;
   position: absolute;
   z-index: 2;
@@ -41,7 +46,7 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-.rrs__options-container--visible > .rrs__options-container {
+.rrs__options-container--visible + .rrs__options-container {
   height: auto;
   visibility: visible;
   overflow: auto;
@@ -50,7 +55,9 @@
 }
 
 .rrs__option {
-  padding: 0 1rem;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  margin: 0;
   border-top: #eee 1px solid;
 }
 
@@ -60,6 +67,10 @@
 
 .rrs__option:first-of-type {
   border-top: 0;
+}
+
+.rrs__option:focus {
+  outline: 0;
 }
 
 .rrs__is-desktop .rrs__option:hover {
@@ -77,22 +88,24 @@
   color: #03a9f4;
 }
 
+.rrs__option.rrs__option--selected {
+  color: #03a9f4;
+}
+
 .rrs__label-container {
   padding: 0 2rem 0 1rem;
-  border: 1px solid #f1f1f1;
+  border: 1px solid transparent;
   display: inline-flex;
   width: 100%;
   max-width: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.rrs__select-container.rrs__options-container--visible .rrs__label-container,
 .rrs__select-container:focus .rrs__label-container {
+  border-bottom: 1px solid #fff;
   outline: 0;
   border: 1px solid #999;
-}
-
-.rrs__select-container.rrs__options-container--visible:focus .rrs__label-container {
-  border-bottom: 1px solid #fff;
 }
 
 .rrs__label {

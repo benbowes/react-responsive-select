@@ -53,6 +53,79 @@ class Form extends Component { // eslint-disable-line
   render() {
     return (
       <form ref={r => this.form = r}>
+        <div className="row row--hero">
+          <div>
+            <div className="label">Single-select basic</div>
+            <ReactResponsiveSelect
+              name="carType1"
+              options={[
+                { value: 'null', text: 'Any' },
+                { value: 'fiat', text: 'Fiat' },
+                { value: 'subaru', text: 'Subaru' },
+                { value: 'bmw', text: 'BMW' },
+                { value: 'tesla', text: 'Tesla' },
+                { value: 'fiat', text: 'Fiat' },
+                { value: 'subaru', text: 'Subaru' },
+                { value: 'bmw', text: 'BMW' },
+                { value: 'tesla', text: 'Tesla' }
+              ]}
+              onSubmit={() => { this.form.submit(); }}
+              caretIcon={caretIcon}
+              prefix="Car1: "
+              selectedValue="subaru"
+              onChange={this.reportChange}
+            />
+          </div>
+          <div>
+            <div className="label">Single-select custom options</div>
+            <ReactResponsiveSelect
+              name="carType2"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
+              caretIcon={caretIcon}
+              prefix="Car2: "
+              selectedValue="tesla"
+              onChange={this.reportChange}
+            />
+          </div>
+          <div>
+            <div className="label">Single-select custom label</div>
+            <ReactResponsiveSelect
+              name="carType3"
+              options={options}
+              onSubmit={() => { this.form.submit(); }}
+              customLabelRenderer={singleSelectSelectedOption => `You selected ${singleSelectSelectedOption.text}`}
+              caretIcon={caretIcon}
+              prefix="Car3: "
+              selectedValue="bmw"
+              onChange={this.reportChange}
+            />
+          </div>
+          <div>
+            <div className="label">Multi-select</div>
+            <ReactResponsiveSelect
+              multiselect
+              name="carType4"
+              options={[ // (Required) an array of options - see above const options
+                { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+                { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
+                { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+                { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
+                { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
+                { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
+                { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
+              ]}
+              onSubmit={() => { this.form.submit(); }}
+              caretIcon={caretIcon}
+              prefix="Car4: "
+              onChange={this.reportChange}
+            />
+          </div>
+        </div>
         <div className="row">
           <h2>Basic implementation</h2>
 
@@ -129,7 +202,13 @@ const caretIcon = (
           </div>
 
 <code className="code-block">
-<pre>{`<ReactResponsiveSelect
+<pre>{`const caretIcon = (
+  <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"/></g>
+  </svg>
+);
+
+<ReactResponsiveSelect
   name="make2"
   options={[
       value: 'null',
@@ -177,7 +256,13 @@ const caretIcon = (
           </div>
 
 <code className="code-block">
-<pre>{`<ReactResponsiveSelect
+<pre>{`const caretIcon = (
+  <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"/></g>
+  </svg>
+);
+
+<ReactResponsiveSelect
   name="make3"
   customLabelRenderer={selectedOption => { console.log(selectedOption); }} // return a string to format your own label text
   options={[
@@ -251,6 +336,12 @@ const caretIcon = (
   </div>
 );
 
+const caretIcon = (
+  <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"/></g>
+  </svg>
+);
+
 <ReactResponsiveSelect
   multiselect
   name="make4"
@@ -318,6 +409,12 @@ const caretIcon = (
     </span>
     <span> {text}</span>
   </div>
+);
+
+const caretIcon = (
+  <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"/></g>
+  </svg>
 );
 
 <ReactResponsiveSelect

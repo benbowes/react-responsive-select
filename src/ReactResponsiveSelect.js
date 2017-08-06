@@ -6,6 +6,7 @@ import reducer, { initialState } from './reducers/reducer';
 import getNextIndex from './lib/getNextIndex';
 import SingleSelect from './components/SingleSelect';
 import MultiSelect from './components/MultiSelect';
+import debugReportChange from './lib/debugReportChange';
 
 export default class ReactResponsiveSelect extends Component {
 
@@ -17,17 +18,18 @@ export default class ReactResponsiveSelect extends Component {
   handleClick = this.handleClick.bind(this);
   handleKeyEvent = this.handleKeyEvent.bind(this);
 
-  OPTION_NODES_LENGTH = 0;
+  optionNodesLength = 0;
+  listeners = {};
 
   componentDidMount() {
     const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
 
     this.updateState({
-      type: actionTypes.BOOTSTRAP_STATE,
+      type: actionTypes.INITIALISE,
       value: { options, selectedValue, selectedValues, name, multiselect }
     });
 
-    this.OPTION_NODES_LENGTH = options.length;
+    this.optionNodesLength = options.length;
 
     if (!disabled) {
       this.listeners = {
@@ -47,7 +49,6 @@ export default class ReactResponsiveSelect extends Component {
     const { onChange } = this.props;
 
     if (isMultiSelect) {
-
       const { options: prevOptions } = prevState.multiSelectSelectedOptions;
       const { options: currOptions } = multiSelectSelectedOptions;
       const shouldBroadcastChange = (
@@ -67,12 +68,9 @@ export default class ReactResponsiveSelect extends Component {
       }
 
     } else {
-
       const { value: prevValue } = prevState.singleSelectSelectedOption;
       const { value: currValue } = singleSelectSelectedOption;
-      const shouldBroadcastChange = (
-        prevValue && prevValue !== currValue
-      );
+      const shouldBroadcastChange = ( prevValue && prevValue !== currValue  );
 
       if( shouldBroadcastChange ) {
         return onChange({
@@ -82,7 +80,6 @@ export default class ReactResponsiveSelect extends Component {
           altered
         });
       }
-
     }
   }
 
@@ -105,11 +102,13 @@ export default class ReactResponsiveSelect extends Component {
     } = this.state;
 
     if (isMultiSelect) {
-
       const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectSelectedOptions) || false;
-
       return (
-        <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
+        <div
+          className="rrs__select"
+          ref={(r) => { this.selectBox = r; }}
+          {...this.listeners}
+        >
           <MultiSelect
             disabled={disabled}
             altered={altered}
@@ -127,13 +126,14 @@ export default class ReactResponsiveSelect extends Component {
           />
         </div>
       );
-
     } else {
-
       const customLabelText = customLabelRenderer && customLabelRenderer(singleSelectSelectedOption) || false;
-
       return (
-        <div ref={(r) => { this.selectBox = r; }} {...this.listeners}>
+        <div
+          className="rrs__select"
+          ref={(r) => { this.selectBox = r; }}
+          {...this.listeners}
+        >
           <SingleSelect
             disabled={disabled}
             altered={altered}
@@ -155,24 +155,22 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   updateState(action) {
+    /* Update state in a similar way to Redux - thanks to https://twitter.com/mehdimollaverdi */
     const nextState = this.reducer(this.state, action);
     this.setState( nextState );
+
+    /* To debug actions plus their resulting state whilst developing, add ?debug=true */
+    debugReportChange( this.props.name, action, nextState );
   }
 
   handleTouchStart() {
     /* initially it's assumed that the user is not dragging */
-    this.updateState({
-      type: actionTypes.SET_IS_DRAGGING,
-      boolean: false
-    });
+    this.updateState({ type: actionTypes.SET_IS_DRAGGING, boolean: false });
   }
 
   handleTouchMove() {
     /* if touchmove fired - User is dragging, this disables touchend/click */
-    this.updateState({
-      type: actionTypes.SET_IS_DRAGGING,
-      boolean: true
-    });
+    this.updateState({ type: actionTypes.SET_IS_DRAGGING, boolean: true });
   }
 
   handleKeyEvent(e) {
@@ -186,90 +184,92 @@ export default class ReactResponsiveSelect extends Component {
       keyCodes.DOWN
     ], e);
 
-    if ( e.keyCode === keyCodes.TAB ) {
-      /* dont blur selectbox when the panel is open */
-      if (isOptionsPanelOpen && !isMultiSelect) e.preventDefault();
-      return e;
-    }
+    switch ( e.keyCode ) {
 
-    if ( e.keyCode === keyCodes.ENTER ) {
-      /* can close the panel when open and focussed
-       * can submit the form when closed and focussed */
-      return this.enterPressed(e);
-    }
+      case keyCodes.TAB:
+        /* Don't shift focus when the panel is open (unless it's a Multiselect) */
+        if (isOptionsPanelOpen) {
+          e.preventDefault();
 
-    if ( e.keyCode === keyCodes.SPACE ) {
-      /* open or close the panel when focussed */
-      return (isOptionsPanelOpen)
-        ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
-        : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
-    }
+          /* Multiselect does not close on selection. Focus button to blur and close options panel on TAB */
+          if (isMultiSelect) {
+            this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+            this.focusButton();
+          }
+        }
+        return e;
 
-    if ( e.keyCode === keyCodes.ESC ) {
-      /* remove focus from the panel when focussed */
-      return this.selectBox.firstChild.blur();
-    }
+      case keyCodes.ENTER:
+        /* can close the panel when open and focussed
+         * can submit the form when closed and focussed */
+        return this.enterPressed(e);
 
-    if ( e.keyCode === keyCodes.UP ) {
-      /* will open the options panel if closed
-       * will not decrement selection if options panel closed
-       * if panel open, will decrement up the options list */
-      return this.keyUpOrDownPressed('decrement');
-    }
+      case keyCodes.SPACE:
+        /* open or close the panel when focussed */
+        if (isOptionsPanelOpen) {
+          return this.handleClick(e);
+        }
+        return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
 
-    if ( e.keyCode === keyCodes.DOWN ) {
-      /* will open the options panel if closed
-       * will not increment selection if options panel closed
-       * if panel open, will increment down the options list */
-      return this.keyUpOrDownPressed('increment');
+      case keyCodes.ESCAPE:
+        /* remove focus from the panel when focussed */
+        this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
+        return this.focusButton();
+
+      case keyCodes.UP:
+        /* will open the options panel if closed
+         * will not decrement selection if options panel closed
+         * if panel open, will decrement up the options list */
+        return this.keyUpOrDownPressed('decrement');
+
+      case keyCodes.DOWN:
+        /* will open the options panel if closed
+         * will not increment selection if options panel closed
+         * if panel open, will increment down the options list */
+        return this.keyUpOrDownPressed('increment');
+
     }
   }
 
   handleClick(e) {
+    if (isDragging === true) return; /* Ignore touchend if user is dragging */
+
+    /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
+    e.preventDefault();
+
     const { isMultiSelect, isOptionsPanelOpen, isDragging } = this.state;
+    const userSelectedOption = e.target.classList.contains('rrs__option');
 
-    /* Ignore touchend if user is dragging */
-    if (isDragging === false) {
-      e.preventDefault();
-
-      /* Ensure selectBox container has focus */
-      this.selectBox.firstChild.focus();
-
-      /* Select option index, if an index was clicked/touchend'd */
-      if (e && e.target.classList.contains('rrs__option')) {
-
-        if(isMultiSelect) {
-          const optionIndex = parseFloat(e.target.getAttribute('data-key'));
-          /* Dont close on selection for multi select */
-          return this.updateState({
-            type: actionTypes.SET_MULTISELECT_OPTIONS,
-            optionIndex
-          });
-
-        } else {
-          this.updateState({
-            type: actionTypes.SET_SELECTED_INDEX,
-            optionIndex: parseFloat(e.target.getAttribute('data-key'))
-          });
-        }
-        /* Close on selection for single select */
-        return this.forceUpdate(() => {
-          return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
-        });
-
-      } else if (e && e.target.classList.contains('rrs__options-container')) {
-        return false; /* presume user is scrolling by mouse*/
-      }
-
-      /* Open panel if closed, close panel if open */
-      return (isOptionsPanelOpen)
-        ? this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED })
-        : this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
+    /* Select option index, if an index was clicked */
+    if (userSelectedOption) {
+      return this.updateState({
+        type: isMultiSelect
+          ? actionTypes.SET_MULTISELECT_OPTIONS
+          : actionTypes.SET_SINGLESELECT_OPTIONS,
+        optionIndex: parseFloat(e.target.getAttribute('data-key'))
+      });
     }
+
+    /* Else user clicked close or open the options panel */
+    this.updateState({
+      type: isOptionsPanelOpen
+        ? actionTypes.SET_OPTIONS_PANEL_CLOSED
+        : actionTypes.SET_OPTIONS_PANEL_OPEN
+    });
+    return this.focusButton();
   }
 
-  handleBlur() {
-    this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
+  handleBlur(e) {
+    const { isOptionsPanelOpen } = this.state;
+
+    /* Handle click outside of selectbox */
+    if (
+      this.selectBox
+      && !this.selectBox.contains(e.relatedTarget)
+      && isOptionsPanelOpen
+    ) {
+      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR });
+    }
   }
 
   /* Disable native functionality if keyCode match */
@@ -281,18 +281,22 @@ export default class ReactResponsiveSelect extends Component {
 
   enterPressed(e) {
     const { isMultiSelect, isOptionsPanelOpen, nextPotentialSelectionIndex } = this.state;
+
     if (isMultiSelect) {
-      return this.updateState({
+      this.updateState({
         type: actionTypes.SET_MULTISELECT_OPTIONS,
+        optionIndex: nextPotentialSelectionIndex
+      });
+    } else {
+      this.updateState({
+        type: actionTypes.SET_SINGLESELECT_OPTIONS,
         optionIndex: nextPotentialSelectionIndex
       });
     }
 
-    if (isOptionsPanelOpen === true) {
-      e.stopPropagation(); // Do not submit form
-      return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
-    }
-    return this.props.onSubmit(); // Submit the form
+    return (isOptionsPanelOpen)
+      ? e.stopPropagation() // Do not submit form
+      : this.props.onSubmit(); // Submit the form
   }
 
   keyUpOrDownPressed(type) {
@@ -300,13 +304,17 @@ export default class ReactResponsiveSelect extends Component {
 
     this.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX,
-      optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.OPTION_NODES_LENGTH)
+      optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.optionNodesLength)
     });
 
     /* Open the options panel */
     if (isOptionsPanelOpen === false) {
       this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
+  }
+
+  focusButton() {
+    this.selectBox.querySelector('.rrs__select-container').focus();
   }
 
 }

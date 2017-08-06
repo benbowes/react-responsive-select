@@ -7,8 +7,6 @@
 */
 export default function simpleArraysEqual(a, b) {
   const aLength = a.length;
-  if (a === b) return true;
-  if (a == null || b == null) return false;
   if (aLength !== b.length) return false;
 
   for (let i = 0; i < aLength; i++) {

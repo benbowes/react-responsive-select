@@ -98,11 +98,13 @@ describe('ReactResponsiveSelect', () => {
   describe('Events', () => {
     let selectBox;
     let selectBoxContainer;
+    let optionsContainer;
     let selectBoxDOM;
 
     beforeEach(() => {
       selectBox = setup();
       selectBoxContainer = selectBox.find('.rrs__select-container');
+      optionsContainer = selectBox.find('.rrs__options-container');
       selectBoxDOM = selectBoxContainer.getDOMNode();
     });
 
@@ -130,19 +132,21 @@ describe('ReactResponsiveSelect', () => {
     it('mousedown on option should update state with correct option index', () => {
       const selectBoxInstance = selectBox.instance();
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-      selectBoxContainer.find('[data-key=3]').simulate('mousedown');
-      expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_SELECTED_INDEX, optionIndex: 3 });
+      optionsContainer.find('[data-key=3]').simulate('mousedown');
+      expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_SINGLESELECT_OPTIONS, optionIndex: 3 });
       selectBoxInstance.updateState.restore();
     });
 
     it('blur on rrs__select-container container should close the options panel', () => {
-      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
-      expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
-
       selectBoxDOM.focus();
 
-      // Close
-      selectBoxContainer.simulate('blur');
+      selectBoxContainer.simulate('mouseDown');
+
+      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(true);
+      expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
+
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
+
       expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
     });
@@ -208,17 +212,14 @@ describe('ReactResponsiveSelect', () => {
 
       expect(enterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(false);
-      expect(updateStateSpy.secondCall.args[0]).to.eql({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+      expect(updateStateSpy.secondCall.args[0]).to.eql({ 'optionIndex': 1, 'type': 'SET_SINGLESELECT_OPTIONS' });
       expect(enterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
       expect(enterPressedSpy.args[0][0].isPropagationStopped()).to.equal(true);
     });
 
     it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and selects nextPotentialSelectionIndex when multiselect', () => {
       submitSpy.reset();
-      selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3 });
-
-      selectBoxContainer.simulate('mouseDown'); // open
-      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
+      selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3, isOptionsPanelOpen: true });
 
       selectBox.find('.rrs__options-container .rrs__option').at(3).simulate('keyDown', { keyCode: keyCodes.ENTER });
 
@@ -240,10 +241,10 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state('isOptionsPanelOpen')).to.equal( true );
 
       // ensure its focussed
-      expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(true);
+      expect(document.activeElement.classList.contains('rrs__option--selected')).to.equal(true);
 
-      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESC });
-      expect(document.activeElement.classList.contains('rrs__select-container')).to.equal(false);
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
+      expect(document.activeElement.classList.contains('rrs__option--selected')).to.equal(false);
     });
 
     it('handleKeyEvent() - keyDown "UP" calls enterPressed("decrement")', () => {
@@ -383,9 +384,9 @@ describe('ReactResponsiveSelect', () => {
       });
       const selectBoxInstance = selectBox.instance();
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-      const selectBoxContainer = selectBox.find('.rrs__select-container');
+      const optionsContainer = selectBox.find('.rrs__options-container');
 
-      selectBoxContainer.find('[data-key=3]').simulate('mousedown');
+      optionsContainer.find('[data-key=3]').simulate('mousedown');
       expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_MULTISELECT_OPTIONS, optionIndex: 3 });
       expect(updateStateSpy.calledOnce).to.equal(true); // does not do anything else .... like close
     });
@@ -465,31 +466,8 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect( selectBox.instance().listeners ).to.equal( undefined );
+      expect( selectBox.instance().listeners ).to.eql({});
     });
-  });
-
-  describe('Scrollbar', () => {
-    let selectBox;
-
-    afterEach(() => {
-      selectBox.unmount();
-    });
-
-    it('should ignore mousedown when user is scrolling', () => {
-      const props = {
-        name: 'make',
-        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
-      };
-      selectBox = setup(undefined, props);
-      const selectBoxInstance = selectBox.instance();
-      const selectBoxContainer = selectBox.find('.rrs__select-container');
-      const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-
-      selectBoxContainer.find('.rrs__options-container').simulate('mousedown');
-      expect(updateStateSpy.calledOnce).to.equal(false); // does not do anything
-    });
-
   });
 
 });
