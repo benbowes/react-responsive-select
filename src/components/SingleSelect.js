@@ -3,9 +3,33 @@ import PropTypes from 'prop-types';
 import singleline from 'singleline';
 import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
 import SingleSelectOption from './SingleSelectOption';
+
 const SingleSelectOptionHOC = scrollIntoViewIIHOC(SingleSelectOption);
 
 export default class SingleSelect extends Component {
+
+  // interactionOccurrance = 0;
+
+  componentDidUpdate (prevProps) {
+
+    /* Enable focus of button close when no selection has been made but options panel is closed */
+    // if(this.props.isOptionsPanelOpen && !prevProps.isOptionsPanelOpen) {
+    //   this.interactionOccurrance++;
+    // }
+
+    /* Focus selectBox button if options panel has just closed, there has been an interaction or the value has changed */
+    if (
+      !this.props.isOptionsPanelOpen
+      && prevProps.isOptionsPanelOpen
+      && (
+        prevProps.singleSelectSelectedIndex !== this.props.singleSelectSelectedIndex
+        // || this.interactionOccurrance === 1
+      )
+    ) {
+      // this.interactionOccurrance = 0;
+      this.optionsButton.focus();
+    }
+  }
 
   render(){
     const {
@@ -31,6 +55,7 @@ export default class SingleSelect extends Component {
           aria-haspopup="true"
           aria-expanded={`${isOptionsPanelOpen}`}
           aria-controls={`rrs-${name}-menu`}
+          ref={(r) => { if (r) { return this.optionsButton = r; }}}
           className={singleline(`
             rrs__select-container
             ${(disabled === true) ? 'rrs__select-container--disabled' : ''}

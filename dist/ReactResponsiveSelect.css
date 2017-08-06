@@ -88,6 +88,10 @@
   color: #03a9f4;
 }
 
+.rrs__option.rrs__option--selected {
+  color: #03a9f4;
+}
+
 .rrs__label-container {
   padding: 0 2rem 0 1rem;
   border: 1px solid transparent;

@@ -46,7 +46,7 @@ function resetMultiSelectState(state) {
 export default function reducer(state, action) {
 
   switch (action.type) {
-    case actionTypes.BOOTSTRAP_STATE: {
+    case actionTypes.INITIALISE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
       const initialSelectedIndexes = getSelectedValueIndexes(action.value.options, action.value.selectedValues);
       const initialSelectedOptions = getInitialMultiSelectSelectedOptions(action.value.options, action.value.selectedValues, action.value.name);
@@ -126,12 +126,21 @@ export default function reducer(state, action) {
         nextPotentialSelectionIndex: action.optionIndex
       };
 
-    case actionTypes.SET_SELECTED_INDEX:
-      return {
+    case actionTypes.SET_SINGLESELECT_OPTIONS: {
+      const nextState = {
         ...state,
         nextPotentialSelectionIndex: action.optionIndex,
-        singleSelectSelectedIndex: action.optionIndex
+        singleSelectSelectedIndex: action.optionIndex,
+        isOptionsPanelOpen: false,
+        singleSelectSelectedOption: {
+          name: state.name,
+          ...state.options[action.optionIndex]
+        }
       };
+
+      // Set altered state
+      return mergeIsAlteredState(nextState);
+    }
 
     case actionTypes.SET_MULTISELECT_OPTIONS: {
 

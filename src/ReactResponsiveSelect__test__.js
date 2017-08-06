@@ -133,7 +133,7 @@ describe('ReactResponsiveSelect', () => {
       const selectBoxInstance = selectBox.instance();
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
       optionsContainer.find('[data-key=3]').simulate('mousedown');
-      expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_SELECTED_INDEX, optionIndex: 3 });
+      expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_SINGLESELECT_OPTIONS, optionIndex: 3 });
       selectBoxInstance.updateState.restore();
     });
 
@@ -212,17 +212,14 @@ describe('ReactResponsiveSelect', () => {
 
       expect(enterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(false);
-      expect(updateStateSpy.secondCall.args[0]).to.eql({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
+      expect(updateStateSpy.secondCall.args[0]).to.eql({ 'optionIndex': 1, 'type': 'SET_SINGLESELECT_OPTIONS' });
       expect(enterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
       expect(enterPressedSpy.args[0][0].isPropagationStopped()).to.equal(true);
     });
 
     it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and selects nextPotentialSelectionIndex when multiselect', () => {
       submitSpy.reset();
-      selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3 });
-
-      selectBoxContainer.simulate('mouseDown'); // open
-      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
+      selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3, isOptionsPanelOpen: true });
 
       selectBox.find('.rrs__options-container .rrs__option').at(3).simulate('keyDown', { keyCode: keyCodes.ENTER });
 
@@ -471,29 +468,6 @@ describe('ReactResponsiveSelect', () => {
       selectBox = setup(undefined, props);
       expect( selectBox.instance().listeners ).to.eql({});
     });
-  });
-
-  describe('Scrollbar', () => {
-    let selectBox;
-
-    afterEach(() => {
-      selectBox.unmount();
-    });
-
-    it('should ignore mousedown when user is scrolling', () => {
-      const props = {
-        name: 'make',
-        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
-      };
-      selectBox = setup(undefined, props);
-      const selectBoxInstance = selectBox.instance();
-      const optionsContainer = selectBox.find('.rrs__options-container');
-      const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-
-      optionsContainer.find('.rrs__options-container').simulate('mousedown');
-      expect(updateStateSpy.calledOnce).to.equal(false); // does not do anything
-    });
-
   });
 
 });
