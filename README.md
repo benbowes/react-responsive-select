@@ -107,7 +107,8 @@ You can hook into the onChange function via the `customLabelRenderer` function p
 
 ## API
 
-The external API has not changed with version 2, but the DOM structure and CSS has (hence the major version). Version 1 docs can be found here: https://github.com/benbowes/react-responsive-select/tree/1.5.3.
+The external API has not changed with version 2, but the DOM structure and CSS has (hence the major version change). To upgrade to this major version you'll need to do a minor upgrade of your CSS (If you have custom CSS overrides).
+Version 1 docs can be found here: https://github.com/benbowes/react-responsive-select/tree/1.5.3.
 
 <table width="100%">
   <tr>
