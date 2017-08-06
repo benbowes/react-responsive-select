@@ -8,25 +8,24 @@ const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
 
 export default class MultiSelect extends Component {
 
-  // interactionOccured = false;
+  getAriaLabel() {
+    const { multiSelectSelectedOptions, prefix } = this.props;
+    const selectedOptionsLength = multiSelectSelectedOptions.options.length;
+    return singleline(`
+      Checkbox group ${prefix ? prefix + ' ' : ''} has
+      ${selectedOptionsLength} item${selectedOptionsLength === 1 ? '' : 's'} selected.
+      Selected option${selectedOptionsLength === 1 ? '' : 's'} ${selectedOptionsLength === 1 ? 'is' : 'are'}
+      ${multiSelectSelectedOptions.options.map(v => v.text).join(' and ')}
+    `);
+  }
 
   componentDidUpdate (prevProps) {
-
-    /* Enable focus of button close when no selection has been made but options panel is open then closed */
-    // if(this.props.isOptionsPanelOpen && !prevProps.isOptionsPanelOpen) {
-    //   this.interactionOccured = true;
-    // }
-
     /* Focus selectBox button if options panel has just closed, there has been an interaction or the value has changed */
     if (
       !this.props.isOptionsPanelOpen
       && prevProps.isOptionsPanelOpen
-      && (
-        !simpleArraysEqual(prevProps.multiSelectSelectedIndexes, this.props.multiSelectSelectedIndexes)
-        //|| this.interactionOccured
-      )
+      && !simpleArraysEqual(prevProps.multiSelectSelectedIndexes, this.props.multiSelectSelectedIndexes)
     ) {
-      // this.interactionOccured = false;
       this.optionsButton.focus();
     }
   }
@@ -68,7 +67,7 @@ export default class MultiSelect extends Component {
           {customLabelText &&
           <div className="rrs__label-container">
             <span
-              aria-label={`${prefix ? prefix + ' ' : ''}${[multiSelectSelectedOptions.options.map(v => v.text)].join(' ,')} selected`}
+              aria-label={this.getAriaLabel()}
               className="rrs__label"
               id={`rrs-${name}-label`}
             >
@@ -81,7 +80,7 @@ export default class MultiSelect extends Component {
           {!customLabelText &&
           <div className="rrs__label-container">
             <span
-              aria-label={`${prefix ? prefix + ' ' : ''}${[multiSelectSelectedOptions.options.map(v => v.text)].join(' ,')} selected`}
+              aria-label={this.getAriaLabel()}
               className="rrs__label"
               id={`rrs-${name}-label`}
             >

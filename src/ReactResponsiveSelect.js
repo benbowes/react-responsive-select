@@ -251,11 +251,12 @@ export default class ReactResponsiveSelect extends Component {
     }
 
     /* Else user clicked close or open the options panel */
-    return this.updateState({
+    this.updateState({
       type: isOptionsPanelOpen
         ? actionTypes.SET_OPTIONS_PANEL_CLOSED
         : actionTypes.SET_OPTIONS_PANEL_OPEN
     });
+    return this.focusButton();
   }
 
   handleBlur(e) {

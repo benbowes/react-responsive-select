@@ -17,9 +17,11 @@ export default class MultiSelectOption extends Component {
 
     return (
       <li
-        role="menuitem"
+        role="checkbox"
         tabIndex="-1"
-        aria-label={isSelected ? `${option.text} selected` : `${option.text} not selected`}
+        aria-checked={isSelected}
+        aria-label={option.text}
+        aria-live="assertive"
         data-key={index}
         ref={(r) => { this[`option_${index}`] = r; }}
         className={singleline(`
