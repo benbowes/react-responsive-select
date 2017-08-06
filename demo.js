@@ -55,7 +55,6 @@ class Form extends Component { // eslint-disable-line
       <form ref={r => this.form = r}>
         <div className="row row--hero">
           <div>
-            <div className="label">Single-select basic</div>
             <ReactResponsiveSelect
               name="carType1"
               options={[
@@ -75,9 +74,9 @@ class Form extends Component { // eslint-disable-line
               selectedValue="subaru"
               onChange={this.reportChange}
             />
+            <div className="label">Single-select basic</div>
           </div>
           <div>
-            <div className="label">Single-select custom options</div>
             <ReactResponsiveSelect
               name="carType2"
               options={options}
@@ -87,9 +86,9 @@ class Form extends Component { // eslint-disable-line
               selectedValue="tesla"
               onChange={this.reportChange}
             />
+            <div className="label">Single-select custom options</div>
           </div>
           <div>
-            <div className="label">Single-select custom label</div>
             <ReactResponsiveSelect
               name="carType3"
               options={options}
@@ -100,9 +99,9 @@ class Form extends Component { // eslint-disable-line
               selectedValue="bmw"
               onChange={this.reportChange}
             />
+            <div className="label">Single-select custom label</div>
           </div>
           <div>
-            <div className="label">Multi-select</div>
             <ReactResponsiveSelect
               multiselect
               name="carType4"
@@ -124,6 +123,7 @@ class Form extends Component { // eslint-disable-line
               prefix="Car4: "
               onChange={this.reportChange}
             />
+            <div className="label">Multi-select</div>
           </div>
         </div>
         <div className="row">
