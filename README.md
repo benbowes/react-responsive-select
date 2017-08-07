@@ -1,12 +1,8 @@
-# React Responsive Select
-
-![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
+# React Responsive Select ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
 
 A customisable, touchable, React single-select / multi-select form control.
 
 Built with keyboard and screen reader accessibility in mind.
-
-react-responsive-select is both keyboard accessible like a native `<select/>` on desktop, and also tappable plus draggable on touch devices.
 
 ## Demo
 
