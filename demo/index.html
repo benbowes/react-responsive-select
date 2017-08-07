@@ -4,6 +4,7 @@
 <title>React Responsive Select Demo</title>
 <meta name="description" content="A touch friendly and keyboard accessible custom React JS select control">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <link href="../dist/ReactResponsiveSelect.css" rel="stylesheet">
 <link href="./demo.css" rel="stylesheet">
 </head>
@@ -48,58 +49,17 @@
       </a>
     </div>
 
-    <div class="centered">
-      <h1>react-<span class="subh1">responsive</span>-select</h1>
+    <div class="heading-area centered">
+      <h1>REACT-RESPONSIVE-SELECT</h1>
       <p class="subh1p">
-        <strong>A touch friendly, highly customisable, custom React single-select &amp; multi-select form control.</strong>
-        <br>Built with accessibility in mind.
+        <strong>A customisable, touchable, React <b>single-select</b> / <b>multi-select</b> form control.</strong>
+        <br>Built with keyboard and screen reader accessibility in mind.
       </p>
     </div>
 
-    <div id="root" class="demo-form"></div>
+    <div id="root" class="root"></div>
 
     <div class="inset">
-
-      <h2>Touch Device Interactions</h2>
-
-      <ul>
-        <li><code class="code-inline">TAPPING</code> on a select will open it's options</li>
-        <li><code class="code-inline">TAPPING</code> on an option will select it's value</li>
-        <li><code class="code-inline">DRAGGING</code> on an options panel that is scrollable, will scroll the options panel</li>
-      </ul>
-
-      <h2>Keyboard Accessibility Tests</h2>
-
-      <h4>When not focused</h4>
-
-      <ul>
-        <li>Select Input receives focus when <code class="code-inline">TABBED</code> to</li>
-      </ul>
-
-
-      <h4>When focused and closed</h4>
-
-      <ul>
-        <li>hitting <code class="code-inline">TAB</code> key should blur Select Input</li>
-        <li>hitting <code class="code-inline">DOWN</code> key should open the options panel and signify selected item</li>
-        <li>hitting <code class="code-inline">UP</code> key should open the options panel and signify selected item</li>
-        <li>hitting <code class="code-inline">SPACE</code> key should open the options panel and signify selected item</li>
-        <li>hitting <code class="code-inline">ENTER</code> key should submit the form</li>
-    </ul>
-
-      <h4>When focused and open</h4>
-
-      <ul>
-        <li>hitting <code class="code-inline">TAB</code> key should not blur Select Input</li>
-        <li>hitting <code class="code-inline">DOWN</code> key should signify selected item and decrement down the options panel - signifying next potential selection</li>
-        <li>hitting <code class="code-inline">UP</code> key should signify selected item and increment up the options panel - signifying next potential selection</li>
-        <li>hitting <code class="code-inline">ENTER</code> key should select the current signified option and close the options panel</li>
-        <li>hitting <code class="code-inline">SPACE</code> key should select the current signified option and close the options panel</li>
-        <li>hitting <code class="code-inline">ESC</code> key should close the options panel and keep current selection</li>
-    </ul>
-
-
-    <p>&nbsp;</p>
 
     <h2>Compare with native select boxes</h2>
 
