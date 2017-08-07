@@ -52,7 +52,7 @@ class Form extends Component { // eslint-disable-line
 
   render() {
     return (
-      <form ref={r => this.form = r}>
+      <form className="form" ref={r => this.form = r}>
         <div className="row row--hero">
           <div>
             <ReactResponsiveSelect
@@ -438,7 +438,7 @@ const caretIcon = (
         </div>
 
         <div className="row centered">
-          <button type="submit" className={'button'}>Submit</button>
+          <button type="submit" className={'button'}>Submit form</button>
         </div>
       </form>
     );

@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   background: #fff;
   color: #15394b;
   font-size: 14px;
@@ -14,20 +14,13 @@ body {
 }
 
 h1 {
-  font-weight: 300;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.75px;
-  margin: 4rem 0 0 0;
-  padding: 0 0 0.5rem 0;
-  border-bottom: 1px solid #ccc;
-  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  font-size: 3rem;
   display: inline-block;
-}
-
-.subh1 {
-  font-style: italic;
-  font-family: Georgia;
-  color: #999;
 }
 
 h2 {
@@ -53,12 +46,20 @@ li {
 }
 
 .subh1p {
-  margin-bottom: 4.5rem;
-  padding: 0 2rem;
+  color: #47626f;
+  margin: 0;
+  font-size: 1.25rem;
+  padding: 0 1.5rem;
 }
 
 .subh1p strong {
   font-weight: normal;
+}
+
+.heading-area {
+  background: #e4e4e4;
+  padding: 5rem 0;
+  margin: 0 0 2rem;
 }
 
 .code-inline {
@@ -74,17 +75,24 @@ li {
   width: 100%;
   padding: 0.5rem 1rem;
   overflow: auto;
-  margin: 1rem 0 4rem 0;
-  color: #f1f1f1;
-  background: #333;
+  margin: 0 0 4rem 0;
+  color: #333;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .wrapper {
   background: #f1f1f1;
 }
 
-.demo-form {
+.root {
   padding: 0 2rem;
+}
+
+.form {
+  max-width: 940px;
+  margin: 0 auto;
 }
 
 .inset {
@@ -156,9 +164,9 @@ li {
   -webkit-appearance: none;
   appearance: none;
   border: 0;
-  border-radius: 3px;
-  padding: 0.75rem 3rem;
-  font-size: inherit;
+  border-radius: 40px;
+  padding: 0.75rem 2rem;
+  font-size: 1.25rem;
   color: #fff;
   background: #03A9F4;
   cursor: pointer;
@@ -225,24 +233,13 @@ li {
 
 .row--hero {
   display: block;
-  margin: 0 0 4rem 0;
+  margin: 0 0 5rem 0;
+  border-bottom: 2px solid #333;
 }
 
 .row--hero > * {
   flex: 1;
   margin: 0 0 1rem 0;
-}
-
-@media only screen and (min-width: 900px) {
-  .row--hero {
-    display: flex;
-    margin: 0;
-  }
-
-  .row--hero > * {
-    flex: 1;
-    margin: 0 0 4rem 0;
-  }
 }
 
 .row:after {
@@ -256,4 +253,42 @@ li {
   width: 100%;
   max-width: 300px;
   margin: 0 1rem 1rem 0;
+}
+
+@media only screen and (min-width: 900px) {
+  .row--hero {
+    display: flex;
+  }
+
+  .row--hero > * {
+    flex: 1;
+    margin: 0 0 3rem 0;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+  }
+  .subh1p {
+    font-size: 1rem;
+  }
+  .heading-area {
+    padding: 3rem 0;
+    margin: 0 0 2rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .root {
+    padding: 0 1rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  .col {
+    max-width: 100%;
+    margin: 0;
+  }
 }

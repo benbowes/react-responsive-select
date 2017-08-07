@@ -2,7 +2,11 @@
 
 ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
 
-A React custom select control, that is both keyboard accessible like a native `<select/>` on desktop. And also tappable / draggable on touch devices. As of version 2 it is now reading meaningfully on a screenreader (Only tested with VoiceOver on desktop so far).
+A customisable, touchable, React single-select / multi-select form control.
+
+Built with keyboard and screen reader accessibility in mind.
+
+react-responsive-select is both keyboard accessible like a native `<select/>` on desktop, and also tappable plus draggable on touch devices.
 
 ## Demo
 
@@ -16,11 +20,11 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 Install the dependency - https://www.npmjs.com/package/react-responsive-select
 
-`npm install react-responsive-select -D` or `yarn add -D react-responsive-select`
+`npm install react-responsive-select -D`
 
 Add **ReactResponsiveSelect.js**
 
-And include the css file in your project. `./dist/ReactResponsiveSelect.css`
+And include the CSS file in your project via an import, or by copy/pasting the CSS from:  `../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css`
 
 Example usage:
 
@@ -28,7 +32,6 @@ Example usage:
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
-// import './node_modules/react-responsive-select/dist/ReactResponsiveSelect.css'; // To get basic styling (presuming you have an appropriate loader)
 
 class Form extends Component {
 
@@ -72,12 +75,12 @@ A more detailed usage example can be found here:
 
 ## Altering styling
 
-The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Include it in your project via an import or copy/paste it's contents into your stylesheet.
+The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Include it in your project via an import or copy paste it's contents into your stylesheet.
 Customisations can be done via overriding the styles or rewriting the classes.
 
 The class names themselves are not configurable.
 
-To aid in styling the hover/selected states in the options list I would suggest overriding the class that hides the options temporarily e.g.
+To aid in styling the hover/selected states in the options list, I would suggest overriding the class that hides the options temporarily e.g.
 
 ```
 .rrs__select-container + .rrs__options-container {
@@ -108,6 +111,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
 ## API
 
 The external API has not changed with version 2, but the DOM structure and CSS has (hence the major version change). To upgrade to this major version you'll need to do a minor upgrade of your CSS (If you have custom CSS overrides).
+
 Version 1 docs can be found here: https://github.com/benbowes/react-responsive-select/tree/1.5.3.
 
 <table width="100%">
