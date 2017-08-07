@@ -232,31 +232,38 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleClick(e) {
-    if (isDragging === true) return; /* Ignore touchend if user is dragging */
-
-    /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
-    e.preventDefault();
-
     const { isMultiSelect, isOptionsPanelOpen, isDragging } = this.state;
-    const userSelectedOption = e.target.classList.contains('rrs__option');
 
-    /* Select option index, if an index was clicked */
-    if (userSelectedOption) {
-      return this.updateState({
-        type: isMultiSelect
-          ? actionTypes.SET_MULTISELECT_OPTIONS
-          : actionTypes.SET_SINGLESELECT_OPTIONS,
-        optionIndex: parseFloat(e.target.getAttribute('data-key'))
+    if (isDragging === false) {
+
+      /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
+      e.preventDefault();
+
+      /* If user is scrolling return */
+      if (e && e.target.classList.contains('rrs__options-container')) {
+        return true;
+      }
+
+      const userSelectedOption = e.target.classList.contains('rrs__option');
+
+      /* Select option index, if an index was clicked */
+      if (userSelectedOption) {
+        return this.updateState({
+          type: isMultiSelect
+            ? actionTypes.SET_MULTISELECT_OPTIONS
+            : actionTypes.SET_SINGLESELECT_OPTIONS,
+          optionIndex: parseFloat(e.target.getAttribute('data-key'))
+        });
+      }
+
+      /* Else user clicked close or open the options panel */
+      this.updateState({
+        type: isOptionsPanelOpen
+          ? actionTypes.SET_OPTIONS_PANEL_CLOSED
+          : actionTypes.SET_OPTIONS_PANEL_OPEN
       });
+      return this.focusButton();
     }
-
-    /* Else user clicked close or open the options panel */
-    this.updateState({
-      type: isOptionsPanelOpen
-        ? actionTypes.SET_OPTIONS_PANEL_CLOSED
-        : actionTypes.SET_OPTIONS_PANEL_OPEN
-    });
-    return this.focusButton();
   }
 
   handleBlur(e) {
