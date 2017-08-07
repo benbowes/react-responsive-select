@@ -98,7 +98,7 @@ li {
 .inset {
   background: white;
   margin: 1rem 0 0 0;
-  padding: 3rem 1.75rem;
+  padding: 2rem 1.75rem;
   text-align: left;
   width: 100%;
   overflow: hidden;
@@ -165,7 +165,7 @@ li {
   appearance: none;
   border: 0;
   border-radius: 40px;
-  padding: 0.75rem 2rem;
+  padding: 1rem 2rem;
   font-size: 1.25rem;
   color: #fff;
   background: #03A9F4;
@@ -176,7 +176,7 @@ li {
 
 .button:hover,
 .button:focus {
-  background: #42a5f5;
+  background: #2196F3;
   transition: all 0.1s ease-in-out;
 }
 
@@ -234,7 +234,7 @@ li {
 .row--hero {
   display: block;
   margin: 0 0 5rem 0;
-  border-bottom: 2px solid #333;
+  border-bottom: 1px solid #333;
 }
 
 .row--hero > * {
@@ -262,7 +262,7 @@ li {
 
   .row--hero > * {
     flex: 1;
-    margin: 0 0 3rem 0;
+    margin: 0 0 2rem 0;
   }
 }
 
