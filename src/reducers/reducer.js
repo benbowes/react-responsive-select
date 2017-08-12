@@ -126,6 +126,13 @@ export default function reducer(state, action) {
         nextPotentialSelectionIndex: action.optionIndex
       };
 
+    case actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC:
+      return {
+        ...state,
+        isOptionsPanelOpen: true,
+        nextPotentialSelectionIndex: action.optionIndex
+      };
+
     case actionTypes.SET_SINGLESELECT_OPTIONS: {
       const nextState = {
         ...state,

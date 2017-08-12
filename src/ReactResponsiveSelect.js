@@ -202,7 +202,7 @@ export default class ReactResponsiveSelect extends Component {
       case keyCodes.ENTER:
         /* can close the panel when open and focussed
          * can submit the form when closed and focussed */
-        return this.enterPressed(e);
+        return this.handleEnterPressed(e);
 
       case keyCodes.SPACE:
         /* open or close the panel when focussed */
@@ -220,15 +220,17 @@ export default class ReactResponsiveSelect extends Component {
         /* will open the options panel if closed
          * will not decrement selection if options panel closed
          * if panel open, will decrement up the options list */
-        return this.keyUpOrDownPressed('decrement');
+        return this.handleKeyUpOrDownPressed('decrement');
 
       case keyCodes.DOWN:
         /* will open the options panel if closed
          * will not increment selection if options panel closed
          * if panel open, will increment down the options list */
-        return this.keyUpOrDownPressed('increment');
-
+        return this.handleKeyUpOrDownPressed('increment');
     }
+
+    /* handle alpha-nemeric key press */
+    if (/^[a-z0-9]+$/.test(e.key)) this.handleAlphaNumerical(e);
   }
 
   handleClick(e) {
@@ -279,14 +281,19 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
-  /* Disable native functionality if keyCode match */
-  preventDefaultForKeyCodes(keyCodes, e) {
-    keyCodes.forEach(keyCode => {
-      if(keyCode === e.keyCode) e.preventDefault();
-    });
+  handleAlphaNumerical(e) {
+    const { options } = this.state;
+    const optionIndex = options.map(v => String(v.text).toLowerCase().charAt(0)).indexOf(e.key);
+
+    if (optionIndex > -1) {
+      this.updateState({
+        type: actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC,
+        optionIndex
+      });
+    }
   }
 
-  enterPressed(e) {
+  handleEnterPressed(e) {
     const { isMultiSelect, isOptionsPanelOpen, nextPotentialSelectionIndex } = this.state;
 
     if (isMultiSelect) {
@@ -306,7 +313,7 @@ export default class ReactResponsiveSelect extends Component {
       : this.props.onSubmit(); // Submit the form
   }
 
-  keyUpOrDownPressed(type) {
+  handleKeyUpOrDownPressed(type) {
     const { isOptionsPanelOpen, nextPotentialSelectionIndex } = this.state;
 
     this.updateState({
@@ -318,6 +325,13 @@ export default class ReactResponsiveSelect extends Component {
     if (isOptionsPanelOpen === false) {
       this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
     }
+  }
+
+  /* Disable native functionality if keyCode match */
+  preventDefaultForKeyCodes(keyCodes, e) {
+    keyCodes.forEach(keyCode => {
+      if(keyCode === e.keyCode) e.preventDefault();
+    });
   }
 
   focusButton() {

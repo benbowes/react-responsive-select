@@ -21,6 +21,7 @@
 - hitting **UP** key should open the options panel and signify selected item
 - hitting **SPACE** key should open the options panel and signify selected item
 - hitting **ENTER** key should submit the form
+- hitting **a-z or 0-9** key should highlight first item that starts with this character
 
 ##### When focused and open
 - hitting **TAB** key should not blur Select Input
@@ -29,6 +30,7 @@
 - hitting **ENTER** key should select the current signified option and close the options panel
 - hitting **SPACE** key should select the current signified option and close the options panel
 - hitting **ESC** key should close the options panel and keep current selection
+- hitting **a-z or 0-9** key should highlight first item that starts with this character
 
 ##### When not focused
 - Select Input receives focus when **TABBED** to

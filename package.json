@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "An accessible React responsive select and multiselect form control",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -98,8 +98,8 @@
     "react-dom": "15.5.x",
     "sinon": "2.3.x",
     "style-loader": "0.18.x",
-    "webpack": "3.0.x",
-    "webpack-dev-server": "2.5.x",
+    "webpack": "3.5.x",
+    "webpack-dev-server": "2.7.x",
     "webpack-node-externals": "1.6.x"
   },
   "peerDependencies": {

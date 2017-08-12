@@ -151,6 +151,19 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
     });
 
+    it('hitting an alphanumerical key on a rrs__select-container container should open the options panel and set nextPotentialSelectionIndex', () => {
+      selectBoxDOM.focus();
+
+      expect(selectBox.state('nextPotentialSelectionIndex')).to.equal(1);
+
+      selectBoxContainer.simulate('keyDown', { keyCode: 66, key: 'b' });
+
+      expect(selectBox.state('nextPotentialSelectionIndex')).to.equal(3);
+      expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
+    });
+
+    //handleAlphaNumerical
+
   });
 
   describe('ReactResponsiveSelect functions', () => {
@@ -158,8 +171,8 @@ describe('ReactResponsiveSelect', () => {
     let selectBoxInstance;
     let selectBoxContainer;
     let updateStateSpy;
-    let enterPressedSpy;
-    let keyUpOrDownPressedSpy;
+    let handleEnterPressedSpy;
+    let handleKeyUpOrDownPressedSpy;
 
     beforeEach(() => {
       selectBox = setup();
@@ -167,14 +180,14 @@ describe('ReactResponsiveSelect', () => {
 
       selectBoxContainer = selectBox.find('.rrs__select-container');
       updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-      enterPressedSpy = sinon.spy(selectBoxInstance, 'enterPressed');
-      keyUpOrDownPressedSpy = sinon.spy(selectBoxInstance, 'keyUpOrDownPressed');
+      handleEnterPressedSpy = sinon.spy(selectBoxInstance, 'handleEnterPressed');
+      handleKeyUpOrDownPressedSpy = sinon.spy(selectBoxInstance, 'handleKeyUpOrDownPressed');
     });
 
     afterEach(() => {
       selectBoxInstance.updateState.restore();
-      selectBoxInstance.enterPressed.restore();
-      selectBoxInstance.keyUpOrDownPressed.restore();
+      selectBoxInstance.handleEnterPressed.restore();
+      selectBoxInstance.handleKeyUpOrDownPressed.restore();
       selectBox.unmount();
     });
 
@@ -190,40 +203,40 @@ describe('ReactResponsiveSelect', () => {
       updateStateSpy.reset();
     });
 
-    it('Enter key calls handleKeyEvent() enterPressed()', () => {
+    it('Enter key calls handleKeyEvent() handleEnterPressed()', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
-      expect(enterPressedSpy.called).to.equal(true);
+      expect(handleEnterPressedSpy.called).to.equal(true);
     });
 
-    it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and onSubmit() when options panel closed', () => {
+    it('handleKeyEvent() - keyDown "ENTER" calls handleEnterPressed() and onSubmit() when options panel closed', () => {
       submitSpy.reset();
 
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
-      expect(enterPressedSpy.called).to.equal(true);
+      expect(handleEnterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(true);
-      expect(enterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
+      expect(handleEnterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
     });
 
-    it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and toggleOptionsPanel("close") when options panel open', () => {
+    it('handleKeyEvent() - keyDown "ENTER" calls handleEnterPressed() and toggleOptionsPanel("close") when options panel open', () => {
       submitSpy.reset();
 
       selectBoxContainer.simulate('mouseDown'); // open
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
 
-      expect(enterPressedSpy.called).to.equal(true);
+      expect(handleEnterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(false);
       expect(updateStateSpy.secondCall.args[0]).to.eql({ 'optionIndex': 1, 'type': 'SET_SINGLESELECT_OPTIONS' });
-      expect(enterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
-      expect(enterPressedSpy.args[0][0].isPropagationStopped()).to.equal(true);
+      expect(handleEnterPressedSpy.args[0][0].defaultPrevented).to.equal(true);
+      expect(handleEnterPressedSpy.args[0][0].isPropagationStopped()).to.equal(true);
     });
 
-    it('handleKeyEvent() - keyDown "ENTER" calls enterPressed() and selects nextPotentialSelectionIndex when multiselect', () => {
+    it('handleKeyEvent() - keyDown "ENTER" calls handleEnterPressed() and selects nextPotentialSelectionIndex when multiselect', () => {
       submitSpy.reset();
       selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3, isOptionsPanelOpen: true });
 
       selectBox.find('.rrs__options-container .rrs__option').at(3).simulate('keyDown', { keyCode: keyCodes.ENTER });
 
-      expect(enterPressedSpy.called).to.equal(true);
+      expect(handleEnterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(false);
       expect(updateStateSpy.firstCall.args[0]).to.eql({ type: actionTypes.SET_MULTISELECT_OPTIONS, optionIndex: 3 });
     });
@@ -247,10 +260,10 @@ describe('ReactResponsiveSelect', () => {
       expect(document.activeElement.classList.contains('rrs__option--selected')).to.equal(false);
     });
 
-    it('handleKeyEvent() - keyDown "UP" calls enterPressed("decrement")', () => {
+    it('handleKeyEvent() - keyDown "UP" calls handleEnterPressed("decrement")', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.UP });
-      expect(keyUpOrDownPressedSpy.calledOnce).to.equal(true);
-      expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('decrement');
+      expect(handleKeyUpOrDownPressedSpy.calledOnce).to.equal(true);
+      expect(handleKeyUpOrDownPressedSpy.args[0][0]).to.equal('decrement');
     });
 
     it('handleKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
@@ -260,10 +273,10 @@ describe('ReactResponsiveSelect', () => {
       expect(updateStateSpy.args[1][0]).to.eql({ type: 'SET_OPTIONS_PANEL_OPEN' });
     });
 
-    it('handleKeyEvent() - keyDown "DOWN" calls enterPressed("increment")', () => {
+    it('handleKeyEvent() - keyDown "DOWN" calls handleEnterPressed("increment")', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.DOWN });
-      expect(keyUpOrDownPressedSpy.calledOnce).to.equal(true);
-      expect(keyUpOrDownPressedSpy.args[0][0]).to.equal('increment');
+      expect(handleKeyUpOrDownPressedSpy.calledOnce).to.equal(true);
+      expect(handleKeyUpOrDownPressedSpy.args[0][0]).to.equal('increment');
     });
 
     it('handleKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {
@@ -285,6 +298,12 @@ describe('ReactResponsiveSelect', () => {
       expect(updateStateSpy.calledOnce).to.equal(false);
     });
 
+    it('handleKeyEvent() - keyDown "TAB" does NOT close options panel when isMultiSelect', () => {
+      selectBox.setState({ isOptionsPanelOpen: true, isMultiSelect: true });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.TAB });
+      expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
+    });
+
     it('tapping on selectBox does not close the options panel when a user is dragging - allowing a touch device user to scroll', () => {
       window['ontouchstart'] = 'fakeEvent';
 
@@ -299,7 +318,6 @@ describe('ReactResponsiveSelect', () => {
     });
 
   });
-
 
   describe('option list selectedValue .rrs__option--selected class', () => {
     let selectBox;
