@@ -13,19 +13,25 @@ body {
   padding: 0;
 }
 
+a {
+  color: inherit;
+}
+
 h1 {
+  color: #f1f1f1;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.75px;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 1rem 0;
   padding: 0;
   font-size: 2.5rem;
   display: inline-block;
 }
 
 h2 {
+  border-top: #cccccc solid 1px;
   line-height: 1;
-  padding-bottom: 0;
+  padding: 2rem 0 0 0;
   margin: 0 0 0.75rem 0;
   font-size: 1.5em;
   font-weight: 400;
@@ -46,7 +52,7 @@ li {
 }
 
 .subh1p {
-  color: #47626f;
+  color: #cccccc;
   margin: 0;
   font-size: 1.25rem;
   padding: 0 1.5rem;
@@ -57,9 +63,14 @@ li {
 }
 
 .heading-area {
-  background: #e4e4e4;
-  padding: 5rem 0;
-  margin: 0 0 2rem;
+  background: #333333;
+  padding: 6rem 0;
+  margin: 0 0 4rem;
+}
+
+.heading-area__wrapper {
+  max-width: 940px;
+  margin: 0 auto;
 }
 
 .code-inline {
@@ -104,12 +115,23 @@ li {
   overflow: hidden;
 }
 
+.inset h2 {
+  display: inline-block;
+  vertical-align: text-top;
+  border-width: 0px;
+  line-height: 1;
+  padding: 0;
+}
+
+.inset form {
+  display: inline-block;
+}
+
 .logos {
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
   background: #fff;
-  color: #f2fbfe;
   font-size: 0.75rem;
   padding: 0.5rem;
   text-decoration: none;
@@ -168,7 +190,7 @@ li {
   padding: 1rem 2rem;
   font-size: 1.25rem;
   color: #fff;
-  background: #03A9F4;
+  background: #15394b;
   cursor: pointer;
   margin: 0 0 3rem 0;
   transition: all 0.3s ease-in-out;
@@ -233,7 +255,7 @@ li {
 
 .row--hero {
   display: block;
-  margin: 0 0 5rem 0;
+  margin: 0 0 2rem 0;
 }
 
 .row--hero > * {
