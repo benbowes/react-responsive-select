@@ -64,7 +64,7 @@ li {
 
 .heading-area {
   background: #15394b;
-  padding: 2rem 0 3rem;
+  padding: 2.5rem 0 3rem 0;
   margin: 0 0 4rem;
 }
 
@@ -80,7 +80,7 @@ li {
   width: 170px;
   height: 170px;
   border-radius: 60%;
-  padding: 1.75rem 0 0 0.5rem;
+  padding: 2.25rem 0.25rem 0 0.75rem;
 }
 
 .code-inline {
@@ -117,9 +117,10 @@ li {
 }
 
 .inset {
+  display: flex;
+  justify-content: space-between;
   background: white;
-  margin: 1rem 0 0 0;
-  padding: 2rem 1.75rem 0.5rem;
+  padding: 2rem 2rem 1.75rem;
   text-align: left;
   width: 100%;
   overflow: hidden;
@@ -131,6 +132,11 @@ li {
   border-width: 0px;
   line-height: 1;
   padding: 0;
+  margin: 0 1rem 0 0;
+}
+
+.inset p {
+  margin: 0;
 }
 
 .inset form {
@@ -153,7 +159,7 @@ li {
 }
 
 .github-link svg {
-  fill: #999;
+  fill: #111111;
   fill-opacity: 0.8;
 }
 
@@ -309,6 +315,16 @@ li {
     padding: 3rem 0;
     margin: 0 0 2rem;
   }
+  .inset {
+    text-align: center;
+    display: block;
+  }
+  .inset h2 {
+    margin-bottom: 0.25rem;
+  }
+  .inset > *:first-child {
+    margin-bottom: 3rem;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -321,5 +337,13 @@ li {
   .col {
     max-width: 100%;
     margin: 0;
+  }
+  .logo-wrapper {
+    padding: 1.5rem 0.25rem 0 0.65rem;
+    width: 110px;
+    height: 110px;
+  }
+  .heading-area {
+    padding: 2rem 0;
   }
 }
