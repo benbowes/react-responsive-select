@@ -54,7 +54,8 @@ class Form extends Component { // eslint-disable-line
     return (
       <form className="form" ref={r => this.form = r}>
 
-        <div className="row row--hero">
+        <h2>Single-select &amp; multi-select modes</h2>
+        <div className="row row--hero --margin-bottom-4">
           <div>
             <ReactResponsiveSelect
               name="carType1"
@@ -131,8 +132,10 @@ class Form extends Component { // eslint-disable-line
 
         <div className="row">
           <h2>Install the dependency</h2>
-          <code className="code-block"><pre>$ npm install --save-dev react-responsive-select</pre></code>
-          <p className="--margin-bottom-4">Check out the full documentation in the <strong><a title="Github repository link for react-responsive-select" href="https://github.com/benbowes/react-responsive-select">react-responsive-select</a></strong> repository</p>
+          <pre>
+          <code className="language-bash">$ npm install --save-dev react-responsive-select</code>
+          </pre>
+          <p className="--margin-bottom-4">Check out the full documentation in the <strong><a title="Github repository link for react-responsive-select" href="https://github.com/benbowes/react-responsive-select">react-responsive-select</a></strong> repo</p>
         </div>
 
         <div className="row">
@@ -164,8 +167,9 @@ class Form extends Component { // eslint-disable-line
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<code className="code-block --margin-bottom-4">
-<pre>{`import React, { Component } from 'react';
+<div className="code-block"><pre>
+<code className="language-javascript --margin-bottom-4">
+{`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -206,9 +210,8 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</pre>
 </code>
-
+</pre></div>
         </div>
 
         <div className="row">
@@ -230,8 +233,9 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<code className="code-block --margin-bottom-4">
-<pre>{`import React, { Component } from 'react';
+<div className="code-block"><pre>
+<code className="language-javascript --margin-bottom-4">
+{`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -281,9 +285,8 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</pre>
 </code>
-
+</pre></div>
         </div>
 
         <div className="row">
@@ -305,8 +308,9 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<code className="code-block --margin-bottom-4">
-<pre>{`import React, { Component } from 'react';
+<div className="code-block"><pre>
+<code className="language-javascript --margin-bottom-4">
+{`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -357,8 +361,8 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</pre>
 </code>
+</pre></div>
 
         </div>
 
@@ -394,8 +398,8 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<code className="code-block --margin-bottom-4">
-<pre>
+<div className="code-block"><pre>
+<code className="language-javascript --margin-bottom-4">
 {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
@@ -449,8 +453,8 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</pre>
 </code>
+</pre></div>
 
         </div>
 
@@ -490,8 +494,9 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<code className="code-block --margin-bottom-4">
-<pre>
+
+<div className="code-block"><pre>
+<code className="language-javascript --margin-bottom-4">
 {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
@@ -545,8 +550,8 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</pre>
 </code>
+</pre></div>
 
         </div>
 
