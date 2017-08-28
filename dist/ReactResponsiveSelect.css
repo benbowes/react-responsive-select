@@ -76,7 +76,7 @@
 .rrs__is-desktop .rrs__option:hover {
   /* Don't hover on touch devices */
   background: #f1f8fb;
-  color: #03a9f4;
+  color: #0273b5;
 }
 
 .rrs__is-desktop .rrs__option:active {
@@ -85,11 +85,11 @@
 
 .rrs__option.rrs__option--next-selection {
   background: #f1f8fb;
-  color: #03a9f4;
+  color: #0273b5;
 }
 
 .rrs__option.rrs__option--selected {
-  color: #03a9f4;
+  color: #0273b5;
 }
 
 .rrs__label-container {
@@ -118,7 +118,7 @@
 }
 
 .rrs__has-changed .rrs__label-container {
-  color: #03a9f4;
+  color: #0273b5;
 }
 
 /*
