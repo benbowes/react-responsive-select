@@ -160,7 +160,7 @@ li {
 
 .label {
   margin: 8px 0 0 0;
-  color: #999;
+  color: #333;
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -170,7 +170,7 @@ li {
 .view-console-message{
   display: inline-block;
   padding: 12px 0;
-  color: #999;
+  color: #333;
   font-style: italic;
 }
 
@@ -197,9 +197,9 @@ li {
   padding: 1rem 2rem;
   font-size: 1.25rem;
   color: #fff;
-  background: #2196F3;
+  background: linear-gradient(135deg, #327684 , #673AB7);
   cursor: pointer;
-  margin: 0 0 3rem 0;
+  margin: 0 0 4rem 0;
   transition: all 0.3s ease-in-out;
 }
 
@@ -213,7 +213,7 @@ li {
   position: absolute;
   right: 1rem;
   top: 1.25rem;
-  fill: #999;
+  fill: #333;
 }
 
 .rrs__options-container--visible .caret-icon {
@@ -232,7 +232,7 @@ li {
 }
 
 .rrs__option.rrs__option--selected .checkbox {
-  border: 1px solid #03a9f4;
+  border: 1px solid #0273b5;
 }
 
 .checkbox-icon {
@@ -243,7 +243,7 @@ li {
 }
 
 .rrs__option.rrs__option--selected .checkbox-icon {
-  fill: #03a9f4;
+  fill: #0273b5;
 }
 
 .centered {

@@ -197,7 +197,8 @@ export default class Form extends Component {
           caretIcon={caretIcon}
           prefix="Make1: "
           selectedValue="fiat"
-          onChange={() => { console.log("Handle select change here") }}
+          // newValue e.g. {name: "make1", text: "Fiat", value: "fiat", altered: true}
+          onChange={(newValue) => { console.log(newValue) }}
         />
 
       </form>
@@ -272,7 +273,8 @@ export default class Form extends Component {
           caretIcon={caretIcon}
           prefix="Make2: "
           selectedValue="fiat"
-          onChange={() => { console.log("Handle select change here") }}
+          // newValue e.g. {name: <name>, text: "Fiat", value: "fiat", altered: true}
+          onChange={(newValue) => { console.log(newValue) }}
         />
 
       </form>
@@ -328,6 +330,7 @@ export default class Form extends Component {
 
         <ReactResponsiveSelect
           name="make3"
+          // selectedOption e.g. {name: "carType1", text: "Fiat", value: "fiat", altered: true}
           customLabelRenderer={selectedOption => { console.log(selectedOption); }} // return a string to format your own label text
           options={[
               value: 'null',
@@ -348,7 +351,8 @@ export default class Form extends Component {
           caretIcon={caretIcon}
           prefix="Make3:"
           selectedValue="fiat"
-          onChange={() => { console.log("Handle select change here") }}
+          // newValue e.g. {name: <name>, text: "Fiat", value: "fiat", altered: true}
+          onChange={(newValue) => { console.log(newValue) }}
         />
 
       </form>
@@ -440,7 +444,8 @@ export default class Form extends Component {
           caretIcon={caretIcon}
           prefix="Make4:"
           selectedValues={['mazda','ford']}
-          onChange={() => { console.log("Handle select change here") }}
+          // newValue e.g. { altered: true, options: [{ name: "make4", text: "Ford", value: "ford" }, {name: "make4", text: "Mazda", value: "mazda"} ] }
+          onChange={(newValue) => { console.log(newValue) }}
         />
 
       </form>
@@ -535,9 +540,11 @@ export default class Form extends Component {
           ]}
           onSubmit={() => { console.log("Handle form submit here") }}
           caretIcon={caretIcon} // (Optional) add you own icon by using markup here
+          // multiSelectSelectedOptions = { altered: true, options: [{ name: "carType4", text: "Ford", value: "ford" }, {name: "carType4", text: "Mazda", value: "mazda"} ] }
           customLabelRenderer={multiSelectSelectedOptions => { console.log(multiSelectSelectedOptions); }} // return a string to format your own label text
           selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this value, or if ommited the first item will be selected
-          onChange={() => { console.log("Handle select change here") }}
+          // newValue e.g. { altered: true, options: [{ name: "make5", text: "Ford", value: "ford" }, {name: "make5", text: "Mazda", value: "mazda"} ] }
+          onChange={(newValue) => { console.log(newValue) }}
         />
 
       </form>
