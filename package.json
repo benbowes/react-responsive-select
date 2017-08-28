@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A React customisable, touchable, single-select / multi-select form control. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
