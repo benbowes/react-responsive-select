@@ -1,8 +1,8 @@
-# Interaction Tests
+# Interaction Business Rules
 
 ---
 
-## Single-Select Touch Device Business Rules
+## Single-Select Touch Device
 
 - **TAPPING** on a select will open it's options
 - **TAPPING** on an option will select it's value
@@ -10,7 +10,7 @@
 
 ---
 
-## Single-Select Desktop Keyboard Business Rules
+## Single-Select Desktop Keyboard
 
 ##### When not focused
 - Select Input receives focus when **TABBED** to
@@ -37,7 +37,7 @@
 
 ---
 
-## Multi-Select Touch Device Business Rules
+## Multi-Select Touch Device
 
 - **TAPPING** on a select will open it's options
 - **TAPPING** on an option will check/uncheck it's value
@@ -45,7 +45,7 @@
 
 ---
 
-## Multi-Select Desktop Keyboard Business Rules
+## Multi-Select Desktop Keyboard
 
 #### When not focused
 
