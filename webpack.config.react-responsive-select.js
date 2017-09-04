@@ -3,7 +3,7 @@ const path = require('path');
 
 const entry = './src/ReactResponsiveSelect.js';
 const library = 'ReactResponsiveSelect';
-const module = {
+const moduleConfig = {
   rules: [{
     test: /\.js$/,
     loader: 'babel-loader',
@@ -14,7 +14,7 @@ const module = {
 module.exports = [{
 
   entry,
-  module,
+  module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.js',
     libraryTarget: 'umd',
@@ -25,7 +25,7 @@ module.exports = [{
 }, {
 
   entry,
-  module,
+  module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.window.js',
     libraryTarget: 'window',
@@ -36,7 +36,7 @@ module.exports = [{
 }, {
 
   entry,
-  module,
+  module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.var.js',
     libraryTarget: 'var',
