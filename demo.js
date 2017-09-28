@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from './src/ReactResponsiveSelect';
+import CodeBlock from './CodeBlock';
 
 const options = [{
   value: 'null', // (Required) form submitted value
@@ -31,13 +32,21 @@ const caretIcon = (
   </svg>
 );
 
+const checkboxIcon = (
+  <span className="checkbox">
+    <svg className="checkbox-icon" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 488.878 488.878">
+      <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 "/></g>
+    </svg>
+  </span>
+);
+
+const featuresCheckboxIcon = (
+  <span className="features-list__checkIcon">{checkboxIcon}</span>
+);
+
 const multiSelectOptionMarkup = (text) => (
   <div>
-    <span className="checkbox">
-      <svg className="checkbox-icon" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 488.878 488.878">
-        <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 "/></g>
-      </svg>
-    </span>
+    {checkboxIcon}
     <span> {text}</span>
   </div>
 );
@@ -54,7 +63,21 @@ class Form extends Component { // eslint-disable-line
     return (
       <form className="form" ref={r => this.form = r}>
 
-        <h2>Single-select &amp; multi-select modes</h2>
+        <div className="row">
+          <h2>FEATURES</h2>
+
+          <ul className="features-list">
+            <li className="features-list__item">{featuresCheckboxIcon}<h4>Accessible WAI ARIA compliance</h4></li>
+            <li className="features-list__item">{featuresCheckboxIcon}<h4>Touch friendly</h4></li>
+            <li className="features-list__item">{featuresCheckboxIcon}<h4>Keyboard friendly</h4></li>
+            <li className="features-list__item">{featuresCheckboxIcon}<h4>Similar interaction experience across platforms</h4></li>
+            <li className="features-list__item">{featuresCheckboxIcon}<h4>Easy to style</h4></li>
+          </ul>
+        </div>
+
+        <h2>DEMO</h2>
+
+        <h3>Single-select &amp; multi-select modes demo</h3>
         <div className="row row--hero --margin-bottom-4">
           <div>
             <ReactResponsiveSelect
@@ -131,7 +154,10 @@ class Form extends Component { // eslint-disable-line
 
 
         <div className="row">
-          <h2>Install the dependency</h2>
+
+          <h2>GETTING STARTED</h2>
+
+          <h3>Install the dependency</h3>
           <pre>
           <code className="language-bash">$ npm install --save-dev react-responsive-select</code>
           </pre>
@@ -139,7 +165,10 @@ class Form extends Component { // eslint-disable-line
         </div>
 
         <div className="row">
-          <h2>Basic implementation</h2>
+
+          <h2>EXAMPLES</h2>
+
+          <h3>Basic implementation</h3>
 
           <div>
             <div className="col">
@@ -167,8 +196,7 @@ class Form extends Component { // eslint-disable-line
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<div className="code-block"><pre>
-<code className="language-javascript --margin-bottom-4">
+<CodeBlock>
 {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
@@ -211,12 +239,11 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</code>
-</pre></div>
+</CodeBlock>
         </div>
 
         <div className="row">
-          <h2>Custom option markup implementation</h2>
+          <h3>Custom option markup implementation</h3>
 
           <div>
             <div className="col">
@@ -234,8 +261,7 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<div className="code-block"><pre>
-<code className="language-javascript --margin-bottom-4">
+<CodeBlock>
 {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
@@ -287,12 +313,11 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</code>
-</pre></div>
+</CodeBlock>
         </div>
 
         <div className="row">
-          <h2>Custom label and options implementation</h2>
+          <h3>Custom label and options implementation</h3>
 
           <div>
             <div className="col">
@@ -310,8 +335,7 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<div className="code-block"><pre>
-<code className="language-javascript --margin-bottom-4">
+<CodeBlock>
 {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
@@ -365,13 +389,12 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</code>
-</pre></div>
+</CodeBlock>
 
         </div>
 
         <div className="row">
-          <h2>MultiSelect mode implementation</h2>
+          <h3>MultiSelect mode implementation</h3>
 
           <div>
             <div className="col">
@@ -402,8 +425,7 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<div className="code-block"><pre>
-<code className="language-javascript --margin-bottom-4">
+<CodeBlock>
 {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
@@ -458,13 +480,12 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</code>
-</pre></div>
+</CodeBlock>
 
         </div>
 
         <div className="row">
-          <h2>MultiSelect mode implementation with custom renderer</h2>
+          <h3>MultiSelect mode implementation with custom renderer</h3>
 
           <div>
             <div className="col">
@@ -500,8 +521,7 @@ ReactDOM.render(
           </div>
 
 
-<div className="code-block"><pre>
-<code className="language-javascript --margin-bottom-4">
+<CodeBlock>
 {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
@@ -557,13 +577,13 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</code>
-</pre></div>
+</CodeBlock>
 
         </div>
 
         <div className="row centered">
-          <button type="submit" className={'button'}>Submit form</button>
+          <h3>When inside a &lt;form /&gt;, submit will happen like a standard html form</h3>
+          <button type="submit" className={'button'}>Submit page</button><br/><div className="view-console-message"> Check the URL after you submit the page</div>
         </div>
       </form>
     );

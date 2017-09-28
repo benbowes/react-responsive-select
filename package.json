@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -58,7 +58,12 @@
     "url": "https://github.com/benbowes/react-responsive-select"
   },
   "keywords": [
-    "react",
+    "select",
+    "react select",
+    "react-select",
+    "react dropdown",
+    "react-dropdown",
+    "accessible react select",
     "component",
     "responsive",
     "mobile",

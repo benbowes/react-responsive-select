@@ -49,7 +49,7 @@ describe('ReactResponsiveSelect', () => {
     });
 
     it('should render correct amount of options and have an onSubmit function', () => {
-      expect(selectBox.find('.rrs__options-container .rrs__option').length).to.equal(5);
+      expect(selectBox.find('.rrs__options .rrs__option').length).to.equal(5);
       expect(selectBox.find('ReactResponsiveSelect').props().onSubmit).to.equal(submitSpy);
     });
 
@@ -103,8 +103,8 @@ describe('ReactResponsiveSelect', () => {
 
     beforeEach(() => {
       selectBox = setup();
-      selectBoxContainer = selectBox.find('.rrs__select-container');
-      optionsContainer = selectBox.find('.rrs__options-container');
+      selectBoxContainer = selectBox.find('.rrs');
+      optionsContainer = selectBox.find('.rrs__options');
       selectBoxDOM = selectBoxContainer.getDOMNode();
     });
 
@@ -112,20 +112,20 @@ describe('ReactResponsiveSelect', () => {
       selectBox.unmount();
     });
 
-    it('mousedown on rrs__select-container container should toggle the options panel open and closed', () => {
+    it('mousedown on rrs__button container should toggle the options panel open and closed', () => {
       // Open
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(true);
+      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(true);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
 
       // Closed
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
+      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
 
       // Open
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(true);
+      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(true);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
     });
 
@@ -142,16 +142,16 @@ describe('ReactResponsiveSelect', () => {
 
       selectBoxContainer.simulate('mouseDown');
 
-      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(true);
+      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(true);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
 
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
 
-      expect(selectBoxContainer.hasClass('rrs__options-container--visible')).to.equal(false);
+      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
     });
 
-    it('hitting an alphanumerical key on a rrs__select-container container should open the options panel and set nextPotentialSelectionIndex', () => {
+    it('hitting an alphanumerical key on a rrs__button container should open the options panel and set nextPotentialSelectionIndex', () => {
       selectBoxDOM.focus();
 
       expect(selectBox.state('nextPotentialSelectionIndex')).to.equal(1);
@@ -178,7 +178,7 @@ describe('ReactResponsiveSelect', () => {
       selectBox = setup();
       selectBoxInstance = selectBox.instance();
 
-      selectBoxContainer = selectBox.find('.rrs__select-container');
+      selectBoxContainer = selectBox.find('.rrs__button');
       updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
       handleEnterPressedSpy = sinon.spy(selectBoxInstance, 'handleEnterPressed');
       handleKeyUpOrDownPressedSpy = sinon.spy(selectBoxInstance, 'handleKeyUpOrDownPressed');
@@ -234,7 +234,7 @@ describe('ReactResponsiveSelect', () => {
       submitSpy.reset();
       selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3, isOptionsPanelOpen: true });
 
-      selectBox.find('.rrs__options-container .rrs__option').at(3).simulate('keyDown', { keyCode: keyCodes.ENTER });
+      selectBox.find('.rrs__options .rrs__option').at(3).simulate('keyDown', { keyCode: keyCodes.ENTER });
 
       expect(handleEnterPressedSpy.called).to.equal(true);
       expect(submitSpy.called).to.equal(false);
@@ -308,7 +308,7 @@ describe('ReactResponsiveSelect', () => {
       window['ontouchstart'] = 'fakeEvent';
 
       const selectBoxMobile = setup();
-      const selectBoxMobileContainer = selectBoxMobile.find('.rrs__select-container');
+      const selectBoxMobileContainer = selectBoxMobile.find('.rrs__button');
 
       selectBoxMobileContainer.simulate('touchStart');
 
@@ -328,12 +328,12 @@ describe('ReactResponsiveSelect', () => {
 
     it('should add .rrs__option--selected class to option if selectedValue prop found in options', () => {
       selectBox = setup();
-      expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props()['children']).to.equal('Fiat');
+      expect(selectBox.find('.rrs__options .rrs__option.rrs__option--selected').props()['children']).to.equal('Fiat');
     });
 
     it('should add .rrs__option--selected class to first option when unrecognised selectedValue prop', () => {
       selectBox = setup({selectedValue: 'blahblah'});
-      expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props().children).to.equal('Any');
+      expect(selectBox.find('.rrs__options .rrs__option.rrs__option--selected').props().children).to.equal('Any');
     });
 
     it('should add .rrs__option--selected class to first option when no selectedValue prop', () => {
@@ -344,7 +344,7 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect(selectBox.find('.rrs__options-container .rrs__option.rrs__option--selected').props().children).to.equal('Any');
+      expect(selectBox.find('.rrs__options .rrs__option.rrs__option--selected').props().children).to.equal('Any');
     });
 
   });
@@ -375,10 +375,10 @@ describe('ReactResponsiveSelect', () => {
           multiSelectSelectedIndexes: [1, 2, 3]
         }
       );
-      expect(selectBox.find('.rrs__select-container--multiselect').length).to.equal(1);
+      expect(selectBox.find('.rrs__multiselect-label').length).to.equal(1);
     });
 
-    it('should add .rrs__has-changed class to label if select has been altered', () => {
+    it('should add .rrs--has-changed class to label if select has been altered', () => {
       selectBox = setup({
         multiselect: true,
         caretIcon: '+',
@@ -391,7 +391,7 @@ describe('ReactResponsiveSelect', () => {
         optionIndex: 3
       });
 
-      expect(selectBox.find('.rrs__select-container--multiselect').hasClass('rrs__has-changed')).to.equal(true);
+      expect(selectBox.find('.rrs').hasClass('rrs--has-changed')).to.equal(true);
     });
 
     it('should allow multiple selection on click of an option and not close', () => {
@@ -402,7 +402,7 @@ describe('ReactResponsiveSelect', () => {
       });
       const selectBoxInstance = selectBox.instance();
       const updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
-      const optionsContainer = selectBox.find('.rrs__options-container');
+      const optionsContainer = selectBox.find('.rrs__options');
 
       optionsContainer.find('[data-key=3]').simulate('mousedown');
       expect(updateStateSpy.args[0][0]).to.eql({ type: actionTypes.SET_MULTISELECT_OPTIONS, optionIndex: 3 });
@@ -427,7 +427,7 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect(selectBox.find('.rrs__select-container .rrs__label').props().children).to.equal('Any selected');
+      expect(selectBox.find('.rrs__label__text').props().children).to.equal('Any selected');
     });
 
     it('should handle customLabelRenderer on multi select', () => {
@@ -443,7 +443,7 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect(selectBox.find('.rrs__select-container .rrs__label').props().children).to.equal('Fiat selected');
+      expect(selectBox.find('.rrs__label__text').props().children).to.equal('Fiat selected');
     });
 
   });
@@ -462,7 +462,7 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect(selectBox.find('.rrs__select-container--disabled').length).to.equal(1);
+      expect(selectBox.find('.rrs__button--disabled').length).to.equal(1);
     });
 
     it('should add disabled class on multiselect', () => {
@@ -473,7 +473,7 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect(selectBox.find('.rrs__select-container--disabled').length).to.equal(1);
+      expect(selectBox.find('.rrs__button--disabled').length).to.equal(1);
     });
 
     it('should not add listeners when disabled', () => {

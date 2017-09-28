@@ -21,7 +21,6 @@ export default class SingleSelect extends Component {
 
   render(){
     const {
-      altered,
       caretIcon,
       customLabelText,
       disabled,
@@ -45,18 +44,16 @@ export default class SingleSelect extends Component {
           aria-controls={`rrs-${name}-menu`}
           ref={(r) => { if (r) { return this.optionsButton = r; }}}
           className={singleline(`
-            rrs__select-container
-            ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
-            ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-            ${(altered) ? 'rrs__has-changed': ''}
+            rrs__button
+            ${(disabled === true) ? 'rrs__button--disabled' : ''}
           `)}
         >
 
           {customLabelText &&
-          <div className="rrs__label-container">
+          <div className="rrs__label">
             <span
               aria-label={`${prefix ? prefix + ' ' : ''}${singleSelectSelectedOption.text} selected`}
-              className="rrs__label"
+              className="rrs__label__text"
               id={`rrs-${name}-label`}
             >
               {customLabelText}
@@ -66,10 +63,10 @@ export default class SingleSelect extends Component {
           }
 
           {!customLabelText &&
-          <div className="rrs__label-container">
+          <div className="rrs__label">
             <span
               aria-label={`${prefix ? prefix + ' ' : ''}${singleSelectSelectedOption.text} selected`}
-              className="rrs__label"
+              className="rrs__label__text"
               id={`rrs-${name}-label`}
             >
               {prefix &&
@@ -91,7 +88,7 @@ export default class SingleSelect extends Component {
           id={`rrs-${name}-menu`}
           aria-labelledby={`rrs-${name}-label`}
           role="menu"
-          className="rrs__options-container"
+          className="rrs__options"
           ref={(r) => { if (r) { return this.optionsContainer = r; }}}
         >
           {options.length > 0 &&

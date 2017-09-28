@@ -32,7 +32,6 @@ export default class MultiSelect extends Component {
 
   render(){
     const {
-      altered,
       caretIcon,
       customLabelText,
       disabled,
@@ -56,19 +55,16 @@ export default class MultiSelect extends Component {
           aria-controls={`rrs-${name}-menu`}
           ref={(r) => { if (r) { return this.optionsButton = r; }}}
           className={singleline(`
-            rrs__select-container
-            rrs__select-container--multiselect
-            ${(disabled === true) ? 'rrs__select-container--disabled' : ''}
-            ${(isOptionsPanelOpen === true) ? 'rrs__options-container--visible' : ''}
-            ${altered ? 'rrs__has-changed': ''}
+            rrs__button
+            ${(disabled === true) ? 'rrs__button--disabled' : ''}
           `)}
         >
 
           {customLabelText &&
-          <div className="rrs__label-container">
+          <div className="rrs__label">
             <span
               aria-label={this.getAriaLabel()}
-              className="rrs__label"
+              className="rrs__label__text"
               id={`rrs-${name}-label`}
             >
               {customLabelText}
@@ -78,16 +74,16 @@ export default class MultiSelect extends Component {
           }
 
           {!customLabelText &&
-          <div className="rrs__label-container">
+          <div className="rrs__label">
             <span
               aria-label={this.getAriaLabel()}
-              className="rrs__label"
+              className="rrs__label__text"
               id={`rrs-${name}-label`}
             >
-              <span className='rrs__multiselect__label'>
-                <span className='rrs__multiselect__label-text'>{`${prefix ? prefix + ' ' : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
+              <span className='rrs__multiselect-label'>
+                <span className='rrs__multiselect-label__text'>{`${prefix ? prefix + ' ' : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
                 {multiSelectSelectedOptions.options.length > 1 &&
-                <span className='rrs__multiselect__label-badge'>
+                <span className='rrs__multiselect-label__badge'>
                   {`+ ${multiSelectSelectedOptions.options.length-1}`}
                 </span>
                 }
@@ -111,7 +107,7 @@ export default class MultiSelect extends Component {
           id={`rrs-${name}-menu`}
           aria-labelledby={`rrs-${name}-label`}
           role="menu"
-          className="rrs__options-container"
+          className="rrs__options"
           ref={(r) => { if (r) { return this.optionsContainer = r; }}}
         >
           {options.length > 0 &&
