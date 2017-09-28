@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import singleline from 'singleline';
 import * as actionTypes from './constants/actionTypes';
 import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducers/reducer';
@@ -105,7 +106,11 @@ export default class ReactResponsiveSelect extends Component {
       const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectSelectedOptions) || false;
       return (
         <div
-          className="rrs__select"
+          className={singleline(`
+            rrs
+            ${(isOptionsPanelOpen === true) ? 'rrs--options-visible' : ''}
+            ${altered ? 'rrs--has-changed': ''}
+          `)}
           ref={(r) => { this.selectBox = r; }}
           {...this.listeners}
         >
@@ -130,7 +135,11 @@ export default class ReactResponsiveSelect extends Component {
       const customLabelText = customLabelRenderer && customLabelRenderer(singleSelectSelectedOption) || false;
       return (
         <div
-          className="rrs__select"
+          className={singleline(`
+            rrs
+            ${(isOptionsPanelOpen === true) ? 'rrs--options-visible' : ''}
+            ${altered ? 'rrs--has-changed': ''}
+          `)}
           ref={(r) => { this.selectBox = r; }}
           {...this.listeners}
         >
@@ -335,7 +344,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   focusButton() {
-    this.selectBox.querySelector('.rrs__select-container').focus();
+    this.selectBox.querySelector('.rrs__button').focus();
   }
 
 }
