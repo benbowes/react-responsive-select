@@ -79,7 +79,7 @@ The class names themselves are not configurable.
 To aid in styling the hover/selected states in the options list, I would suggest overriding the class that hides the options temporarily e.g.
 
 ```
-.rrs__select-container + .rrs__options-container {
+.rrs__button + .rrs__options {
   /* height: 0;
   visibility: hidden; */
   height: auto;
@@ -188,6 +188,10 @@ Version 1 docs can be found here: https://github.com/benbowes/react-responsive-s
     </td>
   </tr>
 </table>
+
+## React Responsive Select v2 to v3 upgrade guide
+
+See: https://github.com/benbowes/react-responsive-select/releases/tag/3.0.0
 
 ## Interaction Tests
 
