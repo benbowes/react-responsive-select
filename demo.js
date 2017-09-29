@@ -161,7 +161,7 @@ class Form extends Component { // eslint-disable-line
           <pre>
           <code className="language-bash">$ npm install --save-dev react-responsive-select</code>
           </pre>
-          <p className="--margin-bottom-4">Check out the full documentation in the <strong><a title="Github repository link for react-responsive-select" href="https://github.com/benbowes/react-responsive-select">react-responsive-select</a></strong> repo</p>
+          <p className="--margin-bottom-4">Check out <strong><a title="Github repository link for react-responsive-select" href="https://github.com/benbowes/react-responsive-select">the docs</a></strong> and view the <strong><a href="https://codepen.io/collection/DrjWEk/">Codepen examples</a></strong></p>
         </div>
 
         <div className="row">
