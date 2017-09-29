@@ -165,6 +165,11 @@ class Form extends Component { // eslint-disable-line
         </div>
 
         <div className="row">
+          <h2>SCREEN READER DEMO GIF</h2>
+          <img className="demo-gif --margin-bottom-4" src="./react-responsive-select-voice-over.gif" alt="Screen reader demo gif" />
+        </div>
+
+        <div className="row">
 
           <h2>EXAMPLES</h2>
 

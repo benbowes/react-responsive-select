@@ -308,6 +308,12 @@ li {
   margin: 0 0.75rem 0 0;
 }
 
+.demo-gif {
+  max-width: 640px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
 .centered {
   text-align: center;
 }

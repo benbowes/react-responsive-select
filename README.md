@@ -8,6 +8,10 @@ Built with keyboard and screen reader accessibility in mind.
 
 See the [homepage](https://benbowes.github.io/react-responsive-select/demo/) and the [Codepen examples](https://codepen.io/collection/DrjWEk/)
 
+## Screen reader demo
+
+![Voice over demo gif](./demo/react-responsive-select-voice-over.gif)
+
 ---
 
 ## Getting started
