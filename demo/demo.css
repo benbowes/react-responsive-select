@@ -309,6 +309,7 @@ li {
 }
 
 .demo-gif {
+  width: 100%;
   max-width: 640px;
   border: 1px solid #ccc;
   border-radius: 3px;

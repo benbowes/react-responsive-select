@@ -191,6 +191,16 @@ Version 1 docs can be found here: https://github.com/benbowes/react-responsive-s
   </tr>
 </table>
 
+## CDN
+
+JS:
+https://unpkg.com/react-responsive-select@latest/dist/ReactResponsiveSelect.js
+
+CSS:
+https://unpkg.com/react-responsive-select@latest/dist/ReactResponsiveSelect.css
+
+The [Codepen examples](https://codepen.io/collection/DrjWEk/) are consuming react-responsive-select via CDN if you'd like a guide.
+
 ## React Responsive Select v2 to v3 upgrade guide
 
 See: https://github.com/benbowes/react-responsive-select/releases/tag/3.0.0
