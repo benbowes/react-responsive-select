@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -109,6 +109,6 @@
     "webpack-node-externals": "1.6.x"
   },
   "peerDependencies": {
-    "react": "0.14.9 || ^15.3.0"
+    "react": "0.14.9 || >15.3.0"
   }
 }
