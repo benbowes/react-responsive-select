@@ -251,7 +251,7 @@ export default class ReactResponsiveSelect extends Component {
       e.preventDefault();
 
       /* If user is scrolling return */
-      if (e && e.target.classList.contains('rrs__options-container')) {
+      if (e && e.target.classList.contains('rrs__options')) {
         return true;
       }
 
