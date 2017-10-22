@@ -7,6 +7,7 @@ import reducer, { initialState } from './reducers/reducer';
 import getNextIndex from './lib/getNextIndex';
 import SingleSelect from './components/SingleSelect';
 import MultiSelect from './components/MultiSelect';
+import containsClassName from './lib/containsClassName';
 import debugReportChange from './lib/debugReportChange';
 
 export default class ReactResponsiveSelect extends Component {
@@ -251,11 +252,9 @@ export default class ReactResponsiveSelect extends Component {
       e.preventDefault();
 
       /* If user is scrolling return */
-      if (e && e.target.classList.contains('rrs__options')) {
-        return true;
-      }
+      if (e && containsClassName(e.target, 'rrs__options')) return true;
 
-      const userSelectedOption = e.target.classList.contains('rrs__option');
+      const userSelectedOption = containsClassName(e.target, 'rrs__option');
 
       /* Select option index, if an index was clicked */
       if (userSelectedOption) {
