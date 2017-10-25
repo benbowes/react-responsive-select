@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import containsClassName from './containsClassName';
 
 // Inheritence Inversion HOC https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e#5247
 const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
@@ -17,7 +18,7 @@ const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
     const { scrollIntoViewElementSelector, scrollIntoViewScrollPaneRef, isDragging } = this.props;
     this.scrollPaneDOM = this.scrollPaneDOM || scrollIntoViewScrollPaneRef();
     this.elementDOM = this.elementDOM || ReactDOM.findDOMNode(this);
-    const isCurrentHighlightedOption = this.elementDOM.classList.contains( scrollIntoViewElementSelector );
+    const isCurrentHighlightedOption = containsClassName(this.elementDOM, scrollIntoViewElementSelector );
 
     if (isDragging === true) this.dontScrollIntoView = true; // if dragged - kill scrollIntoView
     if (
