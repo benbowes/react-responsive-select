@@ -164,10 +164,10 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
-  updateState(action) {
+  updateState(action, callback) {
     /* Update state in a similar way to Redux - thanks to https://twitter.com/mehdimollaverdi */
     const nextState = this.reducer(this.state, action);
-    this.setState( nextState );
+    this.setState( nextState, () => callback && callback() );
 
     /* To debug actions plus their resulting state whilst developing, add ?debug=true */
     debugReportChange( this.props.name, action, nextState );
@@ -203,8 +203,10 @@ export default class ReactResponsiveSelect extends Component {
 
           /* Multiselect does not close on selection. Focus button to blur and close options panel on TAB */
           if (isMultiSelect) {
-            this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED });
-            this.focusButton();
+            this.updateState(
+              { type: actionTypes.SET_OPTIONS_PANEL_CLOSED },
+              () => this.focusButton
+            );
           }
         }
         return e;
@@ -223,8 +225,10 @@ export default class ReactResponsiveSelect extends Component {
 
       case keyCodes.ESCAPE:
         /* remove focus from the panel when focussed */
-        this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION });
-        return this.focusButton();
+        return this.updateState(
+          { type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION },
+          () => this.focusButton,
+        );
 
       case keyCodes.UP:
         /* will open the options panel if closed
@@ -271,18 +275,17 @@ export default class ReactResponsiveSelect extends Component {
         type: isOptionsPanelOpen
           ? actionTypes.SET_OPTIONS_PANEL_CLOSED
           : actionTypes.SET_OPTIONS_PANEL_OPEN
-      });
-      return this.focusButton();
+      }, () => this.focusButton);
     }
   }
 
-  handleBlur(e) {
+  handleBlur() {
     const { isOptionsPanelOpen } = this.state;
 
     /* Handle click outside of selectbox */
     if (
       this.selectBox
-      && !this.selectBox.contains(e.relatedTarget)
+      && !this.selectBox.contains(document.activeElement)
       && isOptionsPanelOpen
     ) {
       return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR });

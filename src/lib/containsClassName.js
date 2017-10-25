@@ -1,5 +1,3 @@
 export default function containsClassName(element, classNameStr) {
-  if (element && element.className) {
-    return element.className.split(' ').indexOf(classNameStr) > -1;
-  }
+  return String(element.className).split(' ').indexOf(classNameStr) > -1;
 }
