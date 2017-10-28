@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { ReactResponsiveSelectProps } from './propTypes';
 import singleline from 'singleline';
 import * as actionTypes from './constants/actionTypes';
 import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducers/reducer';
-import getNextIndex from './lib/getNextIndex';
 import SingleSelect from './components/SingleSelect';
 import MultiSelect from './components/MultiSelect';
 import containsClassName from './lib/containsClassName';
 import debugReportChange from './lib/debugReportChange';
+import getNextIndex from './lib/getNextIndex';
+import { singleSelectBroadcastChange, multiSelectBroadcastChange } from './lib/onChangeBroadcasters';
 
 export default class ReactResponsiveSelect extends Component {
 
   state = initialState;
   reducer = reducer;
+  listeners = {};
   handleBlur = this.handleBlur.bind(this);
   handleTouchMove = this.handleTouchMove.bind(this);
   handleTouchStart = this.handleTouchStart.bind(this);
   handleClick = this.handleClick.bind(this);
   handleKeyEvent = this.handleKeyEvent.bind(this);
-
-  optionNodesLength = 0;
-  listeners = {};
 
   componentDidMount() {
     const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
@@ -30,8 +29,6 @@ export default class ReactResponsiveSelect extends Component {
       type: actionTypes.INITIALISE,
       value: { options, selectedValue, selectedValues, name, multiselect }
     });
-
-    this.optionNodesLength = options.length;
 
     if (!disabled) {
       this.listeners = {
@@ -51,37 +48,9 @@ export default class ReactResponsiveSelect extends Component {
     const { onChange } = this.props;
 
     if (isMultiSelect) {
-      const { options: prevOptions } = prevState.multiSelectSelectedOptions;
-      const { options: currOptions } = multiSelectSelectedOptions;
-      const shouldBroadcastChange = (
-        prevOptions.length &&
-        (prevOptions.length !== currOptions.length || prevOptions[0].value !== currOptions[0].value)
-      );
-
-      if( shouldBroadcastChange ) {
-        return onChange({
-          options: multiSelectSelectedOptions.options.map(v => ({
-            name: v.name,
-            text: v.text,
-            value: v.value
-          })),
-          altered
-        });
-      }
-
+      multiSelectBroadcastChange(prevState.multiSelectSelectedOptions.options, multiSelectSelectedOptions.options, altered, onChange);
     } else {
-      const { value: prevValue } = prevState.singleSelectSelectedOption;
-      const { value: currValue } = singleSelectSelectedOption;
-      const shouldBroadcastChange = ( prevValue && prevValue !== currValue  );
-
-      if( shouldBroadcastChange ) {
-        return onChange({
-          name: singleSelectSelectedOption.name,
-          text: singleSelectSelectedOption.text,
-          value: singleSelectSelectedOption.value,
-          altered
-        });
-      }
+      singleSelectBroadcastChange(prevState.singleSelectSelectedOption, singleSelectSelectedOption, altered, onChange);
     }
   }
 
@@ -167,10 +136,10 @@ export default class ReactResponsiveSelect extends Component {
   updateState(action, callback) {
     /* Update state in a similar way to Redux - thanks to https://twitter.com/mehdimollaverdi */
     const nextState = this.reducer(this.state, action);
-    this.setState( nextState, () => callback && callback() );
+    this.setState(nextState, () => callback && callback());
 
     /* To debug actions plus their resulting state whilst developing, add ?debug=true */
-    debugReportChange( this.props.name, action, nextState );
+    debugReportChange(this.props.name, action, nextState);
   }
 
   handleTouchStart() {
@@ -194,8 +163,7 @@ export default class ReactResponsiveSelect extends Component {
       keyCodes.DOWN
     ], e);
 
-    switch ( e.keyCode ) {
-
+    switch (e.keyCode) {
       case keyCodes.TAB:
         /* Don't shift focus when the panel is open (unless it's a Multiselect) */
         if (isOptionsPanelOpen) {
@@ -203,10 +171,7 @@ export default class ReactResponsiveSelect extends Component {
 
           /* Multiselect does not close on selection. Focus button to blur and close options panel on TAB */
           if (isMultiSelect) {
-            this.updateState(
-              { type: actionTypes.SET_OPTIONS_PANEL_CLOSED },
-              () => this.focusButton
-            );
+            this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED }, () => this.focusButton);
           }
         }
         return e;
@@ -217,10 +182,8 @@ export default class ReactResponsiveSelect extends Component {
         return this.handleEnterPressed(e);
 
       case keyCodes.SPACE:
-        /* open or close the panel when focussed */
-        if (isOptionsPanelOpen) {
-          return this.handleClick(e);
-        }
+        /* close the panel and select option when open, or open the panel if closed */
+        if (isOptionsPanelOpen) return this.handleClick(e);
         return this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
 
       case keyCodes.ESCAPE:
@@ -251,17 +214,14 @@ export default class ReactResponsiveSelect extends Component {
     const { isMultiSelect, isOptionsPanelOpen, isDragging } = this.state;
 
     if (isDragging === false) {
-
       /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
       e.preventDefault();
 
       /* If user is scrolling return */
       if (e && containsClassName(e.target, 'rrs__options')) return true;
 
-      const userSelectedOption = containsClassName(e.target, 'rrs__option');
-
-      /* Select option index, if an index was clicked */
-      if (userSelectedOption) {
+      /* Select option index, if user selected option */
+      if (containsClassName(e.target, 'rrs__option')) {
         return this.updateState({
           type: isMultiSelect
             ? actionTypes.SET_MULTISELECT_OPTIONS
@@ -281,7 +241,6 @@ export default class ReactResponsiveSelect extends Component {
 
   handleBlur() {
     const { isOptionsPanelOpen } = this.state;
-
     /* Handle click outside of selectbox */
     if (
       this.selectBox
@@ -294,7 +253,7 @@ export default class ReactResponsiveSelect extends Component {
 
   handleAlphaNumerical(e) {
     const { options } = this.state;
-    const optionIndex = options.map(v => String(v.text).toLowerCase().charAt(0)).indexOf(e.key);
+    const optionIndex = options.map(v => v.text.toLowerCase().charAt(0)).indexOf(e.key);
 
     if (optionIndex > -1) {
       this.updateState({
@@ -325,11 +284,11 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleKeyUpOrDownPressed(type) {
-    const { isOptionsPanelOpen, nextPotentialSelectionIndex } = this.state;
+    const { isOptionsPanelOpen, nextPotentialSelectionIndex, options } = this.state;
 
     this.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX,
-      optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, this.optionNodesLength)
+      optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, options.length)
     });
 
     /* Open the options panel */
@@ -341,7 +300,7 @@ export default class ReactResponsiveSelect extends Component {
   /* Disable native functionality if keyCode match */
   preventDefaultForKeyCodes(keyCodes, e) {
     keyCodes.forEach(keyCode => {
-      if(keyCode === e.keyCode) e.preventDefault();
+      if (keyCode === e.keyCode) e.preventDefault();
     });
   }
 
@@ -351,24 +310,4 @@ export default class ReactResponsiveSelect extends Component {
 
 }
 
-ReactResponsiveSelect.propTypes = {
-  caretIcon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
-  customLabelRenderer: PropTypes.func,
-  disabled: PropTypes.bool,
-  multiselect: PropTypes.bool,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  onSubmit: PropTypes.func,
-  prefix: PropTypes.string,
-  selectedValue: PropTypes.string,
-  selectedValues: PropTypes.arrayOf( PropTypes.string.isRequired )
-};
+ReactResponsiveSelect.propTypes = ReactResponsiveSelectProps;

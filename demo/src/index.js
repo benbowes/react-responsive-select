@@ -1,29 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import ReactResponsiveSelect from './src/ReactResponsiveSelect';
+import ReactResponsiveSelect from '../../src/ReactResponsiveSelect';
 import CodeBlock from './CodeBlock';
-
-const options = [{
-  value: 'null', // (Required) form submitted value
-  text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
-  markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
-}, {
-  value: 'fiat',
-  text: 'Fiat',
-  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
-}, {
-  value: 'subaru',
-  text: 'Subaru',
-  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
-}, {
-  value: 'bmw',
-  text: 'BMW',
-  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
-}, {
-  value: 'tesla',
-  text: 'Tesla',
-  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
-}];
 
 // By default no caret icon is supplied - any valid jsx markup will do
 const caretIcon = (
@@ -104,7 +82,27 @@ class Form extends Component { // eslint-disable-line
           <div>
             <ReactResponsiveSelect
               name="carType2"
-              options={options}
+              options={[{
+                value: 'null', // (Required) form submitted value
+                text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
+                markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+              }, {
+                value: 'fiat',
+                text: 'Fiat',
+                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+              }, {
+                value: 'subaru',
+                text: 'Subaru',
+                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+              }, {
+                value: 'bmw',
+                text: 'BMW',
+                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+              }, {
+                value: 'tesla',
+                text: 'Tesla',
+                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+              }]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
               prefix="Car2: "
@@ -116,7 +114,27 @@ class Form extends Component { // eslint-disable-line
           <div>
             <ReactResponsiveSelect
               name="carType3"
-              options={options}
+              options={[{
+                value: 'null', // (Required) form submitted value
+                text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
+                markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+              }, {
+                value: 'fiat',
+                text: 'Fiat',
+                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+              }, {
+                value: 'subaru',
+                text: 'Subaru',
+                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+              }, {
+                value: 'bmw',
+                text: 'BMW',
+                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+              }, {
+                value: 'tesla',
+                text: 'Tesla',
+                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+              }]}
               onSubmit={() => { this.form.submit(); }}
               customLabelRenderer={singleSelectSelectedOption => `You selected ${singleSelectSelectedOption.text}`}
               caretIcon={caretIcon}
@@ -254,7 +272,27 @@ ReactDOM.render(
             <div className="col">
               <ReactResponsiveSelect
                 name="make2"
-                options={options}
+                options={[{
+                  value: 'null', // (Required) form submitted value
+                  text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
+                  markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+                }, {
+                  value: 'fiat',
+                  text: 'Fiat',
+                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+                }, {
+                  value: 'subaru',
+                  text: 'Subaru',
+                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+                }, {
+                  value: 'bmw',
+                  text: 'BMW',
+                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+                }, {
+                  value: 'tesla',
+                  text: 'Tesla',
+                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+                }]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
                 prefix="Make2: "
@@ -328,7 +366,27 @@ ReactDOM.render(
             <div className="col">
               <ReactResponsiveSelect
                 name="make3"
-                options={options}
+                options={[{
+                  value: 'null', // (Required) form submitted value
+                  text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
+                  markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+                }, {
+                  value: 'fiat',
+                  text: 'Fiat',
+                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+                }, {
+                  value: 'subaru',
+                  text: 'Subaru',
+                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+                }, {
+                  value: 'bmw',
+                  text: 'BMW',
+                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+                }, {
+                  value: 'tesla',
+                  text: 'Tesla',
+                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+                }]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
                 customLabelRenderer={singleSelectSelectedOption => `Selected make is ${singleSelectSelectedOption.text} :)`} // (Optional) format your own label text like this

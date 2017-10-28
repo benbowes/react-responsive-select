@@ -10,7 +10,6 @@ import mergeIsAlteredState from './lib/mergeIsAlteredState';
 import getInitialOption from './lib/getInitialOption';
 
 export const initialState = {
-
   // Constants
   isMultiSelect: false,
 

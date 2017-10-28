@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { MultiSelectOptionProps } from '../propTypes';
 import singleline from 'singleline';
 
 export default class MultiSelectOption extends Component {
@@ -36,16 +36,4 @@ export default class MultiSelectOption extends Component {
   }
 }
 
-MultiSelectOption.propTypes = {
-  index: PropTypes.number.isRequired,
-  isOptionsPanelOpen: PropTypes.bool.isRequired,
-  multiSelectSelectedIndexes: PropTypes.arrayOf(
-    PropTypes.number
-  ),
-  nextPotentialSelectionIndex: PropTypes.number,
-  option: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    markup: PropTypes.element
-  }).isRequired
-};
+MultiSelectOption.propTypes = MultiSelectOptionProps;

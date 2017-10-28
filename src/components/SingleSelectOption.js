@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { SingleSelectOptionProps } from '../propTypes';
 import singleline from 'singleline';
 
 export default class SingleSelectOption extends Component {
@@ -37,14 +37,4 @@ export default class SingleSelectOption extends Component {
   }
 }
 
-SingleSelectOption.propTypes = {
-  index: PropTypes.number.isRequired,
-  isOptionsPanelOpen: PropTypes.bool.isRequired,
-  nextPotentialSelectionIndex: PropTypes.number,
-  option: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    markup: PropTypes.element
-  }).isRequired,
-  singleSelectSelectedIndex: PropTypes.number
-};
+SingleSelectOption.propTypes = SingleSelectOptionProps;

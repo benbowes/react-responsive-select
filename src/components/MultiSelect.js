@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { MultiSelectProps } from '../propTypes';
 import singleline from 'singleline';
-import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
 import MultiSelectOption from './MultiSelectOption';
 import simpleArraysEqual from '../lib/simpleArraysEqual';
+import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
 const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
 
 export default class MultiSelect extends Component {
@@ -131,45 +131,4 @@ export default class MultiSelect extends Component {
   }
 }
 
-MultiSelect.propTypes = {
-  altered: PropTypes.bool,
-  caretIcon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
-  customLabelText: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-    PropTypes.element
-  ]),
-  disabled: PropTypes.bool,
-  multiSelectInitialSelectedIndexes: PropTypes.arrayOf(
-    PropTypes.number
-  ),
-  multiSelectSelectedIndexes: PropTypes.arrayOf(
-    PropTypes.number
-  ),
-  multiSelectSelectedOptions: PropTypes.shape({
-    altered: PropTypes.bool,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        text: PropTypes.string,
-        value: PropTypes.string,
-        markup: PropTypes.object
-      })
-    )
-  }),
-  isDragging: PropTypes.bool,
-  isOptionsPanelOpen: PropTypes.bool,
-  name: PropTypes.string,
-  nextPotentialSelectionIndex: PropTypes.number,
-  onSubmit: PropTypes.func,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  prefix: PropTypes.string
-};
+MultiSelect.propTypes = MultiSelectProps;
