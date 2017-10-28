@@ -5,6 +5,13 @@
 */
 .rrs {
   position: relative;
+  box-sizing: border-box;
+}
+
+.rrs *,
+.rrs *:before,
+.rrs *:after {
+  box-sizing: border-box;
 }
 
 .rrs__button {
