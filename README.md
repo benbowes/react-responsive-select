@@ -1,8 +1,18 @@
-# React Responsive Select ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
+# React Responsive Select
+![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
 
 A customisable, touchable, React single-select / multi-select form control.
 
 Built with keyboard and screen reader accessibility in mind.
+
+## Features
+
+- Single and Multi select modes
+- Accessible WAI ARIA compliance
+- Touch friendly
+- Keyboard friendly
+- Similar interaction experience across platforms
+- Easy to style
 
 ## Demo
 
@@ -108,9 +118,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
 
 ## API
 
-The external API has not changed with version 2, but the DOM structure and CSS has (hence the major version change). To upgrade to this major version you'll need to do a minor upgrade of your CSS (If you have custom CSS overrides).
-
-Version 1 docs can be found here: https://github.com/benbowes/react-responsive-select/tree/1.5.3.
+#### Single Select
 
 <table width="100%">
   <tr>
@@ -168,22 +176,23 @@ Version 1 docs can be found here: https://github.com/benbowes/react-responsive-s
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
-    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label. See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L97) or the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo.js#L388)</p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label. See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L139) or the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L573-L577)</p>
     </td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+</table>
 
+#### Multi Select
+
+Same as Single Select API but with the following amendments
+
+<table width="100%">
   <tr>
-    <td>multiselect (MultiSelect mode)</td>
+    <td>multiselect</td>
     <td>Boolean</td>
     <td>Makes the select control handle multiple selections. Check the implementation example here: https://benbowes.github.io/react-responsive-select/demo/</td>
   </tr>
   <tr>
-    <td>selectedValues (when MultiSelect mode)</td>
+    <td>selectedValues</td>
     <td>Array of String values</td>
     <td>Pre-select several options with this value - should match against an existing <code>option.value</code>, or if omitted, the first item will be selected.
     e.g. <code>selectedValues={['mazda','ford']}</code>

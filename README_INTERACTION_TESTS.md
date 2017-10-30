@@ -2,14 +2,6 @@
 
 ---
 
-## Single-Select Touch Device
-
-- **TAPPING** on a select will open it's options
-- **TAPPING** on an option will select it's value
-- **DRAGGING** on an options panel that is scrollable, will scroll the options panel
-
----
-
 ## Single-Select Desktop Keyboard
 
 ##### When not focused
@@ -37,10 +29,10 @@
 
 ---
 
-## Multi-Select Touch Device
+## Single-Select Touch Device
 
 - **TAPPING** on a select will open it's options
-- **TAPPING** on an option will check/uncheck it's value
+- **TAPPING** on an option will select it's value
 - **DRAGGING** on an options panel that is scrollable, will scroll the options panel
 
 ---
@@ -63,8 +55,8 @@
 #### When focused and open
 
 - hitting **TAB** key should close options panel but retain focus on the select
-- hitting **DOWN** key should signify item available for interaction and decrement down the options panel - signifying next potential item available for interaction 
-- hitting **UP** key should signify  available for interaction and increment up the options panel - signifying next item  available for interaction 
+- hitting **DOWN** key should signify item available for interaction and decrement down the options panel - signifying next potential item available for interaction
+- hitting **UP** key should signify  available for interaction and increment up the options panel - signifying next item  available for interaction
 - hitting **ENTER** key should select the current signified option
 - hitting **SPACE** key should select the current signified option
 - hitting **ESC** key should close the options panel and keep current selection
@@ -73,3 +65,11 @@
 #### When not focused
 
 - Select Input receives focus when **TABBED** to
+
+---
+
+## Multi-Select Touch Device
+
+- **TAPPING** on a select will open it's options
+- **TAPPING** on an option will check/uncheck it's value
+- **DRAGGING** on an options panel that is scrollable, will scroll the options panel
