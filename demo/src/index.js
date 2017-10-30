@@ -45,6 +45,7 @@ class Form extends Component { // eslint-disable-line
           <h2>FEATURES</h2>
 
           <ul className="features-list">
+            <li className="features-list__item">{featuresCheckboxIcon}<h4>Single and Multi select modes</h4></li>
             <li className="features-list__item">{featuresCheckboxIcon}<h4>Accessible WAI ARIA compliance</h4></li>
             <li className="features-list__item">{featuresCheckboxIcon}<h4>Touch friendly</h4></li>
             <li className="features-list__item">{featuresCheckboxIcon}<h4>Keyboard friendly</h4></li>
