@@ -63,14 +63,14 @@ class Form extends Component { // eslint-disable-line
               name="carType1"
               options={[
                 { value: 'null', text: 'Any' },
+                { value: 'alfa-romeo', text: 'Alfa Romeo' },
+                { value: 'bmw', text: 'BMW' },
                 { value: 'fiat', text: 'Fiat' },
                 { value: 'subaru', text: 'Subaru' },
-                { value: 'bmw', text: 'BMW' },
+                { value: 'suzuki', text: 'Suzuki' },
                 { value: 'tesla', text: 'Tesla' },
-                { value: 'fiat', text: 'Fiat' },
-                { value: 'subaru', text: 'Subaru' },
-                { value: 'bmw', text: 'BMW' },
-                { value: 'tesla', text: 'Tesla' }
+                { value: 'volvo', text: 'Volvo' },
+                { value: 'zonda', text: 'Zonda' }
               ]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
@@ -84,9 +84,13 @@ class Form extends Component { // eslint-disable-line
             <ReactResponsiveSelect
               name="carType2"
               options={[{
-                value: 'null', // (Required) form submitted value
-                text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
-                markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+                value: 'null',
+                text: 'Any',
+                markup: <span>Any</span>
+              }, {
+                value: 'bmw',
+                text: 'BMW',
+                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
               }, {
                 value: 'fiat',
                 text: 'Fiat',
@@ -95,10 +99,6 @@ class Form extends Component { // eslint-disable-line
                 value: 'subaru',
                 text: 'Subaru',
                 markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
-              }, {
-                value: 'bmw',
-                text: 'BMW',
-                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
               }, {
                 value: 'tesla',
                 text: 'Tesla',
@@ -116,9 +116,13 @@ class Form extends Component { // eslint-disable-line
             <ReactResponsiveSelect
               name="carType3"
               options={[{
-                value: 'null', // (Required) form submitted value
-                text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
-                markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+                value: 'null',
+                text: 'Any',
+                markup: <span>Any</span>
+              }, {
+                value: 'bmw',
+                text: 'BMW',
+                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
               }, {
                 value: 'fiat',
                 text: 'Fiat',
@@ -127,10 +131,6 @@ class Form extends Component { // eslint-disable-line
                 value: 'subaru',
                 text: 'Subaru',
                 markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
-              }, {
-                value: 'bmw',
-                text: 'BMW',
-                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
               }, {
                 value: 'tesla',
                 text: 'Tesla',
@@ -151,16 +151,16 @@ class Form extends Component { // eslint-disable-line
               name="carType4"
               options={[ // (Required) an array of options - see above const options
                 { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
                 { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
                 { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
                 { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
                 { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
+                { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
+                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') }
               ]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
@@ -200,14 +200,14 @@ class Form extends Component { // eslint-disable-line
                 name="make1"
                 options={[
                   { value: 'null', text: 'Any' },
+                  { value: 'alfa-romeo', text: 'Alfa Romeo' },
+                  { value: 'bmw', text: 'BMW' },
                   { value: 'fiat', text: 'Fiat' },
                   { value: 'subaru', text: 'Subaru' },
-                  { value: 'bmw', text: 'BMW' },
+                  { value: 'suzuki', text: 'Suzuki' },
                   { value: 'tesla', text: 'Tesla' },
-                  { value: 'fiat', text: 'Fiat' },
-                  { value: 'subaru', text: 'Subaru' },
-                  { value: 'bmw', text: 'BMW' },
-                  { value: 'tesla', text: 'Tesla' }
+                  { value: 'volvo', text: 'Volvo' },
+                  { value: 'zonda', text: 'Zonda' }
                 ]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
@@ -274,9 +274,13 @@ ReactDOM.render(
               <ReactResponsiveSelect
                 name="make2"
                 options={[{
-                  value: 'null', // (Required) form submitted value
-                  text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
-                  markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+                  value: 'null',
+                  text: 'Any',
+                  markup: <span>Any</span>
+                }, {
+                  value: 'bmw',
+                  text: 'BMW',
+                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
                 }, {
                   value: 'fiat',
                   text: 'Fiat',
@@ -285,10 +289,6 @@ ReactDOM.render(
                   value: 'subaru',
                   text: 'Subaru',
                   markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
-                }, {
-                  value: 'bmw',
-                  text: 'BMW',
-                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
                 }, {
                   value: 'tesla',
                   text: 'Tesla',
@@ -334,7 +334,7 @@ export default class Form extends Component {
               markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
             }, {
               value: 'subaru', // (Required) form submitted value
-              text: 'Subaru',// (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
+              text: 'Subaru', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
               markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span> // (Optional) option label if you want to add your own markup. Note "text" is used in select label
             },
             ...
@@ -372,6 +372,10 @@ ReactDOM.render(
                   text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
                   markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
                 }, {
+                  value: 'bmw',
+                  text: 'BMW',
+                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+                }, {
                   value: 'fiat',
                   text: 'Fiat',
                   markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
@@ -379,10 +383,6 @@ ReactDOM.render(
                   value: 'subaru',
                   text: 'Subaru',
                   markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
-                }, {
-                  value: 'bmw',
-                  text: 'BMW',
-                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
                 }, {
                   value: 'tesla',
                   text: 'Tesla',
@@ -467,16 +467,16 @@ ReactDOM.render(
                 name="make4" // (Required) the value to submit
                 options={[ // (Required) an array of options - see above const options
                   { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
                   { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
                   { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
                   { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
                   { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
+                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
+                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') }
                 ]}
                 onSubmit={() => { this.form.submit(); }} // (Required) form submit function
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
@@ -522,8 +522,8 @@ export default class Form extends Component {
           name="make4"
           options={[
             { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-            { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
             { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+            { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
             ...
           ]}
           onSubmit={() => { console.log("Handle form submit here") }}
@@ -558,16 +558,16 @@ ReactDOM.render(
                 name="make5" // (Required) the value to submit
                 options={[ // (Required) an array of options - see above const options
                   { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
                   { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
                   { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
                   { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
                   { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') }
+                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
+                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') }
                 ]}
                 onSubmit={() => { this.form.submit(); }} // (Required) form submit function
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
@@ -618,8 +618,8 @@ export default class Form extends Component {
           name="make5" // (Required) the value to submit
           options={[ // (Required) an array of options - see above const options
             { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-            { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
             { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+            { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
             ...
           ]}
           onSubmit={() => { console.log("Handle form submit here") }}
