@@ -42,6 +42,17 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
+  /* Allow updating options and selectedValue via props */
+  componentWillReceiveProps(nextProps) {
+    const { options, selectedValue } = nextProps;
+    const { selectedValues, name, multiselect, disabled } = this.props;
+
+    this.updateState({
+      type: actionTypes.INITIALISE,
+      value: { options, selectedValue, selectedValues, name, multiselect }
+    });
+  }
+
   /* Broadcast change when there has been one */
   componentDidUpdate( prevProps, prevState ) {
     const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect, altered } = this.state;
