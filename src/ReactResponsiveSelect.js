@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ReactResponsiveSelectProps } from './propTypes';
 import singleline from 'singleline';
+import isEqual from 'lodash.isequal';
+import { ReactResponsiveSelectProps } from './propTypes';
 import * as actionTypes from './constants/actionTypes';
 import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducers/reducer';
@@ -23,11 +24,11 @@ export default class ReactResponsiveSelect extends Component {
   handleKeyEvent = this.handleKeyEvent.bind(this);
 
   componentDidMount() {
-    const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
+    const { options, selectedValue, selectedValues, name, multiselect, disabled, altered } = this.props;
 
     this.updateState({
       type: actionTypes.INITIALISE,
-      value: { options, selectedValue, selectedValues, name, multiselect }
+      value: { options, selectedValue, selectedValues, name, multiselect, altered }
     });
 
     if (!disabled) {
@@ -42,15 +43,13 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
-  /* Allow updating options and selectedValue via props */
   componentWillReceiveProps(nextProps) {
-    const { options, selectedValue } = nextProps;
-    const { selectedValues, name, multiselect, disabled } = this.props;
-
-    this.updateState({
-      type: actionTypes.INITIALISE,
-      value: { options, selectedValue, selectedValues, name, multiselect }
-    });
+    if(!isEqual(nextProps, this.props)) {
+      this.updateState({
+        type: actionTypes.UPDATE_VIA_PROPS,
+        value: { ...this.props, ...nextProps }
+      });
+    }
   }
 
   /* Broadcast change when there has been one */
