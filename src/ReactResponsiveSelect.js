@@ -149,7 +149,11 @@ export default class ReactResponsiveSelect extends Component {
 
   handleTouchMove() {
     /* if touchmove fired - User is dragging, this disables touchend/click */
-    this.updateState({ type: actionTypes.SET_IS_DRAGGING, boolean: true });
+    const { isDragging } = this.state;
+
+    if (!isDragging) {
+      this.updateState({ type: actionTypes.SET_IS_DRAGGING, boolean: true });
+    }
   }
 
   handleKeyEvent(e) {
