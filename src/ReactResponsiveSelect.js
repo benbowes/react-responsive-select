@@ -43,6 +43,10 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
+  /**
+  * Allow for the component to be updated/controlled via props after componentDidMount
+  * TODO add a test for this
+  */
   componentWillReceiveProps(nextProps) {
     if(!isEqual(nextProps, this.props)) {
       this.updateState({
@@ -56,6 +60,20 @@ export default class ReactResponsiveSelect extends Component {
   componentDidUpdate( prevProps, prevState ) {
     const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect, altered } = this.state;
     const { onChange } = this.props;
+
+    /**
+    * Check if there is a need to broadcast a change, props can now change state given
+    * that the component can be controlled externally.
+    * Exit if - the same single select option is selected as before
+    * Exit if - the same multi select options are selected as before
+    * TODO add a test for this
+    */
+    if (
+      this.props.selectedValue === this.state.singleSelectInitialIndex ||
+      isEqual(this.props.selectedValues, this.state.multiSelectInitialSelectedIndexes)
+    ) {
+      return false;
+    }
 
     if (isMultiSelect) {
       multiSelectBroadcastChange(prevState.multiSelectSelectedOptions.options, multiSelectSelectedOptions.options, altered, onChange);
@@ -183,7 +201,9 @@ export default class ReactResponsiveSelect extends Component {
         if (isOptionsPanelOpen) {
           e.preventDefault();
 
-          /* Multiselect does not close on selection. Focus button to blur and close options panel on TAB */
+          /** Multiselect does not close on selection. Focus button to blur and close options panel on TAB
+          * TODO add a test for this
+          */
           if (isMultiSelect) {
             this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED }, () => this.focusButton);
           }
@@ -231,7 +251,7 @@ export default class ReactResponsiveSelect extends Component {
       /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
       e.preventDefault();
 
-      /* If user is scrolling return */
+      /* If user is scrolling return TODO add a test for this */
       if (e && containsClassName(e.target, 'rrs__options')) return true;
 
       /* Select option index, if user selected option */
@@ -253,6 +273,7 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
+  /* TODO add a test for this */
   handleBlur() {
     const { isOptionsPanelOpen } = this.state;
     /* Handle click outside of selectbox */
@@ -318,6 +339,7 @@ export default class ReactResponsiveSelect extends Component {
     });
   }
 
+  /* TODO add a test for this */
   focusButton() {
     this.selectBox.querySelector('.rrs__button').focus();
   }
