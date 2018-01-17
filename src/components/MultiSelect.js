@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { MultiSelectProps } from '../propTypes';
 import singleline from 'singleline';
+import isEqual from 'lodash.isequal';
 import MultiSelectOption from './MultiSelectOption';
-import simpleArraysEqual from '../lib/simpleArraysEqual';
 import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
 const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
 
@@ -24,7 +24,7 @@ export default class MultiSelect extends Component {
     if (
       !this.props.isOptionsPanelOpen
       && prevProps.isOptionsPanelOpen
-      && !simpleArraysEqual(prevProps.multiSelectSelectedIndexes, this.props.multiSelectSelectedIndexes)
+      && !isEqual(prevProps.multiSelectSelectedIndexes, this.props.multiSelectSelectedIndexes)
     ) {
       this.optionsButton.focus();
     }

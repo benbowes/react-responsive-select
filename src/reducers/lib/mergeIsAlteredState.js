@@ -1,9 +1,9 @@
-import simpleArraysEqual from '../../lib/simpleArraysEqual';
+import isEqual from 'lodash.isequal';
 
 export function isAltered(newState) {
   return (!newState.isMultiSelect)
     ? newState.singleSelectSelectedIndex !== newState.singleSelectInitialIndex
-    : !simpleArraysEqual(newState.multiSelectInitialSelectedIndexes, newState.multiSelectSelectedIndexes);
+    : !isEqual(newState.multiSelectInitialSelectedIndexes, newState.multiSelectSelectedIndexes);
 }
 
 export default function mergeIsAlteredState(newState) {
