@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ReactResponsiveSelectProps } from './propTypes';
 import singleline from 'singleline';
+import isEqual from 'lodash.isequal';
+import { ReactResponsiveSelectProps } from './propTypes';
 import * as actionTypes from './constants/actionTypes';
 import keyCodes from './constants/keyCodes';
 import reducer, { initialState } from './reducers/reducer';
@@ -23,11 +24,11 @@ export default class ReactResponsiveSelect extends Component {
   handleKeyEvent = this.handleKeyEvent.bind(this);
 
   componentDidMount() {
-    const { options, selectedValue, selectedValues, name, multiselect, disabled } = this.props;
+    const { options, selectedValue, selectedValues, name, multiselect, disabled, altered } = this.props;
 
     this.updateState({
       type: actionTypes.INITIALISE,
-      value: { options, selectedValue, selectedValues, name, multiselect }
+      value: { options, selectedValue, selectedValues, name, multiselect, altered }
     });
 
     if (!disabled) {
@@ -42,10 +43,37 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
+  /**
+  * Allow for the component to be updated/controlled via props after componentDidMount
+  * TODO add a test for this
+  */
+  componentWillReceiveProps(nextProps) {
+    if(!isEqual(nextProps, this.props)) {
+      this.updateState({
+        type: actionTypes.UPDATE_VIA_PROPS,
+        value: { ...this.props, ...nextProps }
+      });
+    }
+  }
+
   /* Broadcast change when there has been one */
   componentDidUpdate( prevProps, prevState ) {
     const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect, altered } = this.state;
     const { onChange } = this.props;
+
+    /**
+    * Check if there is a need to broadcast a change, props can now change state given
+    * that the component can be controlled externally.
+    * Exit if - the same single select option is selected as before
+    * Exit if - the same multi select options are selected as before
+    * TODO add a test for this
+    */
+    if (
+      this.props.selectedValue === this.state.singleSelectInitialIndex ||
+      isEqual(this.props.selectedValues, this.state.multiSelectInitialSelectedIndexes)
+    ) {
+      return false;
+    }
 
     if (isMultiSelect) {
       multiSelectBroadcastChange(prevState.multiSelectSelectedOptions.options, multiSelectSelectedOptions.options, altered, onChange);
@@ -173,7 +201,9 @@ export default class ReactResponsiveSelect extends Component {
         if (isOptionsPanelOpen) {
           e.preventDefault();
 
-          /* Multiselect does not close on selection. Focus button to blur and close options panel on TAB */
+          /** Multiselect does not close on selection. Focus button to blur and close options panel on TAB
+          * TODO add a test for this
+          */
           if (isMultiSelect) {
             this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED }, () => this.focusButton);
           }
@@ -221,7 +251,7 @@ export default class ReactResponsiveSelect extends Component {
       /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
       e.preventDefault();
 
-      /* If user is scrolling return */
+      /* If user is scrolling return TODO add a test for this */
       if (e && containsClassName(e.target, 'rrs__options')) return true;
 
       /* Select option index, if user selected option */
@@ -243,6 +273,7 @@ export default class ReactResponsiveSelect extends Component {
     }
   }
 
+  /* TODO add a test for this */
   handleBlur() {
     const { isOptionsPanelOpen } = this.state;
     /* Handle click outside of selectbox */
@@ -308,6 +339,7 @@ export default class ReactResponsiveSelect extends Component {
     });
   }
 
+  /* TODO add a test for this */
   focusButton() {
     this.selectBox.querySelector('.rrs__button').focus();
   }

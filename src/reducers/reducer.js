@@ -45,6 +45,7 @@ function resetMultiSelectState(state) {
 export default function reducer(state, action) {
 
   switch (action.type) {
+    case actionTypes.UPDATE_VIA_PROPS:
     case actionTypes.INITIALISE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
       const initialSelectedIndexes = getSelectedValueIndexes(action.value.options, action.value.selectedValues);
@@ -58,7 +59,7 @@ export default function reducer(state, action) {
         // Universal
         name: action.value.name,
         options: action.value.options,
-        altered: false,
+        altered: action.value.altered || false,
 
         // Single select
         singleSelectInitialIndex: initialSelectedIndex,
