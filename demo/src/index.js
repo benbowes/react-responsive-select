@@ -184,6 +184,17 @@ class Form extends Component { // eslint-disable-line
         </div>
 
         <div className="row">
+
+          <h2>CODEPEN EXAMPLES</h2>
+
+          <ul>
+            <li><a href="https://codepen.io/benbowes/pen/gxEdoG">Basic implementation example react-responsive-select</a></li>
+            <li><a href="https://codepen.io/benbowes/pen/MEoYvd">Multiselect implementation with react-responsive-select</a></li>
+            <li><a href="https://codepen.io/benbowes/pen/baKoBQ">Controlled example react-responsive-select</a></li>
+          </ul>
+        </div>
+
+        <div className="row">
           <h2>SCREEN READER DEMO GIF</h2>
           <img className="demo-gif --margin-bottom-4" src="./react-responsive-select-voice-over.gif" alt="Screen reader demo gif" />
         </div>
