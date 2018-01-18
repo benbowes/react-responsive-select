@@ -16,11 +16,13 @@ Built with keyboard and screen reader accessibility in mind.
 
 ## Demo
 
-https://benbowes.github.io/react-responsive-select/demo/ 
+https://benbowes.github.io/react-responsive-select/demo/
 
 ## Codepen
 
-https://codepen.io/collection/DrjWEk/
+- Basic implementation example react-responsive-select https://codepen.io/benbowes/pen/gxEdoG
+- Multiselect implementation with react-responsive-select https://codepen.io/benbowes/pen/MEoYvd
+- Controlled example react-responsive-select https://codepen.io/benbowes/pen/baKoBQ
 
 ## Screen reader demo
 
