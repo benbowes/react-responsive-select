@@ -38,6 +38,7 @@ export default class SingleSelect extends Component {
         <div
           role="button"
           tabIndex="0"
+          aria-disabled={disabled}
           aria-haspopup="true"
           aria-expanded={`${isOptionsPanelOpen}`}
           aria-controls={`rrs-${name}-menu`}

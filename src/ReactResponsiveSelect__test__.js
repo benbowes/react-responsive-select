@@ -72,6 +72,7 @@ describe('ReactResponsiveSelect', () => {
         ],
         'multiSelectSelectedIndexes': [ 0 ],
         altered: false,
+        disabled: false,
         'multiSelectSelectedOptions': {
           options: [{
             name: 'make',
@@ -477,7 +478,7 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.find('.rrs__button--disabled').length).to.equal(1);
     });
 
-    it('should not add listeners when disabled', () => {
+    it('should add listeners when disabled', () => {
       const props = {
         multiselect: true,
         disabled: true,
@@ -485,7 +486,9 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect( selectBox.instance().listeners ).to.eql({});
+      const selectBoxInstance = selectBox.instance();
+      const listenerKeys = Object.keys(selectBoxInstance.listeners).map(k => k);
+      expect( listenerKeys ).to.eql(['onTouchStart', 'onTouchMove', 'onTouchEnd', 'onBlur', 'onMouseDown', 'onKeyDown']);
     });
   });
 
