@@ -60,6 +60,7 @@ export default function reducer(state, action) {
         name: action.value.name,
         options: action.value.options,
         altered: action.value.altered || false,
+        disabled: action.value.disabled || false,
 
         // Single select
         singleSelectInitialIndex: initialSelectedIndex,

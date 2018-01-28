@@ -72,6 +72,7 @@ describe('ReactResponsiveSelect', () => {
         ],
         'multiSelectSelectedIndexes': [ 0 ],
         altered: false,
+        disabled: false,
         'multiSelectSelectedOptions': {
           options: [{
             name: 'make',
@@ -161,9 +162,37 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state('nextPotentialSelectionIndex')).to.equal(3);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
     });
+  });
 
-    //handleAlphaNumerical
+  describe('ReactResponsiveSelect Disabled', () => {
+    let selectBox;
+    let selectBoxContainer;
+    let selectBoxDOM;
 
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
+    it('when disabled, event handlers cannot change state', () => {
+      selectBox = setup({ disabled: true });
+      selectBoxContainer = selectBox.find('.rrs');
+      selectBoxDOM = selectBoxContainer.getDOMNode();
+
+      const initialState = { ...selectBox.state() };
+      selectBoxDOM.focus();
+
+      selectBoxContainer.simulate('keyDown', { keyCode: 66, key: 'b' });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.SPACE });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.UP });
+      selectBoxContainer.simulate('touchStart');
+      selectBoxContainer.simulate('touchMove');
+      selectBoxContainer.simulate('touchEnd');
+      selectBoxContainer.simulate('mouseDown');
+
+      expect(initialState).to.eql(selectBox.state());
+    });
   });
 
   describe('ReactResponsiveSelect functions', () => {
@@ -477,7 +506,7 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.find('.rrs__button--disabled').length).to.equal(1);
     });
 
-    it('should not add listeners when disabled', () => {
+    it('should add listeners when disabled', () => {
       const props = {
         multiselect: true,
         disabled: true,
@@ -485,7 +514,9 @@ describe('ReactResponsiveSelect', () => {
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
       };
       selectBox = setup(undefined, props);
-      expect( selectBox.instance().listeners ).to.eql({});
+      const selectBoxInstance = selectBox.instance();
+      const listenerKeys = Object.keys(selectBoxInstance.listeners).map(k => k);
+      expect( listenerKeys ).to.eql(['onTouchStart', 'onTouchMove', 'onTouchEnd', 'onBlur', 'onMouseDown', 'onKeyDown']);
     });
   });
 

@@ -28,19 +28,17 @@ export default class ReactResponsiveSelect extends Component {
 
     this.updateState({
       type: actionTypes.INITIALISE,
-      value: { options, selectedValue, selectedValues, name, multiselect, altered }
+      value: { options, selectedValue, selectedValues, name, multiselect, disabled, altered }
     });
 
-    if (!disabled) {
-      this.listeners = {
-        onTouchStart: this.handleTouchStart,
-        onTouchMove: this.handleTouchMove,
-        onTouchEnd: this.handleClick,
-        onBlur: this.handleBlur,
-        onMouseDown: this.handleClick,
-        onKeyDown: this.handleKeyEvent
-      };
-    }
+    this.listeners = {
+      onTouchStart: this.handleTouchStart,
+      onTouchMove: this.handleTouchMove,
+      onTouchEnd: this.handleClick,
+      onBlur: this.handleBlur,
+      onMouseDown: this.handleClick,
+      onKeyDown: this.handleKeyEvent
+    };
   }
 
   /**
@@ -171,13 +169,19 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleTouchStart() {
+    const { disabled } = this.state;
+
+    if (disabled) return;
+
     /* initially it's assumed that the user is not dragging */
     this.updateState({ type: actionTypes.SET_IS_DRAGGING, boolean: false });
   }
 
   handleTouchMove() {
     /* if touchmove fired - User is dragging, this disables touchend/click */
-    const { isDragging } = this.state;
+    const { isDragging, disabled } = this.state;
+
+    if (disabled) return;
 
     if (!isDragging) {
       this.updateState({ type: actionTypes.SET_IS_DRAGGING, boolean: true });
@@ -185,7 +189,9 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleKeyEvent(e) {
-    const { isMultiSelect, isOptionsPanelOpen } = this.state;
+    const { isMultiSelect, isOptionsPanelOpen, disabled } = this.state;
+
+    if (disabled) return;
 
     this.preventDefaultForKeyCodes([
       keyCodes.ENTER,
@@ -245,7 +251,9 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleClick(e) {
-    const { isMultiSelect, isOptionsPanelOpen, isDragging } = this.state;
+    const { isMultiSelect, isOptionsPanelOpen, isDragging, disabled } = this.state;
+
+    if (disabled) return;
 
     if (isDragging === false) {
       /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
@@ -275,7 +283,10 @@ export default class ReactResponsiveSelect extends Component {
 
   /* TODO add a test for this */
   handleBlur() {
-    const { isOptionsPanelOpen } = this.state;
+    const { isOptionsPanelOpen, disabled } = this.state;
+
+    if (disabled) return;
+
     /* Handle click outside of selectbox */
     if (
       this.selectBox
@@ -287,7 +298,10 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleAlphaNumerical(e) {
-    const { options } = this.state;
+    const { options, disabled } = this.state;
+
+    if (disabled) return;
+
     const optionIndex = options.map(v => v.text.toLowerCase().charAt(0)).indexOf(e.key);
 
     if (optionIndex > -1) {
@@ -299,7 +313,9 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleEnterPressed(e) {
-    const { isMultiSelect, isOptionsPanelOpen, nextPotentialSelectionIndex } = this.state;
+    const { isMultiSelect, isOptionsPanelOpen, nextPotentialSelectionIndex, disabled } = this.state;
+
+    if (disabled) return;
 
     if (isMultiSelect) {
       this.updateState({
@@ -319,7 +335,9 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleKeyUpOrDownPressed(type) {
-    const { isOptionsPanelOpen, nextPotentialSelectionIndex, options } = this.state;
+    const { isOptionsPanelOpen, nextPotentialSelectionIndex, options, disabled } = this.state;
+
+    if (disabled) return;
 
     this.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX,
