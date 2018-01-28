@@ -162,9 +162,37 @@ describe('ReactResponsiveSelect', () => {
       expect(selectBox.state('nextPotentialSelectionIndex')).to.equal(3);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
     });
+  });
 
-    //handleAlphaNumerical
+  describe('ReactResponsiveSelect Disabled', () => {
+    let selectBox;
+    let selectBoxContainer;
+    let selectBoxDOM;
 
+    afterEach(() => {
+      selectBox.unmount();
+    });
+
+    it('when disabled, event handlers cannot change state', () => {
+      selectBox = setup({ disabled: true });
+      selectBoxContainer = selectBox.find('.rrs');
+      selectBoxDOM = selectBoxContainer.getDOMNode();
+
+      const initialState = { ...selectBox.state() };
+      selectBoxDOM.focus();
+
+      selectBoxContainer.simulate('keyDown', { keyCode: 66, key: 'b' });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ENTER });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.SPACE });
+      selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.UP });
+      selectBoxContainer.simulate('touchStart');
+      selectBoxContainer.simulate('touchMove');
+      selectBoxContainer.simulate('touchEnd');
+      selectBoxContainer.simulate('mouseDown');
+
+      expect(initialState).to.eql(selectBox.state());
+    });
   });
 
   describe('ReactResponsiveSelect functions', () => {
