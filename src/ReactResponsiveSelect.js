@@ -56,7 +56,7 @@ export default class ReactResponsiveSelect extends Component {
 
   /* Broadcast change when there has been one */
   componentDidUpdate( prevProps, prevState ) {
-    const { singleSelectSelectedOption, multiSelectSelectedOptions, isMultiSelect, altered } = this.state;
+    const { singleSelectSelectedOption, multiSelectSelectedOptions, multiselect, altered } = this.state;
     const { onChange } = this.props;
 
     /**
@@ -73,7 +73,7 @@ export default class ReactResponsiveSelect extends Component {
       return false;
     }
 
-    if (isMultiSelect) {
+    if (multiselect) {
       multiSelectBroadcastChange(prevState.multiSelectSelectedOptions.options, multiSelectSelectedOptions.options, altered, onChange);
     } else {
       singleSelectBroadcastChange(prevState.singleSelectSelectedOption, singleSelectSelectedOption, altered, onChange);
@@ -95,10 +95,10 @@ export default class ReactResponsiveSelect extends Component {
       options,
       singleSelectSelectedIndex,
       singleSelectSelectedOption,
-      isMultiSelect
+      multiselect
     } = this.state;
 
-    if (isMultiSelect) {
+    if (multiselect) {
       const customLabelText = customLabelRenderer && customLabelRenderer(multiSelectSelectedOptions) || false;
       return (
         <div
@@ -189,7 +189,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleKeyEvent(e) {
-    const { isMultiSelect, isOptionsPanelOpen, disabled } = this.state;
+    const { multiselect, isOptionsPanelOpen, disabled } = this.state;
 
     if (disabled) return;
 
@@ -210,7 +210,7 @@ export default class ReactResponsiveSelect extends Component {
           /** Multiselect does not close on selection. Focus button to blur and close options panel on TAB
           * TODO add a test for this
           */
-          if (isMultiSelect) {
+          if (multiselect) {
             this.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED }, () => this.focusButton);
           }
         }
@@ -251,7 +251,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleClick(e) {
-    const { isMultiSelect, isOptionsPanelOpen, isDragging, disabled } = this.state;
+    const { multiselect, isOptionsPanelOpen, isDragging, disabled } = this.state;
 
     if (disabled) return;
 
@@ -265,7 +265,7 @@ export default class ReactResponsiveSelect extends Component {
       /* Select option index, if user selected option */
       if (containsClassName(e.target, 'rrs__option')) {
         return this.updateState({
-          type: isMultiSelect
+          type: multiselect
             ? actionTypes.SET_MULTISELECT_OPTIONS
             : actionTypes.SET_SINGLESELECT_OPTIONS,
           optionIndex: parseFloat(e.target.getAttribute('data-key'))
@@ -313,11 +313,11 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   handleEnterPressed(e) {
-    const { isMultiSelect, isOptionsPanelOpen, nextPotentialSelectionIndex, disabled } = this.state;
+    const { multiselect, isOptionsPanelOpen, nextPotentialSelectionIndex, disabled } = this.state;
 
     if (disabled) return;
 
-    if (isMultiSelect) {
+    if (multiselect) {
       this.updateState({
         type: actionTypes.SET_MULTISELECT_OPTIONS,
         optionIndex: nextPotentialSelectionIndex

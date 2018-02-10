@@ -1,6 +1,6 @@
 export default {
   isTouchDevice: false,
-  isMultiSelect: false,
+  multiselect: false,
   name: 'Make 1',
   options: [{
     value: 'null',
