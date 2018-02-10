@@ -59,7 +59,7 @@ describe('ReactResponsiveSelect', () => {
         isOptionsPanelOpen: false,
         singleSelectInitialIndex: 1,
         multiSelectInitialSelectedIndexes: [ 0 ],
-        isMultiSelect: false,
+        multiselect: false,
         nextPotentialSelectionIndex: 1,
         singleSelectSelectedIndex: 1,
         name: 'make',
@@ -261,7 +261,7 @@ describe('ReactResponsiveSelect', () => {
 
     it('handleKeyEvent() - keyDown "ENTER" calls handleEnterPressed() and selects nextPotentialSelectionIndex when multiselect', () => {
       submitSpy.reset();
-      selectBox.setState({ isMultiSelect: true, nextPotentialSelectionIndex: 3, isOptionsPanelOpen: true });
+      selectBox.setState({ multiselect: true, nextPotentialSelectionIndex: 3, isOptionsPanelOpen: true });
 
       selectBox.find('.rrs__options .rrs__option').at(3).simulate('keyDown', { keyCode: keyCodes.ENTER });
 
@@ -328,8 +328,8 @@ describe('ReactResponsiveSelect', () => {
       expect(updateStateSpy.calledOnce).to.equal(false);
     });
 
-    it('handleKeyEvent() - keyDown "TAB" does NOT close options panel when isMultiSelect', () => {
-      selectBox.setState({ isOptionsPanelOpen: true, isMultiSelect: true });
+    it('handleKeyEvent() - keyDown "TAB" does NOT close options panel when multiselect', () => {
+      selectBox.setState({ isOptionsPanelOpen: true, multiselect: true });
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.TAB });
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
     });
@@ -393,7 +393,7 @@ describe('ReactResponsiveSelect', () => {
         },
         undefined,
         {
-          isMultiSelect: true,
+          multiselect: true,
           multiSelectInitialSelectedIndexes: [1, 2, 3],
           multiSelectSelectedOptions: {
             options: [

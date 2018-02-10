@@ -1,7 +1,7 @@
 import isEqual from 'lodash.isequal';
 
 export function isAltered(newState) {
-  return (!newState.isMultiSelect)
+  return (!newState.multiselect)
     ? newState.singleSelectSelectedIndex !== newState.singleSelectInitialIndex
     : !isEqual(newState.multiSelectInitialSelectedIndexes, newState.multiSelectSelectedIndexes);
 }

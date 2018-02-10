@@ -12,7 +12,7 @@ describe('getInitialOption', () => {
     expect(result).to.eql({
       altered: false,
       isDragging: false,
-      isMultiSelect: false,
+      multiselect: false,
       isOptionsPanelOpen: false,
       isTouchDevice: false,
       multiSelectInitialSelectedIndexes: [1, 2, 3],

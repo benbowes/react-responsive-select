@@ -95,7 +95,7 @@ describe('reducer', () => {
     it('should deselect all and select first option when first option requested', () => {
       const initialState = {
         name: 'thing',
-        isMultiSelect: true,
+        multiselect: true,
         altered: false,
         options: [
           { text: 'Any', value: 'null' },
@@ -119,7 +119,7 @@ describe('reducer', () => {
       );
 
       expect(result).to.eql({
-        isMultiSelect: true,
+        multiselect: true,
         altered: true,
         name: 'thing',
         options: [
@@ -138,7 +138,7 @@ describe('reducer', () => {
 
     it('should deselect first option and select requested option when NOT first option requested', () => {
       const initialState = {
-        isMultiSelect: true,
+        multiselect: true,
         altered: false,
         name: 'thing',
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
@@ -159,7 +159,7 @@ describe('reducer', () => {
       );
 
       expect(result).to.eql({
-        isMultiSelect: true,
+        multiselect: true,
         altered: true,
         name: 'thing',
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
@@ -174,7 +174,7 @@ describe('reducer', () => {
 
     it('should add to multiselect options when requested item if does not exist', () => {
       const initialState = {
-        isMultiSelect: true,
+        multiselect: true,
         name: 'thing',
         altered: false,
         options: [
@@ -199,7 +199,7 @@ describe('reducer', () => {
       );
 
       expect(result).to.eql({
-        isMultiSelect: true,
+        multiselect: true,
         altered: true,
         options: [
           { text: 'Any', value: 'null' },
@@ -218,7 +218,7 @@ describe('reducer', () => {
 
     it('should remove from multiselect options when requested item exists', () => {
       const initialState = {
-        isMultiSelect: true,
+        multiselect: true,
         altered: false,
         options: [
           { text: 'Any', value: 'null' },
@@ -242,7 +242,7 @@ describe('reducer', () => {
       );
 
       expect(result).to.eql({
-        isMultiSelect: true,
+        multiselect: true,
         altered: false,
         options: [
           { text: 'Any', value: 'null' },
@@ -260,7 +260,7 @@ describe('reducer', () => {
 
     it('should select first item if all options are deselected', () => {
       const initialState = {
-        isMultiSelect: true,
+        multiselect: true,
         altered: false,
         name: 'thing',
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
@@ -281,7 +281,7 @@ describe('reducer', () => {
       );
 
       expect(result).to.eql({
-        isMultiSelect: true,
+        multiselect: true,
         altered: true,
         name: 'thing',
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],

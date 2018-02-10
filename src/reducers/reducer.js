@@ -11,7 +11,7 @@ import getInitialOption from './lib/getInitialOption';
 
 export const initialState = {
   // Constants
-  isMultiSelect: false,
+  multiselect: false,
 
   // Universal
   name: undefined,
@@ -45,6 +45,7 @@ function resetMultiSelectState(state) {
 export default function reducer(state, action) {
 
   switch (action.type) {
+
     case actionTypes.UPDATE_VIA_PROPS:
     case actionTypes.INITIALISE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
@@ -54,7 +55,7 @@ export default function reducer(state, action) {
         ...state,
 
         // Constants
-        isMultiSelect: action.value.multiselect || false,
+        multiselect: action.value.multiselect || false,
 
         // Universal
         name: action.value.name,
@@ -70,8 +71,11 @@ export default function reducer(state, action) {
           ...action.value.options[ initialSelectedIndex ]
         },
 
-        // For determining highlighted item on Keyboard navigation
-        nextPotentialSelectionIndex: initialSelectedIndex,
+        // For determining highlighted item on Keyboard navigation and selection via UPDATE_VIA_PROPS
+        // If UPDATE_VIA_PROPS and state exists, re-select nextPotentialSelectionIndex from state
+        nextPotentialSelectionIndex: (state.nextPotentialSelectionIndex)
+          ? state.nextPotentialSelectionIndex
+          : initialSelectedIndex,
 
         // Multi select
         multiSelectInitialSelectedIndexes: initialSelectedIndexes,
@@ -92,7 +96,17 @@ export default function reducer(state, action) {
       const newState = {
         ...state,
         isOptionsPanelOpen: true,
-        nextPotentialSelectionIndex: state.singleSelectSelectedIndex,
+
+        // For determining highlighted item on Keyboard navigation
+        nextPotentialSelectionIndex: (() => {
+          if (state.multiselect) {
+            return state.multiSelectSelectedIndexes.length
+              ? state.multiSelectSelectedIndexes[0]
+              : 0;
+          }
+          return state.nextPotentialSelectionIndex;
+        })(),
+
         singleSelectSelectedOption: {
           name: state.name,
           ...state.options[ state.singleSelectSelectedIndex ]
