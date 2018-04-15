@@ -36,7 +36,10 @@ export default function handleKeyEvent({
         * TODO add a test for this
         */
         if (multiselect) {
-          ReactResponsiveSelectClassRef.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED }, () => ReactResponsiveSelectClassRef.focusButton);
+          ReactResponsiveSelectClassRef.updateState(
+            { type: actionTypes.SET_OPTIONS_PANEL_CLOSED },
+            () => ReactResponsiveSelectClassRef.focusButton(),
+          );
         }
       }
       break;
@@ -62,9 +65,7 @@ export default function handleKeyEvent({
       /* remove focus from the panel when focussed */
       ReactResponsiveSelectClassRef.updateState(
         { type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION },
-        () => {
-          ReactResponsiveSelectClassRef.focusButton();
-        },
+        () => ReactResponsiveSelectClassRef.focusButton(),
       );
       break;
 
