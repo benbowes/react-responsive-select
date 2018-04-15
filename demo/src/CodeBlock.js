@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 export default class CodeBlock extends Component {
 
-  state = { isExpanded: false };
+  constructor() {
+    super();
+    this.state = { isExpanded: false };
+  }
 
   render () {
     const { isExpanded } = this.state;

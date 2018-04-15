@@ -3,7 +3,6 @@ import reducer, { initialState } from './reducer';
 import * as actionTypes from '../constants/actionTypes';
 
 describe('reducer', () => {
-
   it('should update state when INITIALISE is fired', () => {
     const result = reducer(
       initialState,
@@ -13,9 +12,9 @@ describe('reducer', () => {
           ...initialState,
           options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
           selectedValue: 'fiat',
-          name: 'thing'
-        }
-      }
+          name: 'thing',
+        },
+      },
     );
     expect(result.name).to.eql('thing');
     expect(result.singleSelectSelectedOption).to.eql({ name: 'thing', text: 'Fiat', value: 'fiat' });
@@ -26,13 +25,13 @@ describe('reducer', () => {
       initialState,
       {
         type: actionTypes.SET_IS_DRAGGING,
-        boolean: true
-      }
+        boolean: true,
+      },
     );
 
     expect(result).to.eql({
       ...initialState,
-      isDragging: true
+      isDragging: true,
     });
   });
 
@@ -41,14 +40,14 @@ describe('reducer', () => {
       nextPotentialSelectionIndex: 0,
       singleSelectSelectedIndex: 0,
       name: 'make1',
-      options: [{ text: 'Any', value: 'null' }]
+      options: [{ text: 'Any', value: 'null' }],
     };
     const result = reducer(
       mockInitialState,
       {
         type: actionTypes.SET_OPTIONS_PANEL_OPEN,
-        value: true
-      }
+        value: true,
+      },
     );
 
     expect(result).to.eql({
@@ -57,9 +56,9 @@ describe('reducer', () => {
       singleSelectSelectedOption: {
         name: 'make1',
         text: 'Any',
-        value: 'null'
+        value: 'null',
       },
-      isOptionsPanelOpen: true
+      isOptionsPanelOpen: true,
     });
   });
 
@@ -67,14 +66,14 @@ describe('reducer', () => {
     const mockState = {
       ...initialState,
       name: 'make1',
-      options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }]
+      options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
     };
     const result = reducer(
       mockState,
       {
         type: actionTypes.SET_SINGLESELECT_OPTIONS,
-        optionIndex: 1
-      }
+        optionIndex: 1,
+      },
     );
 
     expect(result).to.eql({
@@ -85,37 +84,36 @@ describe('reducer', () => {
       singleSelectSelectedOption: {
         name: 'make1',
         text: 'Fiat',
-        value: 'fiat'
-      }
+        value: 'fiat',
+      },
     });
   });
 
   describe('MultiSelect', () => {
-
     it('should deselect all and select first option when first option requested', () => {
-      const initialState = {
+      const state = {
         name: 'thing',
         multiselect: true,
         altered: false,
         options: [
           { text: 'Any', value: 'null' },
           { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' }
+          { text: 'Mazda', value: 'mazda' },
         ],
         multiSelectInitialSelectedIndexes: [1, 2],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
-          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }]
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }],
         },
-        nextPotentialSelectionIndex: 2
+        nextPotentialSelectionIndex: 2,
       };
 
       const result = reducer(
-        initialState,
+        state,
         {
           type: actionTypes.SET_MULTISELECT_OPTIONS,
-          optionIndex: 0
-        }
+          optionIndex: 0,
+        },
       );
 
       expect(result).to.eql({
@@ -125,19 +123,19 @@ describe('reducer', () => {
         options: [
           { text: 'Any', value: 'null' },
           { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' }
+          { text: 'Mazda', value: 'mazda' },
         ],
         multiSelectInitialSelectedIndexes: [1, 2],
         multiSelectSelectedIndexes: [0],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Any', value: 'null' }]
+          options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
-        nextPotentialSelectionIndex: 0
+        nextPotentialSelectionIndex: 0,
       });
     });
 
     it('should deselect first option and select requested option when NOT first option requested', () => {
-      const initialState = {
+      const state = {
         multiselect: true,
         altered: false,
         name: 'thing',
@@ -145,17 +143,17 @@ describe('reducer', () => {
         multiSelectInitialSelectedIndexes: [0],
         multiSelectSelectedIndexes: [0],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Any', value: 'null' }]
+          options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
-        nextPotentialSelectionIndex: 0
+        nextPotentialSelectionIndex: 0,
       };
 
       const result = reducer(
-        initialState,
+        state,
         {
           type: actionTypes.SET_MULTISELECT_OPTIONS,
-          optionIndex: 1
-        }
+          optionIndex: 1,
+        },
       );
 
       expect(result).to.eql({
@@ -166,36 +164,36 @@ describe('reducer', () => {
         multiSelectInitialSelectedIndexes: [0],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }]
+          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
         },
-        nextPotentialSelectionIndex: 1
+        nextPotentialSelectionIndex: 1,
       });
     });
 
     it('should add to multiselect options when requested item if does not exist', () => {
-      const initialState = {
+      const state = {
         multiselect: true,
         name: 'thing',
         altered: false,
         options: [
           { text: 'Any', value: 'null' },
           { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' }
+          { text: 'Mazda', value: 'mazda' },
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }]
+          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
         },
-        nextPotentialSelectionIndex: 1
+        nextPotentialSelectionIndex: 1,
       };
 
       const result = reducer(
-        initialState,
+        state,
         {
           type: actionTypes.SET_MULTISELECT_OPTIONS,
-          optionIndex: 2
-        }
+          optionIndex: 2,
+        },
       );
 
       expect(result).to.eql({
@@ -204,41 +202,41 @@ describe('reducer', () => {
         options: [
           { text: 'Any', value: 'null' },
           { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' }
+          { text: 'Mazda', value: 'mazda' },
         ],
         name: 'thing',
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }, { name: 'thing', text: 'Mazda', value: 'mazda' }]
+          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }, { name: 'thing', text: 'Mazda', value: 'mazda' }],
         },
-        nextPotentialSelectionIndex: 2
+        nextPotentialSelectionIndex: 2,
       });
     });
 
     it('should remove from multiselect options when requested item exists', () => {
-      const initialState = {
+      const state = {
         multiselect: true,
         altered: false,
         options: [
           { text: 'Any', value: 'null' },
           { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' }
+          { text: 'Mazda', value: 'mazda' },
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
-          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }]
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }],
         },
-        nextPotentialSelectionIndex: 2
+        nextPotentialSelectionIndex: 2,
       };
 
       const result = reducer(
-        initialState,
+        state,
         {
           type: actionTypes.SET_MULTISELECT_OPTIONS,
-          optionIndex: 2
-        }
+          optionIndex: 2,
+        },
       );
 
       expect(result).to.eql({
@@ -247,19 +245,19 @@ describe('reducer', () => {
         options: [
           { text: 'Any', value: 'null' },
           { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' }
+          { text: 'Mazda', value: 'mazda' },
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }]
+          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }],
         },
-        nextPotentialSelectionIndex: 2
+        nextPotentialSelectionIndex: 2,
       });
     });
 
     it('should select first item if all options are deselected', () => {
-      const initialState = {
+      const state = {
         multiselect: true,
         altered: false,
         name: 'thing',
@@ -267,17 +265,17 @@ describe('reducer', () => {
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }]
+          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
         },
-        nextPotentialSelectionIndex: 1
+        nextPotentialSelectionIndex: 1,
       };
 
       const result = reducer(
-        initialState,
+        state,
         {
           type: actionTypes.SET_MULTISELECT_OPTIONS,
-          optionIndex: 1
-        }
+          optionIndex: 1,
+        },
       );
 
       expect(result).to.eql({
@@ -288,12 +286,10 @@ describe('reducer', () => {
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [0],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Any', value: 'null' }]
+          options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
-        nextPotentialSelectionIndex: 0
+        nextPotentialSelectionIndex: 0,
       });
-
     });
   });
-
 });

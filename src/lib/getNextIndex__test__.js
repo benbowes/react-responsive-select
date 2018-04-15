@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import getNextIndex from './getNextIndex';
 
 describe('getNextIndex', () => {
-
   // mode INCREMENT
 
   it('should retun current singleSelectSelectedIndex when opensPanel is closed and mode is "increment"', () => {
@@ -10,7 +9,7 @@ describe('getNextIndex', () => {
       mode: 'increment',
       isOptionsPanelOpen: false,
       singleSelectSelectedIndex: 3,
-      optionNodesLength: 4
+      optionNodesLength: 4,
     };
 
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(3);
@@ -21,7 +20,7 @@ describe('getNextIndex', () => {
       mode: 'increment',
       isOptionsPanelOpen: false,
       singleSelectSelectedIndex: 3,
-      optionNodesLength: 4
+      optionNodesLength: 4,
     };
 
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(3);
@@ -32,7 +31,7 @@ describe('getNextIndex', () => {
       mode: 'increment',
       isOptionsPanelOpen: true,
       singleSelectSelectedIndex: 3, // zero base
-      optionNodesLength: 4 // non zero based
+      optionNodesLength: 4, // non zero based
     };
 
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(0);
@@ -43,7 +42,7 @@ describe('getNextIndex', () => {
       mode: 'increment',
       isOptionsPanelOpen: true,
       singleSelectSelectedIndex: 2,
-      optionNodesLength: 4
+      optionNodesLength: 4,
     };
 
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(3);
@@ -56,7 +55,7 @@ describe('getNextIndex', () => {
       mode: 'decrement',
       isOptionsPanelOpen: false,
       singleSelectSelectedIndex: 2,
-      optionNodesLength: 4
+      optionNodesLength: 4,
     };
 
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(2);
@@ -67,7 +66,7 @@ describe('getNextIndex', () => {
       mode: 'decrement',
       isOptionsPanelOpen: true,
       singleSelectSelectedIndex: 0,
-      optionNodesLength: 4
+      optionNodesLength: 4,
     };
 
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(3);
@@ -78,7 +77,7 @@ describe('getNextIndex', () => {
       mode: 'decrement',
       isOptionsPanelOpen: true,
       singleSelectSelectedIndex: 2,
-      optionNodesLength: 4
+      optionNodesLength: 4,
     };
 
     expect(getNextIndex(ARGS.mode, ARGS.isOptionsPanelOpen, ARGS.singleSelectSelectedIndex, ARGS.optionNodesLength)).to.equal(1);

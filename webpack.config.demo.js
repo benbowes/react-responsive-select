@@ -8,6 +8,8 @@ module.exports = {
     inline: true
   },
 
+  mode: process.env.NODE_ENV,
+
   devtool: 'source-map',
 
   entry: {
@@ -24,7 +26,10 @@ module.exports = {
     rules: [{
       test: /\.js$/,
       loader: 'babel-loader',
-      exclude: path.resolve(__dirname, 'node_modules')
+      exclude: path.resolve(__dirname, 'node_modules'),
+      options: {
+        presets: ['env']
+      }
     }]
   },
 

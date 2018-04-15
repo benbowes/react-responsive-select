@@ -9,6 +9,6 @@ export function isAltered(newState) {
 export default function mergeIsAlteredState(newState) {
   return {
     ...newState,
-    altered: isAltered(newState)
+    altered: isAltered(newState),
   };
 }

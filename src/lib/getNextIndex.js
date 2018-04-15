@@ -2,9 +2,8 @@ export default function getNextIndex(
   mode,
   isOptionsPanelOpen,
   singleSelectSelectedIndex,
-  optionNodesLength
+  optionNodesLength,
 ) {
-
   if (mode === 'increment') {
     // Hold selection on current selected option when options panel first opens
     if (isOptionsPanelOpen === false) return singleSelectSelectedIndex;
@@ -23,4 +22,5 @@ export default function getNextIndex(
     return singleSelectSelectedIndex - 1;
   }
 
+  return 0;
 }

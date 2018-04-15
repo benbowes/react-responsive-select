@@ -4,8 +4,8 @@ export default function addMultiSelectOption(state, index) {
       ...state.multiSelectSelectedOptions.options,
       {
         name: state.name,
-        ...state.options[index]
-      }
-    ]
+        ...state.options[index],
+      },
+    ],
   };
 }

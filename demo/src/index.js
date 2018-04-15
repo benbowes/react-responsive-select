@@ -31,7 +31,10 @@ const multiSelectOptionMarkup = (text) => (
 
 class Form extends Component { // eslint-disable-line
 
-  reportChange = this.reportChange.bind(this);
+  constructor() {
+    super();
+    this.reportChange = this.reportChange.bind(this);
+  }
 
   reportChange(newValue) {
     console.log('reportChange', newValue);
@@ -584,7 +587,7 @@ ReactDOM.render(
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
                 customLabelRenderer={multiSelectSelectedOptions => {
                   return multiSelectSelectedOptions.options
-                    && multiSelectSelectedOptions.options.length
+                    && multiSelectSelectedOptions.options.length > 0
                     && multiSelectSelectedOptions.options.map(v => v.text).join(', ');
                 }} // (Optional) format your own label text like this
                 selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected

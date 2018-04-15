@@ -1,4 +1,4 @@
-import * as actionTypes from './constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 
 export default ({ event, state, ReactResponsiveSelectClassRef }) => {
   const { options, disabled } = state;
@@ -10,7 +10,7 @@ export default ({ event, state, ReactResponsiveSelectClassRef }) => {
   if (optionIndex > -1) {
     ReactResponsiveSelectClassRef.updateState({
       type: actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC,
-      optionIndex
+      optionIndex,
     });
   }
 };

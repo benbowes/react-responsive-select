@@ -7,6 +7,9 @@ const moduleConfig = {
   rules: [{
     test: /\.js$/,
     loader: 'babel-loader',
+    options: {
+      presets: ['env']
+    },
     exclude: path.resolve(__dirname, 'node_modules')
   }]
 };
@@ -14,6 +17,7 @@ const moduleConfig = {
 module.exports = [{
 
   entry,
+  mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.js',
@@ -25,6 +29,7 @@ module.exports = [{
 }, {
 
   entry,
+  mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.window.js',
@@ -36,6 +41,7 @@ module.exports = [{
 }, {
 
   entry,
+  mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.var.js',

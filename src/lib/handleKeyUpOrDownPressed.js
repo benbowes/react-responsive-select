@@ -1,14 +1,16 @@
-import getNextIndex from './lib/getNextIndex';
-import * as actionTypes from './constants/actionTypes';
+import getNextIndex from './getNextIndex';
+import * as actionTypes from '../constants/actionTypes';
 
 export default function handleKeyUpOrDownPressed({ state, ReactResponsiveSelectClassRef, type }) {
-  const { isOptionsPanelOpen, nextPotentialSelectionIndex, options, disabled } = state;
+  const {
+    isOptionsPanelOpen, nextPotentialSelectionIndex, options, disabled,
+  } = state;
 
   if (disabled) return;
 
   ReactResponsiveSelectClassRef.updateState({
     type: actionTypes.SET_NEXT_SELECTED_INDEX,
-    optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, options.length)
+    optionIndex: getNextIndex(type, isOptionsPanelOpen, nextPotentialSelectionIndex, options.length),
   });
 
   /* Open the options panel */

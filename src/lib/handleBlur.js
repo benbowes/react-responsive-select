@@ -1,4 +1,4 @@
-import * as actionTypes from './constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 
 /* TODO add a test for this */
 export default function handleBlur({ state, ReactResponsiveSelectClassRef }) {
@@ -12,8 +12,8 @@ export default function handleBlur({ state, ReactResponsiveSelectClassRef }) {
     && !ReactResponsiveSelectClassRef.selectBox.contains(document.activeElement)
     && isOptionsPanelOpen
   ) {
-    return ReactResponsiveSelectClassRef.updateState({
-      type: actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR
+    ReactResponsiveSelectClassRef.updateState({
+      type: actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR,
     });
   }
 }

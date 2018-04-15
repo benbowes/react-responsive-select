@@ -1,10 +1,9 @@
 import { expect } from 'chai';
+import deepFreeze from 'deep-freeze';
 import removeMultiSelectOption from './removeMultiSelectOption';
 import state from '../../../mocha/state-mock';
-import deepFreeze from 'deep-freeze';
 
 describe('removeMultiSelectOption', () => {
-
   deepFreeze(state);
 
   it('should remove from multiSelectSelectOptions at requested index', () => {
@@ -13,32 +12,31 @@ describe('removeMultiSelectOption', () => {
       multiSelectSelectedOptions: {
         options: [{
           value: 'fiat',
-          text: 'Fiat'
+          text: 'Fiat',
         }, {
           value: 'subaru',
-          text: 'Subaru'
+          text: 'Subaru',
         }, {
           value: 'bmw',
-          text: 'BMW'
+          text: 'BMW',
         }, {
           value: 'tesla',
-          text: 'Tesla'
-        }]
-      }
+          text: 'Tesla',
+        }],
+      },
     }, 1);
 
     expect(result).to.eql({
       options: [{
         value: 'fiat',
-        text: 'Fiat'
+        text: 'Fiat',
       }, {
         value: 'bmw',
-        text: 'BMW'
+        text: 'BMW',
       }, {
         value: 'tesla',
-        text: 'Tesla'
-      }]
+        text: 'Tesla',
+      }],
     });
   });
-
 });

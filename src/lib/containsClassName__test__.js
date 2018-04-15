@@ -2,9 +2,8 @@ import { expect } from 'chai';
 import containsClassName from './containsClassName';
 
 describe('containsClassName', () => {
-
   const mockElement = {
-    className: 'things'
+    className: 'things',
   };
 
   it('should return true when a class is found', () => {

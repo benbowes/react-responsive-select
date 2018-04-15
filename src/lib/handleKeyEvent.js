@@ -1,12 +1,14 @@
-import keyCodes from './constants/keyCodes';
+import keyCodes from '../constants/keyCodes';
+import * as actionTypes from '../constants/actionTypes';
 import preventDefaultForKeyCodes from './preventDefaultForKeyCodes';
 import handleAlphaNumerical from './handleAlphaNumerical';
 import handleEnterPressed from './handleEnterPressed';
 import handleClick from './handleClick';
 import handleKeyUpOrDownPressed from './handleKeyUpOrDownPressed';
-import * as actionTypes from './constants/actionTypes';
 
-export default function handleKeyEvent({ event, state, props, ReactResponsiveSelectClassRef }) {
+export default function handleKeyEvent({
+  event, state, props, ReactResponsiveSelectClassRef,
+}) {
   const { multiselect, isOptionsPanelOpen, disabled } = state;
 
   if (disabled) return;
@@ -16,8 +18,13 @@ export default function handleKeyEvent({ event, state, props, ReactResponsiveSel
     keyCodes.SPACE,
     keyCodes.ESCAPE,
     keyCodes.UP,
-    keyCodes.DOWN
+    keyCodes.DOWN,
   ], event);
+
+  /* handle alpha-nemeric key press */
+  if (/^[a-z0-9]+$/.test(event.key)) {
+    handleAlphaNumerical({ event, ReactResponsiveSelectClassRef, state });
+  }
 
   switch (event.keyCode) {
     case keyCodes.TAB:
@@ -32,42 +39,50 @@ export default function handleKeyEvent({ event, state, props, ReactResponsiveSel
           ReactResponsiveSelectClassRef.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED }, () => ReactResponsiveSelectClassRef.focusButton);
         }
       }
-      return event;
+      break;
 
     case keyCodes.ENTER:
       /* can close the panel when open and focussed
        * can submit the form when closed and focussed */
-      return handleEnterPressed({ event, state, props, ReactResponsiveSelectClassRef });
+      handleEnterPressed({
+        event, state, props, ReactResponsiveSelectClassRef,
+      });
+      break;
 
     case keyCodes.SPACE:
       /* close the panel and select option when open, or open the panel if closed */
       if (isOptionsPanelOpen) {
-        return handleClick({ event, state, ReactResponsiveSelectClassRef });
+        handleClick({ event, state, ReactResponsiveSelectClassRef });
+      } else {
+        ReactResponsiveSelectClassRef.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
       }
-      return ReactResponsiveSelectClassRef.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
+      break;
 
     case keyCodes.ESCAPE:
       /* remove focus from the panel when focussed */
-      return ReactResponsiveSelectClassRef.updateState(
+      ReactResponsiveSelectClassRef.updateState(
         { type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION },
         () => {
           ReactResponsiveSelectClassRef.focusButton();
         },
       );
+      break;
 
     case keyCodes.UP:
       /* will open the options panel if closed
        * will not decrement selection if options panel closed
        * if panel open, will decrement up the options list */
-      return handleKeyUpOrDownPressed({ state, ReactResponsiveSelectClassRef, type: 'decrement' });
+      handleKeyUpOrDownPressed({ state, ReactResponsiveSelectClassRef, type: 'decrement' });
+      break;
 
     case keyCodes.DOWN:
       /* will open the options panel if closed
        * will not increment selection if options panel closed
        * if panel open, will increment down the options list */
-      return handleKeyUpOrDownPressed({ state, ReactResponsiveSelectClassRef, type: 'increment' });
-  }
+      handleKeyUpOrDownPressed({ state, ReactResponsiveSelectClassRef, type: 'increment' });
+      break;
 
-  /* handle alpha-nemeric key press */
-  if (/^[a-z0-9]+$/.test(event.key)) handleAlphaNumerical({ event, ReactResponsiveSelectClassRef, state });
+    default:
+      break;
+  }
 }
