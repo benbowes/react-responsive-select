@@ -65,10 +65,8 @@ export default class ReactResponsiveSelect extends Component {
       selectedValues,
       multiSelectInitialSelectedIndexes,
     } = this.state;
-    const {
-      onChange,
-      selectedValue,
-    } = this.props;
+
+    const { onChange, selectedValue } = this.props;
 
     /**
     * Check if there is a need to broadcast a change, props can now change state given
