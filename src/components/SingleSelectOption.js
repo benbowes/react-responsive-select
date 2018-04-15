@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import { SingleSelectOptionProps } from '../propTypes';
 import singleline from 'singleline';
+import { SingleSelectOptionProps } from '../propTypes';
 
 export default class SingleSelectOption extends Component {
-
   componentDidUpdate() {
     const { index, isOptionsPanelOpen, nextPotentialSelectionIndex } = this.props;
-    if(index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
+    if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
       this[`option_${index}`].focus();
     }
   }
 
-  render(){
+  render() {
     const {
       index,
       nextPotentialSelectionIndex,
       option,
-      singleSelectSelectedIndex
+      singleSelectSelectedIndex,
     } = this.props;
 
     return (

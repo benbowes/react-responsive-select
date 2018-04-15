@@ -1,10 +1,9 @@
 import { expect } from 'chai';
+import deepFreeze from 'deep-freeze';
 import getSelectedValueIndex from './getSelectedValueIndex';
 import state from '../../../mocha/state-mock';
-import deepFreeze from 'deep-freeze';
 
 describe('getSelectedValueIndex', () => {
-
   deepFreeze(state);
 
   it('should return then index of a found option if match', () => {
@@ -24,5 +23,4 @@ describe('getSelectedValueIndex', () => {
     const result = getSelectedValueIndex(state.options, selectedValue);
     expect(result).to.equal(0);
   });
-
 });

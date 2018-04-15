@@ -1,10 +1,9 @@
 import { expect } from 'chai';
+import deepFreeze from 'deep-freeze';
 import getInitialOption from './getInitialOption';
 import state from '../../../mocha/state-mock';
-import deepFreeze from 'deep-freeze';
 
 describe('getInitialOption', () => {
-
   deepFreeze(state);
 
   it('should return then first option', () => {
@@ -21,31 +20,30 @@ describe('getInitialOption', () => {
         options: [{
           name: 'Make 1',
           value: 'null',
-          text: 'Any'
-        }]
+          text: 'Any',
+        }],
       },
       name: 'Make 1',
       nextPotentialSelectionIndex: 0,
       options: [{
         text: 'Any',
-        value: 'null'
+        value: 'null',
       }, {
         text: 'Fiat',
-        value: 'fiat'
+        value: 'fiat',
       }, {
         text: 'Subaru',
-        value: 'subaru'
+        value: 'subaru',
       }, {
         text: 'BMW',
-        value: 'bmw'
+        value: 'bmw',
       }, {
         text: 'Tesla',
-        value: 'tesla'
+        value: 'tesla',
       }],
       singleSelectInitialIndex: 0,
       singleSelectSelectedIndex: 0,
-      singleSelectSelectedOption: {}
+      singleSelectSelectedOption: {},
     });
   });
-
 });

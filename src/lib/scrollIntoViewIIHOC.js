@@ -17,15 +17,15 @@ const scrollIntoViewIIHOC = WrappedComponent => class extends WrappedComponent {
   scrollIntoView() {
     const { scrollIntoViewElementSelector, scrollIntoViewScrollPaneRef, isDragging } = this.props;
     this.scrollPaneDOM = this.scrollPaneDOM || scrollIntoViewScrollPaneRef();
+    // eslint-disable-next-line react/no-find-dom-node
     this.elementDOM = this.elementDOM || ReactDOM.findDOMNode(this);
-    const isCurrentHighlightedOption = containsClassName(this.elementDOM, scrollIntoViewElementSelector );
+    const isCurrentHighlightedOption = containsClassName(this.elementDOM, scrollIntoViewElementSelector);
 
     if (isDragging === true) this.dontScrollIntoView = true; // if dragged - kill scrollIntoView
     if (
       !this.dontScrollIntoView &&
       isCurrentHighlightedOption
     ) {
-
       const topOfScrollPane = this.scrollPaneDOM.getBoundingClientRect().top;
       const bottomOfScrollPane = this.scrollPaneDOM.getBoundingClientRect().bottom;
       const topOfElement = this.elementDOM.getBoundingClientRect().top;

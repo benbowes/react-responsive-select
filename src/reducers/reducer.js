@@ -31,21 +31,19 @@ export const initialState = {
   // Multi select
   multiSelectInitialSelectedIndexes: [0],
   multiSelectSelectedOptions: { options: [] },
-  multiSelectSelectedIndexes: []
+  multiSelectSelectedIndexes: [],
 };
 
 function resetMultiSelectState(state) {
   return { // reset multiSelect state
     ...state,
-    multiSelectSelectedIndexes: [ ...initialState.multiSelectSelectedIndexes ],
-    multiSelectSelectedOptions: { ...initialState.multiSelectSelectedOptions }
+    multiSelectSelectedIndexes: [...initialState.multiSelectSelectedIndexes],
+    multiSelectSelectedOptions: { ...initialState.multiSelectSelectedOptions },
   };
 }
 
 export default function reducer(state, action) {
-
   switch (action.type) {
-
     case actionTypes.UPDATE_VIA_PROPS:
     case actionTypes.INITIALISE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
@@ -68,7 +66,7 @@ export default function reducer(state, action) {
         singleSelectSelectedIndex: initialSelectedIndex,
         singleSelectSelectedOption: {
           name: action.value.name,
-          ...action.value.options[ initialSelectedIndex ]
+          ...action.value.options[initialSelectedIndex],
         },
 
         // For determining highlighted item on Keyboard navigation and selection via UPDATE_VIA_PROPS
@@ -81,15 +79,15 @@ export default function reducer(state, action) {
         multiSelectInitialSelectedIndexes: initialSelectedIndexes,
         multiSelectSelectedIndexes: initialSelectedIndexes,
         multiSelectSelectedOptions: {
-          options: initialSelectedOptions
-        }
+          options: initialSelectedOptions,
+        },
       };
     }
 
     case actionTypes.SET_IS_DRAGGING:
       return {
         ...state,
-        isDragging: action.boolean
+        isDragging: action.value,
       };
 
     case actionTypes.SET_OPTIONS_PANEL_OPEN: {
@@ -109,8 +107,8 @@ export default function reducer(state, action) {
 
         singleSelectSelectedOption: {
           name: state.name,
-          ...state.options[ state.singleSelectSelectedIndex ]
-        }
+          ...state.options[state.singleSelectSelectedIndex],
+        },
       };
       return mergeIsAlteredState(newState);
     }
@@ -122,8 +120,8 @@ export default function reducer(state, action) {
         singleSelectSelectedIndex: state.nextPotentialSelectionIndex,
         singleSelectSelectedOption: {
           name: state.name,
-          ...state.options[state.nextPotentialSelectionIndex]
-        }
+          ...state.options[state.nextPotentialSelectionIndex],
+        },
       };
       return mergeIsAlteredState(newState);
     }
@@ -132,20 +130,20 @@ export default function reducer(state, action) {
     case actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR:
       return {
         ...state,
-        isOptionsPanelOpen: false
+        isOptionsPanelOpen: false,
       };
 
     case actionTypes.SET_NEXT_SELECTED_INDEX:
       return {
         ...state,
-        nextPotentialSelectionIndex: action.optionIndex
+        nextPotentialSelectionIndex: action.optionIndex,
       };
 
     case actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC:
       return {
         ...state,
         isOptionsPanelOpen: true,
-        nextPotentialSelectionIndex: action.optionIndex
+        nextPotentialSelectionIndex: action.optionIndex,
       };
 
     case actionTypes.SET_SINGLESELECT_OPTIONS: {
@@ -156,8 +154,8 @@ export default function reducer(state, action) {
         isOptionsPanelOpen: false,
         singleSelectSelectedOption: {
           name: state.name,
-          ...state.options[action.optionIndex]
-        }
+          ...state.options[action.optionIndex],
+        },
       };
 
       // Set altered state
@@ -165,7 +163,6 @@ export default function reducer(state, action) {
     }
 
     case actionTypes.SET_MULTISELECT_OPTIONS: {
-
       const isFirstOptionInListSelected = (
         state.multiSelectSelectedIndexes[0] === 0 &&
         state.multiSelectSelectedIndexes.length === 1
@@ -185,13 +182,14 @@ export default function reducer(state, action) {
       );
 
       // If any thing selected and first option was requested, deselect all, and return first option
-      if ( shouldDeselectAllAndSelectFirstOption ) {
+      if (shouldDeselectAllAndSelectFirstOption) {
         const nextState = getInitialOption(state);
         return mergeIsAlteredState(nextState);
       }
 
       // Deselect first option when first option selected and another option is requested
-      if ( shouldDeselectFirstOptionAndSelectRequestedOption ) {
+      if (shouldDeselectFirstOptionAndSelectRequestedOption) {
+        // eslint-disable-next-line no-param-reassign
         state = resetMultiSelectState(state);
       }
 
@@ -207,7 +205,7 @@ export default function reducer(state, action) {
           : removeMultiSelectIndex(state, indexLocation),
         multiSelectSelectedOptions: (indexLocation === -1)
           ? addMultiSelectOption(state, action.optionIndex)
-          : removeMultiSelectOption(state, indexLocation)
+          : removeMultiSelectOption(state, indexLocation),
       };
 
       // Select first option if user has deselected all items
@@ -218,6 +216,7 @@ export default function reducer(state, action) {
       // Set altered state
       return mergeIsAlteredState(nextState);
     }
+    default:
+      return state;
   }
-
 }

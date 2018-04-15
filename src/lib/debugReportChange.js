@@ -1,4 +1,4 @@
-export default function debugReportChange( name, action, nextState ) {
+export default function debugReportChange(name, action, nextState) {
   const knownCircularKeys = ['markup'];
 
   if (
@@ -6,15 +6,15 @@ export default function debugReportChange( name, action, nextState ) {
     && typeof window !== 'undefined'
     && window.location.search.indexOf('debug=true') > -1
   ) {
-
     const removeCircular = (obj) => {
       let cache = [];
-      const result = JSON.stringify(obj, function(key, value) {
-        if ( typeof value === 'object' && value !== null ) {
+      const result = JSON.stringify(obj, (key, value) => {
+        if (typeof value === 'object' && value !== null) {
           // If circular reference found then discard it
-          if ( cache.indexOf(value) !== -1 || knownCircularKeys.some((k) => key === k) ) return;
+          if (cache.indexOf(value) !== -1 || knownCircularKeys.some(k => key === k)) return;
           cache.push(value);
         }
+        // eslint-disable-next-line
         return value;
       }, 2);
       cache = null;
@@ -23,9 +23,9 @@ export default function debugReportChange( name, action, nextState ) {
     };
 
     console.log(
-      '\nname:', '"' + name + '\'',
+      '\nname:', `"${name}'`,
       '\naction:', JSON.parse(removeCircular(action)),
-      '\nnextState:', JSON.parse(removeCircular(nextState))
+      '\nnextState:', JSON.parse(removeCircular(nextState)),
     );
   }
 }

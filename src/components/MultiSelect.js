@@ -1,25 +1,14 @@
 import React, { Component } from 'react';
-import { MultiSelectProps } from '../propTypes';
 import singleline from 'singleline';
 import isEqual from 'lodash.isequal';
+import { MultiSelectProps } from '../propTypes';
 import MultiSelectOption from './MultiSelectOption';
 import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
+
 const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
 
 export default class MultiSelect extends Component {
-
-  getAriaLabel() {
-    const { multiSelectSelectedOptions, prefix } = this.props;
-    const selectedOptionsLength = multiSelectSelectedOptions.options.length;
-    return singleline(`
-      Checkbox group ${prefix ? prefix + ' ' : ''} has
-      ${selectedOptionsLength} item${selectedOptionsLength === 1 ? '' : 's'} selected.
-      Selected option${selectedOptionsLength === 1 ? '' : 's'} ${selectedOptionsLength === 1 ? 'is' : 'are'}
-      ${multiSelectSelectedOptions.options.map(v => v.text).join(' and ')}
-    `);
-  }
-
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     /* Focus selectBox button if options panel has just closed, there has been an interaction or the value has changed */
     if (
       !this.props.isOptionsPanelOpen
@@ -30,7 +19,18 @@ export default class MultiSelect extends Component {
     }
   }
 
-  render(){
+  getAriaLabel() {
+    const { multiSelectSelectedOptions, prefix } = this.props;
+    const selectedOptionsLength = multiSelectSelectedOptions.options.length;
+    return singleline(`
+      Checkbox group ${prefix ? `${prefix} ` : ''} has
+      ${selectedOptionsLength} item${selectedOptionsLength === 1 ? '' : 's'} selected.
+      Selected option${selectedOptionsLength === 1 ? '' : 's'} ${selectedOptionsLength === 1 ? 'is' : 'are'}
+      ${multiSelectSelectedOptions.options.map(v => v.text).join(' and ')}
+    `);
+  }
+
+  render() {
     const {
       caretIcon,
       customLabelText,
@@ -42,7 +42,7 @@ export default class MultiSelect extends Component {
       name,
       options,
       nextPotentialSelectionIndex,
-      prefix
+      prefix,
     } = this.props;
 
     return (
@@ -52,9 +52,9 @@ export default class MultiSelect extends Component {
           tabIndex="0"
           aria-disabled={disabled}
           aria-haspopup="true"
-          aria-expanded={`${isOptionsPanelOpen}`}
+          aria-expanded={isOptionsPanelOpen}
           aria-controls={`rrs-${name}-menu`}
-          ref={(r) => { if (r) { return this.optionsButton = r; }}}
+          ref={(r) => { if (r) this.optionsButton = r; }}
           className={singleline(`
             rrs__button
             ${(disabled === true) ? 'rrs__button--disabled' : ''}
@@ -81,11 +81,11 @@ export default class MultiSelect extends Component {
               className="rrs__label__text"
               id={`rrs-${name}-label`}
             >
-              <span className='rrs__multiselect-label'>
-                <span className='rrs__multiselect-label__text'>{`${prefix ? prefix + ' ' : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
+              <span className="rrs__multiselect-label">
+                <span className="rrs__multiselect-label__text">{`${prefix ? `${prefix} ` : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
                 {multiSelectSelectedOptions.options.length > 1 &&
-                <span className='rrs__multiselect-label__badge'>
-                  {`+ ${multiSelectSelectedOptions.options.length-1}`}
+                <span className="rrs__multiselect-label__badge">
+                  {`+ ${multiSelectSelectedOptions.options.length - 1}`}
                 </span>
                 }
               </span>
@@ -109,13 +109,13 @@ export default class MultiSelect extends Component {
           aria-labelledby={`rrs-${name}-label`}
           role="menu"
           className="rrs__options"
-          ref={(r) => { if (r) { return this.optionsContainer = r; }}}
+          ref={(r) => { if (r) this.optionsContainer = r; }}
         >
           {options.length > 0 &&
             options.map((option, index) => (
               <MultiSelectOptionHOC
                 scrollIntoViewScrollPaneRef={() => this.optionsContainer}
-                scrollIntoViewElementSelector={'rrs__option--next-selection'}
+                scrollIntoViewElementSelector="rrs__option--next-selection"
                 key={index}
                 index={index}
                 option={option}

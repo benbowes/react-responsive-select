@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { MultiSelectOptionProps } from '../propTypes';
 import singleline from 'singleline';
+import { MultiSelectOptionProps } from '../propTypes';
 
 export default class MultiSelectOption extends Component {
-
   componentDidUpdate() {
     const { index, isOptionsPanelOpen, nextPotentialSelectionIndex } = this.props;
-    if(index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
+    if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
       this[`option_${index}`].focus();
     }
   }
 
-  render(){
-    const { index, multiSelectSelectedIndexes, nextPotentialSelectionIndex, option } = this.props;
+  render() {
+    const {
+      index, multiSelectSelectedIndexes, nextPotentialSelectionIndex, option,
+    } = this.props;
     const isSelected = multiSelectSelectedIndexes.some(i => i === index);
 
     return (

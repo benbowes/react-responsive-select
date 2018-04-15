@@ -7,41 +7,47 @@ const moduleConfig = {
   rules: [{
     test: /\.js$/,
     loader: 'babel-loader',
-    exclude: path.resolve(__dirname, 'node_modules')
-  }]
+    options: {
+      presets: ['env'],
+    },
+    exclude: path.resolve(__dirname, 'node_modules'),
+  }],
 };
 
 module.exports = [{
 
   entry,
+  mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.js',
     libraryTarget: 'umd',
-    library
+    library,
   },
-  externals: [ nodeExternals({ whitelist: ['prop-types'] }) ]
+  externals: [nodeExternals({ whitelist: ['prop-types'] })],
 
 }, {
 
   entry,
+  mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.window.js',
     libraryTarget: 'window',
-    library
+    library,
   },
-  externals: { react: 'React' }
+  externals: { react: 'React' },
 
 }, {
 
   entry,
+  mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
     filename: './dist/ReactResponsiveSelect.var.js',
     libraryTarget: 'var',
-    library
+    library,
   },
-  externals: { react: 'React' }
+  externals: { react: 'React' },
 
 }];

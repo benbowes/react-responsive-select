@@ -5,9 +5,9 @@ export default function getInitialOption(state) {
     multiSelectSelectedOptions: {
       options: [{
         name: state.name,
-        ...state.options[0]
-      }]
+        ...state.options[0],
+      }],
     },
-    nextPotentialSelectionIndex: 0
+    nextPotentialSelectionIndex: 0,
   };
 }

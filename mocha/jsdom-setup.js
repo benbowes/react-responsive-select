@@ -1,4 +1,5 @@
 const jsdom = require('jsdom');
+
 const { JSDOM } = jsdom;
 // setup the simplest document possible
 const dom = new JSDOM('<!doctype html><html><body></body></html>');

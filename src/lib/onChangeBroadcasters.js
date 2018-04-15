@@ -10,13 +10,13 @@ export const multiSelectBroadcastChange = (prevOptions, currOptions, altered, on
   );
 
   if (shouldBroadcastChange) {
-    return onChange({
-      options: currOptions.map(v => ({
-        name: v.name,
-        text: v.text,
-        value: v.value
+    onChange({
+      options: currOptions.map(currOption => ({
+        name: currOption.name,
+        text: currOption.text,
+        value: currOption.value,
       })),
-      altered
+      altered,
     });
   }
 };
@@ -27,11 +27,11 @@ export const singleSelectBroadcastChange = (prevValue, currValue, altered, onCha
   const shouldBroadcastChange = (prevValue && prevValue.value !== currValue.value);
 
   if (shouldBroadcastChange) {
-    return onChange({
+    onChange({
       name: currValue.name,
       text: currValue.text,
       value: currValue.value,
-      altered
+      altered,
     });
   }
 };

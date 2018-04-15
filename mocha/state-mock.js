@@ -4,19 +4,19 @@ export default {
   name: 'Make 1',
   options: [{
     value: 'null',
-    text: 'Any'
+    text: 'Any',
   }, {
     value: 'fiat',
-    text: 'Fiat'
+    text: 'Fiat',
   }, {
     value: 'subaru',
-    text: 'Subaru'
+    text: 'Subaru',
   }, {
     value: 'bmw',
-    text: 'BMW'
+    text: 'BMW',
   }, {
     value: 'tesla',
-    text: 'Tesla'
+    text: 'Tesla',
   }],
   isDragging: false,
   isOptionsPanelOpen: false,
@@ -29,14 +29,14 @@ export default {
   multiSelectSelectedOptions: {
     options: [{
       value: 'fiat',
-      text: 'Fiat'
+      text: 'Fiat',
     }, {
       value: 'subaru',
-      text: 'Subaru'
+      text: 'Subaru',
     }, {
       value: 'bmw',
-      text: 'BMW'
-    }]
+      text: 'BMW',
+    }],
   },
-  multiSelectSelectedIndexes: [1, 2, 3]
+  multiSelectSelectedIndexes: [1, 2, 3],
 };
