@@ -87,7 +87,7 @@ export default function reducer(state, action) {
     case actionTypes.SET_IS_DRAGGING:
       return {
         ...state,
-        isDragging: action.boolean,
+        isDragging: action.value,
       };
 
     case actionTypes.SET_OPTIONS_PANEL_OPEN: {

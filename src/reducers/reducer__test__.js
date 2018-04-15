@@ -25,7 +25,7 @@ describe('reducer', () => {
       initialState,
       {
         type: actionTypes.SET_IS_DRAGGING,
-        boolean: true,
+        value: true,
       },
     );
 

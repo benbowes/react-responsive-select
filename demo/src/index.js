@@ -6,14 +6,14 @@ import CodeBlock from './CodeBlock';
 // By default no caret icon is supplied - any valid jsx markup will do
 const caretIcon = (
   <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
-    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"></path></g>
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z" /></g>
   </svg>
 );
 
 const checkboxIcon = (
   <span className="checkbox">
     <svg className="checkbox-icon" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 488.878 488.878">
-      <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 "></polygon></g>
+      <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 " /></g>
     </svg>
   </span>
 );
@@ -22,7 +22,7 @@ const featuresCheckboxIcon = (
   <span className="features-list__checkIcon">{checkboxIcon}</span>
 );
 
-const multiSelectOptionMarkup = (text) => (
+const multiSelectOptionMarkup = text => (
   <div>
     {checkboxIcon}
     <span> {text}</span>
@@ -36,13 +36,14 @@ class Form extends Component { // eslint-disable-line
     this.reportChange = this.reportChange.bind(this);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   reportChange(newValue) {
     console.log('reportChange', newValue);
   }
 
   render() {
     return (
-      <form className="form" ref={r => this.form = r}>
+      <form className="form" ref={(r) => { this.form = r; }}>
 
         <div className="row">
           <h2>FEATURES</h2>
@@ -73,7 +74,7 @@ class Form extends Component { // eslint-disable-line
                 { value: 'suzuki', text: 'Suzuki' },
                 { value: 'tesla', text: 'Tesla' },
                 { value: 'volvo', text: 'Volvo' },
-                { value: 'zonda', text: 'Zonda' }
+                { value: 'zonda', text: 'Zonda' },
               ]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
@@ -89,23 +90,23 @@ class Form extends Component { // eslint-disable-line
               options={[{
                 value: 'null',
                 text: 'Any',
-                markup: <span>Any</span>
+                markup: <span>Any</span>,
               }, {
                 value: 'bmw',
                 text: 'BMW',
-                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
               }, {
                 value: 'fiat',
                 text: 'Fiat',
-                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
               }, {
                 value: 'subaru',
                 text: 'Subaru',
-                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
               }, {
                 value: 'tesla',
                 text: 'Tesla',
-                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
               }]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
@@ -121,23 +122,23 @@ class Form extends Component { // eslint-disable-line
               options={[{
                 value: 'null',
                 text: 'Any',
-                markup: <span>Any</span>
+                markup: <span>Any</span>,
               }, {
                 value: 'bmw',
                 text: 'BMW',
-                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
               }, {
                 value: 'fiat',
                 text: 'Fiat',
-                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
               }, {
                 value: 'subaru',
                 text: 'Subaru',
-                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
               }, {
                 value: 'tesla',
                 text: 'Tesla',
-                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
               }]}
               onSubmit={() => { this.form.submit(); }}
               customLabelRenderer={singleSelectSelectedOption => `You selected ${singleSelectSelectedOption.text}`}
@@ -163,7 +164,7 @@ class Form extends Component { // eslint-disable-line
                 { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
                 { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
                 { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') }
+                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
               ]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
@@ -181,7 +182,7 @@ class Form extends Component { // eslint-disable-line
 
           <h3>Install the dependency</h3>
           <pre>
-          <code className="language-bash">$ npm install --save-dev react-responsive-select</code>
+            <code className="language-bash">$ npm install --save-dev react-responsive-select</code>
           </pre>
           <p className="--margin-bottom-4">Check out <strong><a title="Github repository link for react-responsive-select" href="https://github.com/benbowes/react-responsive-select">the docs</a></strong> and view the <strong><a href="https://codepen.io/collection/DrjWEk/">Codepen examples</a></strong></p>
         </div>
@@ -221,7 +222,7 @@ class Form extends Component { // eslint-disable-line
                   { value: 'suzuki', text: 'Suzuki' },
                   { value: 'tesla', text: 'Tesla' },
                   { value: 'volvo', text: 'Volvo' },
-                  { value: 'zonda', text: 'Zonda' }
+                  { value: 'zonda', text: 'Zonda' },
                 ]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
@@ -234,8 +235,8 @@ class Form extends Component { // eslint-disable-line
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<CodeBlock>
-{`import React, { Component } from 'react';
+          <CodeBlock>
+            {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -277,7 +278,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</CodeBlock>
+          </CodeBlock>
         </div>
 
         <div className="row">
@@ -290,23 +291,23 @@ ReactDOM.render(
                 options={[{
                   value: 'null',
                   text: 'Any',
-                  markup: <span>Any</span>
+                  markup: <span>Any</span>,
                 }, {
                   value: 'bmw',
                   text: 'BMW',
-                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
                 }, {
                   value: 'fiat',
                   text: 'Fiat',
-                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
                 }, {
                   value: 'subaru',
                   text: 'Subaru',
-                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
                 }, {
                   value: 'tesla',
                   text: 'Tesla',
-                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
                 }]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
@@ -319,8 +320,8 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<CodeBlock>
-{`import React, { Component } from 'react';
+          <CodeBlock>
+            {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -371,7 +372,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</CodeBlock>
+          </CodeBlock>
         </div>
 
         <div className="row">
@@ -384,23 +385,23 @@ ReactDOM.render(
                 options={[{
                   value: 'null', // (Required) form submitted value
                   text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
-                  markup: <span>Any</span> // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+                  markup: <span>Any</span>, // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
                 }, {
                   value: 'bmw',
                   text: 'BMW',
-                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>
+                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
                 }, {
                   value: 'fiat',
                   text: 'Fiat',
-                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>
+                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
                 }, {
                   value: 'subaru',
                   text: 'Subaru',
-                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>
+                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
                 }, {
                   value: 'tesla',
                   text: 'Tesla',
-                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>
+                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
                 }]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
@@ -413,8 +414,8 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<CodeBlock>
-{`import React, { Component } from 'react';
+          <CodeBlock>
+            {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -467,7 +468,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</CodeBlock>
+          </CodeBlock>
 
         </div>
 
@@ -490,12 +491,12 @@ ReactDOM.render(
                   { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
                   { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
                   { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') }
+                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
                 ]}
                 onSubmit={() => { this.form.submit(); }} // (Required) form submit function
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
                 prefix="Make4: "
-                selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+                selectedValues={['mazda', 'ford']} // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
                 onChange={this.reportChange} // (Optional) listen for changes in a select
               />
             </div>
@@ -503,8 +504,8 @@ ReactDOM.render(
             <div className="view-console-message">View the onChange object via the console</div>
           </div>
 
-<CodeBlock>
-{`import React, { Component } from 'react';
+          <CodeBlock>
+            {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -558,7 +559,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</CodeBlock>
+          </CodeBlock>
 
         </div>
 
@@ -581,16 +582,14 @@ ReactDOM.render(
                   { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
                   { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
                   { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') }
+                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
                 ]}
                 onSubmit={() => { this.form.submit(); }} // (Required) form submit function
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
-                customLabelRenderer={multiSelectSelectedOptions => {
-                  return multiSelectSelectedOptions.options
+                customLabelRenderer={multiSelectSelectedOptions => multiSelectSelectedOptions.options
                     && multiSelectSelectedOptions.options.length > 0
-                    && multiSelectSelectedOptions.options.map(v => v.text).join(', ');
-                }} // (Optional) format your own label text like this
-                selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
+                    && multiSelectSelectedOptions.options.map(v => v.text).join(', ')} // (Optional) format your own label text like this
+                selectedValues={['mazda', 'ford']} // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
                 onChange={this.reportChange} // (Optional) listen for changes in a select
               />
             </div>
@@ -599,8 +598,8 @@ ReactDOM.render(
           </div>
 
 
-<CodeBlock>
-{`import React, { Component } from 'react';
+          <CodeBlock>
+            {`import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactResponsiveSelect from 'react-responsive-select';
 
@@ -655,13 +654,13 @@ ReactDOM.render(
   document.getElementById('root')
 );
 `}
-</CodeBlock>
+          </CodeBlock>
 
         </div>
 
         <div className="row centered">
           <h3>When inside a &lt;form /&gt;, submit will happen like a standard html form</h3>
-          <button type="submit" className={'button'}>Submit page</button><br/><div className="view-console-message"> Check the URL after you submit the page</div>
+          <button type="submit" className="button">Submit page</button><br /><div className="view-console-message"> Check the URL after you submit the page</div>
         </div>
       </form>
     );
@@ -670,5 +669,5 @@ ReactDOM.render(
 
 ReactDOM.render(
   <Form />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

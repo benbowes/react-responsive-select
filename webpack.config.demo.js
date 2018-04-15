@@ -1,11 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
+
 const DEV = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 
   devServer: {
-    inline: true
+    inline: true,
   },
 
   mode: process.env.NODE_ENV,
@@ -13,13 +14,13 @@ module.exports = {
   devtool: 'source-map',
 
   entry: {
-    index: './demo/src/index.js'
+    index: './demo/src/index.js',
   },
 
   output: {
     filename: 'demo.js',
     path: path.resolve(__dirname, 'demo'),
-    publicPath: 'demo'
+    publicPath: 'demo',
   },
 
   module: {
@@ -28,14 +29,16 @@ module.exports = {
       loader: 'babel-loader',
       exclude: path.resolve(__dirname, 'node_modules'),
       options: {
-        presets: ['env']
-      }
-    }]
+        presets: ['env'],
+      },
+    }],
   },
 
   plugins: [
-    new webpack.DefinePlugin({ 'process.env': {
-      'NODE_ENV': JSON.stringify(DEV ? 'development' : 'production')
-    }})
-  ]
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(DEV ? 'development' : 'production'),
+      },
+    }),
+  ],
 };

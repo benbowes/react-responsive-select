@@ -5,19 +5,19 @@ import ReactResponsiveSelect from '../../src/ReactResponsiveSelect';
 // By default no caret icon is supplied - any valid jsx markup will do
 const caretIcon = (
   <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
-    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"></path></g>
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z" /></g>
   </svg>
 );
 
 const checkboxIcon = (
   <span className="checkbox">
     <svg className="checkbox-icon" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 488.878 488.878">
-      <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 "></polygon></g>
+      <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 " /></g>
     </svg>
   </span>
 );
 
-const multiSelectOptionMarkup = (text) => (
+const multiSelectOptionMarkup = text => (
   <div>
     {checkboxIcon}
     <span> {text}</span>
@@ -25,13 +25,13 @@ const multiSelectOptionMarkup = (text) => (
 );
 
 const singleSelectOptions = [
-  { value: 'null', text: 'Any'},
+  { value: 'null', text: 'Any' },
   { value: 'alfa-romeo', text: 'Alfa Romeo' },
   { value: 'bmw', text: 'BMW' },
   { value: 'fiat', text: 'Fiat' },
   { value: 'lexus', text: 'Lexus' },
   { value: 'morgan', text: 'Morgan' },
-  { value: 'subaru', text: 'Subaru' }
+  { value: 'subaru', text: 'Subaru' },
 ];
 
 const multiSelectOptions = [
@@ -41,27 +41,39 @@ const multiSelectOptions = [
   { value: 'fiat', text: 'Fiat', markup: multiSelectOptionMarkup('Fiat') },
   { value: 'lexus', text: 'Lexus', markup: multiSelectOptionMarkup('Lexus') },
   { value: 'morgan', text: 'Morgan', markup: multiSelectOptionMarkup('Morgan') },
-  { value: 'subaru', text: 'Subaru', markup: multiSelectOptionMarkup('Subaru') }
+  { value: 'subaru', text: 'Subaru', markup: multiSelectOptionMarkup('Subaru') },
 ];
 
 /* eslint-disable react/no-multi-comp */
 class Form extends Component {
-  state = {
-    selectedValue: 'null',
-    initialSelectedValue: 'null',
-    selectedValues: ['bmw','fiat'],
-    initialSelectedValues: ['bmw','fiat'],
-    isSingleSelect: true,
-    isDisabled: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      selectedValue: 'null',
+      initialSelectedValue: 'null',
+      selectedValues: ['bmw', 'fiat'],
+      initialSelectedValues: ['bmw', 'fiat'],
+      isSingleSelect: true,
+      isDisabled: false,
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSingleSelectChange = this.handleSingleSelectChange.bind(this);
+    this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
+    this.handleSelectOption = this.handleSelectOption.bind(this);
+    this.handleSelectOptions = this.handleSelectOptions.bind(this);
+    this.handleSelectTypeChange = this.handleSelectTypeChange.bind(this);
+    this.handleDisabledChange = this.handleDisabledChange.bind(this);
+  }
 
-  handleSubmit = this.handleSubmit.bind(this);
-  handleSingleSelectChange = this.handleSingleSelectChange.bind(this);
-  handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
-  handleSelectOption = this.handleSelectOption.bind(this);
-  handleSelectOptions = this.handleSelectOptions.bind(this);
-  handleSelectTypeChange = this.handleSelectTypeChange.bind(this);
-  handleDisabledChange = this.handleDisabledChange.bind(this);
+  // eslint-disable-next-line class-methods-use-this
+  getMultiSelectValue(newValue) {
+    return {
+      [newValue.options[0].name]: {
+        options: [...newValue.options],
+        altered: newValue.altered,
+      },
+    };
+  }
 
   handleSelectOption(e) {
     const firstLetter = e.target.value.charAt(0);
@@ -78,7 +90,7 @@ class Form extends Component {
 
     const firstLetters = e.target.value.split(',');
     const foundValues = multiSelectOptions
-      .filter((v) => firstLetters.some(letter => v.value.charAt(0) === letter.charAt(0)))
+      .filter(v => firstLetters.some(letter => v.value.charAt(0) === letter.charAt(0)))
       .map(v => v.value);
 
     this.setState({ selectedValues: foundValues.reverse() });
@@ -89,25 +101,16 @@ class Form extends Component {
       [newValue.name]: {
         text: newValue.text,
         value: newValue.value,
-        altered: newValue.altered
+        altered: newValue.altered,
       },
-      selectedValue: newValue.value
+      selectedValue: newValue.value,
     };
 
     // Merge new value over top of existing value
     this.setState(
       { ...this.state, ...formValue },
-      () => console.log('handleChange()', this.state)
+      () => console.log('handleChange()', this.state),
     );
-  }
-
-  getMultiSelectValue(newValue) {
-    return {
-      [newValue.options[0].name]: {
-        options: [...newValue.options],
-        altered: newValue.altered
-      }
-    };
   }
 
   handleMultiSelectChange(newValue) {
@@ -117,7 +120,7 @@ class Form extends Component {
     this.setState({
       ...this.state,
       ...formValue,
-      selectedValues: newValue.options.map(v => v.value)
+      selectedValues: newValue.options.map(v => v.value),
     });
   }
 
@@ -135,7 +138,7 @@ class Form extends Component {
 
   render() {
     const {
-      selectedValue, initialSelectedValue, selectedValues, initialSelectedValues, isSingleSelect, isDisabled
+      selectedValue, initialSelectedValue, selectedValues, initialSelectedValues, isSingleSelect, isDisabled,
     } = this.state;
 
     return (
@@ -160,7 +163,7 @@ class Form extends Component {
               type="text"
               name="firstLetter"
               placeholder="Select option via first letter"
-              onKeyUp={(e) => this.handleSelectOption(e)}
+              onKeyUp={e => this.handleSelectOption(e)}
             />
           </div>
           }
@@ -184,21 +187,21 @@ class Form extends Component {
               type="text"
               name="firstLetters"
               placeholder="Select options via comma-delimited first letters e.g. a,s,f"
-              onKeyUp={(e) => this.handleSelectOptions(e)}
+              onKeyUp={e => this.handleSelectOptions(e)}
             />
           </div>
           }
 
-              <label>
-                <input checked={isSingleSelect} onChange={this.handleSelectTypeChange} type="radio" name="selectType" value="single-select" />
+          <label htmlFor="selectType1">
+            <input checked={isSingleSelect} onChange={this.handleSelectTypeChange} type="radio" id="selectType1" name="selectType" value="single-select" />
                 Single Select
-              </label>
-              <label>
-                <input checked={!isSingleSelect} onChange={this.handleSelectTypeChange} type="radio" name="selectType" value="multi-select" />
+          </label>
+          <label htmlFor="selectType2">
+            <input checked={!isSingleSelect} onChange={this.handleSelectTypeChange} type="radio" id="selectType2" name="selectType" value="multi-select" />
                 Multi Select
-            </label>
-<label>
-          <input checked={isDisabled} onChange={this.handleDisabledChange} type="checkbox" name="disabled" value="is-disabled" />
+          </label>
+          <label htmlFor="disabled">
+            <input checked={isDisabled} onChange={this.handleDisabledChange} type="checkbox" id="disabled" name="disabled" value="is-disabled" />
           Disabled
           </label>
 
@@ -211,5 +214,5 @@ class Form extends Component {
 
 ReactDOM.render(
   <Form />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

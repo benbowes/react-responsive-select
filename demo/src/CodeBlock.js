@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class CodeBlock extends Component {
-
   constructor() {
     super();
     this.state = { isExpanded: false };
   }
 
-  render () {
+  render() {
     const { isExpanded } = this.state;
     const { children } = this.props;
 
@@ -33,5 +32,5 @@ export default class CodeBlock extends Component {
 }
 
 CodeBlock.propTypes = {
-  children: PropTypes.string
+  children: PropTypes.string.isRequired,
 };

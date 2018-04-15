@@ -7,6 +7,9 @@ export default function handleTouchMove({ state, ReactResponsiveSelectClassRef }
   if (disabled) return;
 
   if (!isDragging) {
-    ReactResponsiveSelectClassRef.updateState({ type: actionTypes.SET_IS_DRAGGING, boolean: true });
+    ReactResponsiveSelectClassRef.updateState({
+      type: actionTypes.SET_IS_DRAGGING,
+      value: true,
+    });
   }
 }

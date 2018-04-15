@@ -32,20 +32,20 @@
     "check-coverage": true,
     "watermarks": {
       "lines": [
-        100,
-        100
+        95,
+        95
       ],
       "functions": [
-        100,
-        100
+        95,
+        95
       ],
       "branches": [
-        100,
-        100
+        95,
+        95
       ],
       "statements": [
-        100,
-        100
+        95,
+        95
       ]
     }
   },

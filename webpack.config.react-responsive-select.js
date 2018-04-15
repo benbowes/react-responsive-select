@@ -8,10 +8,10 @@ const moduleConfig = {
     test: /\.js$/,
     loader: 'babel-loader',
     options: {
-      presets: ['env']
+      presets: ['env'],
     },
-    exclude: path.resolve(__dirname, 'node_modules')
-  }]
+    exclude: path.resolve(__dirname, 'node_modules'),
+  }],
 };
 
 module.exports = [{
@@ -22,9 +22,9 @@ module.exports = [{
   output: {
     filename: './dist/ReactResponsiveSelect.js',
     libraryTarget: 'umd',
-    library
+    library,
   },
-  externals: [ nodeExternals({ whitelist: ['prop-types'] }) ]
+  externals: [nodeExternals({ whitelist: ['prop-types'] })],
 
 }, {
 
@@ -34,9 +34,9 @@ module.exports = [{
   output: {
     filename: './dist/ReactResponsiveSelect.window.js',
     libraryTarget: 'window',
-    library
+    library,
   },
-  externals: { react: 'React' }
+  externals: { react: 'React' },
 
 }, {
 
@@ -46,8 +46,8 @@ module.exports = [{
   output: {
     filename: './dist/ReactResponsiveSelect.var.js',
     libraryTarget: 'var',
-    library
+    library,
   },
-  externals: { react: 'React' }
+  externals: { react: 'React' },
 
 }];

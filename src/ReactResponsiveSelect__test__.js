@@ -276,12 +276,12 @@ describe('ReactResponsiveSelect', () => {
 
     it('handleTouchStart() should set isDragging to false', () => {
       selectBoxContainer.simulate('touchStart');
-      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, boolean: false }]);
+      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, value: false }]);
     });
 
     it('handleTouchMove() should set isDragging to true', () => {
       selectBoxContainer.simulate('touchMove');
-      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, boolean: true }]);
+      expect(updateStateSpy.args[0]).to.eql([{ type: actionTypes.SET_IS_DRAGGING, value: true }]);
     });
 
     it('Enter key calls handleKeyEvent() handleEnterPressed()', () => {
