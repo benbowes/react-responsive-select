@@ -43,47 +43,32 @@ And include the CSS file in your project via an import, or by copy/pasting the C
 Example usage:
 
 ```js
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import ReactResponsiveSelect from 'react-responsive-select';
 
-class Form extends Component {
+const reportChange = (newValue) => console.log(newValue);
 
-  reportChange(newValue) {
-    console.log(newValue);
-  }
-
-  render() {
-    return (
-      <form ref={r => this.form = r}>
-
-        <ReactResponsiveSelect
-          caretIcon={<span style={{float:'right'}}>+</span>}
-          name="make"
-          options={[
-            { text: 'Any', value: 'null' },
-            { text: 'Oldsmobile', value: 'oldsmobile', markup: <span>Oldsmobile</span> },
-            { text: 'Ford', value: 'ford', markup: <span>Ford</span> }
-          ]}
-          onChange={this.reportChange}
-          onSubmit={() => { this.form.submit(); }}
-          prefix="Make:"
-          selectedValue="mazda"
-        />
-
-      </form>
-    );
-  }
-}
-
-ReactDOM.render(
-  <Form />,
-  document.getElementById('root')
+const Form = () => (
+  <form ref={r => this.form = r}>
+    <ReactResponsiveSelect
+      name="make"
+      options={[
+        { text: 'Any', value: 'null' },
+        { text: 'Oldsmobile', value: 'oldsmobile', markup: <span>Oldsmobile</span> },
+        { text: 'Ford', value: 'ford', markup: <span>Ford</span> }
+      ]}
+      prefix="Make:"
+      selectedValue="mazda"
+      onSubmit={() => { this.form.submit(); }}
+      onChange={reportChange}
+      caretIcon={<span>+</span>}
+    />
+  </form>
 );
 ```
 
 A more detailed usage example can be found here:
- https://github.com/benbowes/react-responsive-select/blob/master/demo.js
+ https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js
 
 ---
 
@@ -144,7 +129,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
         text: "Fiat",
         value: "fiat",
         markup: &lt;span&gt;Fiat&lt;/span&gt;
-        }]</code></p><p><code>text</code> (Required) display value for the select and the default for the option label</p><p><code>value</code> (Required) value that is submitted</p><p><code>markup</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
+        }]</code></p><p><code>text:</code> (Required) display value for the select and the default for the option label</p><p><code>value:</code> (Required) value that is submitted</p><p><code>markup:</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
   </tr>
   <tr>
     <td>onSubmit</td>
@@ -181,8 +166,11 @@ You can hook into the onChange function via the `customLabelRenderer` function p
   <tr>
     <td>customLabelRenderer</td>
     <td>Function</td>
-    <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
-    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label. See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L139) or the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L573-L577)</p>
+    <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns an option object e.g. <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label.
+
+    See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L144).
+    </p>
     </td>
   </tr>
 </table>
@@ -202,6 +190,16 @@ Same as Single Select API but with the following amendments
     <td>Array of String values</td>
     <td>Pre-select several options with this value - should match against an existing <code>option.value</code>, or if omitted, the first item will be selected.
     e.g. <code>selectedValues={['mazda','ford']}</code>
+    </td>
+  </tr>
+  <tr>
+    <td>customLabelRenderer</td>
+    <td>Function</td>
+    <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns an array option objects e.g. <code>[{ name: select.name, value: option.value, text: option.text, markup: JSX Object }]</code></p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label.
+
+    See the example in the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L589-L591).
+    </p>
     </td>
   </tr>
 </table>
