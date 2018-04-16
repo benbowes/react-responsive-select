@@ -85,7 +85,9 @@ export default class ReactResponsiveSelect extends Component {
     if (multiselect) {
       multiSelectBroadcastChange(
         prevState.multiSelectSelectedOptions.options,
-        multiSelectSelectedOptions.options, altered, onChange,
+        multiSelectSelectedOptions.options,
+        altered,
+        onChange,
       );
     } else {
       singleSelectBroadcastChange(

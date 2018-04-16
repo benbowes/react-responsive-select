@@ -9,6 +9,7 @@ export default function handleBlur({ state, ReactResponsiveSelectClassRef }) {
   /* Handle click outside of selectbox */
   if (
     isOptionsPanelOpen &&
+    ReactResponsiveSelectClassRef.selectBox &&
     !ReactResponsiveSelectClassRef.selectBox.contains(document.activeElement)
   ) {
     ReactResponsiveSelectClassRef.updateState({
