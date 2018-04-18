@@ -1,5 +1,5 @@
-import containsClassName from './containsClassName';
-import * as actionTypes from '../constants/actionTypes';
+import containsClassName from '../containsClassName';
+import * as actionTypes from '../../constants/actionTypes';
 
 export default function handleClick({ event, state, ReactResponsiveSelectClassRef }) {
   const {

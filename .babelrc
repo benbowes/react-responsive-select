@@ -3,14 +3,16 @@
     "react",
     ["env", {
       "targets": {
-        "browsers": ["last 10 versions", "ie 11"]
-      }
+        "browsers": [
+          "last 4 versions",
+          "not ie <= 10"
+        ]
+      },
+      "debug": true,
     }]
   ],
   "plugins": [
-    ["transform-object-rest-spread", {
-      "useBuiltIns": true
-    }]
+    "transform-object-rest-spread"
   ],
   "env": {
     "test": {

@@ -1,4 +1,4 @@
-export const multiSelectBroadcastChange = (prevOptions, currOptions, altered, onChange) => {
+export default (prevOptions, currOptions, altered, onChange) => {
   if (!onChange) return;
 
   const shouldBroadcastChange = (
@@ -16,21 +16,6 @@ export const multiSelectBroadcastChange = (prevOptions, currOptions, altered, on
         text: currOption.text,
         value: currOption.value,
       })),
-      altered,
-    });
-  }
-};
-
-export const singleSelectBroadcastChange = (prevValue, currValue, altered, onChange) => {
-  if (!onChange) return;
-
-  const shouldBroadcastChange = (prevValue && prevValue.value !== currValue.value);
-
-  if (shouldBroadcastChange) {
-    onChange({
-      name: currValue.name,
-      text: currValue.text,
-      value: currValue.value,
       altered,
     });
   }

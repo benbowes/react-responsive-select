@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import singleline from 'singleline';
 import isEqual from 'lodash.isequal';
-import { ReactResponsiveSelectProps } from './propTypes';
-import handleKeyEvent from './lib/handleKeyEvent';
-import handleTouchStart from './lib/handleTouchStart';
-import handleTouchMove from './lib/handleTouchMove';
-import handleClick from './lib/handleClick';
-import handleBlur from './lib/handleBlur';
-import getCustomLabelText from './lib/getCustomLabelText';
+import singleline from 'singleline';
 import * as actionTypes from './constants/actionTypes';
-import reducer, { initialState } from './reducers/reducer';
-import SingleSelect from './components/SingleSelect';
-import MultiSelect from './components/MultiSelect';
+import { handleBlur, handleClick, handleKeyEvent, handleTouchMove, handleTouchStart } from './lib/eventHandlers';
+import { multiSelectBroadcastChange, singleSelectBroadcastChange } from './lib/onChangeBroadcasters';
+import { ReactResponsiveSelectProps } from './propTypes';
 import debugReportChange from './lib/debugReportChange';
-import { singleSelectBroadcastChange, multiSelectBroadcastChange } from './lib/onChangeBroadcasters';
+import getCustomLabelText from './lib/getCustomLabelText';
+import initialState from './reducers/initialState';
+import reducer from './reducers/reducer';
+
+import MultiSelect from './components/MultiSelect';
+import SingleSelect from './components/SingleSelect';
 
 export default class ReactResponsiveSelect extends Component {
   constructor() {

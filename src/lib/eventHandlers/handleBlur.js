@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from '../../constants/actionTypes';
 
 /* TODO add a test for this */
 export default function handleBlur({ state, ReactResponsiveSelectClassRef }) {
