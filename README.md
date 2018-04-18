@@ -214,6 +214,20 @@ https://unpkg.com/react-responsive-select@latest/dist/ReactResponsiveSelect.css
 
 The [Codepen examples](https://codepen.io/collection/DrjWEk/) are consuming react-responsive-select via CDN if you'd like a guide.
 
+## Babel Preset Env Targets
+
+```
+{
+  "chrome": "62",
+  "android": "4.2",
+  "edge": "13",
+  "firefox": "56",
+  "ie": "11",
+  "ios": "10",
+  "safari": "10"
+}
+```
+
 ## React Responsive Select v2 to v3 upgrade guide
 
 See: https://github.com/benbowes/react-responsive-select/releases/tag/3.0.0

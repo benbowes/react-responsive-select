@@ -1,46 +1,16 @@
 import * as actionTypes from '../constants/actionTypes';
-import getSelectedValueIndex from './lib/getSelectedValueIndex';
-import getSelectedValueIndexes from './lib/getSelectedValueIndexes';
-import getInitialMultiSelectSelectedOptions from './lib/getInitialMultiSelectSelectedOptions';
-import addMultiSelectIndex from './lib/addMultiSelectIndex';
-import removeMultiSelectIndex from './lib/removeMultiSelectIndex';
-import addMultiSelectOption from './lib/addMultiSelectOption';
-import removeMultiSelectOption from './lib/removeMultiSelectOption';
-import mergeIsAlteredState from './lib/mergeIsAlteredState';
-import getInitialOption from './lib/getInitialOption';
-
-export const initialState = {
-  // Constants
-  multiselect: false,
-
-  // Universal
-  name: undefined,
-  options: [],
-  isDragging: false,
-  isOptionsPanelOpen: false,
-  altered: false,
-
-  // Single select
-  singleSelectInitialIndex: 0,
-  singleSelectSelectedIndex: 0,
-  singleSelectSelectedOption: {},
-
-  // For determining highlighted item on Keyboard navigation
-  nextPotentialSelectionIndex: 0,
-
-  // Multi select
-  multiSelectInitialSelectedIndexes: [0],
-  multiSelectSelectedOptions: { options: [] },
-  multiSelectSelectedIndexes: [],
-};
-
-function resetMultiSelectState(state) {
-  return { // reset multiSelect state
-    ...state,
-    multiSelectSelectedIndexes: [...initialState.multiSelectSelectedIndexes],
-    multiSelectSelectedOptions: { ...initialState.multiSelectSelectedOptions },
-  };
-}
+import {
+  getSelectedValueIndex,
+  getSelectedValueIndexes,
+  getInitialMultiSelectSelectedOptions,
+  addMultiSelectIndex,
+  removeMultiSelectIndex,
+  addMultiSelectOption,
+  removeMultiSelectOption,
+  mergeIsAlteredState,
+  getInitialOption,
+  resetMultiSelectState,
+} from './lib';
 
 export default function reducer(state, action) {
   switch (action.type) {

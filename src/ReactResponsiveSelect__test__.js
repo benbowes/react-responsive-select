@@ -5,8 +5,8 @@ import { expect } from 'chai';
 
 import ReactResponsiveSelect from './ReactResponsiveSelect';
 import * as actionTypes from './constants/actionTypes';
-import * as handleEnterPressed from './lib/handleEnterPressed';
-import * as handleKeyUpOrDownPressed from './lib/handleKeyUpOrDownPressed';
+import * as handleEnterPressed from './lib/eventHandlers/handleEnterPressed';
+import * as handleKeyUpOrDownPressed from './lib/eventHandlers/handleKeyUpOrDownPressed';
 import keyCodes from './constants/keyCodes';
 
 describe('ReactResponsiveSelect', () => {

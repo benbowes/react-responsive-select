@@ -1,6 +1,6 @@
-import keyCodes from '../constants/keyCodes';
-import * as actionTypes from '../constants/actionTypes';
-import preventDefaultForKeyCodes from './preventDefaultForKeyCodes';
+import keyCodes from '../../constants/keyCodes';
+import * as actionTypes from '../../constants/actionTypes';
+import preventDefaultForKeyCodes from '../preventDefaultForKeyCodes';
 import handleAlphaNumerical from './handleAlphaNumerical';
 import handleEnterPressed from './handleEnterPressed';
 import handleClick from './handleClick';
