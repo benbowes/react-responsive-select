@@ -20,7 +20,7 @@ module.exports = [{
   mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
-    filename: './dist/ReactResponsiveSelect.js',
+    filename: 'ReactResponsiveSelect.js',
     libraryTarget: 'umd',
     library,
   },
@@ -32,7 +32,7 @@ module.exports = [{
   mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
-    filename: './dist/ReactResponsiveSelect.window.js',
+    filename: 'ReactResponsiveSelect.window.js',
     libraryTarget: 'window',
     library,
   },
@@ -44,7 +44,7 @@ module.exports = [{
   mode: process.env.NODE_ENV,
   module: moduleConfig,
   output: {
-    filename: './dist/ReactResponsiveSelect.var.js',
+    filename: 'ReactResponsiveSelect.var.js',
     libraryTarget: 'var',
     library,
   },
