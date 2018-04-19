@@ -5,8 +5,8 @@
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --config webpack.config.demo.js --progress --host 0.0.0.0 --port 3001",
-    "build": ".bin/build.sh",
-    "deploy": ".bin/deploy.sh",
+    "build": "./auto/build.sh",
+    "deploy": "./auto/deploy.sh",
     "eslint": "eslint demo.js src/**",
     "test": "yarn eslint && mocha --compilers js:babel-register --require mocha/jsdom-setup.js 'src/**/*__test__.js'",
     "testSingle": "echo $test && mocha --compilers js:babel-register --require mocha/jsdom-setup.js src/**/*$test*__test__.js -w",
