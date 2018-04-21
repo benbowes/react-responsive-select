@@ -167,10 +167,8 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns an option object e.g. <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
-    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label.
-
-    See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L144).
-    </p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label.</p>
+    <p>See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L144). </p>
     </td>
   </tr>
 </table>
@@ -196,10 +194,8 @@ Same as Single Select API but with the following amendments
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns an array option objects e.g. <code>[{ name: select.name, value: option.value, text: option.text, markup: JSX Object }]</code></p>
-    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label.
-
-    See the example in the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L589-L591).
-    </p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label.</p>
+    <p>See the example in the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L589-L591).</p>
     </td>
   </tr>
 </table>
