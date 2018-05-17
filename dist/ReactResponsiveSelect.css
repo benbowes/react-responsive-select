@@ -120,15 +120,6 @@
   border: 1px solid #999;
 }
 
-.rrs__label {
-  font-size: inherit;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
 .rrs--has-changed .rrs__label {
   color: #0273b5;
 }

@@ -224,9 +224,13 @@ The [Codepen examples](https://codepen.io/collection/DrjWEk/) are consuming reac
 }
 ```
 
-## React Responsive Select v2 to v3 upgrade guide
+## React Responsive Select 2.x => 3.x upgrade guide
 
 See: https://github.com/benbowes/react-responsive-select/releases/tag/3.0.0
+
+## React Responsive Select 3.x => 4.x
+
+Upgraded from React 15.x to React 16.x
 
 ## Interaction Tests
 
