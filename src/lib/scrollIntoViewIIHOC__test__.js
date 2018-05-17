@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai';
 
 import scrollIntoViewIIHOC from './scrollIntoViewIIHOC';
@@ -45,6 +46,8 @@ class ContainerComponent extends Component { // eslint-disable-line
 }
 
 describe('Scroll into view', () => {
+  Enzyme.configure({ adapter: new Adapter() });
+
   let containerComponent;
 
   before(() => {
@@ -59,18 +62,19 @@ describe('Scroll into view', () => {
   });
 
   it('should scroll option into view when incrementing out of the viewable option area', () => {
-    const selectedItem = containerComponent.find('.item').get(5);
+    const selectedItem = containerComponent.find('.item').at(5).getDOMNode();
     containerRef.scrollTop = 0;
     selectedItem.getBoundingClientRect = () => ({
       width: 300, height: 100, top: 500, left: 0, right: 300, bottom: 600,
     });
 
     containerComponent.setProps({ selectedItem: 5 });
+    containerComponent.update();
     expect(containerRef.scrollTop).to.equal(100);
   });
 
   it('should scroll option into view when incrementing out of the viewable option area', () => {
-    const selectedItem = containerComponent.find('.item').get(2);
+    const selectedItem = containerComponent.find('.item').at(2).getDOMNode();
     containerRef.scrollTop = 0;
     selectedItem.getBoundingClientRect = () => ({
       width: 300, height: 100, top: -100, left: 0, right: 300, bottom: 0,
