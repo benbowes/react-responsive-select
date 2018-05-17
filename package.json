@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "3.2.4",
+  "version": "4.0.0",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -75,6 +75,7 @@
   "license": "MIT",
   "dependencies": {
     "lodash.isequal": "^4.5.0",
+    "prop-types": "^15.6.1",
     "singleline": "1.0.x"
   },
   "devDependencies": {
@@ -87,7 +88,8 @@
     "chai": "^4.1.2",
     "css-loader": "^0.28.11",
     "deep-freeze": "0.0.1",
-    "enzyme": "2.9.x",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-babel": "3.2.x",
@@ -97,10 +99,8 @@
     "jsdom": "^11.7.0",
     "mocha": "^5.1.0",
     "nyc": "^11.6.0",
-    "prop-types": "15.5.x",
-    "react": "15.5.x",
-    "react-addons-test-utils": "15.5.x",
-    "react-dom": "15.5.x",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "sinon": "^4.5.0",
     "style-loader": "^0.20.3",
     "webpack": "^4.5.0",

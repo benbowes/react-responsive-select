@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
@@ -10,6 +11,8 @@ import * as handleKeyUpOrDownPressed from './lib/eventHandlers/handleKeyUpOrDown
 import keyCodes from './constants/keyCodes';
 
 describe('ReactResponsiveSelect', () => {
+  Enzyme.configure({ adapter: new Adapter() });
+
   const mockFunctions = {
     submitFunction: () => {},
     onChangeFunction: () => {},
@@ -45,7 +48,6 @@ describe('ReactResponsiveSelect', () => {
   describe('Initialise', () => {
     let selectBox;
     let selectBoxInstance;
-    // let selectBoxContainer;
 
     let submitSpy;
     let changeSpy;
@@ -60,7 +62,6 @@ describe('ReactResponsiveSelect', () => {
         onSubmit: submitSpy,
         onChange: changeSpy,
       });
-      // selectBoxContainer = selectBox.find('.rrs__button');
       selectBoxInstance = selectBox.instance();
       updateStateSpy = sinon.spy(selectBoxInstance, 'updateState');
       handleEnterPressedSpy = sinon.spy(handleEnterPressed, 'default');
@@ -138,18 +139,16 @@ describe('ReactResponsiveSelect', () => {
 
     it('mousedown on rrs__button container should toggle the options panel open and closed', () => {
       // Open
-      selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(true);
+      selectBox.simulate('mousedown');
+
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
 
       // Closed
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
 
       // Open
       selectBoxContainer.simulate('mousedown');
-      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(true);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
     });
 
@@ -166,12 +165,10 @@ describe('ReactResponsiveSelect', () => {
 
       selectBoxContainer.simulate('mouseDown');
 
-      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(true);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(true);
 
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.ESCAPE });
 
-      expect(selectBoxContainer.hasClass('rrs--options-visible')).to.equal(false);
       expect(selectBox.state('isOptionsPanelOpen')).to.equal(false);
     });
 
@@ -469,6 +466,8 @@ describe('ReactResponsiveSelect', () => {
         optionIndex: 3,
       });
 
+      selectBox.update();
+
       expect(selectBox.find('.rrs').hasClass('rrs--has-changed')).to.equal(true);
     });
 
@@ -500,7 +499,6 @@ describe('ReactResponsiveSelect', () => {
         prefix: 'Make',
         name: 'make',
         customLabelRenderer: option => `${option.text} selected`,
-        // onSubmit: submitSpy,
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
       };
       selectBox = setup(undefined, props);
@@ -514,7 +512,6 @@ describe('ReactResponsiveSelect', () => {
         name: 'make',
         selectedValues: ['fiat'],
         customLabelRenderer: option => `${option.options ? option.options.map(o => o.text).join(', ') : 'Nothing'} selected`,
-        // onSubmit: submitSpy,
         options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
       };
       selectBox = setup(undefined, props);
