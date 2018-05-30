@@ -21,7 +21,7 @@ module.exports = [{
   module: moduleConfig,
   output: {
     filename: 'ReactResponsiveSelect.js',
-    libraryTarget: 'umd',
+    libraryTarget: 'commonjs2',
     library,
   },
   externals: [nodeExternals({ whitelist: ['prop-types'] })],
