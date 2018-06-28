@@ -93,7 +93,7 @@ To aid in styling the hover/selected states in the options list, I would suggest
 
 ## Custom label and options
 
-You can hook into the onChange function via the `customLabelRenderer` and `customOptionRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
+You can hook into the onChange function via the `customLabelRenderer` and `customOptionRenderer` function props. This allows you to render a custom label and options. See the API table for what the `selectedOption` object has in it.
 
 ```
 <ReactResponsiveSelect
