@@ -91,9 +91,9 @@ To aid in styling the hover/selected states in the options list, I would suggest
 ```
 ---
 
-## Custom labeling
+## Custom label & options
 
-You can hook into the onChange function via the `customLabelRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
+You can hook into the onChange function via the `customLabelRenderer` & `customOptionRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
 
 ```
 <ReactResponsiveSelect
@@ -102,22 +102,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
   onSubmit={() => { this.form.submit(); }}
   // (Optional) format your own label text like this
   customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`}
-/>
-```
-
----
-
-## Custom options
-
-You can hook into the onChange function via the `customOptionRenderer` function prop. This allows you to render a custom option. See the API table for what the `selectedOption` object has in it.
-
-```
-<ReactResponsiveSelect
-  name="make2"
-  options={options}
-  onSubmit={() => { this.form.submit(); }}
-  // (Optional) format your own label text like this
-  customOptionRenderer={selectedOption => <span>{selectedOption.text} (customized)</span>}
+  customOptionRenderer={selectedOption => `${selectedOption.text} (customized)`}
 />
 ```
 
