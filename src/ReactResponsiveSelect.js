@@ -128,7 +128,7 @@ export default class ReactResponsiveSelect extends Component {
       options,
       singleSelectSelectedIndex,
       singleSelectSelectedOption,
-      multiselect
+      multiselect,
     } = this.state;
 
     const customLabelText = getCustomLabelText({
