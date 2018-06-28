@@ -16,6 +16,7 @@ export default class SingleSelectOption extends Component {
       nextPotentialSelectionIndex,
       option,
       singleSelectSelectedIndex,
+      customOptionRenderer,
     } = this.props;
 
     return (
@@ -30,7 +31,7 @@ export default class SingleSelectOption extends Component {
           ${(nextPotentialSelectionIndex === index) ? 'rrs__option--next-selection' : ''}
         `)}
       >
-        {option.markup || option.text}
+        {customOptionRenderer ? customOptionRenderer(option) : (option.markup || option.text)}
       </li>
     );
   }

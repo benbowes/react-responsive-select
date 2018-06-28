@@ -114,7 +114,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   render() {
-    const { prefix, caretIcon, disabled } = this.props;
+    const { prefix, caretIcon, disabled, customOptionRenderer } = this.props;
     const {
       altered,
       singleSelectInitialIndex,
@@ -128,7 +128,7 @@ export default class ReactResponsiveSelect extends Component {
       options,
       singleSelectSelectedIndex,
       singleSelectSelectedOption,
-      multiselect,
+      multiselect
     } = this.state;
 
     const customLabelText = getCustomLabelText({
@@ -201,6 +201,7 @@ export default class ReactResponsiveSelect extends Component {
             prefix={prefix}
             name={name}
             customLabelText={customLabelText}
+            customOptionRenderer={customOptionRenderer}
             singleSelectSelectedOption={singleSelectSelectedOption}
             singleSelectSelectedIndex={singleSelectSelectedIndex}
             nextPotentialSelectionIndex={nextPotentialSelectionIndex}

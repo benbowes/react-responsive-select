@@ -171,6 +171,13 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <p>See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L144). </p>
     </td>
   </tr>
+  <tr>
+    <td>customOptionRenderer</td>
+    <td>Function</td>
+    <td><p>Allows you to format your own option element</p><p>The customOptionRenderer function returns an option object e.g. <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom option.</p>
+    </td>
+  </tr>
 </table>
 
 #### Multi Select
