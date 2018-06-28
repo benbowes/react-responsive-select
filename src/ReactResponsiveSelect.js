@@ -114,7 +114,12 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   render() {
-    const { prefix, caretIcon, disabled, customOptionRenderer } = this.props;
+    const {
+      prefix,
+      caretIcon,
+      disabled,
+      customOptionRenderer,
+    } = this.props;
     const {
       altered,
       singleSelectInitialIndex,
