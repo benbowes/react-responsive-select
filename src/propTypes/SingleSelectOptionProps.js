@@ -11,4 +11,5 @@ export const SingleSelectOptionProps = {
     markup: PropTypes.element,
   }).isRequired,
   singleSelectSelectedIndex: PropTypes.number,
+  customOptionRenderer: PropTypes.func,
 };

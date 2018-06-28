@@ -91,9 +91,9 @@ To aid in styling the hover/selected states in the options list, I would suggest
 ```
 ---
 
-## Custom labeling
+## Custom label and options
 
-You can hook into the onChange function via the `customLabelRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
+You can hook into the onChange function via the `customLabelRenderer` and `customOptionRenderer` function props. This allows you to render a custom label and options. See the API table for what the `selectedOption` object has in it.
 
 ```
 <ReactResponsiveSelect
@@ -102,6 +102,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
   onSubmit={() => { this.form.submit(); }}
   // (Optional) format your own label text like this
   customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`}
+  customOptionRenderer={selectedOption => `${selectedOption.text} (customized)`}
 />
 ```
 
@@ -169,6 +170,13 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns an option object e.g. <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
     <p>To use this feature you need to return some JSX; using values from the above object to create your own custom label.</p>
     <p>See the example in the [singleselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L144). </p>
+    </td>
+  </tr>
+  <tr>
+    <td>customOptionRenderer</td>
+    <td>Function</td>
+    <td><p>Allows you to format your own option element</p><p>The customOptionRenderer function returns an option object e.g. <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>
+    <p>To use this feature you need to return some JSX; using values from the above object to create your own custom option.</p>
     </td>
   </tr>
 </table>

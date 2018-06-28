@@ -22,6 +22,7 @@ export default class SingleSelect extends Component {
     const {
       caretIcon,
       customLabelText,
+      customOptionRenderer,
       disabled,
       isOptionsPanelOpen,
       isDragging,
@@ -94,6 +95,7 @@ export default class SingleSelect extends Component {
           {options.length > 0 &&
             options.map((option, index) => (
               <SingleSelectOptionHOC
+                customOptionRenderer={customOptionRenderer}
                 scrollIntoViewScrollPaneRef={() => this.optionsContainer}
                 scrollIntoViewElementSelector="rrs__option--next-selection"
                 key={index}

@@ -7,6 +7,7 @@ export const ReactResponsiveSelectProps = {
     PropTypes.element,
   ]),
   customLabelRenderer: PropTypes.func,
+  customOptionRenderer: PropTypes.func,
   disabled: PropTypes.bool,
   multiselect: PropTypes.bool,
   name: PropTypes.string.isRequired,

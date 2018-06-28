@@ -12,6 +12,7 @@ export const SingleSelectProps = {
     PropTypes.bool,
     PropTypes.element,
   ]),
+  customOptionRenderer: PropTypes.func,
   disabled: PropTypes.bool,
   singleSelectInitialIndex: PropTypes.number,
   singleSelectSelectedIndex: PropTypes.number,
