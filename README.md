@@ -107,6 +107,22 @@ You can hook into the onChange function via the `customLabelRenderer` function p
 
 ---
 
+## Custom options
+
+You can hook into the onChange function via the `customOptionRenderer` function prop. This allows you to render a custom option. See the API table for what the `selectedOption` object has in it.
+
+```
+<ReactResponsiveSelect
+  name="make2"
+  options={options}
+  onSubmit={() => { this.form.submit(); }}
+  // (Optional) format your own label text like this
+  customOptionRenderer={selectedOption => <span>{selectedOption.text} (customized)</span>}
+/>
+```
+
+---
+
 ## API
 
 #### Single Select
