@@ -99,6 +99,12 @@
   color: #0273b5;
 }
 
+.rrs_option.rrs__option--disabled {
+  color: #999999;
+  background: #f5f5f5;
+  cursor: default;
+}
+
 .rrs__label {
   padding: 0 2rem 0 1rem;
   display: inline-flex;
