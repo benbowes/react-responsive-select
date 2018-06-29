@@ -3,7 +3,7 @@ import * as actionTypes from '../../constants/actionTypes';
 
 export default function handleClick({ event, state, ReactResponsiveSelectClassRef }) {
   const {
-    multiselect, isOptionsPanelOpen, isDragging, disabled,
+    multiselect, isOptionsPanelOpen, isDragging, disabled, options,
   } = state;
 
   if (disabled) return;
@@ -17,13 +17,19 @@ export default function handleClick({ event, state, ReactResponsiveSelectClassRe
       return;
     }
 
+    const optionIndex = parseFloat(event.target.getAttribute('data-key'));
+
+    if (options[optionIndex] && options[optionIndex].disabled === true) {
+      return;
+    }
+
     /* Select option index, if user selected option */
     if (containsClassName(event.target, 'rrs__option')) {
       ReactResponsiveSelectClassRef.updateState({
         type: multiselect
           ? actionTypes.SET_MULTISELECT_OPTIONS
           : actionTypes.SET_SINGLESELECT_OPTIONS,
-        optionIndex: parseFloat(event.target.getAttribute('data-key')),
+        optionIndex,
       });
 
       return;

@@ -9,6 +9,7 @@ export const SingleSelectOptionProps = {
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     markup: PropTypes.element,
+    disabled: PropTypes.bool,
   }).isRequired,
   singleSelectSelectedIndex: PropTypes.number,
 };
