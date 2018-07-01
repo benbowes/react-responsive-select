@@ -130,7 +130,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
         value: "fiat",
         markup: &lt;span&gt;Fiat&lt;/span&gt;
         disabled: true;
-        }]</code></p><p><code>text:</code> (Required) display value for the select and the default for the option label</p><p><code>value:</code> (Required) value that is submitted</p><p><code>markup:</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p><code>disabled:</code> disable option - option cannot be selected and is greyed</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
+        }]</code></p><p><code>text:</code> (Required) display value for the select and the default for the option label</p><p><code>value:</code> (Required) value that is submitted</p><p><code>markup:</code> (Optional) JSX markup used as the option label. Allows for the use of badges and icons...</p><p><code>disabled:</code> (Optional) disable option - option cannot be selected and is greyed</p><p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p></td>
   </tr>
   <tr>
     <td>onSubmit</td>
