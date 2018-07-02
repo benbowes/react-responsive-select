@@ -10,5 +10,6 @@ export const MultiSelectOptionProps = {
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     markup: PropTypes.element,
+    disabled: PropTypes.bool,
   }).isRequired,
 };

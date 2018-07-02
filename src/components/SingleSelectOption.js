@@ -22,12 +22,14 @@ export default class SingleSelectOption extends Component {
       <li
         role="menuitem"
         tabIndex="-1"
+        aria-disabled={option.disabled ? 'true' : 'false'}
         data-key={index}
         ref={(r) => { this[`option_${index}`] = r; }}
         className={singleline(`
           rrs__option
           ${(singleSelectSelectedIndex === index) ? 'rrs__option--selected' : ''}
           ${(nextPotentialSelectionIndex === index) ? 'rrs__option--next-selection' : ''}
+          ${(option.disabled === true) ? 'rrs__option--disabled' : ''}
         `)}
       >
         {option.markup || option.text}
