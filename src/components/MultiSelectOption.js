@@ -23,6 +23,7 @@ export default class MultiSelectOption extends Component {
         aria-checked={isSelected}
         aria-label={option.text}
         aria-live="assertive"
+        aria-disabled={option.disabled ? 'true' : 'false'}
         data-key={index}
         ref={(r) => { this[`option_${index}`] = r; }}
         className={singleline(`

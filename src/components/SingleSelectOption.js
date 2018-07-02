@@ -22,6 +22,7 @@ export default class SingleSelectOption extends Component {
       <li
         role="menuitem"
         tabIndex="-1"
+        aria-disabled={option.disabled ? 'true' : 'false'}
         data-key={index}
         ref={(r) => { this[`option_${index}`] = r; }}
         className={singleline(`
