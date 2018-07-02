@@ -234,6 +234,30 @@ describe('ReactResponsiveSelect', () => {
       selectBox = setup(undefined, props);
       expect(selectBox.find('.rrs__button--disabled').length).to.equal(1);
     });
+
+    it('option can be disabled on multiselect', () => {
+      const props = {
+        multiselect: true,
+        name: 'make',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat', disabled: true }],
+      };
+      selectBox = setup(undefined, props);
+      expect(selectBox.find('.rrs__option').at(0).props()['aria-disabled']).to.equal('false');
+      expect(selectBox.find('.rrs__option').at(1).props()['aria-disabled']).to.equal('true');
+      expect(selectBox.find('.rrs__option--disabled').length).to.equal(1);
+    });
+
+    it('option can be disabled on singleselect', () => {
+      const props = {
+        multiselect: true,
+        name: 'make',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat', disabled: true }],
+      };
+      selectBox = setup(undefined, props);
+      expect(selectBox.find('.rrs__option').at(0).props()['aria-disabled']).to.equal('false');
+      expect(selectBox.find('.rrs__option').at(1).props()['aria-disabled']).to.equal('true');
+      expect(selectBox.find('.rrs__option--disabled').length).to.equal(1);
+    });
   });
 
   describe('ReactResponsiveSelect functions', () => {
