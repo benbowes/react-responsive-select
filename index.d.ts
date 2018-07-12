@@ -1,61 +1,68 @@
 import * as React from "react";
 
-import OnChangeArgsMultiSelect = ReactResponsiveSelect.OnChangeArgsMultiSelect;
-import OnChangeArgsSingleSelect = ReactResponsiveSelect.OnChangeArgsSingleSelect;
-import ReactResponsiveSelectOption = ReactResponsiveSelect.ReactResponsiveSelectOption;
-import ReactResponsiveSelectProps = ReactResponsiveSelect.ReactResponsiveSelectProps;
+import OnChangeMultiSelect = ReactResponsiveSelect.IOnChangeMultiSelect;
+import OnChangeSingleSelect = ReactResponsiveSelect.IOnChangeSingleSelect;
+import ReactResponsiveSelectOption = ReactResponsiveSelect.IOption;
+import Props = ReactResponsiveSelect.IProps;
+import CustomLabelRendererSelectedOption = ReactResponsiveSelect.ICustomLabelRendererSelectedOption;
+import CustomLabelRendererSelectedOptions = ReactResponsiveSelect.ICustomLabelRendererSelectedOptions;
 
 export {
-  OnChangeArgsMultiSelect,
-  OnChangeArgsSingleSelect,
+  OnChangeMultiSelect,
+  OnChangeSingleSelect,
   ReactResponsiveSelectOption,
-  ReactResponsiveSelectProps,
+  Props,
+  CustomLabelRendererSelectedOption,
+  CustomLabelRendererSelectedOptions,
 };
 
 export default ReactResponsiveSelect.ReactResponsiveSelect;
 
 declare namespace ReactResponsiveSelect {
-  interface ReactResponsiveSelectProps {
+  type JSXOutput = JSX.Element | string;
+
+  interface IProps {
     name: string;
-    options: ReactResponsiveSelectOption[];
+    options: IOption[];
     onSubmit?: () => void;
-    onChange?: (changes: OnChangeArgsSingleSelect | OnChangeArgsMultiSelect) => void;
-    caretIcon?: JSX.Element | string;
+    onChange?: (changes: IOnChangeSingleSelect | IOnChangeMultiSelect) => void;
+    caretIcon?: JSXOutput;
     selectedValue?: string;
     prefix?: string;
     disabled?: boolean;
     customLabelRenderer?: (
-      selected: ReactResponsiveSelectOption | { options: ReactResponsiveSelectOption[] }
-    ) => JSX.Element | string;
+      selected: ICustomLabelRendererSelectedOption | ICustomLabelRendererSelectedOptions
+    ) => JSXOutput;
     multiselect?: boolean;
     selectedValues?: string[];
   }
 
-  interface OnChangeArgsSingleSelect {
+  interface IOption {
+    text: string;
+    value: string;
+    markup?: JSXOutput;
+    disabled?: boolean;
+  }
+
+  interface IOnChange {
     altered: boolean;
+  }
+
+  interface IOnChangeSingleSelect extends IOnChange {
     text: string;
     name: string;
     value: string;
   }
 
-  interface OnChangeArgsMultiSelect {
-    altered: boolean;
-    options: ReactResponsiveSelectOption[];
+  interface IOnChangeMultiSelect extends IOnChange {
+    options: IOption[];
   }
 
-  interface ReactResponsiveSelectOption {
-    text: string;
-    value: string;
-    markup?: JSX.Element;
-    disabled?: boolean;
+  interface ICustomLabelRendererSelectedOption extends IOption {}
+
+  interface ICustomLabelRendererSelectedOptions {
+    options: IOption[];
   }
 
-  interface CustomRendererReactResponsiveSelectOption {
-    text: string;
-    value: string;
-    markup?: JSX.Element;
-    disabled?: boolean;
-  }
-
-  export class ReactResponsiveSelect extends React.Component<ReactResponsiveSelectProps> {}
+  export class ReactResponsiveSelect extends React.Component<IProps> {}
 }
