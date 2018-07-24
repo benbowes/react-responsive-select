@@ -104,7 +104,10 @@ describe('reducer', () => {
         multiSelectInitialSelectedIndexes: [1, 2],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
-          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }],
+          options: [
+            { name: 'make2', text: 'Fiat', value: 'fiat' },
+            { name: 'make2', text: 'Mazda', value: 'mazda' },
+          ],
         },
         nextPotentialSelectionIndex: 2,
       };
@@ -132,6 +135,11 @@ describe('reducer', () => {
           options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
         nextPotentialSelectionIndex: 0,
+        singleSelectSelectedOption: {
+          name: 'thing',
+          text: 'Any',
+          value: 'null',
+        },
       });
     });
 
@@ -290,6 +298,11 @@ describe('reducer', () => {
           options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
         nextPotentialSelectionIndex: 0,
+        singleSelectSelectedOption: {
+          name: 'thing',
+          text: 'Any',
+          value: 'null',
+        },
       });
     });
   });

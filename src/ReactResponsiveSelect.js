@@ -23,6 +23,7 @@ export default class ReactResponsiveSelect extends Component {
   componentDidMount() {
     const {
       options,
+      noSelectionLabel,
       selectedValue,
       selectedValues,
       name,
@@ -34,7 +35,14 @@ export default class ReactResponsiveSelect extends Component {
     this.updateState({
       type: actionTypes.INITIALISE,
       value: {
-        options, selectedValue, selectedValues, name, multiselect, disabled, altered,
+        options,
+        noSelectionLabel,
+        selectedValue,
+        selectedValues,
+        name,
+        multiselect,
+        disabled,
+        altered,
       },
     });
   }
@@ -100,7 +108,7 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   updateState(action, callback) {
-    /* Update state in a similar way to Redux - thanks to https://twitter.com/mehdimollaverdi */
+    /* Update state in a similar way to Redux */
     const nextState = this.reducer(this.state, action);
     this.setState(nextState, () => callback && callback());
 
@@ -120,6 +128,7 @@ export default class ReactResponsiveSelect extends Component {
       singleSelectInitialIndex,
       isOptionsPanelOpen,
       isDragging,
+      noSelectionLabel,
       multiSelectInitialSelectedIndexes,
       multiSelectSelectedIndexes,
       multiSelectSelectedOptions,
@@ -193,6 +202,7 @@ export default class ReactResponsiveSelect extends Component {
         )
         : (
           <SingleSelect
+            noSelectionLabel={noSelectionLabel}
             disabled={disabled}
             altered={altered}
             isDragging={isDragging}

@@ -90,6 +90,7 @@ describe('ReactResponsiveSelect', () => {
         singleSelectInitialIndex: 1,
         multiSelectInitialSelectedIndexes: [0],
         multiselect: false,
+        noSelectionLabel: undefined,
         nextPotentialSelectionIndex: 1,
         singleSelectSelectedIndex: 1,
         name: 'make',

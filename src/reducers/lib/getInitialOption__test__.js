@@ -6,7 +6,7 @@ import state from '../../../mocha/state-mock';
 describe('getInitialOption', () => {
   deepFreeze(state);
 
-  it('should return then first option', () => {
+  it('should return the first option', () => {
     const result = getInitialOption(state);
     expect(result).to.eql({
       altered: false,
@@ -43,7 +43,11 @@ describe('getInitialOption', () => {
       }],
       singleSelectInitialIndex: 0,
       singleSelectSelectedIndex: 0,
-      singleSelectSelectedOption: {},
+      singleSelectSelectedOption: {
+        name: 'Make 1',
+        text: 'Any',
+        value: 'null',
+      },
     });
   });
 });

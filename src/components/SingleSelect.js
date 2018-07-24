@@ -18,9 +18,64 @@ export default class SingleSelect extends Component {
     }
   }
 
+  getCustomLabel() {
+    const {
+      prefix, name, singleSelectSelectedOption, caretIcon, customLabelText,
+    } = this.props;
+
+    return (
+      <div className="rrs__label">
+        <span
+          aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
+          className="rrs__label__text"
+          id={`rrs-${name}-label`}
+        >
+          {customLabelText}
+        </span>
+        {caretIcon && caretIcon}
+      </div>
+    );
+  }
+
+  getDefaultLabel() {
+    const {
+      prefix, singleSelectSelectedOption, name, caretIcon, singleSelectSelectedIndex, noSelectionLabel,
+    } = this.props;
+
+    if (singleSelectSelectedIndex === -1) {
+      return (
+        <div className="rrs__label">
+          <span
+            aria-label={noSelectionLabel}
+            className="rrs__label__text"
+            id={`rrs-${name}-label`}
+          >
+            {noSelectionLabel}
+          </span>
+          {caretIcon && caretIcon}
+        </div>
+      );
+    }
+
+    return (
+      <div className="rrs__label">
+        <span
+          aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
+          className="rrs__label__text"
+          id={`rrs-${name}-label`}
+        >
+          {prefix &&
+            <span>{prefix}</span>
+          }
+          {singleSelectSelectedOption.text}
+        </span>
+        {caretIcon && caretIcon}
+      </div>
+    );
+  }
+
   render() {
     const {
-      caretIcon,
       customLabelText,
       disabled,
       isOptionsPanelOpen,
@@ -28,7 +83,6 @@ export default class SingleSelect extends Component {
       name,
       nextPotentialSelectionIndex,
       options,
-      prefix,
       singleSelectSelectedIndex,
       singleSelectSelectedOption,
     } = this.props;
@@ -49,34 +103,9 @@ export default class SingleSelect extends Component {
           `)}
         >
 
-          {customLabelText &&
-          <div className="rrs__label">
-            <span
-              aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
-              className="rrs__label__text"
-              id={`rrs-${name}-label`}
-            >
-              {customLabelText}
-            </span>
-            {caretIcon && caretIcon}
-          </div>
-          }
+          {customLabelText && this.getCustomLabel()}
 
-          {!customLabelText &&
-          <div className="rrs__label">
-            <span
-              aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
-              className="rrs__label__text"
-              id={`rrs-${name}-label`}
-            >
-              {prefix &&
-                <span>{prefix}</span>
-              }
-              {singleSelectSelectedOption.text}
-            </span>
-            {caretIcon && caretIcon}
-          </div>
-          }
+          {!customLabelText && this.getDefaultLabel()}
 
           {name &&
           <input type="hidden" name={name} value={singleSelectSelectedOption.value} />

@@ -7,6 +7,7 @@ import addMultiSelectOption from './addMultiSelectOption';
 import removeMultiSelectOption from './removeMultiSelectOption';
 import mergeIsAlteredState from './mergeIsAlteredState';
 import getInitialOption from './getInitialOption';
+import getSingleSelectSelectedOption from './getSingleSelectSelectedOption';
 import resetMultiSelectState from './resetMultiSelectState';
 
 export {
@@ -19,5 +20,6 @@ export {
   removeMultiSelectOption,
   mergeIsAlteredState,
   getInitialOption,
+  getSingleSelectSelectedOption,
   resetMultiSelectState,
 };

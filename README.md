@@ -165,6 +165,11 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td>Disables the select control</td>
   </tr>
   <tr>
+    <td>noSelectionLabel</td>
+    <td>string</td>
+    <td>Custom label when nothing selected. When used, first option is not automatically selected</td>
+  </tr>
+  <tr>
     <td>customLabelRenderer</td>
     <td>Function</td>
     <td><p>Allows you to format your own select label</p><p>The customLabelRenderer function returns an option object e.g. <code>{ name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p>

@@ -9,6 +9,7 @@ import {
   removeMultiSelectOption,
   mergeIsAlteredState,
   getInitialOption,
+  getSingleSelectSelectedOption,
   resetMultiSelectState,
 } from './lib';
 
@@ -16,7 +17,7 @@ export default function reducer(state, action) {
   switch (action.type) {
     case actionTypes.UPDATE_VIA_PROPS:
     case actionTypes.INITIALISE: {
-      const initialSelectedIndex = getSelectedValueIndex(action.value.options, action.value.selectedValue);
+      const initialSelectedIndex = getSelectedValueIndex(action.value);
       const initialSelectedIndexes = getSelectedValueIndexes(action.value.options, action.value.selectedValues);
       const initialSelectedOptions = getInitialMultiSelectSelectedOptions(action.value.options, action.value.selectedValues, action.value.name);
       return {
@@ -24,6 +25,9 @@ export default function reducer(state, action) {
 
         // Constants
         multiselect: action.value.multiselect || false,
+
+        // Optional nothing selected label
+        noSelectionLabel: action.value.noSelectionLabel,
 
         // Universal
         name: action.value.name,
@@ -34,10 +38,7 @@ export default function reducer(state, action) {
         // Single select
         singleSelectInitialIndex: initialSelectedIndex,
         singleSelectSelectedIndex: initialSelectedIndex,
-        singleSelectSelectedOption: {
-          name: action.value.name,
-          ...action.value.options[initialSelectedIndex],
-        },
+        singleSelectSelectedOption: getSingleSelectSelectedOption(action.value, initialSelectedIndex),
 
         // For determining highlighted item on Keyboard navigation and selection via UPDATE_VIA_PROPS
         // If UPDATE_VIA_PROPS and state exists, re-select nextPotentialSelectionIndex from state
@@ -75,11 +76,9 @@ export default function reducer(state, action) {
           return state.nextPotentialSelectionIndex;
         })(),
 
-        singleSelectSelectedOption: {
-          name: state.name,
-          ...state.options[state.singleSelectSelectedIndex],
-        },
+        singleSelectSelectedOption: getSingleSelectSelectedOption(state, state.nextPotentialSelectionIndex),
       };
+
       return mergeIsAlteredState(newState);
     }
 
@@ -88,10 +87,7 @@ export default function reducer(state, action) {
         ...state,
         isOptionsPanelOpen: false,
         singleSelectSelectedIndex: state.nextPotentialSelectionIndex,
-        singleSelectSelectedOption: {
-          name: state.name,
-          ...state.options[state.nextPotentialSelectionIndex],
-        },
+        singleSelectSelectedOption: getSingleSelectSelectedOption(state, state.nextPotentialSelectionIndex),
       };
       return mergeIsAlteredState(newState);
     }
@@ -122,10 +118,7 @@ export default function reducer(state, action) {
         nextPotentialSelectionIndex: action.optionIndex,
         singleSelectSelectedIndex: action.optionIndex,
         isOptionsPanelOpen: false,
-        singleSelectSelectedOption: {
-          name: state.name,
-          ...state.options[action.optionIndex],
-        },
+        singleSelectSelectedOption: getSingleSelectSelectedOption(state, action.optionIndex),
       };
 
       // Set altered state
