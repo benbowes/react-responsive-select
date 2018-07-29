@@ -82,7 +82,10 @@ export default class MultiSelect extends Component {
               id={`rrs-${name}-label`}
             >
               <span className="rrs__multiselect-label">
-                <span className="rrs__multiselect-label__text">{`${prefix ? `${prefix} ` : ''}${multiSelectSelectedOptions.options[0].text}`}</span>
+                <span className="rrs__multiselect-label__text">
+                  {`${prefix ? `${prefix} ` : ''}
+                  ${multiSelectSelectedOptions.options.length > 0 ? multiSelectSelectedOptions.options[0].text : ''}`}
+                </span>
                 {multiSelectSelectedOptions.options.length > 1 &&
                 <span className="rrs__multiselect-label__badge">
                   {`+ ${multiSelectSelectedOptions.options.length - 1}`}

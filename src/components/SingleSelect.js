@@ -70,7 +70,7 @@ export default class SingleSelect extends Component {
           {prefix &&
             <span>{prefix}</span>
           }
-          {singleSelectSelectedOption.text}
+          {singleSelectSelectedOption.text ? singleSelectSelectedOption.text : <div>&nbsp;</div> }
         </span>
         {caretIcon && caretIcon}
       </div>
