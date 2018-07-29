@@ -18,7 +18,7 @@ export default function reducer(state, action) {
     case actionTypes.UPDATE_VIA_PROPS:
     case actionTypes.INITIALISE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value);
-      const initialSelectedIndexes = getMultiSelectSelectedValueIndexes(action.value.options, action.value.selectedValues);
+      const initialSelectedIndexes = getMultiSelectSelectedValueIndexes(action.value.options, action.value.selectedValues, action.value.noSelectionLabel);
 
       return {
         ...state,

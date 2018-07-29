@@ -7,13 +7,11 @@ describe('addMultiSelectOption', () => {
   deepFreeze(state);
 
   it('should return list of selected multiSelectSelectOptions when selectedValues is set', () => {
-    const selectedValues = ['fiat', 'bmw'];
-    const name = 'Make 1';
-    const result = getMultiSelectInitialSelectedOptions(
-      state.options,
-      selectedValues,
-      name,
-    );
+    const result = getMultiSelectInitialSelectedOptions({
+      ...state,
+      selectedValues: ['fiat', 'bmw'],
+      name: 'Make 1',
+    });
 
     expect(result).to.eql([{
       name: 'Make 1',
@@ -27,13 +25,11 @@ describe('addMultiSelectOption', () => {
   });
 
   it('should return first item for multiSelectSelectOptions when selectedValues is not set', () => {
-    const selectedValues = undefined;
-    const name = 'Make 1';
-    const result = getMultiSelectInitialSelectedOptions(
-      state.options,
-      selectedValues,
-      name,
-    );
+    const result = getMultiSelectInitialSelectedOptions({
+      ...state,
+      selectedValues: undefined,
+      name: 'Make 1',
+    });
 
     expect(result).to.eql([{
       name: 'Make 1',

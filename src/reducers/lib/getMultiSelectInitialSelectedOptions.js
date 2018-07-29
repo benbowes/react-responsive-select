@@ -1,5 +1,5 @@
 export default function getMultiSelectInitialSelectedOptions({
-  options, name, selectedValues = [], noSelectionLabel,
+  options, name, selectedValues, noSelectionLabel,
 }, initialSelectedIndexes = []) {
   if (!noSelectionLabel) {
     // Preselect the first item in the list when if no noSelectionLabel exists
@@ -9,6 +9,7 @@ export default function getMultiSelectInitialSelectedOptions({
         .filter(option => selectedValues.some(selectedValue => selectedValue === option.value))
         .map(option => ({ name, ...option }));
     }
+
     /* Grab first option and merge in `name` */
     return [{ name, ...options[0] }];
   }
