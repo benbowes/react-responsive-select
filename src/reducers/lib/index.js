@@ -1,6 +1,6 @@
 import getSelectedValueIndex from './getSelectedValueIndex';
-import getSelectedValueIndexes from './getSelectedValueIndexes';
-import getInitialMultiSelectSelectedOptions from './getInitialMultiSelectSelectedOptions';
+import getMultiSelectSelectedValueIndexes from './getMultiSelectSelectedValueIndexes';
+import getMultiSelectInitialSelectedOptions from './getMultiSelectInitialSelectedOptions';
 import addMultiSelectIndex from './addMultiSelectIndex';
 import removeMultiSelectIndex from './removeMultiSelectIndex';
 import addMultiSelectOption from './addMultiSelectOption';
@@ -12,8 +12,8 @@ import resetMultiSelectState from './resetMultiSelectState';
 
 export {
   getSelectedValueIndex,
-  getSelectedValueIndexes,
-  getInitialMultiSelectSelectedOptions,
+  getMultiSelectSelectedValueIndexes,
+  getMultiSelectInitialSelectedOptions,
   addMultiSelectIndex,
   removeMultiSelectIndex,
   addMultiSelectOption,

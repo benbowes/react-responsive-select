@@ -50,6 +50,9 @@ export default class SingleSelect extends Component {
             className="rrs__label__text"
             id={`rrs-${name}-label`}
           >
+            {prefix &&
+              <span>{prefix}</span>
+            }
             {noSelectionLabel}
           </span>
           {caretIcon && caretIcon}

@@ -108,7 +108,6 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   updateState(action, callback) {
-    /* Update state in a similar way to Redux */
     const nextState = this.reducer(this.state, action);
     this.setState(nextState, () => callback && callback());
 
@@ -185,6 +184,7 @@ export default class ReactResponsiveSelect extends Component {
         {multiselect
           ? (
             <MultiSelect
+              noSelectionLabel={noSelectionLabel}
               disabled={disabled}
               altered={altered}
               isDragging={isDragging}

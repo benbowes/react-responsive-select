@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
-import getInitialMultiSelectSelectedOptions from './getInitialMultiSelectSelectedOptions';
+import getMultiSelectInitialSelectedOptions from './getMultiSelectInitialSelectedOptions';
 import state from '../../../mocha/state-mock';
 
 describe('addMultiSelectOption', () => {
@@ -9,7 +9,7 @@ describe('addMultiSelectOption', () => {
   it('should return list of selected multiSelectSelectOptions when selectedValues is set', () => {
     const selectedValues = ['fiat', 'bmw'];
     const name = 'Make 1';
-    const result = getInitialMultiSelectSelectedOptions(
+    const result = getMultiSelectInitialSelectedOptions(
       state.options,
       selectedValues,
       name,
@@ -29,7 +29,7 @@ describe('addMultiSelectOption', () => {
   it('should return first item for multiSelectSelectOptions when selectedValues is not set', () => {
     const selectedValues = undefined;
     const name = 'Make 1';
-    const result = getInitialMultiSelectSelectedOptions(
+    const result = getMultiSelectInitialSelectedOptions(
       state.options,
       selectedValues,
       name,

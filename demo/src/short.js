@@ -59,7 +59,7 @@ class Form extends Component { // eslint-disable-line
               ]}
               onSubmit={() => { this.form.submit(); }}
               caretIcon={caretIcon}
-              prefix="Car1: "
+              // prefix="Car1: "
               noSelectionLabel="Please select"
               onChange={this.reportChange}
             />
@@ -148,8 +148,10 @@ class Form extends Component { // eslint-disable-line
                 { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
               ]}
               onSubmit={() => { this.form.submit(); }}
+              noSelectionLabel="Please select"
               caretIcon={caretIcon}
-              prefix="Car4: "
+              // prefix="Car4: "
+              // selectedValues={['amc', 'bmw']}
               onChange={this.reportChange}
             />
             <div className="label">Multi-select</div>
