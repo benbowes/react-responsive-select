@@ -480,7 +480,7 @@ ReactDOM.render(
           <div>
             <div className="col">
               <ReactResponsiveSelect
-                name="carType1"
+                name="make3a"
                 options={[
                   { value: 'alfa-romeo', text: 'Alfa Romeo' },
                   { value: 'bmw', text: 'BMW' },
@@ -493,7 +493,6 @@ ReactDOM.render(
                 ]}
                 onSubmit={() => { this.form.submit(); }}
                 caretIcon={caretIcon}
-                // prefix="Car1: "
                 noSelectionLabel="Please select"
                 onChange={this.reportChange}
               />
@@ -533,7 +532,6 @@ export default class Form extends Component {
           ]}
           onSubmit={() => { console.log("Handle form submit here") }}
           caretIcon={caretIcon}
-          // prefix="Car1: "
           noSelectionLabel="Please select"
           onChange={(newValue) => { console.log(newValue) }}
         />
@@ -748,7 +746,7 @@ ReactDOM.render(
             <div className="col">
               <ReactResponsiveSelect
                 multiselect
-                name="make7"
+                name="make6"
                 options={[ // (Required) an array of options - see above const options
                     { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
                     { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
@@ -803,7 +801,7 @@ export default class Form extends Component {
 
         <ReactResponsiveSelect
           multiselect
-          name="make7"
+          name="make6"
           options={[ // (Required) an array of options - see above const options
               { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
               { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },

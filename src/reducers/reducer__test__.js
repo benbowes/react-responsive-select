@@ -305,5 +305,43 @@ describe('reducer', () => {
         },
       });
     });
+
+    it('should select default no selection state if noSelectionLabel prop set and all options are deselected', () => {
+      const state = {
+        noSelectionLabel: 'Please select',
+        multiselect: true,
+        altered: false,
+        name: 'thing',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [1],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
+        },
+        nextPotentialSelectionIndex: 1,
+      };
+
+      const result = reducer(
+        state,
+        {
+          type: actionTypes.SET_MULTISELECT_OPTIONS,
+          optionIndex: 1,
+        },
+      );
+
+      expect(result).to.eql({
+        noSelectionLabel: 'Please select',
+        multiselect: true,
+        altered: true,
+        name: 'thing',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'thing', text: 'Please select', value: 'null' }],
+        },
+        nextPotentialSelectionIndex: -1,
+      });
+    });
   });
 });
