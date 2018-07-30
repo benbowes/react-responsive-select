@@ -104,7 +104,10 @@ describe('reducer', () => {
         multiSelectInitialSelectedIndexes: [1, 2],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
-          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }, { name: 'make2', text: 'Mazda', value: 'mazda' }],
+          options: [
+            { name: 'make2', text: 'Fiat', value: 'fiat' },
+            { name: 'make2', text: 'Mazda', value: 'mazda' },
+          ],
         },
         nextPotentialSelectionIndex: 2,
       };
@@ -132,6 +135,11 @@ describe('reducer', () => {
           options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
         nextPotentialSelectionIndex: 0,
+        singleSelectSelectedOption: {
+          name: 'thing',
+          text: 'Any',
+          value: 'null',
+        },
       });
     });
 
@@ -290,6 +298,49 @@ describe('reducer', () => {
           options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
         nextPotentialSelectionIndex: 0,
+        singleSelectSelectedOption: {
+          name: 'thing',
+          text: 'Any',
+          value: 'null',
+        },
+      });
+    });
+
+    it('should select default no selection state if noSelectionLabel prop set and all options are deselected', () => {
+      const state = {
+        noSelectionLabel: 'Please select',
+        multiselect: true,
+        altered: false,
+        name: 'thing',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [1],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
+        },
+        nextPotentialSelectionIndex: 1,
+      };
+
+      const result = reducer(
+        state,
+        {
+          type: actionTypes.SET_MULTISELECT_OPTIONS,
+          optionIndex: 1,
+        },
+      );
+
+      expect(result).to.eql({
+        noSelectionLabel: 'Please select',
+        multiselect: true,
+        altered: true,
+        name: 'thing',
+        options: [{ text: 'Any', value: 'null' }, { text: 'Fiat', value: 'fiat' }],
+        multiSelectInitialSelectedIndexes: [1],
+        multiSelectSelectedIndexes: [],
+        multiSelectSelectedOptions: {
+          options: [{ name: 'thing', text: 'Please select', value: 'null' }],
+        },
+        nextPotentialSelectionIndex: -1,
       });
     });
   });

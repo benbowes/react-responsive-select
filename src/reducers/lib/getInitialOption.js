@@ -1,4 +1,6 @@
-export default function getInitialOption(state) {
+import getSingleSelectSelectedOption from './getSingleSelectSelectedOption';
+
+export default function getInitialOption(state, initialSelectedIndex = 0) {
   return {
     ...state,
     multiSelectSelectedIndexes: [0],
@@ -9,5 +11,7 @@ export default function getInitialOption(state) {
       }],
     },
     nextPotentialSelectionIndex: 0,
+
+    singleSelectSelectedOption: getSingleSelectSelectedOption(state, initialSelectedIndex),
   };
 }

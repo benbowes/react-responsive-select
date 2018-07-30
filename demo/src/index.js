@@ -473,6 +473,84 @@ ReactDOM.render(
         </div>
 
         <div className="row">
+          <h3>Custom default label via the noSelectionLabel prop</h3>
+          <small>When the <code>noSelectionLabel</code> prop is used. It will not auto-select the first item.</small>
+          <p />
+
+          <div>
+            <div className="col">
+              <ReactResponsiveSelect
+                name="make3a"
+                options={[
+                  { value: 'alfa-romeo', text: 'Alfa Romeo' },
+                  { value: 'bmw', text: 'BMW' },
+                  { value: 'fiat', text: 'Fiat' },
+                  { value: 'subaru', text: 'Subaru' },
+                  { value: 'suzuki', text: 'Suzuki' },
+                  { value: 'tesla', text: 'Tesla' },
+                  { value: 'volvo', text: 'Volvo' },
+                  { value: 'zonda', text: 'Zonda' },
+                ]}
+                onSubmit={() => { this.form.submit(); }}
+                caretIcon={caretIcon}
+                noSelectionLabel="Please select"
+                onChange={this.reportChange}
+              />
+            </div>
+
+            <div className="view-console-message">View the onChange object via the console</div>
+          </div>
+
+          <CodeBlock>
+            {`import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import ReactResponsiveSelect from 'react-responsive-select';
+
+// By default no caret icon is supplied - any valid jsx markup will do
+const caretIcon = (
+  <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"/></g>
+  </svg>
+);
+
+export default class Form extends Component {
+  render() {
+    return (
+      <form>
+
+        <ReactResponsiveSelect
+          name="make3a"
+          options={[
+            { value: 'alfa-romeo', text: 'Alfa Romeo' },
+            { value: 'bmw', text: 'BMW' },
+            { value: 'fiat', text: 'Fiat' },
+            { value: 'subaru', text: 'Subaru' },
+            { value: 'suzuki', text: 'Suzuki' },
+            { value: 'tesla', text: 'Tesla' },
+            { value: 'volvo', text: 'Volvo' },
+            { value: 'zonda', text: 'Zonda' },
+          ]}
+          onSubmit={() => { console.log("Handle form submit here") }}
+          caretIcon={caretIcon}
+          noSelectionLabel="Please select"
+          onChange={(newValue) => { console.log(newValue) }}
+        />
+
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Form />,
+  document.getElementById('root')
+);
+`}
+          </CodeBlock>
+
+        </div>
+
+        <div className="row">
           <h3>MultiSelect mode implementation</h3>
 
           <div>
@@ -641,6 +719,105 @@ export default class Form extends Component {
           customLabelRenderer={multiSelectSelectedOptions => { console.log(multiSelectSelectedOptions); }} // return a string to format your own label text
           selectedValues={['mazda','ford']}  // (Optional) pre-select an option with this value, or if ommited the first item will be selected
           // newValue e.g. { altered: true, options: [{ name: "make5", text: "Ford", value: "ford" }, {name: "make5", text: "Mazda", value: "mazda"} ] }
+          onChange={(newValue) => { console.log(newValue) }}
+        />
+
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Form />,
+  document.getElementById('root')
+);
+`}
+          </CodeBlock>
+
+        </div>
+
+
+        <div className="row">
+          <h3>MultiSelect mode implementation with noSelectionLabel prop</h3>
+          <small>When the <code>noSelectionLabel</code> prop is used. It will not auto-select the first item.</small>
+          <p />
+
+          <div>
+            <div className="col">
+              <ReactResponsiveSelect
+                multiselect
+                name="make6"
+                options={[ // (Required) an array of options - see above const options
+                    { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+                    { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+                    { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
+                    { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
+                    { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+                    { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+                    { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+                    { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
+                    { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
+                    { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
+                    { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+                  ]}
+                onSubmit={() => { this.form.submit(); }}
+                noSelectionLabel="Please select"
+                caretIcon={caretIcon}
+                onChange={this.reportChange}
+              />
+            </div>
+
+            <div className="view-console-message">View the onChange object via the console</div>
+          </div>
+
+
+          <CodeBlock>
+            {`import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import ReactResponsiveSelect from 'react-responsive-select';
+
+const multiSelectOptionMarkup = (text) => (
+  <div>
+    <span className="checkbox">
+      <svg className="checkbox-icon" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 488.878 488.878">
+        <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 "/></g>
+      </svg>
+    </span>
+    <span> {text}</span>
+  </div>
+);
+
+// By default no caret icon is supplied - any valid jsx markup will do
+const caretIcon = (
+  <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
+    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z"/></g>
+  </svg>
+);
+
+export default class Form extends Component {
+  render() {
+    return (
+      <form>
+
+        <ReactResponsiveSelect
+          multiselect
+          name="make6"
+          options={[ // (Required) an array of options - see above const options
+              { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+              { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
+              { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
+              { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
+              { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
+              { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
+              { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
+              { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
+              { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
+              { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
+              { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+            ]}
+          onSubmit={() => { console.log("Handle form submit here") }}
+          noSelectionLabel="Please select"
+          caretIcon={caretIcon}
           onChange={(newValue) => { console.log(newValue) }}
         />
 
