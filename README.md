@@ -91,7 +91,7 @@ To aid in styling the hover/selected states in the options list, I would suggest
 ```
 ---
 
-## Custom labeling
+## Custom labelling
 
 You can hook into the onChange function via the `customLabelRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
 
@@ -167,7 +167,7 @@ You can hook into the onChange function via the `customLabelRenderer` function p
   <tr>
     <td>noSelectionLabel</td>
     <td>string</td>
-    <td>Custom label when nothing selected. When used, first option is not automatically selected</td>
+    <td>A custom label to be used when nothing is selected. When used, the first option is not automatically selected</td>
   </tr>
   <tr>
     <td>customLabelRenderer</td>
