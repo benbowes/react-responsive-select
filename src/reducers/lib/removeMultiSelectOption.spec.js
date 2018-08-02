@@ -1,7 +1,6 @@
-import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 import removeMultiSelectOption from './removeMultiSelectOption';
-import state from '../../../mocha/state-mock';
+import state from '../../../__mocks__/state-mock';
 
 describe('removeMultiSelectOption', () => {
   deepFreeze(state);
@@ -26,7 +25,7 @@ describe('removeMultiSelectOption', () => {
       },
     }, 1);
 
-    expect(result).to.eql({
+    expect(result).toMatchObject({
       options: [{
         value: 'fiat',
         text: 'Fiat',

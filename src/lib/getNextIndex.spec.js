@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import getNextIndex from './getNextIndex';
 
 describe('getNextIndex', () => {
@@ -14,7 +13,7 @@ describe('getNextIndex', () => {
       },
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.state)).to.equal(3);
+    expect(getNextIndex(ARGS.mode, ARGS.state)).toEqual(3);
   });
 
   it('should return current nextPotentialSelectionIndex when options panel is closed, mode is "increment" and nextPotentialSelectionIndex equals optionNodesLength - 1', () => {
@@ -27,7 +26,7 @@ describe('getNextIndex', () => {
       },
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.state)).to.equal(3);
+    expect(getNextIndex(ARGS.mode, ARGS.state)).toEqual(3);
   });
 
   it('should return first nextPotentialSelectionIndex when options panel is open, mode is "increment" and nextPotentialSelectionIndex equals optionNodesLength - 1', () => {
@@ -40,7 +39,7 @@ describe('getNextIndex', () => {
       },
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.state)).to.equal(0);
+    expect(getNextIndex(ARGS.mode, ARGS.state)).toEqual(0);
   });
 
   it('should return current nextPotentialSelectionIndex +1 when options panel is open, mode is "increment" and nextPotentialSelectionIndex is less than optionNodesLength - 1', () => {
@@ -53,7 +52,7 @@ describe('getNextIndex', () => {
       },
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.state)).to.equal(3);
+    expect(getNextIndex(ARGS.mode, ARGS.state)).toEqual(3);
   });
 
   // mode DECREMENT
@@ -68,7 +67,7 @@ describe('getNextIndex', () => {
       },
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.state)).to.equal(2);
+    expect(getNextIndex(ARGS.mode, ARGS.state)).toEqual(2);
   });
 
   it('should return last nextPotentialSelectionIndex when options panel is open, mode is "decrement" and nextPotentialSelectionIndex equals 0', () => {
@@ -81,7 +80,7 @@ describe('getNextIndex', () => {
       },
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.state)).to.equal(3);
+    expect(getNextIndex(ARGS.mode, ARGS.state)).toEqual(3);
   });
 
   it('should return current nextPotentialSelectionIndex +1 when options panel is open, mode is "decrement" and nextPotentialSelectionIndex is greater than 0', () => {
@@ -94,6 +93,6 @@ describe('getNextIndex', () => {
       },
     };
 
-    expect(getNextIndex(ARGS.mode, ARGS.state)).to.equal(1);
+    expect(getNextIndex(ARGS.mode, ARGS.state)).toEqual(1);
   });
 });

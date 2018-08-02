@@ -1,7 +1,6 @@
-import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 import removeMultiSelectIndex from './removeMultiSelectIndex';
-import state from '../../../mocha/state-mock';
+import state from '../../../__mocks__/state-mock';
 
 describe('removeMultiSelectIndex', () => {
   deepFreeze(state);
@@ -11,6 +10,6 @@ describe('removeMultiSelectIndex', () => {
       ...state,
       multiSelectSelectedIndexes: [1, 2, 3],
     }, 1);
-    expect(result).to.eql([1, 3]);
+    expect(result).toMatchObject([1, 3]);
   });
 });

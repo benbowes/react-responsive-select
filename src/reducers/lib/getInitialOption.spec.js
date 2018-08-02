@@ -1,14 +1,13 @@
-import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 import getInitialOption from './getInitialOption';
-import state from '../../../mocha/state-mock';
+import state from '../../../__mocks__/state-mock';
 
 describe('getInitialOption', () => {
   deepFreeze(state);
 
   it('should return the first option', () => {
     const result = getInitialOption(state);
-    expect(result).to.eql({
+    expect(result).toMatchObject({
       altered: false,
       isDragging: false,
       multiselect: false,

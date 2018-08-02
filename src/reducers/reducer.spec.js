@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import reducer from './reducer';
 import initialState from './initialState';
 import * as actionTypes from '../constants/actionTypes';
@@ -17,8 +16,8 @@ describe('reducer', () => {
         },
       },
     );
-    expect(result.name).to.eql('thing');
-    expect(result.singleSelectSelectedOption).to.eql({ name: 'thing', text: 'Fiat', value: 'fiat' });
+    expect(result.name).toEqual('thing');
+    expect(result.singleSelectSelectedOption).toMatchObject({ name: 'thing', text: 'Fiat', value: 'fiat' });
   });
 
   it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
@@ -30,7 +29,7 @@ describe('reducer', () => {
       },
     );
 
-    expect(result).to.eql({
+    expect(result).toMatchObject({
       ...initialState,
       isDragging: true,
     });
@@ -51,7 +50,7 @@ describe('reducer', () => {
       },
     );
 
-    expect(result).to.eql({
+    expect(result).toMatchObject({
       ...mockInitialState,
       altered: true,
       singleSelectSelectedOption: {
@@ -77,7 +76,7 @@ describe('reducer', () => {
       },
     );
 
-    expect(result).to.eql({
+    expect(result).toMatchObject({
       ...mockState,
       altered: true,
       nextPotentialSelectionIndex: 1,
@@ -120,7 +119,7 @@ describe('reducer', () => {
         },
       );
 
-      expect(result).to.eql({
+      expect(result).toMatchObject({
         multiselect: true,
         altered: true,
         name: 'thing',
@@ -165,7 +164,7 @@ describe('reducer', () => {
         },
       );
 
-      expect(result).to.eql({
+      expect(result).toMatchObject({
         multiselect: true,
         altered: true,
         name: 'thing',
@@ -205,7 +204,7 @@ describe('reducer', () => {
         },
       );
 
-      expect(result).to.eql({
+      expect(result).toMatchObject({
         multiselect: true,
         altered: true,
         options: [
@@ -248,7 +247,7 @@ describe('reducer', () => {
         },
       );
 
-      expect(result).to.eql({
+      expect(result).toMatchObject({
         multiselect: true,
         altered: false,
         options: [
@@ -287,7 +286,7 @@ describe('reducer', () => {
         },
       );
 
-      expect(result).to.eql({
+      expect(result).toMatchObject({
         multiselect: true,
         altered: true,
         name: 'thing',
@@ -329,7 +328,7 @@ describe('reducer', () => {
         },
       );
 
-      expect(result).to.eql({
+      expect(result).toMatchObject({
         noSelectionLabel: 'Please select',
         multiselect: true,
         altered: true,

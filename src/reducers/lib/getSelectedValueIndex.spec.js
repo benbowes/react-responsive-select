@@ -1,7 +1,6 @@
-import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 import getSelectedValueIndex from './getSelectedValueIndex';
-import state from '../../../mocha/state-mock';
+import state from '../../../__mocks__/state-mock';
 
 describe('getSelectedValueIndex', () => {
   deepFreeze(state);
@@ -13,7 +12,7 @@ describe('getSelectedValueIndex', () => {
     };
 
     const result = getSelectedValueIndex(newState);
-    expect(result).to.equal(1);
+    expect(result).toEqual(1);
   });
 
   it('should return 0 if no matches found', () => {
@@ -23,7 +22,7 @@ describe('getSelectedValueIndex', () => {
     };
 
     const result = getSelectedValueIndex(newState);
-    expect(result).to.equal(0);
+    expect(result).toEqual(0);
   });
 
   it('should return 0 if selectedValues is undefined', () => {
@@ -33,7 +32,7 @@ describe('getSelectedValueIndex', () => {
     };
 
     const result = getSelectedValueIndex(newState);
-    expect(result).to.equal(0);
+    expect(result).toEqual(0);
   });
 
   it('should return -1 if selectedValues is undefined and noSelectionLabel prop is set', () => {
@@ -44,7 +43,7 @@ describe('getSelectedValueIndex', () => {
     };
 
     const result = getSelectedValueIndex(newState);
-    expect(result).to.equal(-1);
+    expect(result).toEqual(-1);
   });
 
   it('should return the index of a found option if match and noSelectionLabel prop is set', () => {
@@ -55,6 +54,6 @@ describe('getSelectedValueIndex', () => {
     };
 
     const result = getSelectedValueIndex(newState);
-    expect(result).to.equal(1);
+    expect(result).toEqual(1);
   });
 });

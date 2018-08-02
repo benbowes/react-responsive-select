@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { expect } from 'chai';
 
 import scrollIntoViewIIHOC from './scrollIntoViewIIHOC';
 
@@ -50,14 +49,14 @@ describe('Scroll into view', () => {
 
   let containerComponent;
 
-  before(() => {
+  beforeAll(() => {
     containerComponent = mount(<ContainerComponent selectedItem={1} />);
     containerRef.getBoundingClientRect = () => ({
       width: 300, height: 300, top: 0, left: 0, right: 300, bottom: 300,
     });
   });
 
-  after(() => {
+  afterAll(() => {
     containerComponent.unmount();
   });
 
@@ -70,7 +69,7 @@ describe('Scroll into view', () => {
 
     containerComponent.setProps({ selectedItem: 5 });
     containerComponent.update();
-    expect(containerRef.scrollTop).to.equal(100);
+    expect(containerRef.scrollTop).toEqual(100);
   });
 
   it('should scroll option into view when incrementing out of the viewable option area', () => {
@@ -81,13 +80,13 @@ describe('Scroll into view', () => {
     });
 
     containerComponent.setProps({ selectedItem: 2 });
-    expect(containerRef.scrollTop).to.equal(0);
+    expect(containerRef.scrollTop).toEqual(0);
   });
 
   it('should scroll back to first option when all items are deseleted', () => {
     containerRef.scrollTop = 500;
 
     containerComponent.setProps({ selectedItem: 0 });
-    expect(containerRef.scrollTop).to.equal(0);
+    expect(containerRef.scrollTop).toEqual(0);
   });
 });
