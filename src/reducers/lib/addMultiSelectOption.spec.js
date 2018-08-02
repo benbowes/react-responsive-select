@@ -1,7 +1,6 @@
-import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 import addMultiSelectOption from './addMultiSelectOption';
-import state from '../../../mocha/state-mock';
+import state from '../../../__mocks__/state-mock';
 
 describe('addMultiSelectOption', () => {
   deepFreeze(state);
@@ -18,7 +17,7 @@ describe('addMultiSelectOption', () => {
       },
     }, 3);
 
-    expect(result).to.eql({
+    expect(result).toMatchObject({
       options: [{
         name: 'Make 1',
         value: 'fiat',

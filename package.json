@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
@@ -8,46 +8,22 @@
     "build": "./auto/build.sh",
     "deploy": "./auto/deploy.sh",
     "eslint": "eslint demo.js src/**",
-    "test": "yarn eslint && mocha --compilers js:babel-register --require mocha/jsdom-setup.js 'src/**/*__test__.js'",
-    "testSingle": "echo $test && mocha --compilers js:babel-register --require mocha/jsdom-setup.js src/**/*$test*__test__.js -w",
-    "coverage": "rm -rf coverage && NODE_ENV=test nyc mocha 'src/**/*__test__.js' && open $(pwd)/coverage/lcov-report/index.html"
+    "test": "yarn eslint && jest",
+    "coverage": "rm -rf coverage && jest --coverage && open $(pwd)/coverage/index.html"
   },
-  "nyc": {
-    "require": [
-      "babel-register",
-      "./mocha/jsdom-setup.js"
+  "jest": {
+    "testURL": "http://localhost/",
+    "coverageReporters": [
+      "html"
     ],
-    "exclude": [
-      "src/lib/debugReportChange.js",
-      "src/**/*__test__.js",
-      "test"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "report-dir": "./coverage",
-    "sourceMap": false,
-    "instrument": false,
-    "check-coverage": true,
-    "watermarks": {
-      "lines": [
-        95,
-        95
-      ],
-      "functions": [
-        95,
-        95
-      ],
-      "branches": [
-        95,
-        95
-      ],
-      "statements": [
-        95,
-        95
-      ]
-    }
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json"
+    ]
   },
   "author": "Ben Bowes <bb@benbowes.com>",
   "repository": {
@@ -85,7 +61,6 @@
     "babel-plugin-istanbul": "^4.1.6",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "chai": "^4.1.2",
     "css-loader": "^0.28.11",
     "deep-freeze": "0.0.1",
     "enzyme": "^3.3.0",
@@ -96,9 +71,7 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "jsdom": "^11.7.0",
-    "mocha": "^5.1.0",
-    "nyc": "^11.6.0",
+    "jest": "^23.4.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "sinon": "^4.5.0",
