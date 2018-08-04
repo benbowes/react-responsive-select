@@ -204,6 +204,11 @@ Same as Single Select API but with the following amendments
     <p>See the example in the [multiselect demo](https://github.com/benbowes/react-responsive-select/blob/master/demo/src/index.js#L589-L591).</p>
     </td>
   </tr>
+  <tr>
+    <td>noSelectionLabel</td>
+    <td>string</td>
+    <td>A custom label to be used when nothing is selected. When used, the first option is not automatically selected</td>
+  </tr>
 </table>
 
 ## CDN
