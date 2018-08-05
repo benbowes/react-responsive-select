@@ -18,5 +18,6 @@ export const ReactResponsiveSelectProps = {
   onSubmit: PropTypes.func,
   prefix: PropTypes.string,
   selectedValue: PropTypes.string,
+  noSelectionLabel: PropTypes.string,
   selectedValues: PropTypes.arrayOf(PropTypes.string.isRequired),
 };
