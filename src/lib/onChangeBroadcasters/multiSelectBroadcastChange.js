@@ -1,13 +1,9 @@
+import isEqual from 'lodash.isequal';
+
 export default (prevOptions, currOptions, altered, onChange) => {
   if (!onChange) return;
 
-  const shouldBroadcastChange = (
-    prevOptions.length &&
-    (
-      (prevOptions.length !== currOptions.length)
-      || (prevOptions.map(v => v.value).join('') !== currOptions.map(v => v.value).join(''))
-    )
-  );
+  const shouldBroadcastChange = !isEqual(prevOptions, currOptions);
 
   if (shouldBroadcastChange) {
     onChange({

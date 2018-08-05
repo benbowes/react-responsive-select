@@ -29,5 +29,6 @@ export const SingleSelectProps = {
     value: PropTypes.string.isRequired,
   })).isRequired,
   prefix: PropTypes.string,
+  noSelectionLabel: PropTypes.string,
   selectedValue: PropTypes.string,
 };
