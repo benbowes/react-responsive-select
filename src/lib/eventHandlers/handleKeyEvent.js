@@ -7,19 +7,25 @@ import handleClick from './handleClick';
 import handleKeyUpOrDownPressed from './handleKeyUpOrDownPressed';
 
 export default function handleKeyEvent({
-  event, state, props, ReactResponsiveSelectClassRef,
+  event,
+  state,
+  props,
+  ReactResponsiveSelectClassRef,
 }) {
   const { multiselect, isOptionsPanelOpen, disabled } = state;
 
   if (disabled) return;
 
-  preventDefaultForKeyCodes([
-    keyCodes.ENTER,
-    keyCodes.SPACE,
-    keyCodes.ESCAPE,
-    keyCodes.UP,
-    keyCodes.DOWN,
-  ], event);
+  preventDefaultForKeyCodes(
+    [
+      keyCodes.ENTER,
+      keyCodes.SPACE,
+      keyCodes.ESCAPE,
+      keyCodes.UP,
+      keyCodes.DOWN,
+    ],
+    event,
+  );
 
   /* handle alpha-nemeric key press */
   if (/^[a-z0-9]+$/.test(event.key)) {
@@ -33,8 +39,8 @@ export default function handleKeyEvent({
         event.preventDefault();
 
         /** Multiselect does not close on selection. Focus button to blur and close options panel on TAB
-        * TODO add a test for this
-        */
+         * TODO add a test for this
+         */
         if (multiselect) {
           ReactResponsiveSelectClassRef.updateState(
             { type: actionTypes.SET_OPTIONS_PANEL_CLOSED },
@@ -48,7 +54,10 @@ export default function handleKeyEvent({
       /* can close the panel when open and focussed
        * can submit the form when closed and focussed */
       handleEnterPressed({
-        event, state, props, ReactResponsiveSelectClassRef,
+        event,
+        state,
+        props,
+        ReactResponsiveSelectClassRef,
       });
       break;
 
@@ -57,7 +66,9 @@ export default function handleKeyEvent({
       if (isOptionsPanelOpen) {
         handleClick({ event, state, ReactResponsiveSelectClassRef });
       } else {
-        ReactResponsiveSelectClassRef.updateState({ type: actionTypes.SET_OPTIONS_PANEL_OPEN });
+        ReactResponsiveSelectClassRef.updateState({
+          type: actionTypes.SET_OPTIONS_PANEL_OPEN,
+        });
       }
       break;
 
@@ -73,14 +84,22 @@ export default function handleKeyEvent({
       /* will open the options panel if closed
        * will not decrement selection if options panel closed
        * if panel open, will decrement up the options list */
-      handleKeyUpOrDownPressed({ state, ReactResponsiveSelectClassRef, type: 'decrement' });
+      handleKeyUpOrDownPressed({
+        state,
+        ReactResponsiveSelectClassRef,
+        type: 'decrement',
+      });
       break;
 
     case keyCodes.DOWN:
       /* will open the options panel if closed
        * will not increment selection if options panel closed
        * if panel open, will increment down the options list */
-      handleKeyUpOrDownPressed({ state, ReactResponsiveSelectClassRef, type: 'increment' });
+      handleKeyUpOrDownPressed({
+        state,
+        ReactResponsiveSelectClassRef,
+        type: 'increment',
+      });
       break;
 
     default:

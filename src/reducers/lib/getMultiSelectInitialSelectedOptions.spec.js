@@ -12,15 +12,18 @@ describe('addMultiSelectOption', () => {
       name: 'Make 1',
     });
 
-    expect(result).toMatchObject([{
-      name: 'Make 1',
-      value: 'fiat',
-      text: 'Fiat',
-    }, {
-      name: 'Make 1',
-      value: 'bmw',
-      text: 'BMW',
-    }]);
+    expect(result).toMatchObject([
+      {
+        name: 'Make 1',
+        value: 'fiat',
+        text: 'Fiat',
+      },
+      {
+        name: 'Make 1',
+        value: 'bmw',
+        text: 'BMW',
+      },
+    ]);
   });
 
   it('should return first item for multiSelectSelectOptions when selectedValues is not set', () => {
@@ -30,11 +33,13 @@ describe('addMultiSelectOption', () => {
       name: 'Make 1',
     });
 
-    expect(result).toMatchObject([{
-      name: 'Make 1',
-      value: 'null',
-      text: 'Any',
-    }]);
+    expect(result).toMatchObject([
+      {
+        name: 'Make 1',
+        value: 'null',
+        text: 'Any',
+      },
+    ]);
   });
 
   it('should return default item for multiSelectSelectOptions when noSelectionLabel prop is set and selectedValues is not set', () => {
@@ -45,11 +50,13 @@ describe('addMultiSelectOption', () => {
       name: 'Make 1',
     });
 
-    expect(result).toMatchObject([{
-      name: 'Make 1',
-      value: 'null',
-      text: 'Please select...',
-    }]);
+    expect(result).toMatchObject([
+      {
+        name: 'Make 1',
+        value: 'null',
+        text: 'Please select...',
+      },
+    ]);
   });
 
   it('should return list of selected multiSelectSelectOptions when selectedValues is set and noSelectionLabel prop is set', () => {
@@ -60,15 +67,17 @@ describe('addMultiSelectOption', () => {
       name: 'Make 1',
     });
 
-    expect(result).toMatchObject([{
-      name: 'Make 1',
-      text: 'Fiat',
-      value: 'fiat',
-    }, {
-      name: 'Make 1',
-      text: 'BMW',
-      value: 'bmw',
-    },
+    expect(result).toMatchObject([
+      {
+        name: 'Make 1',
+        text: 'Fiat',
+        value: 'fiat',
+      },
+      {
+        name: 'Make 1',
+        text: 'BMW',
+        value: 'bmw',
+      },
     ]);
   });
 });

@@ -1,6 +1,9 @@
 import * as actionTypes from '../../constants/actionTypes';
 
-export default function handleTouchStart({ state, ReactResponsiveSelectClassRef }) {
+export default function handleTouchStart({
+  state,
+  ReactResponsiveSelectClassRef,
+}) {
   const { disabled } = state;
 
   if (disabled) return;

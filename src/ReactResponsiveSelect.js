@@ -2,8 +2,17 @@ import React, { Component } from 'react';
 import isEqual from 'lodash.isequal';
 import singleline from 'singleline';
 import * as actionTypes from './constants/actionTypes';
-import { handleBlur, handleClick, handleKeyEvent, handleTouchMove, handleTouchStart } from './lib/eventHandlers';
-import { multiSelectBroadcastChange, singleSelectBroadcastChange } from './lib/onChangeBroadcasters';
+import {
+  handleBlur,
+  handleClick,
+  handleKeyEvent,
+  handleTouchMove,
+  handleTouchStart,
+} from './lib/eventHandlers';
+import {
+  multiSelectBroadcastChange,
+  singleSelectBroadcastChange,
+} from './lib/onChangeBroadcasters';
 import { ReactResponsiveSelectProps } from './propTypes';
 import debugReportChange from './lib/debugReportChange';
 import getCustomLabelText from './lib/getCustomLabelText';
@@ -48,9 +57,9 @@ export default class ReactResponsiveSelect extends Component {
   }
 
   /**
-  * Allow for the component to be updated/controlled via props after componentDidMount
-  * TODO add a test for this
-  */
+   * Allow for the component to be updated/controlled via props after componentDidMount
+   * TODO add a test for this
+   */
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps, this.props)) {
       this.updateState({
@@ -74,12 +83,12 @@ export default class ReactResponsiveSelect extends Component {
     const { onChange, selectedValue, selectedValues } = this.props;
 
     /**
-    * Check if there is a need to broadcast a change, props can now change state given
-    * that the component can be controlled externally.
-    * Exit if - the same single select option is selected as before
-    * Exit if - the same multi select options are selected as before
-    * TODO add a test for this
-    */
+     * Check if there is a need to broadcast a change, props can now change state given
+     * that the component can be controlled externally.
+     * Exit if - the same single select option is selected as before
+     * Exit if - the same multi select options are selected as before
+     * TODO add a test for this
+     */
     if (
       selectedValue === singleSelectInitialIndex ||
       isEqual(selectedValues, multiSelectInitialSelectedIndexes)
@@ -147,59 +156,74 @@ export default class ReactResponsiveSelect extends Component {
       <div
         className={singleline(`
           rrs
-          ${(isOptionsPanelOpen === true) ? 'rrs--options-visible' : ''}
+          ${isOptionsPanelOpen === true ? 'rrs--options-visible' : ''}
           ${altered ? 'rrs--has-changed' : ''}
         `)}
-        ref={(r) => { this.selectBox = r; }}
-        onKeyDown={e => handleKeyEvent({
-          event: e,
-          ReactResponsiveSelectClassRef: this,
-          state: this.state,
-          props: this.props,
-        })}
-        onTouchStart={() => handleTouchStart({
-          ReactResponsiveSelectClassRef: this,
-          state: this.state,
-        })}
-        onTouchMove={() => handleTouchMove({
-          ReactResponsiveSelectClassRef: this,
-          state: this.state,
-        })}
-        onTouchEnd={e => handleClick({
-          event: e,
-          ReactResponsiveSelectClassRef: this,
-          state: this.state,
-        })}
-        onMouseDown={e => handleClick({
-          event: e,
-          ReactResponsiveSelectClassRef: this,
-          state: this.state,
-        })}
-        onBlur={() => handleBlur({
-          ReactResponsiveSelectClassRef: this,
-          state: this.state,
-        })}
+        ref={r => {
+          this.selectBox = r;
+        }}
+        tabIndex="-1"
+        onKeyDown={e =>
+          handleKeyEvent({
+            event: e,
+            ReactResponsiveSelectClassRef: this,
+            state: this.state,
+            props: this.props,
+          })
+        }
+        onTouchStart={() =>
+          handleTouchStart({
+            ReactResponsiveSelectClassRef: this,
+            state: this.state,
+          })
+        }
+        onTouchMove={() =>
+          handleTouchMove({
+            ReactResponsiveSelectClassRef: this,
+            state: this.state,
+          })
+        }
+        onTouchEnd={e =>
+          handleClick({
+            event: e,
+            ReactResponsiveSelectClassRef: this,
+            state: this.state,
+          })
+        }
+        onMouseDown={e =>
+          handleClick({
+            event: e,
+            ReactResponsiveSelectClassRef: this,
+            state: this.state,
+          })
+        }
+        onBlur={() =>
+          handleBlur({
+            ReactResponsiveSelectClassRef: this,
+            state: this.state,
+          })
+        }
       >
-        {multiselect
-          ? (
-            <MultiSelect
-              noSelectionLabel={noSelectionLabel}
-              disabled={disabled}
-              altered={altered}
-              isDragging={isDragging}
-              caretIcon={caretIcon}
-              customLabelText={customLabelText}
-              prefix={prefix}
-              name={name}
-              multiSelectInitialSelectedIndexes={multiSelectInitialSelectedIndexes}
-              multiSelectSelectedOptions={multiSelectSelectedOptions}
-              multiSelectSelectedIndexes={multiSelectSelectedIndexes}
-              nextPotentialSelectionIndex={nextPotentialSelectionIndex}
-              isOptionsPanelOpen={isOptionsPanelOpen}
-              options={options}
-            />
-        )
-        : (
+        {multiselect ? (
+          <MultiSelect
+            noSelectionLabel={noSelectionLabel}
+            disabled={disabled}
+            altered={altered}
+            isDragging={isDragging}
+            caretIcon={caretIcon}
+            customLabelText={customLabelText}
+            prefix={prefix}
+            name={name}
+            multiSelectInitialSelectedIndexes={
+              multiSelectInitialSelectedIndexes
+            }
+            multiSelectSelectedOptions={multiSelectSelectedOptions}
+            multiSelectSelectedIndexes={multiSelectSelectedIndexes}
+            nextPotentialSelectionIndex={nextPotentialSelectionIndex}
+            isOptionsPanelOpen={isOptionsPanelOpen}
+            options={options}
+          />
+        ) : (
           <SingleSelect
             noSelectionLabel={noSelectionLabel}
             disabled={disabled}
