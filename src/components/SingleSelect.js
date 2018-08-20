@@ -10,9 +10,10 @@ export default class SingleSelect extends Component {
   componentDidUpdate(prevProps) {
     /* Focus selectBox button if options panel has just closed, there has been an interaction or the value has changed */
     if (
-      !this.props.isOptionsPanelOpen
-      && prevProps.isOptionsPanelOpen
-      && prevProps.singleSelectSelectedIndex !== this.props.singleSelectSelectedIndex
+      !this.props.isOptionsPanelOpen &&
+      prevProps.isOptionsPanelOpen &&
+      prevProps.singleSelectSelectedIndex !==
+        this.props.singleSelectSelectedIndex
     ) {
       this.optionsButton.focus();
     }
@@ -20,13 +21,19 @@ export default class SingleSelect extends Component {
 
   getCustomLabel() {
     const {
-      prefix, name, singleSelectSelectedOption, caretIcon, customLabelText,
+      prefix,
+      name,
+      singleSelectSelectedOption,
+      caretIcon,
+      customLabelText,
     } = this.props;
 
     return (
       <div className="rrs__label">
         <span
-          aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
+          aria-label={`${prefix ? `${prefix} ` : ''}${
+            singleSelectSelectedOption.text
+          } selected`}
           className="rrs__label__text"
           id={`rrs-${name}-label`}
         >
@@ -39,7 +46,12 @@ export default class SingleSelect extends Component {
 
   getDefaultLabel() {
     const {
-      prefix, singleSelectSelectedOption, name, caretIcon, singleSelectSelectedIndex, noSelectionLabel,
+      prefix,
+      singleSelectSelectedOption,
+      name,
+      caretIcon,
+      singleSelectSelectedIndex,
+      noSelectionLabel,
     } = this.props;
 
     if (singleSelectSelectedIndex === -1) {
@@ -50,9 +62,7 @@ export default class SingleSelect extends Component {
             className="rrs__label__text"
             id={`rrs-${name}-label`}
           >
-            {prefix &&
-              <span>{prefix}</span>
-            }
+            {prefix && <span>{prefix}</span>}
             {noSelectionLabel}
           </span>
           {caretIcon && caretIcon}
@@ -63,14 +73,18 @@ export default class SingleSelect extends Component {
     return (
       <div className="rrs__label">
         <span
-          aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
+          aria-label={`${prefix ? `${prefix} ` : ''}${
+            singleSelectSelectedOption.text
+          } selected`}
           className="rrs__label__text"
           id={`rrs-${name}-label`}
         >
-          {prefix &&
-            <span>{prefix}</span>
-          }
-          {singleSelectSelectedOption.text ? singleSelectSelectedOption.text : <div>&nbsp;</div> }
+          {prefix && <span>{prefix}</span>}
+          {singleSelectSelectedOption.text ? (
+            singleSelectSelectedOption.text
+          ) : (
+            <div>&nbsp;</div>
+          )}
         </span>
         {caretIcon && caretIcon}
       </div>
@@ -99,21 +113,25 @@ export default class SingleSelect extends Component {
           aria-haspopup="true"
           aria-expanded={isOptionsPanelOpen}
           aria-controls={`rrs-${name}-menu`}
-          ref={(r) => { if (r) this.optionsButton = r; }}
+          ref={r => {
+            if (r) this.optionsButton = r;
+          }}
           className={singleline(`
             rrs__button
-            ${(disabled === true) ? 'rrs__button--disabled' : ''}
+            ${disabled === true ? 'rrs__button--disabled' : ''}
           `)}
         >
-
           {customLabelText && this.getCustomLabel()}
 
           {!customLabelText && this.getDefaultLabel()}
 
-          {name &&
-          <input type="hidden" name={name} value={singleSelectSelectedOption.value} />
-          }
-
+          {name && (
+            <input
+              type="hidden"
+              name={name}
+              value={singleSelectSelectedOption.value}
+            />
+          )}
         </div>
 
         <ul
@@ -121,7 +139,9 @@ export default class SingleSelect extends Component {
           aria-labelledby={`rrs-${name}-label`}
           role="menu"
           className="rrs__options"
-          ref={(r) => { if (r) this.optionsContainer = r; }}
+          ref={r => {
+            if (r) this.optionsContainer = r;
+          }}
         >
           {options.length > 0 &&
             options.map((option, index) => (
@@ -136,8 +156,7 @@ export default class SingleSelect extends Component {
                 singleSelectSelectedIndex={singleSelectSelectedIndex}
                 nextPotentialSelectionIndex={nextPotentialSelectionIndex}
               />
-            ))
-          }
+            ))}
         </ul>
       </div>
     );

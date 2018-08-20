@@ -11,7 +11,9 @@ class ItemComponent extends Component {
     return (
       <div
         data-key={this.props.dataKey} // eslint-disable-line
-        ref={(r) => { this.item = r; }}
+        ref={r => {
+          this.item = r;
+        }}
         className={this.props.classes} // eslint-disable-line
       >
         Item
@@ -22,11 +24,16 @@ class ItemComponent extends Component {
 
 const ItemComponentHOC = scrollIntoViewIIHOC(ItemComponent);
 
-class ContainerComponent extends Component { // eslint-disable-line
+class ContainerComponent extends Component {
+  // eslint-disable-line
   render() {
     return (
       <div
-        ref={(r) => { if (r) { containerRef = r; } }}
+        ref={r => {
+          if (r) {
+            containerRef = r;
+          }
+        }}
         className="container"
         style={{ height: '300px', overflow: 'auto' }}
       >
@@ -52,7 +59,12 @@ describe('Scroll into view', () => {
   beforeAll(() => {
     containerComponent = mount(<ContainerComponent selectedItem={1} />);
     containerRef.getBoundingClientRect = () => ({
-      width: 300, height: 300, top: 0, left: 0, right: 300, bottom: 300,
+      width: 300,
+      height: 300,
+      top: 0,
+      left: 0,
+      right: 300,
+      bottom: 300,
     });
   });
 
@@ -61,10 +73,18 @@ describe('Scroll into view', () => {
   });
 
   it('should scroll option into view when incrementing out of the viewable option area', () => {
-    const selectedItem = containerComponent.find('.item').at(5).getDOMNode();
+    const selectedItem = containerComponent
+      .find('.item')
+      .at(5)
+      .getDOMNode();
     containerRef.scrollTop = 0;
     selectedItem.getBoundingClientRect = () => ({
-      width: 300, height: 100, top: 500, left: 0, right: 300, bottom: 600,
+      width: 300,
+      height: 100,
+      top: 500,
+      left: 0,
+      right: 300,
+      bottom: 600,
     });
 
     containerComponent.setProps({ selectedItem: 5 });
@@ -73,10 +93,18 @@ describe('Scroll into view', () => {
   });
 
   it('should scroll option into view when incrementing out of the viewable option area', () => {
-    const selectedItem = containerComponent.find('.item').at(2).getDOMNode();
+    const selectedItem = containerComponent
+      .find('.item')
+      .at(2)
+      .getDOMNode();
     containerRef.scrollTop = 0;
     selectedItem.getBoundingClientRect = () => ({
-      width: 300, height: 100, top: -100, left: 0, right: 300, bottom: 0,
+      width: 300,
+      height: 100,
+      top: -100,
+      left: 0,
+      right: 300,
+      bottom: 0,
     });
 
     containerComponent.setProps({ selectedItem: 2 });

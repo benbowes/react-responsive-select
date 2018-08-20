@@ -1,10 +1,12 @@
 import * as actionTypes from '../../constants/actionTypes';
 
-export default ({
-  event, state, props, ReactResponsiveSelectClassRef,
-}) => {
+export default ({ event, state, props, ReactResponsiveSelectClassRef }) => {
   const {
-    multiselect, isOptionsPanelOpen, nextPotentialSelectionIndex, disabled, options,
+    multiselect,
+    isOptionsPanelOpen,
+    nextPotentialSelectionIndex,
+    disabled,
+    options,
   } = state;
 
   if (disabled) return;

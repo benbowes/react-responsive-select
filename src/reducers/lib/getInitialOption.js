@@ -5,13 +5,18 @@ export default function getInitialOption(state, initialSelectedIndex = 0) {
     ...state,
     multiSelectSelectedIndexes: [0],
     multiSelectSelectedOptions: {
-      options: [{
-        name: state.name,
-        ...state.options[0],
-      }],
+      options: [
+        {
+          name: state.name,
+          ...state.options[0],
+        },
+      ],
     },
     nextPotentialSelectionIndex: 0,
 
-    singleSelectSelectedOption: getSingleSelectSelectedOption(state, initialSelectedIndex),
+    singleSelectSelectedOption: getSingleSelectSelectedOption(
+      state,
+      initialSelectedIndex,
+    ),
   };
 }

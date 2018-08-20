@@ -4,7 +4,11 @@ import { MultiSelectOptionProps } from '../propTypes';
 
 export default class MultiSelectOption extends Component {
   componentDidUpdate() {
-    const { index, isOptionsPanelOpen, nextPotentialSelectionIndex } = this.props;
+    const {
+      index,
+      isOptionsPanelOpen,
+      nextPotentialSelectionIndex,
+    } = this.props;
     if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
       this[`option_${index}`].focus();
     }
@@ -12,7 +16,10 @@ export default class MultiSelectOption extends Component {
 
   render() {
     const {
-      index, multiSelectSelectedIndexes, nextPotentialSelectionIndex, option,
+      index,
+      multiSelectSelectedIndexes,
+      nextPotentialSelectionIndex,
+      option,
     } = this.props;
     const isSelected = multiSelectSelectedIndexes.some(i => i === index);
 
@@ -25,12 +32,18 @@ export default class MultiSelectOption extends Component {
         aria-live="assertive"
         aria-disabled={option.disabled ? 'true' : 'false'}
         data-key={index}
-        ref={(r) => { this[`option_${index}`] = r; }}
+        ref={r => {
+          this[`option_${index}`] = r;
+        }}
         className={singleline(`
           rrs__option
-          ${(isSelected) ? 'rrs__option--selected' : ''}
-          ${(nextPotentialSelectionIndex === index) ? 'rrs__option--next-selection' : ''}
-          ${(option.disabled === true) ? 'rrs__option--disabled' : ''}
+          ${isSelected ? 'rrs__option--selected' : ''}
+          ${
+            nextPotentialSelectionIndex === index
+              ? 'rrs__option--next-selection'
+              : ''
+          }
+          ${option.disabled === true ? 'rrs__option--disabled' : ''}
         `)}
       >
         {option.markup || option.text}

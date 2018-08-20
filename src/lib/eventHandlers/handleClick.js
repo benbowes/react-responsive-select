@@ -1,9 +1,17 @@
 import containsClassName from '../containsClassName';
 import * as actionTypes from '../../constants/actionTypes';
 
-export default function handleClick({ event, state, ReactResponsiveSelectClassRef }) {
+export default function handleClick({
+  event,
+  state,
+  ReactResponsiveSelectClassRef,
+}) {
   const {
-    multiselect, isOptionsPanelOpen, isDragging, disabled, options,
+    multiselect,
+    isOptionsPanelOpen,
+    isDragging,
+    disabled,
+    options,
   } = state;
 
   if (disabled) return;
@@ -36,15 +44,18 @@ export default function handleClick({ event, state, ReactResponsiveSelectClassRe
     }
 
     /* Else user clicked close or open the options panel */
-    ReactResponsiveSelectClassRef.updateState({
-      type: isOptionsPanelOpen
-        ? actionTypes.SET_OPTIONS_PANEL_CLOSED
-        : actionTypes.SET_OPTIONS_PANEL_OPEN,
-    }, () => {
-      // After state update, check if focus should be moved to the button
-      if (ReactResponsiveSelectClassRef.state.isOptionsPanelOpen === false) {
-        ReactResponsiveSelectClassRef.focusButton();
-      }
-    });
+    ReactResponsiveSelectClassRef.updateState(
+      {
+        type: isOptionsPanelOpen
+          ? actionTypes.SET_OPTIONS_PANEL_CLOSED
+          : actionTypes.SET_OPTIONS_PANEL_OPEN,
+      },
+      () => {
+        // After state update, check if focus should be moved to the button
+        if (ReactResponsiveSelectClassRef.state.isOptionsPanelOpen === false) {
+          ReactResponsiveSelectClassRef.focusButton();
+        }
+      },
+    );
   }
 }

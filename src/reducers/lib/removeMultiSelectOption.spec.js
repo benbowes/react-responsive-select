@@ -6,36 +6,48 @@ describe('removeMultiSelectOption', () => {
   deepFreeze(state);
 
   it('should remove from multiSelectSelectOptions at requested index', () => {
-    const result = removeMultiSelectOption({
-      ...state,
-      multiSelectSelectedOptions: {
-        options: [{
-          value: 'fiat',
-          text: 'Fiat',
-        }, {
-          value: 'subaru',
-          text: 'Subaru',
-        }, {
-          value: 'bmw',
-          text: 'BMW',
-        }, {
-          value: 'tesla',
-          text: 'Tesla',
-        }],
+    const result = removeMultiSelectOption(
+      {
+        ...state,
+        multiSelectSelectedOptions: {
+          options: [
+            {
+              value: 'fiat',
+              text: 'Fiat',
+            },
+            {
+              value: 'subaru',
+              text: 'Subaru',
+            },
+            {
+              value: 'bmw',
+              text: 'BMW',
+            },
+            {
+              value: 'tesla',
+              text: 'Tesla',
+            },
+          ],
+        },
       },
-    }, 1);
+      1,
+    );
 
     expect(result).toMatchObject({
-      options: [{
-        value: 'fiat',
-        text: 'Fiat',
-      }, {
-        value: 'bmw',
-        text: 'BMW',
-      }, {
-        value: 'tesla',
-        text: 'Tesla',
-      }],
+      options: [
+        {
+          value: 'fiat',
+          text: 'Fiat',
+        },
+        {
+          value: 'bmw',
+          text: 'BMW',
+        },
+        {
+          value: 'tesla',
+          text: 'Tesla',
+        },
+      ],
     });
   });
 });

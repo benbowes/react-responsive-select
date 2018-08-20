@@ -1,15 +1,16 @@
 {
   "name": "react-responsive-select",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.demo.js --port 3001",
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.demo.js --port 3001 & yarn prettier-watch",
     "build": "./auto/build.sh",
     "deploy": "./auto/deploy.sh",
-    "eslint": "eslint demo.js src/**",
+    "eslint": "eslint src/**",
     "test": "yarn eslint && jest",
-    "coverage": "rm -rf coverage && jest --coverage && open $(pwd)/coverage/index.html"
+    "coverage": "rm -rf coverage && jest --coverage && open $(pwd)/coverage/index.html",
+    "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
   },
   "jest": {
     "testURL": "http://localhost/",
@@ -52,11 +53,12 @@
   "dependencies": {
     "lodash.isequal": "^4.5.0",
     "prop-types": "^15.6.1",
+    "react-router-dom": "^4.3.1",
     "singleline": "1.0.x"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-eslint": "8.2.x",
+    "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -64,13 +66,12 @@
     "deep-freeze": "0.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-babel": "3.2.x",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint": "^5.3.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.10.0",
     "jest": "^23.4.2",
+    "onchange": "^4.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "sinon": "^4.5.0",
