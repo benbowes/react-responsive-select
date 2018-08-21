@@ -17,6 +17,10 @@ export default class SingleSelect extends Component {
     ) {
       this.optionsButton.focus();
     }
+
+    if (this.props.nextPotentialSelectionIndex === -1) {
+      this.optionsButton.focus();
+    }
   }
 
   getCustomLabel() {
