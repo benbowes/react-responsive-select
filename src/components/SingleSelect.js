@@ -8,17 +8,26 @@ const SingleSelectOptionHOC = scrollIntoViewIIHOC(SingleSelectOption);
 
 export default class SingleSelect extends Component {
   componentDidUpdate(prevProps) {
-    /* Focus selectBox button if options panel has just closed, there has been an interaction or the value has changed */
+    /*
+      Focus selectBox button if options panel has just closed,
+      there has been an interaction, the value has changed,
+      or isOptionsPanelOpen and nextPotentialSelectionIndex === -1
+    */
+    const {
+      singleSelectSelectedIndex,
+      isOptionsPanelOpen,
+      nextPotentialSelectionIndex,
+    } = this.props;
+
     if (
-      !this.props.isOptionsPanelOpen &&
+      !isOptionsPanelOpen &&
       prevProps.isOptionsPanelOpen &&
-      prevProps.singleSelectSelectedIndex !==
-        this.props.singleSelectSelectedIndex
+      prevProps.singleSelectSelectedIndex !== singleSelectSelectedIndex
     ) {
       this.optionsButton.focus();
     }
 
-    if (this.props.nextPotentialSelectionIndex === -1) {
+    if (isOptionsPanelOpen && nextPotentialSelectionIndex === -1) {
       this.optionsButton.focus();
     }
   }
