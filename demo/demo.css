@@ -69,6 +69,16 @@ li {
   margin: 0 0 4px 0;
 }
 
+input[type="text"] {
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+label span {
+  margin: 0 0.5rem;
+}
+
 .subh1p strong {
   font-weight: normal;
 }
