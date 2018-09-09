@@ -4,16 +4,17 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import scrollIntoViewIIHOC from './scrollIntoViewIIHOC';
 
-let containerRef = {};
-
 class ItemComponent extends Component {
+  constructor() {
+    super();
+    this.optionRef = React.createRef();
+  }
+
   render() {
     return (
       <div
         data-key={this.props.dataKey} // eslint-disable-line
-        ref={r => {
-          this.item = r;
-        }}
+        ref={this.optionRef}
         className={this.props.classes} // eslint-disable-line
       >
         Item
@@ -25,15 +26,15 @@ class ItemComponent extends Component {
 const ItemComponentHOC = scrollIntoViewIIHOC(ItemComponent);
 
 class ContainerComponent extends Component {
+  constructor() {
+    super();
+    this.containerRef = React.createRef();
+  }
   // eslint-disable-line
   render() {
     return (
       <div
-        ref={r => {
-          if (r) {
-            containerRef = r;
-          }
-        }}
+        ref={this.containerRef}
         className="container"
         style={{ height: '300px', overflow: 'auto' }}
       >
@@ -41,7 +42,8 @@ class ContainerComponent extends Component {
           <ItemComponentHOC
             key={v}
             dataKey={v}
-            scrollIntoViewScrollPaneRef={() => containerRef}
+            index={v}
+            scrollIntoViewScrollPaneRef={this.containerRef}
             scrollIntoViewElementSelector="item"
             classes={v === this.props.selectedItem ? 'item selected' : 'item'} // eslint-disable-line
           />
@@ -55,10 +57,13 @@ describe('Scroll into view', () => {
   Enzyme.configure({ adapter: new Adapter() });
 
   let containerComponent;
+  let containerComponentsContainerRef;
 
   beforeAll(() => {
     containerComponent = mount(<ContainerComponent selectedItem={1} />);
-    containerRef.getBoundingClientRect = () => ({
+    containerComponentsContainerRef = containerComponent.instance().containerRef
+      .current;
+    containerComponentsContainerRef.getBoundingClientRect = () => ({
       width: 300,
       height: 300,
       top: 0,
@@ -77,7 +82,7 @@ describe('Scroll into view', () => {
       .find('.item')
       .at(5)
       .getDOMNode();
-    containerRef.scrollTop = 0;
+    containerComponentsContainerRef.scrollTop = 0;
     selectedItem.getBoundingClientRect = () => ({
       width: 300,
       height: 100,
@@ -89,7 +94,7 @@ describe('Scroll into view', () => {
 
     containerComponent.setProps({ selectedItem: 5 });
     containerComponent.update();
-    expect(containerRef.scrollTop).toEqual(100);
+    expect(containerComponentsContainerRef.scrollTop).toEqual(100);
   });
 
   it('should scroll option into view when incrementing out of the viewable option area', () => {
@@ -97,7 +102,7 @@ describe('Scroll into view', () => {
       .find('.item')
       .at(2)
       .getDOMNode();
-    containerRef.scrollTop = 0;
+    containerComponentsContainerRef.scrollTop = 0;
     selectedItem.getBoundingClientRect = () => ({
       width: 300,
       height: 100,
@@ -108,13 +113,13 @@ describe('Scroll into view', () => {
     });
 
     containerComponent.setProps({ selectedItem: 2 });
-    expect(containerRef.scrollTop).toEqual(0);
+    expect(containerComponentsContainerRef.scrollTop).toEqual(0);
   });
 
   it('should scroll back to first option when all items are deseleted', () => {
-    containerRef.scrollTop = 500;
+    containerComponentsContainerRef.scrollTop = 500;
 
     containerComponent.setProps({ selectedItem: 0 });
-    expect(containerRef.scrollTop).toEqual(0);
+    expect(containerComponentsContainerRef.scrollTop).toEqual(0);
   });
 });

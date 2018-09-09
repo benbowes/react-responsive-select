@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import containsClassName from './containsClassName';
 
 // Inheritence Inversion HOC https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e#5247
@@ -17,9 +16,11 @@ const scrollIntoViewIIHOC = WrappedComponent =>
         scrollIntoViewScrollPaneRef,
         isDragging,
       } = this.props;
-      this.scrollPaneDOM = this.scrollPaneDOM || scrollIntoViewScrollPaneRef();
-      // eslint-disable-next-line react/no-find-dom-node
-      this.elementDOM = this.elementDOM || ReactDOM.findDOMNode(this);
+      this.scrollPaneDOM =
+        this.scrollPaneDOM || scrollIntoViewScrollPaneRef.current;
+
+      this.elementDOM = this.elementDOM || this.optionRef.current;
+
       const isCurrentHighlightedOption = containsClassName(
         this.elementDOM,
         scrollIntoViewElementSelector,
@@ -43,7 +44,7 @@ const scrollIntoViewIIHOC = WrappedComponent =>
         }
 
         // Scroll to show first option if first option selected - so as to have it in view
-        if (this.elementDOM.getAttribute('data-key') === '0') {
+        if (this.props.index === 0) {
           this.scrollPaneDOM.scrollTop = 0;
         }
       }
