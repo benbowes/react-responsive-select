@@ -58,7 +58,6 @@ export default class ReactResponsiveSelect extends Component {
 
   /**
    * Allow for the component to be updated/controlled via props after componentDidMount
-   * TODO add a test for this
    */
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps, this.props)) {
@@ -84,10 +83,9 @@ export default class ReactResponsiveSelect extends Component {
 
     /**
      * Check if there is a need to broadcast a change, props can now change state given
-     * that the component can be controlled externally.
+     * that the component can be controlled.
      * Exit if - the same single select option is selected as before
      * Exit if - the same multi select options are selected as before
-     * TODO add a test for this
      */
     if (
       selectedValue === singleSelectInitialIndex ||
@@ -123,7 +121,6 @@ export default class ReactResponsiveSelect extends Component {
     debugReportChange(this.props.name, action, nextState);
   }
 
-  /* TODO add a test for this */
   focusButton() {
     this.selectBox.querySelector('.rrs__button').focus();
   }
@@ -201,6 +198,7 @@ export default class ReactResponsiveSelect extends Component {
           handleBlur({
             ReactResponsiveSelectClassRef: this,
             state: this.state,
+            props: this.props,
           })
         }
       >

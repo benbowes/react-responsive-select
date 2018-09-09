@@ -141,7 +141,14 @@ You can hook into the onChange function via the `customLabelRenderer` function p
     <td>onChange</td>
     <td>Function</td>
     <td><p>Listen for changes on selected option change</p>
-    <p>returns <code>{ altered: true||false, name: select.name, value: option.value, text: option.text, markup: JSX Object }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
+    <p>returns <code>{ altered: true||false, name: select.name, value: option.value, text: option.text }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>onBlur</td>
+    <td>Function</td>
+    <td><p>Listen for blur when select loses focus</p>
+    <p>returns <code>{ altered: true||false, name: select.name, value: option.value, text: option.text }</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
     </td>
   </tr>
   <tr>
@@ -208,6 +215,20 @@ Same as Single Select API but with the following amendments
     <td>noSelectionLabel</td>
     <td>string</td>
     <td>A custom label to be used when nothing is selected. When used, the first option is not automatically selected</td>
+  </tr>
+  <tr>
+    <td>onChange</td>
+    <td>Function</td>
+    <td><p>Listen for changes in selection</p>
+    <p>returns <code>{ altered: true||false, options: [{name: select.name, value: option.value, text: option.text }]}</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>onBlur</td>
+    <td>Function</td>
+    <td><p>Listen for blur when select loses focus</p>
+    <p>returns <code>{ altered: true||false, options: [{name: select.name, value: option.value, text: option.text }]}</code></p><p>Note: <code>altered</code> signifies whether a select has been changed from it's original value.</p>
+    </td>
   </tr>
 </table>
 
