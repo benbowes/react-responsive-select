@@ -8,6 +8,12 @@ import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
 const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
 
 export default class MultiSelect extends Component {
+  constructor() {
+    super();
+    this.optionsButton = React.createRef();
+    this.optionsContainer = React.createRef();
+  }
+
   componentDidUpdate(prevProps) {
     /* Focus selectBox button if options panel has just closed, there has been an interaction or the value has changed */
     if (
@@ -18,7 +24,7 @@ export default class MultiSelect extends Component {
         this.props.multiSelectSelectedIndexes,
       )
     ) {
-      this.optionsButton.focus();
+      this.optionsButton.current.focus();
     }
   }
 
@@ -61,9 +67,7 @@ export default class MultiSelect extends Component {
           aria-haspopup="true"
           aria-expanded={isOptionsPanelOpen}
           aria-controls={`rrs-${name}-menu`}
-          ref={r => {
-            if (r) this.optionsButton = r;
-          }}
+          ref={this.optionsButton}
           className={singleline(`
             rrs__button
             ${disabled === true ? 'rrs__button--disabled' : ''}
@@ -125,14 +129,12 @@ export default class MultiSelect extends Component {
           aria-labelledby={`rrs-${name}-label`}
           role="menu"
           className="rrs__options"
-          ref={r => {
-            if (r) this.optionsContainer = r;
-          }}
+          ref={this.optionsContainer}
         >
           {options.length > 0 &&
             options.map((option, index) => (
               <MultiSelectOptionHOC
-                scrollIntoViewScrollPaneRef={() => this.optionsContainer}
+                scrollIntoViewScrollPaneRef={this.optionsContainer}
                 scrollIntoViewElementSelector="rrs__option--next-selection"
                 key={index}
                 index={index}

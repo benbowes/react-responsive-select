@@ -3,6 +3,11 @@ import singleline from 'singleline';
 import { MultiSelectOptionProps } from '../propTypes';
 
 export default class MultiSelectOption extends Component {
+  constructor() {
+    super();
+    this.optionRef = React.createRef();
+  }
+
   componentDidUpdate() {
     const {
       index,
@@ -10,7 +15,7 @@ export default class MultiSelectOption extends Component {
       nextPotentialSelectionIndex,
     } = this.props;
     if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
-      this[`option_${index}`].focus();
+      this.optionRef.current.focus();
     }
   }
 
@@ -32,9 +37,8 @@ export default class MultiSelectOption extends Component {
         aria-live="assertive"
         aria-disabled={option.disabled ? 'true' : 'false'}
         data-key={index}
-        ref={r => {
-          this[`option_${index}`] = r;
-        }}
+        index={index}
+        ref={this.optionRef}
         className={singleline(`
           rrs__option
           ${isSelected ? 'rrs__option--selected' : ''}
