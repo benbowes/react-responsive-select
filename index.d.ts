@@ -27,10 +27,15 @@ declare namespace ReactResponsiveSelect {
 
   interface IProps {
     name: string;
-    options: IOption[];
+    options: {
+      text: string;
+      value: string;
+      markup?: JSXOutput;
+      disabled?: boolean;
+    }[];
     onSubmit?: () => void;
     onChange?: (changes: IOnChangeSingleSelect | IOnChangeMultiSelect) => void;
-    onBlur?: (changes: IOnChangeSingleSelect | IOnChangeMultiSelect) => void;
+    onBlur?: (changes: IOnBlurSingleSelect | IOnBlurMultiSelect) => void;
     caretIcon?: JSXOutput;
     selectedValue?: string;
     prefix?: string;
@@ -53,24 +58,54 @@ declare namespace ReactResponsiveSelect {
     altered: boolean;
   }
 
-  interface IOnChangeSingleSelect extends IOnChange {
+  interface IOnChangeSingleSelect {
+    altered: boolean;
     text: string;
     name: string;
     value: string;
   }
 
-  interface IOnChangeMultiSelect extends IOnChange {
-    options: IOption[];
+  interface IOnChangeMultiSelect {
+    altered: boolean;
+    options: Array<{
+      text: string;
+      value: string;
+      markup?: JSXOutput;
+      disabled?: boolean;
+    }>;
   }
 
-  interface IOnBlurSingleSelect extends IOnChangeSingleSelect { }
+  interface IOnBlurSingleSelect {
+    altered: boolean;
+    text: string;
+    name: string;
+    value: string;
+  }
 
-  interface IOnBlurMultiSelect extends IOnChangeMultiSelect { }
+  interface IOnBlurMultiSelect {
+    altered: boolean;
+    options: Array<{
+      text: string;
+      value: string;
+      markup?: JSXOutput;
+      disabled?: boolean;
+    }>;
+  }
 
-  interface ICustomLabelRendererSelectedOption extends IOption { }
+  interface ICustomLabelRendererSelectedOption {
+    text: string;
+    value: string;
+    markup?: JSXOutput;
+    disabled?: boolean;
+  }
 
   interface ICustomLabelRendererSelectedOptions {
-    options: IOption[];
+    options: Array<{
+      text: string;
+      value: string;
+      markup?: JSXOutput;
+      disabled?: boolean;
+    }>;
   }
 
   export class ReactResponsiveSelect extends React.Component<IProps> { }
