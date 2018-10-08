@@ -10,8 +10,9 @@ export const ReactResponsiveSelectProps = {
   onChange: PropTypes.func,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      text: PropTypes.string,
+      value: PropTypes.string,
+      optHeader: PropTypes.bool,
     }),
   ).isRequired,
   onSubmit: PropTypes.func,

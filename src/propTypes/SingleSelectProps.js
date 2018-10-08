@@ -24,7 +24,8 @@ export const SingleSelectProps = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      value: PropTypes.string,
+      optHeader: PropTypes.bool,
     }),
   ).isRequired,
   prefix: PropTypes.string,

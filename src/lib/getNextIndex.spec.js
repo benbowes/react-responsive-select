@@ -5,7 +5,7 @@ describe('getNextIndex', () => {
 
   it('should retun current nextPotentialSelectionIndex when opensPanel is closed and mode is "increment"', () => {
     const ARGS = {
-      mode: 'increment',
+      mode: 'INCREMENT',
       state: {
         isOptionsPanelOpen: false,
         nextPotentialSelectionIndex: 3,
@@ -18,7 +18,7 @@ describe('getNextIndex', () => {
 
   it('should return current nextPotentialSelectionIndex when options panel is closed, mode is "increment" and nextPotentialSelectionIndex equals optionNodesLength - 1', () => {
     const ARGS = {
-      mode: 'increment',
+      mode: 'INCREMENT',
       state: {
         isOptionsPanelOpen: false,
         nextPotentialSelectionIndex: 3,
@@ -31,7 +31,7 @@ describe('getNextIndex', () => {
 
   it('should return first nextPotentialSelectionIndex when options panel is open, mode is "increment" and nextPotentialSelectionIndex equals optionNodesLength - 1', () => {
     const ARGS = {
-      mode: 'increment',
+      mode: 'INCREMENT',
       state: {
         isOptionsPanelOpen: true,
         nextPotentialSelectionIndex: 3, // zero base
@@ -44,7 +44,7 @@ describe('getNextIndex', () => {
 
   it('should return current nextPotentialSelectionIndex +1 when options panel is open, mode is "increment" and nextPotentialSelectionIndex is less than optionNodesLength - 1', () => {
     const ARGS = {
-      mode: 'increment',
+      mode: 'INCREMENT',
       state: {
         isOptionsPanelOpen: true,
         nextPotentialSelectionIndex: 2,
@@ -59,7 +59,7 @@ describe('getNextIndex', () => {
 
   it('should retun current nextPotentialSelectionIndex when opensPanel is closed and mode is "decrement"', () => {
     const ARGS = {
-      mode: 'decrement',
+      mode: 'DECREMENT',
       state: {
         isOptionsPanelOpen: false,
         nextPotentialSelectionIndex: 2,
@@ -72,7 +72,7 @@ describe('getNextIndex', () => {
 
   it('should return last nextPotentialSelectionIndex when options panel is open, mode is "decrement" and nextPotentialSelectionIndex equals 0', () => {
     const ARGS = {
-      mode: 'decrement',
+      mode: 'DECREMENT',
       state: {
         isOptionsPanelOpen: true,
         nextPotentialSelectionIndex: 0,
@@ -85,7 +85,7 @@ describe('getNextIndex', () => {
 
   it('should return current nextPotentialSelectionIndex +1 when options panel is open, mode is "decrement" and nextPotentialSelectionIndex is greater than 0', () => {
     const ARGS = {
-      mode: 'decrement',
+      mode: 'DECREMENT',
       state: {
         isOptionsPanelOpen: true,
         nextPotentialSelectionIndex: 2,

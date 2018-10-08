@@ -1,4 +1,6 @@
 import * as actionTypes from '../constants/actionTypes';
+import { nextValidIndex } from '../lib/nextValidIndex';
+
 import {
   getSelectedValueIndex,
   getMultiSelectSelectedValueIndexes,
@@ -8,7 +10,7 @@ import {
   addMultiSelectOption,
   removeMultiSelectOption,
   mergeIsAlteredState,
-  getInitialOption,
+  getInitialMultiSelectOption,
   getSingleSelectSelectedOption,
   resetMultiSelectState,
 } from './lib';
@@ -80,10 +82,16 @@ export default function reducer(state, action) {
         nextPotentialSelectionIndex: (() => {
           if (state.multiselect) {
             return state.multiSelectSelectedIndexes.length
-              ? state.multiSelectSelectedIndexes[0]
-              : 0;
+              ? nextValidIndex(
+                  state.options,
+                  state.multiSelectSelectedIndexes[0],
+                )
+              : nextValidIndex(state.options, 0);
           }
-          return state.nextPotentialSelectionIndex;
+          return nextValidIndex(
+            state.options,
+            state.nextPotentialSelectionIndex,
+          );
         })(),
 
         singleSelectSelectedOption: getSingleSelectSelectedOption(
@@ -162,7 +170,7 @@ export default function reducer(state, action) {
 
         // If any thing selected and first option was requested, deselect all, and return first option
         if (shouldDeselectAllAndSelectFirstOption) {
-          const nextState = getInitialOption(state);
+          const nextState = getInitialMultiSelectOption(state);
           return mergeIsAlteredState(nextState);
         }
 
@@ -173,7 +181,7 @@ export default function reducer(state, action) {
         }
       }
 
-      // Remove noSelectionLabel from selected options if sometihng is selected
+      // Remove noSelectionLabel from selected options if something is selected
       if (
         state.noSelectionLabel &&
         state.multiSelectSelectedOptions.options[0].text ===
@@ -221,7 +229,7 @@ export default function reducer(state, action) {
           };
         } else {
           // Select first option if user has deselected all items
-          nextState = getInitialOption(state);
+          nextState = getInitialMultiSelectOption(state);
         }
       }
       // Set altered state

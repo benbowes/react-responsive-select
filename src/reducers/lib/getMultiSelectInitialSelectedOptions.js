@@ -1,35 +1,66 @@
-export default function getMultiSelectInitialSelectedOptions({
-  options,
-  name,
-  selectedValues,
-  noSelectionLabel,
-}) {
-  if (!noSelectionLabel) {
-    // Preselect the first item in the list when if no noSelectionLabel exists
-    if (selectedValues) {
-      /* Grab selected options by matching option.value with selectedValuesand merge in `name` */
-      return options
-        .filter(option =>
-          selectedValues.some(selectedValue => selectedValue === option.value),
-        )
-        .map(option => ({ name, ...option }));
-    }
-
-    /* Grab first option and merge in `name` */
-    return [{ name, ...options[0] }];
+/*
+  Use existing state.singleSelectSelectedOption, or first possible option to use as a selection
+*/
+function findClosestValidOption(state) {
+  if (state.multiSelectSelectedOptions) {
+    return state.multiSelectSelectedOptions;
   }
 
-  return selectedValues && selectedValues.length > 0
-    ? options
+  const possibleOptions = state.options.reduce((acc, option) => {
+    if (!option.optHeader) acc.push(option);
+    return acc;
+  }, []);
+
+  // Note: Will fail if no non-optHeader options exist
+  return possibleOptions[0];
+}
+
+export default function getMultiSelectInitialSelectedOptions(state) {
+  let selectedOptionsToReturn;
+
+  if (!state.noSelectionLabel) {
+    // Preselect the first item in the list when if no noSelectionLabel exists
+    if (state.selectedValues) {
+      // Grab selected options by matching option.value with selectedValues, and merge in `name`
+      selectedOptionsToReturn = state.options
         .filter(option =>
-          selectedValues.some(selectedValue => selectedValue === option.value),
+          state.selectedValues.some(
+            selectedValue => selectedValue === option.value,
+          ),
         )
-        .map(option => ({ name, ...option }))
-    : [
+        .map(option => ({ name: state.name, ...option }));
+    } else {
+      // ELSE - Grab first option and merge in `name`
+      const option = state.options[0].optHeader
+        ? findClosestValidOption(state)
+        : state.options[0];
+      selectedOptionsToReturn = [
         {
-          name,
-          text: noSelectionLabel,
-          value: 'null',
+          name: state.name,
+          ...option,
         },
       ];
+    }
+
+    return selectedOptionsToReturn;
+  }
+
+  selectedOptionsToReturn =
+    state.selectedValues && state.selectedValues.length > 0
+      ? state.options
+          .filter(option =>
+            state.selectedValues.some(
+              selectedValue => selectedValue === option.value,
+            ),
+          )
+          .map(option => ({ name: state.name, ...option }))
+      : [
+          {
+            name: state.name,
+            text: state.noSelectionLabel,
+            value: 'null',
+          },
+        ];
+
+  return selectedOptionsToReturn;
 }

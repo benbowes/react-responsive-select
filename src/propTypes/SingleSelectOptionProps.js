@@ -7,7 +7,8 @@ export const SingleSelectOptionProps = {
   nextPotentialSelectionIndex: PropTypes.number,
   option: PropTypes.shape({
     text: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    optHeader: PropTypes.bool,
     markup: PropTypes.element,
     disabled: PropTypes.bool,
   }).isRequired,

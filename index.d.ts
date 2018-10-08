@@ -5,6 +5,7 @@ import OnBlurSingleSelect = ReactResponsiveSelect.IOnBlurSingleSelect;
 import OnChangeMultiSelect = ReactResponsiveSelect.IOnChangeMultiSelect;
 import OnChangeSingleSelect = ReactResponsiveSelect.IOnChangeSingleSelect;
 import ReactResponsiveSelectOption = ReactResponsiveSelect.IOption;
+import ReactResponsiveSelectOptionHeader = ReactResponsiveSelect.IOptionHeader
 import Props = ReactResponsiveSelect.IProps;
 import CustomLabelRendererSelectedOption = ReactResponsiveSelect.ICustomLabelRendererSelectedOption;
 import CustomLabelRendererSelectedOptions = ReactResponsiveSelect.ICustomLabelRendererSelectedOptions;
@@ -15,6 +16,7 @@ export {
   OnChangeMultiSelect,
   OnChangeSingleSelect,
   ReactResponsiveSelectOption,
+  ReactResponsiveSelectOptionHeader,
   Props,
   CustomLabelRendererSelectedOption,
   CustomLabelRendererSelectedOptions,
@@ -24,15 +26,11 @@ export default ReactResponsiveSelect.ReactResponsiveSelect;
 
 declare namespace ReactResponsiveSelect {
   type JSXOutput = JSX.Element | string;
+  type Option = IOptionHeader | IOption;
 
   interface IProps {
     name: string;
-    options: {
-      text: string;
-      value: string;
-      markup?: JSXOutput;
-      disabled?: boolean;
-    }[];
+    options: Option[];
     onSubmit?: () => void;
     onChange?: (changes: IOnChangeSingleSelect | IOnChangeMultiSelect) => void;
     onBlur?: (changes: IOnBlurSingleSelect | IOnBlurMultiSelect) => void;
@@ -45,6 +43,12 @@ declare namespace ReactResponsiveSelect {
     ) => JSXOutput;
     multiselect?: boolean;
     selectedValues?: string[];
+  }
+
+  interface IOptionHeader {
+    text?: string;
+    optHeader: boolean;
+    markup?: JSXOutput;
   }
 
   interface IOption {

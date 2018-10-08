@@ -7,8 +7,9 @@ export const MultiSelectOptionProps = {
   multiSelectSelectedIndexes: PropTypes.arrayOf(PropTypes.number),
   nextPotentialSelectionIndex: PropTypes.number,
   option: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    text: PropTypes.string,
+    value: PropTypes.string,
+    optHeader: PropTypes.bool,
     markup: PropTypes.element,
     disabled: PropTypes.bool,
   }).isRequired,

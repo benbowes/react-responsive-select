@@ -87,7 +87,7 @@ export default function handleKeyEvent({
       handleKeyUpOrDownPressed({
         state,
         ReactResponsiveSelectClassRef,
-        type: 'decrement',
+        type: 'DECREMENT',
       });
       break;
 
@@ -98,7 +98,7 @@ export default function handleKeyEvent({
       handleKeyUpOrDownPressed({
         state,
         ReactResponsiveSelectClassRef,
-        type: 'increment',
+        type: 'INCREMENT',
       });
       break;
 

@@ -1,36 +1,54 @@
+import { nextValidIndex } from './nextValidIndex';
+
 export default function getNextIndex(mode, state) {
   const { isOptionsPanelOpen, nextPotentialSelectionIndex, options } = state;
 
   switch (mode) {
-    case 'increment':
+    case 'INCREMENT':
       // Hold selection on current selected option when options panel first opens
       if (isOptionsPanelOpen === false) {
-        return nextPotentialSelectionIndex;
+        return nextValidIndex(
+          options,
+          nextPotentialSelectionIndex,
+          'INCREMENT',
+        );
       }
 
       // User is at the end of the options so cycle back to start
       if (nextPotentialSelectionIndex === options.length - 1) {
-        return 0;
+        return nextValidIndex(options, 0, 'INCREMENT');
       }
 
       // Else increment
-      return nextPotentialSelectionIndex + 1;
+      return nextValidIndex(
+        options,
+        nextPotentialSelectionIndex + 1,
+        'INCREMENT',
+      );
 
-    case 'decrement':
+    case 'DECREMENT':
       // Hold selection on current selected option when options panel first opens
       if (isOptionsPanelOpen === false) {
-        return nextPotentialSelectionIndex;
+        return nextValidIndex(
+          options,
+          nextPotentialSelectionIndex,
+          'DECREMENT',
+        );
       }
 
       // User is at start of the options so cycle around to end
       if (nextPotentialSelectionIndex === 0) {
-        return options.length - 1;
+        return nextValidIndex(options, options.length - 1, 'DECREMENT');
       }
 
       // Else decrement
-      return nextPotentialSelectionIndex - 1;
+      return nextValidIndex(
+        options,
+        nextPotentialSelectionIndex - 1,
+        'DECREMENT',
+      );
 
     default:
-      return 0;
+      return nextValidIndex(options, 0, 'DECREMENT');
   }
 }
