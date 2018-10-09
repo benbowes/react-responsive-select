@@ -1,15 +1,18 @@
 {
   "presets": [
     "react",
-    ["env", {
-      "targets": {
-        "browsers": [
-          "last 4 versions",
-          "not ie <= 10"
-        ]
-      },
-      "debug": true,
-    }]
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 4 versions",
+            "not ie <= 10"
+          ]
+        },
+        "debug": true
+      }
+    ]
   ],
   "plugins": [
     "transform-object-rest-spread"

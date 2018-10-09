@@ -19,12 +19,17 @@ export default class MultiSelectOption extends Component {
     }
   }
 
+  isDisabled(option) {
+    return option.disabled || option.optHeader;
+  }
+
   render() {
     const {
       index,
       multiSelectSelectedIndexes,
       nextPotentialSelectionIndex,
       option,
+      optHeaderLabel,
     } = this.props;
     const isSelected = multiSelectSelectedIndexes.some(i => i === index);
 
@@ -33,9 +38,13 @@ export default class MultiSelectOption extends Component {
         role="checkbox"
         tabIndex="-1"
         aria-checked={isSelected}
-        aria-label={option.text}
+        aria-label={`
+        ${option.text || (option.markup && option.markup.textNode)} ${
+          optHeaderLabel !== '' ? ` of ${optHeaderLabel}` : ''
+        }
+      `}
         aria-live="assertive"
-        aria-disabled={option.disabled ? 'true' : 'false'}
+        aria-disabled={this.isDisabled(option) ? 'true' : 'false'}
         data-key={index}
         index={index}
         ref={this.optionRef}
@@ -48,6 +57,7 @@ export default class MultiSelectOption extends Component {
               : ''
           }
           ${option.disabled === true ? 'rrs__option--disabled' : ''}
+          ${option.optHeader === true ? 'rrs__option--header' : ''}
         `)}
       >
         {option.markup || option.text}

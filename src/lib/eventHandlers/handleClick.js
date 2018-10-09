@@ -27,7 +27,10 @@ export default function handleClick({
 
     const optionIndex = parseFloat(event.target.getAttribute('data-key'));
 
-    if (options[optionIndex] && options[optionIndex].disabled === true) {
+    if (
+      (options[optionIndex] && options[optionIndex].disabled === true) ||
+      (options[optionIndex] && options[optionIndex].optHeader === true)
+    ) {
       return;
     }
 

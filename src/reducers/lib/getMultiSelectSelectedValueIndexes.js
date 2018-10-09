@@ -1,3 +1,5 @@
+import { nextValidIndex } from '../../lib/nextValidIndex';
+
 export default function getMultiSelectSelectedValueIndexes(
   options,
   selectedValues = [],
@@ -13,7 +15,7 @@ export default function getMultiSelectSelectedValueIndexes(
     )
     .filter(r => r !== undefined);
 
-  const emptyResult = noSelectionLabel ? [] : [0];
+  const emptyResult = noSelectionLabel ? [] : [nextValidIndex(options, 0)];
 
   /* If something found return that, else return the first item */
   return result.length ? result : emptyResult;

@@ -1,12 +1,12 @@
 import deepFreeze from 'deep-freeze';
-import getInitialOption from './getInitialOption';
+import getInitialMultiSelectOption from './getInitialMultiSelectOption';
 import state from '../../../__mocks__/state-mock';
 
-describe('getInitialOption', () => {
+describe('getInitialMultiSelectOption', () => {
   deepFreeze(state);
 
   it('should return the first option', () => {
-    const result = getInitialOption(state);
+    const result = getInitialMultiSelectOption(state);
     expect(result).toMatchObject({
       altered: false,
       isDragging: false,
@@ -50,11 +50,7 @@ describe('getInitialOption', () => {
       ],
       singleSelectInitialIndex: 0,
       singleSelectSelectedIndex: 0,
-      singleSelectSelectedOption: {
-        name: 'Make 1',
-        text: 'Any',
-        value: 'null',
-      },
+      singleSelectSelectedOption: {},
     });
   });
 });

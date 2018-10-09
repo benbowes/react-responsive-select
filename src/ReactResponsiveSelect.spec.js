@@ -13,7 +13,7 @@ describe('ReactResponsiveSelect', () => {
   Enzyme.configure({ adapter: new Adapter() });
 
   const mockFunctions = {
-    submitFunction: () => {},
+    onSubmitFunction: () => {},
     onChangeFunction: () => {},
   };
 
@@ -52,7 +52,7 @@ describe('ReactResponsiveSelect', () => {
     let handleKeyUpOrDownPressedSpy;
 
     beforeEach(() => {
-      submitSpy = sinon.spy(mockFunctions, 'submitFunction');
+      submitSpy = sinon.spy(mockFunctions, 'onSubmitFunction');
       changeSpy = sinon.spy(mockFunctions, 'onChangeFunction');
       selectBox = setup({
         onSubmit: submitSpy,
@@ -311,7 +311,7 @@ describe('ReactResponsiveSelect', () => {
     let handleKeyUpOrDownPressedSpy;
 
     beforeEach(() => {
-      submitSpy = sinon.spy(mockFunctions, 'submitFunction');
+      submitSpy = sinon.spy(mockFunctions, 'onSubmitFunction');
       changeSpy = sinon.spy(mockFunctions, 'onChangeFunction');
       selectBox = setup({
         onSubmit: submitSpy,
@@ -429,7 +429,7 @@ describe('ReactResponsiveSelect', () => {
     it('handleKeyEvent() - keyDown "UP" calls handleEnterPressed("decrement")', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.UP });
       expect(handleKeyUpOrDownPressedSpy.calledOnce).toEqual(true);
-      expect(handleKeyUpOrDownPressedSpy.args[0][0].type).toEqual('decrement');
+      expect(handleKeyUpOrDownPressedSpy.args[0][0].type).toEqual('DECREMENT');
     });
 
     it('handleKeyEvent() - keyDown "UP" opens the options panel when closed', () => {
@@ -447,7 +447,7 @@ describe('ReactResponsiveSelect', () => {
     it('handleKeyEvent() - keyDown "DOWN" calls handleEnterPressed("increment")', () => {
       selectBoxContainer.simulate('keyDown', { keyCode: keyCodes.DOWN });
       expect(handleKeyUpOrDownPressedSpy.calledOnce).toEqual(true);
-      expect(handleKeyUpOrDownPressedSpy.args[0][0].type).toEqual('increment');
+      expect(handleKeyUpOrDownPressedSpy.args[0][0].type).toEqual('INCREMENT');
     });
 
     it('handleKeyEvent() - keyDown "DOWN" opens the options panel when closed', () => {

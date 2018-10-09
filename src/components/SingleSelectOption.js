@@ -19,19 +19,29 @@ export default class SingleSelectOption extends Component {
     }
   }
 
+  isDisabled(option) {
+    return option.disabled || option.optHeader;
+  }
+
   render() {
     const {
       index,
       nextPotentialSelectionIndex,
       option,
       singleSelectSelectedIndex,
+      optHeaderLabel,
     } = this.props;
 
     return (
       <li
         role="menuitem"
         tabIndex="-1"
-        aria-disabled={option.disabled ? 'true' : 'false'}
+        aria-disabled={this.isDisabled(option) ? 'true' : 'false'}
+        aria-label={`
+          ${option.text || (option.markup && option.markup.textNode)} ${
+          optHeaderLabel !== '' ? ` of ${optHeaderLabel}` : ''
+        }
+        `}
         data-key={index}
         index={index}
         ref={this.optionRef}
@@ -44,6 +54,7 @@ export default class SingleSelectOption extends Component {
               : ''
           }
           ${option.disabled === true ? 'rrs__option--disabled' : ''}
+          ${option.optHeader === true ? 'rrs__option--header' : ''}
         `)}
       >
         {option.markup || option.text}

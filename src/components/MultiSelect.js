@@ -3,9 +3,6 @@ import singleline from 'singleline';
 import isEqual from 'lodash.isequal';
 import { MultiSelectProps } from '../propTypes';
 import MultiSelectOption from './MultiSelectOption';
-import scrollIntoViewIIHOC from '../lib/scrollIntoViewIIHOC';
-
-const MultiSelectOptionHOC = scrollIntoViewIIHOC(MultiSelectOption);
 
 export default class MultiSelect extends Component {
   constructor() {
@@ -57,6 +54,8 @@ export default class MultiSelect extends Component {
       nextPotentialSelectionIndex,
       prefix,
     } = this.props;
+
+    let optHeaderLabel = '';
 
     return (
       <div>
@@ -132,19 +131,23 @@ export default class MultiSelect extends Component {
           ref={this.optionsContainer}
         >
           {options.length > 0 &&
-            options.map((option, index) => (
-              <MultiSelectOptionHOC
-                scrollIntoViewScrollPaneRef={this.optionsContainer}
-                scrollIntoViewElementSelector="rrs__option--next-selection"
-                key={index}
-                index={index}
-                option={option}
-                isDragging={isDragging}
-                isOptionsPanelOpen={isOptionsPanelOpen}
-                multiSelectSelectedIndexes={multiSelectSelectedIndexes}
-                nextPotentialSelectionIndex={nextPotentialSelectionIndex}
-              />
-            ))}
+            options.map((option, index) => {
+              if (option.optHeader) {
+                optHeaderLabel = option.text || option.markup.textContent;
+              }
+              return (
+                <MultiSelectOption
+                  key={index}
+                  optHeaderLabel={optHeaderLabel}
+                  index={index}
+                  option={option}
+                  isDragging={isDragging}
+                  isOptionsPanelOpen={isOptionsPanelOpen}
+                  multiSelectSelectedIndexes={multiSelectSelectedIndexes}
+                  nextPotentialSelectionIndex={nextPotentialSelectionIndex}
+                />
+              );
+            })}
         </ul>
       </div>
     );

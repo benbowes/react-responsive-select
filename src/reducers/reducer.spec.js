@@ -129,11 +129,6 @@ describe('reducer', () => {
           options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
         nextPotentialSelectionIndex: 0,
-        singleSelectSelectedOption: {
-          name: 'thing',
-          text: 'Any',
-          value: 'null',
-        },
       });
     });
 
@@ -298,11 +293,6 @@ describe('reducer', () => {
           options: [{ name: 'thing', text: 'Any', value: 'null' }],
         },
         nextPotentialSelectionIndex: 0,
-        singleSelectSelectedOption: {
-          name: 'thing',
-          text: 'Any',
-          value: 'null',
-        },
       });
     });
 
