@@ -29,6 +29,7 @@ export default class MultiSelectOption extends Component {
       multiSelectSelectedIndexes,
       nextPotentialSelectionIndex,
       option,
+      optHeaderLabel,
     } = this.props;
     const isSelected = multiSelectSelectedIndexes.some(i => i === index);
 
@@ -37,7 +38,11 @@ export default class MultiSelectOption extends Component {
         role="checkbox"
         tabIndex="-1"
         aria-checked={isSelected}
-        aria-label={option.text}
+        aria-label={`
+        ${option.text || (option.markup && option.markup.textNode)} ${
+          optHeaderLabel !== '' ? ` of ${optHeaderLabel}` : ''
+        }
+      `}
         aria-live="assertive"
         aria-disabled={this.isDisabled(option) ? 'true' : 'false'}
         data-key={index}

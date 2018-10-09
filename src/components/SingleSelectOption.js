@@ -29,6 +29,7 @@ export default class SingleSelectOption extends Component {
       nextPotentialSelectionIndex,
       option,
       singleSelectSelectedIndex,
+      optHeaderLabel,
     } = this.props;
 
     return (
@@ -36,6 +37,11 @@ export default class SingleSelectOption extends Component {
         role="menuitem"
         tabIndex="-1"
         aria-disabled={this.isDisabled(option) ? 'true' : 'false'}
+        aria-label={`
+          ${option.text || (option.markup && option.markup.textNode)} ${
+          optHeaderLabel !== '' ? ` of ${optHeaderLabel}` : ''
+        }
+        `}
         data-key={index}
         index={index}
         ref={this.optionRef}
