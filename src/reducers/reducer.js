@@ -29,6 +29,10 @@ export default function reducer(state, action) {
       return {
         ...state,
 
+        hasOptHeaders: action.value.options.some(
+          option => option.optHeader === true,
+        ),
+
         // Constants
         multiselect: action.value.multiselect || false,
 
@@ -191,22 +195,28 @@ export default function reducer(state, action) {
         state.multiSelectSelectedOptions.options = [];
       }
 
+      // With optHeader, action.optionIndex can go out of bounds - check and adjust the value of optionIndex when requried
+      const actionOptionIndexAdjusted = nextValidIndex(
+        state.options,
+        action.optionIndex,
+      );
+
       // Find index of requested option
       const indexLocation = state.multiSelectSelectedIndexes.indexOf(
-        action.optionIndex,
+        actionOptionIndexAdjusted,
       );
 
       // If requested item does not exist, add it. Else remove it
       let nextState = {
         ...state,
-        nextPotentialSelectionIndex: action.optionIndex,
+        nextPotentialSelectionIndex: actionOptionIndexAdjusted,
         multiSelectSelectedIndexes:
           indexLocation === -1
-            ? addMultiSelectIndex(state, action.optionIndex)
+            ? addMultiSelectIndex(state, actionOptionIndexAdjusted)
             : removeMultiSelectIndex(state, indexLocation),
         multiSelectSelectedOptions:
           indexLocation === -1
-            ? addMultiSelectOption(state, action.optionIndex)
+            ? addMultiSelectOption(state, actionOptionIndexAdjusted)
             : removeMultiSelectOption(state, indexLocation),
       };
 
@@ -219,7 +229,9 @@ export default function reducer(state, action) {
           );
           nextState = {
             ...nextState,
-            nextPotentialSelectionIndex: -1,
+            nextPotentialSelectionIndex: state.hasOptHeaders
+              ? nextValidIndex(state.options, -1)
+              : -1,
             multiSelectSelectedOptions: {
               options: getMultiSelectInitialSelectedOptions(
                 state,
