@@ -5,15 +5,33 @@ import CodeBlock from './CodeBlock';
 
 // By default no caret icon is supplied - any valid jsx markup will do
 const caretIcon = (
-  <svg className="caret-icon" x="0px" y="0px" width="11.848px" height="6.338px" viewBox="351.584 2118.292 11.848 6.338">
-    <g><path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z" /></g>
+  <svg
+    className="caret-icon"
+    x="0px"
+    y="0px"
+    width="11.848px"
+    height="6.338px"
+    viewBox="351.584 2118.292 11.848 6.338"
+  >
+    <g>
+      <path d="M363.311,2118.414c-0.164-0.163-0.429-0.163-0.592,0l-5.205,5.216l-5.215-5.216c-0.163-0.163-0.429-0.163-0.592,0s-0.163,0.429,0,0.592l5.501,5.501c0.082,0.082,0.184,0.123,0.296,0.123c0.103,0,0.215-0.041,0.296-0.123l5.501-5.501C363.474,2118.843,363.474,2118.577,363.311,2118.414L363.311,2118.414z" />
+    </g>
   </svg>
 );
 
 const checkboxIcon = (
   <span className="checkbox">
-    <svg className="checkbox-icon" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 488.878 488.878">
-      <g><polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 " /></g>
+    <svg
+      className="checkbox-icon"
+      x="0px"
+      y="0px"
+      width="10px"
+      height="10px"
+      viewBox="0 0 488.878 488.878"
+    >
+      <g>
+        <polygon points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 144.423,442.58 488.878,98.123 437.055,46.298 " />
+      </g>
     </svg>
   </span>
 );
@@ -29,7 +47,8 @@ const multiSelectOptionMarkup = text => (
   </div>
 );
 
-class Form extends Component { // eslint-disable-line
+class Form extends Component {
+  // eslint-disable-line
 
   constructor() {
     super();
@@ -43,18 +62,40 @@ class Form extends Component { // eslint-disable-line
 
   render() {
     return (
-      <form className="form" ref={(r) => { this.form = r; }}>
-
+      <form
+        className="form"
+        ref={r => {
+          this.form = r;
+        }}
+      >
         <div className="row">
           <h2>FEATURES</h2>
 
           <ul className="features-list">
-            <li className="features-list__item">{featuresCheckboxIcon}<h4>Single and Multi select modes</h4></li>
-            <li className="features-list__item">{featuresCheckboxIcon}<h4>Accessible WAI ARIA compliance</h4></li>
-            <li className="features-list__item">{featuresCheckboxIcon}<h4>Touch friendly</h4></li>
-            <li className="features-list__item">{featuresCheckboxIcon}<h4>Keyboard friendly</h4></li>
-            <li className="features-list__item">{featuresCheckboxIcon}<h4>Similar interaction experience across platforms</h4></li>
-            <li className="features-list__item">{featuresCheckboxIcon}<h4>Easy to style</h4></li>
+            <li className="features-list__item">
+              {featuresCheckboxIcon}
+              <h4>Single and Multi select modes</h4>
+            </li>
+            <li className="features-list__item">
+              {featuresCheckboxIcon}
+              <h4>Accessible WAI ARIA compliance</h4>
+            </li>
+            <li className="features-list__item">
+              {featuresCheckboxIcon}
+              <h4>Touch friendly</h4>
+            </li>
+            <li className="features-list__item">
+              {featuresCheckboxIcon}
+              <h4>Keyboard friendly</h4>
+            </li>
+            <li className="features-list__item">
+              {featuresCheckboxIcon}
+              <h4>Similar interaction experience across platforms</h4>
+            </li>
+            <li className="features-list__item">
+              {featuresCheckboxIcon}
+              <h4>Easy to style</h4>
+            </li>
           </ul>
         </div>
 
@@ -76,7 +117,9 @@ class Form extends Component { // eslint-disable-line
                 { value: 'volvo', text: 'Volvo' },
                 { value: 'zonda', text: 'Zonda' },
               ]}
-              onSubmit={() => { this.form.submit(); }}
+              onSubmit={() => {
+                this.form.submit();
+              }}
               caretIcon={caretIcon}
               prefix="Car1: "
               selectedValue="subaru"
@@ -87,28 +130,64 @@ class Form extends Component { // eslint-disable-line
           <div>
             <ReactResponsiveSelect
               name="carType2"
-              options={[{
-                value: 'null',
-                text: 'Any',
-                markup: <span>Any</span>,
-              }, {
-                value: 'bmw',
-                text: 'BMW',
-                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
-              }, {
-                value: 'fiat',
-                text: 'Fiat',
-                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
-              }, {
-                value: 'subaru',
-                text: 'Subaru',
-                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
-              }, {
-                value: 'tesla',
-                text: 'Tesla',
-                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
-              }]}
-              onSubmit={() => { this.form.submit(); }}
+              options={[
+                {
+                  value: 'null',
+                  text: 'Any',
+                  markup: <span>Any</span>,
+                },
+                {
+                  value: 'bmw',
+                  text: 'BMW',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        B
+                      </span>{' '}
+                      BMW
+                    </span>
+                  ),
+                },
+                {
+                  value: 'fiat',
+                  text: 'Fiat',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        F
+                      </span>{' '}
+                      Fiat
+                    </span>
+                  ),
+                },
+                {
+                  value: 'subaru',
+                  text: 'Subaru',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        S
+                      </span>{' '}
+                      Subaru
+                    </span>
+                  ),
+                },
+                {
+                  value: 'tesla',
+                  text: 'Tesla',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        T
+                      </span>{' '}
+                      Tesla
+                    </span>
+                  ),
+                },
+              ]}
+              onSubmit={() => {
+                this.form.submit();
+              }}
               caretIcon={caretIcon}
               prefix="Car2: "
               selectedValue="tesla"
@@ -119,29 +198,67 @@ class Form extends Component { // eslint-disable-line
           <div>
             <ReactResponsiveSelect
               name="carType3"
-              options={[{
-                value: 'null',
-                text: 'Any',
-                markup: <span>Any</span>,
-              }, {
-                value: 'bmw',
-                text: 'BMW',
-                markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
-              }, {
-                value: 'fiat',
-                text: 'Fiat',
-                markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
-              }, {
-                value: 'subaru',
-                text: 'Subaru',
-                markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
-              }, {
-                value: 'tesla',
-                text: 'Tesla',
-                markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
-              }]}
-              onSubmit={() => { this.form.submit(); }}
-              customLabelRenderer={singleSelectSelectedOption => `You selected ${singleSelectSelectedOption.text}`}
+              options={[
+                {
+                  value: 'null',
+                  text: 'Any',
+                  markup: <span>Any</span>,
+                },
+                {
+                  value: 'bmw',
+                  text: 'BMW',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        B
+                      </span>{' '}
+                      BMW
+                    </span>
+                  ),
+                },
+                {
+                  value: 'fiat',
+                  text: 'Fiat',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        F
+                      </span>{' '}
+                      Fiat
+                    </span>
+                  ),
+                },
+                {
+                  value: 'subaru',
+                  text: 'Subaru',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        S
+                      </span>{' '}
+                      Subaru
+                    </span>
+                  ),
+                },
+                {
+                  value: 'tesla',
+                  text: 'Tesla',
+                  markup: (
+                    <span>
+                      <span className="badge" aria-hidden="true">
+                        T
+                      </span>{' '}
+                      Tesla
+                    </span>
+                  ),
+                },
+              ]}
+              onSubmit={() => {
+                this.form.submit();
+              }}
+              customLabelRenderer={singleSelectSelectedOption =>
+                `You selected ${singleSelectSelectedOption.text}`
+              }
               caretIcon={caretIcon}
               prefix="Car3: "
               selectedValue="bmw"
@@ -153,20 +270,67 @@ class Form extends Component { // eslint-disable-line
             <ReactResponsiveSelect
               multiselect
               name="carType4"
-              options={[ // (Required) an array of options - see above const options
-                { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
-                { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
-                { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
-                { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-                { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+              options={[
+                // (Required) an array of options - see above const options
+                {
+                  text: 'Any',
+                  value: 'null',
+                  markup: multiSelectOptionMarkup('Any'),
+                },
+                {
+                  text: 'AMC',
+                  value: 'amc',
+                  markup: multiSelectOptionMarkup('AMC'),
+                },
+                {
+                  text: 'BMW',
+                  value: 'bmw',
+                  markup: multiSelectOptionMarkup('BMW'),
+                },
+                {
+                  text: 'Delorean',
+                  value: 'delorean',
+                  markup: multiSelectOptionMarkup('Delorean'),
+                },
+                {
+                  text: 'Fiat',
+                  value: 'fiat',
+                  markup: multiSelectOptionMarkup('Fiat'),
+                },
+                {
+                  text: 'Ford',
+                  value: 'ford',
+                  markup: multiSelectOptionMarkup('Ford'),
+                },
+                {
+                  text: 'Mazda',
+                  value: 'mazda',
+                  markup: multiSelectOptionMarkup('Mazda'),
+                },
+                {
+                  text: 'Oldsmobile',
+                  value: 'oldsmobile',
+                  markup: multiSelectOptionMarkup('Oldsmobile'),
+                },
+                {
+                  text: 'Subaru',
+                  value: 'subaru',
+                  markup: multiSelectOptionMarkup('Subaru'),
+                },
+                {
+                  text: 'Tesla',
+                  value: 'tesla',
+                  markup: multiSelectOptionMarkup('Tesla'),
+                },
+                {
+                  text: 'Toyota',
+                  value: 'toyota',
+                  markup: multiSelectOptionMarkup('Toyota'),
+                },
               ]}
-              onSubmit={() => { this.form.submit(); }}
+              onSubmit={() => {
+                this.form.submit();
+              }}
               caretIcon={caretIcon}
               prefix="Car4: "
               onChange={this.reportChange}
@@ -175,36 +339,66 @@ class Form extends Component { // eslint-disable-line
           </div>
         </div>
 
-
         <div className="row">
-
           <h2>GETTING STARTED</h2>
 
           <h3>Install the dependency</h3>
           <pre>
-            <code className="language-bash">$ npm install --save-dev react-responsive-select</code>
+            <code className="language-bash">
+              $ npm install --save-dev react-responsive-select
+            </code>
           </pre>
-          <p className="--margin-bottom-4">Check out <strong><a title="Github repository link for react-responsive-select" href="https://github.com/benbowes/react-responsive-select">the docs</a></strong> and view the <strong><a href="https://codepen.io/collection/DrjWEk/">Codepen examples</a></strong></p>
+          <p className="--margin-bottom-4">
+            Check out{' '}
+            <strong>
+              <a
+                title="Github repository link for react-responsive-select"
+                href="https://github.com/benbowes/react-responsive-select"
+              >
+                the docs
+              </a>
+            </strong>{' '}
+            and view the{' '}
+            <strong>
+              <a href="https://codepen.io/collection/DrjWEk/">
+                Codepen examples
+              </a>
+            </strong>
+          </p>
         </div>
 
         <div className="row">
-
           <h2>CODEPEN EXAMPLES</h2>
 
           <ul>
-            <li><a href="https://codepen.io/benbowes/pen/gxEdoG">Basic implementation example react-responsive-select</a></li>
-            <li><a href="https://codepen.io/benbowes/pen/MEoYvd">Multiselect implementation with react-responsive-select</a></li>
-            <li><a href="https://codepen.io/benbowes/pen/baKoBQ">Controlled example react-responsive-select</a></li>
+            <li>
+              <a href="https://codepen.io/benbowes/pen/gxEdoG">
+                Basic implementation example react-responsive-select
+              </a>
+            </li>
+            <li>
+              <a href="https://codepen.io/benbowes/pen/MEoYvd">
+                Multiselect implementation with react-responsive-select
+              </a>
+            </li>
+            <li>
+              <a href="https://codepen.io/benbowes/pen/baKoBQ">
+                Controlled example react-responsive-select
+              </a>
+            </li>
           </ul>
         </div>
 
         <div className="row">
           <h2>SCREEN READER DEMO GIF</h2>
-          <img className="demo-gif --margin-bottom-4" src="./react-responsive-select-voice-over.gif" alt="Screen reader demo gif" />
+          <img
+            className="demo-gif --margin-bottom-4"
+            src="./react-responsive-select-voice-over.gif"
+            alt="Screen reader demo gif"
+          />
         </div>
 
         <div className="row">
-
           <h2>EXAMPLES</h2>
 
           <h3>Basic implementation</h3>
@@ -224,7 +418,9 @@ class Form extends Component { // eslint-disable-line
                   { value: 'volvo', text: 'Volvo' },
                   { value: 'zonda', text: 'Zonda' },
                 ]}
-                onSubmit={() => { this.form.submit(); }}
+                onSubmit={() => {
+                  this.form.submit();
+                }}
                 caretIcon={caretIcon}
                 prefix="Make1: "
                 selectedValue="fiat"
@@ -232,7 +428,9 @@ class Form extends Component { // eslint-disable-line
               />
             </div>
 
-            <div className="view-console-message">View the onChange object via the console</div>
+            <div className="view-console-message">
+              View the onChange object via the console
+            </div>
           </div>
 
           <CodeBlock>
@@ -288,28 +486,64 @@ ReactDOM.render(
             <div className="col">
               <ReactResponsiveSelect
                 name="make2"
-                options={[{
-                  value: 'null',
-                  text: 'Any',
-                  markup: <span>Any</span>,
-                }, {
-                  value: 'bmw',
-                  text: 'BMW',
-                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
-                }, {
-                  value: 'fiat',
-                  text: 'Fiat',
-                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
-                }, {
-                  value: 'subaru',
-                  text: 'Subaru',
-                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
-                }, {
-                  value: 'tesla',
-                  text: 'Tesla',
-                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
-                }]}
-                onSubmit={() => { this.form.submit(); }}
+                options={[
+                  {
+                    value: 'null',
+                    text: 'Any',
+                    markup: <span>Any</span>,
+                  },
+                  {
+                    value: 'bmw',
+                    text: 'BMW',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          B
+                        </span>{' '}
+                        BMW
+                      </span>
+                    ),
+                  },
+                  {
+                    value: 'fiat',
+                    text: 'Fiat',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          F
+                        </span>{' '}
+                        Fiat
+                      </span>
+                    ),
+                  },
+                  {
+                    value: 'subaru',
+                    text: 'Subaru',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          S
+                        </span>{' '}
+                        Subaru
+                      </span>
+                    ),
+                  },
+                  {
+                    value: 'tesla',
+                    text: 'Tesla',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          T
+                        </span>{' '}
+                        Tesla
+                      </span>
+                    ),
+                  },
+                ]}
+                onSubmit={() => {
+                  this.form.submit();
+                }}
                 caretIcon={caretIcon}
                 prefix="Make2: "
                 selectedValue="fiat"
@@ -317,7 +551,9 @@ ReactDOM.render(
               />
             </div>
 
-            <div className="view-console-message">View the onChange object via the console</div>
+            <div className="view-console-message">
+              View the onChange object via the console
+            </div>
           </div>
 
           <CodeBlock>
@@ -382,36 +618,76 @@ ReactDOM.render(
             <div className="col">
               <ReactResponsiveSelect
                 name="make3"
-                options={[{
-                  value: 'null', // (Required) form submitted value
-                  text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
-                  markup: <span>Any</span>, // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
-                }, {
-                  value: 'bmw',
-                  text: 'BMW',
-                  markup: <span><span className="badge" aria-hidden="true">B</span> BMW</span>,
-                }, {
-                  value: 'fiat',
-                  text: 'Fiat',
-                  markup: <span><span className="badge" aria-hidden="true">F</span> Fiat</span>,
-                }, {
-                  value: 'subaru',
-                  text: 'Subaru',
-                  markup: <span><span className="badge" aria-hidden="true">S</span> Subaru</span>,
-                }, {
-                  value: 'tesla',
-                  text: 'Tesla',
-                  markup: <span><span className="badge" aria-hidden="true">T</span> Tesla</span>,
-                }]}
-                onSubmit={() => { this.form.submit(); }}
+                options={[
+                  {
+                    value: 'null', // (Required) form submitted value
+                    text: 'Any', // (Required) Text displayed in the closed select's label - also used as the option label if no markup is supplied
+                    markup: <span>Any</span>, // (Optional) option label if you want to add your own markup. Note `text` is always used in select label
+                  },
+                  {
+                    value: 'bmw',
+                    text: 'BMW',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          B
+                        </span>{' '}
+                        BMW
+                      </span>
+                    ),
+                  },
+                  {
+                    value: 'fiat',
+                    text: 'Fiat',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          F
+                        </span>{' '}
+                        Fiat
+                      </span>
+                    ),
+                  },
+                  {
+                    value: 'subaru',
+                    text: 'Subaru',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          S
+                        </span>{' '}
+                        Subaru
+                      </span>
+                    ),
+                  },
+                  {
+                    value: 'tesla',
+                    text: 'Tesla',
+                    markup: (
+                      <span>
+                        <span className="badge" aria-hidden="true">
+                          T
+                        </span>{' '}
+                        Tesla
+                      </span>
+                    ),
+                  },
+                ]}
+                onSubmit={() => {
+                  this.form.submit();
+                }}
                 caretIcon={caretIcon}
-                customLabelRenderer={singleSelectSelectedOption => `Selected make is ${singleSelectSelectedOption.text} :)`} // (Optional) format your own label text like this
+                customLabelRenderer={singleSelectSelectedOption =>
+                  `Selected make is ${singleSelectSelectedOption.text} :)`
+                } // (Optional) format your own label text like this
                 selectedValue="fiat"
                 onChange={this.reportChange}
               />
             </div>
 
-            <div className="view-console-message">View the onChange object via the console</div>
+            <div className="view-console-message">
+              View the onChange object via the console
+            </div>
           </div>
 
           <CodeBlock>
@@ -469,12 +745,14 @@ ReactDOM.render(
 );
 `}
           </CodeBlock>
-
         </div>
 
         <div className="row">
           <h3>Custom default label via the noSelectionLabel prop</h3>
-          <small>When the <code>noSelectionLabel</code> prop is used. It will not auto-select the first item.</small>
+          <small>
+            When the <code>noSelectionLabel</code> prop is used. It will not
+            auto-select the first item.
+          </small>
           <p />
 
           <div>
@@ -491,14 +769,18 @@ ReactDOM.render(
                   { value: 'volvo', text: 'Volvo' },
                   { value: 'zonda', text: 'Zonda' },
                 ]}
-                onSubmit={() => { this.form.submit(); }}
+                onSubmit={() => {
+                  this.form.submit();
+                }}
                 caretIcon={caretIcon}
                 noSelectionLabel="Please select"
                 onChange={this.reportChange}
               />
             </div>
 
-            <div className="view-console-message">View the onChange object via the console</div>
+            <div className="view-console-message">
+              View the onChange object via the console
+            </div>
           </div>
 
           <CodeBlock>
@@ -547,7 +829,6 @@ ReactDOM.render(
 );
 `}
           </CodeBlock>
-
         </div>
 
         <div className="row">
@@ -558,20 +839,67 @@ ReactDOM.render(
               <ReactResponsiveSelect
                 multiselect
                 name="make4" // (Required) the value to submit
-                options={[ // (Required) an array of options - see above const options
-                  { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                  { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
-                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                  { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
-                  { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
-                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                  { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+                options={[
+                  // (Required) an array of options - see above const options
+                  {
+                    text: 'Any',
+                    value: 'null',
+                    markup: multiSelectOptionMarkup('Any'),
+                  },
+                  {
+                    text: 'AMC',
+                    value: 'amc',
+                    markup: multiSelectOptionMarkup('AMC'),
+                  },
+                  {
+                    text: 'BMW',
+                    value: 'bmw',
+                    markup: multiSelectOptionMarkup('BMW'),
+                  },
+                  {
+                    text: 'Delorean',
+                    value: 'delorean',
+                    markup: multiSelectOptionMarkup('Delorean'),
+                  },
+                  {
+                    text: 'Fiat',
+                    value: 'fiat',
+                    markup: multiSelectOptionMarkup('Fiat'),
+                  },
+                  {
+                    text: 'Ford',
+                    value: 'ford',
+                    markup: multiSelectOptionMarkup('Ford'),
+                  },
+                  {
+                    text: 'Mazda',
+                    value: 'mazda',
+                    markup: multiSelectOptionMarkup('Mazda'),
+                  },
+                  {
+                    text: 'Oldsmobile',
+                    value: 'oldsmobile',
+                    markup: multiSelectOptionMarkup('Oldsmobile'),
+                  },
+                  {
+                    text: 'Subaru',
+                    value: 'subaru',
+                    markup: multiSelectOptionMarkup('Subaru'),
+                  },
+                  {
+                    text: 'Tesla',
+                    value: 'tesla',
+                    markup: multiSelectOptionMarkup('Tesla'),
+                  },
+                  {
+                    text: 'Toyota',
+                    value: 'toyota',
+                    markup: multiSelectOptionMarkup('Toyota'),
+                  },
                 ]}
-                onSubmit={() => { this.form.submit(); }} // (Required) form submit function
+                onSubmit={() => {
+                  this.form.submit();
+                }} // (Required) form submit function
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
                 prefix="Make4: "
                 selectedValues={['mazda', 'ford']} // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
@@ -579,7 +907,9 @@ ReactDOM.render(
               />
             </div>
 
-            <div className="view-console-message">View the onChange object via the console</div>
+            <div className="view-console-message">
+              View the onChange object via the console
+            </div>
           </div>
 
           <CodeBlock>
@@ -638,7 +968,6 @@ ReactDOM.render(
 );
 `}
           </CodeBlock>
-
         </div>
 
         <div className="row">
@@ -649,32 +978,82 @@ ReactDOM.render(
               <ReactResponsiveSelect
                 multiselect
                 name="make5" // (Required) the value to submit
-                options={[ // (Required) an array of options - see above const options
-                  { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                  { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
-                  { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                  { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
-                  { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
-                  { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                  { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                  { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                  { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                  { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-                  { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
+                options={[
+                  // (Required) an array of options - see above const options
+                  {
+                    text: 'Any',
+                    value: 'null',
+                    markup: multiSelectOptionMarkup('Any'),
+                  },
+                  {
+                    text: 'AMC',
+                    value: 'amc',
+                    markup: multiSelectOptionMarkup('AMC'),
+                  },
+                  {
+                    text: 'BMW',
+                    value: 'bmw',
+                    markup: multiSelectOptionMarkup('BMW'),
+                  },
+                  {
+                    text: 'Delorean',
+                    value: 'delorean',
+                    markup: multiSelectOptionMarkup('Delorean'),
+                  },
+                  {
+                    text: 'Fiat',
+                    value: 'fiat',
+                    markup: multiSelectOptionMarkup('Fiat'),
+                  },
+                  {
+                    text: 'Ford',
+                    value: 'ford',
+                    markup: multiSelectOptionMarkup('Ford'),
+                  },
+                  {
+                    text: 'Mazda',
+                    value: 'mazda',
+                    markup: multiSelectOptionMarkup('Mazda'),
+                  },
+                  {
+                    text: 'Oldsmobile',
+                    value: 'oldsmobile',
+                    markup: multiSelectOptionMarkup('Oldsmobile'),
+                  },
+                  {
+                    text: 'Subaru',
+                    value: 'subaru',
+                    markup: multiSelectOptionMarkup('Subaru'),
+                  },
+                  {
+                    text: 'Tesla',
+                    value: 'tesla',
+                    markup: multiSelectOptionMarkup('Tesla'),
+                  },
+                  {
+                    text: 'Toyota',
+                    value: 'toyota',
+                    markup: multiSelectOptionMarkup('Toyota'),
+                  },
                 ]}
-                onSubmit={() => { this.form.submit(); }} // (Required) form submit function
+                onSubmit={() => {
+                  this.form.submit();
+                }} // (Required) form submit function
                 caretIcon={caretIcon} // (Optional) add you own icon by using markup here
-                customLabelRenderer={multiSelectSelectedOptions => multiSelectSelectedOptions.options
-                    && multiSelectSelectedOptions.options.length > 0
-                    && multiSelectSelectedOptions.options.map(v => v.text).join(', ')} // (Optional) format your own label text like this
+                customLabelRenderer={multiSelectSelectedOptions =>
+                  multiSelectSelectedOptions.options &&
+                  multiSelectSelectedOptions.options.length > 0 &&
+                  multiSelectSelectedOptions.options.map(v => v.text).join(', ')
+                } // (Optional) format your own label text like this
                 selectedValues={['mazda', 'ford']} // (Optional) pre-select an option with this `value`, or if ommited the first item will be selected
                 onChange={this.reportChange} // (Optional) listen for changes in a select
               />
             </div>
 
-            <div className="view-console-message">View the onChange object via the console</div>
+            <div className="view-console-message">
+              View the onChange object via the console
+            </div>
           </div>
-
 
           <CodeBlock>
             {`import React, { Component } from 'react';
@@ -733,13 +1112,14 @@ ReactDOM.render(
 );
 `}
           </CodeBlock>
-
         </div>
-
 
         <div className="row">
           <h3>MultiSelect mode implementation with noSelectionLabel prop</h3>
-          <small>When the <code>noSelectionLabel</code> prop is used. It will not auto-select the first item.</small>
+          <small>
+            When the <code>noSelectionLabel</code> prop is used. It will not
+            auto-select the first item.
+          </small>
           <p />
 
           <div>
@@ -747,29 +1127,76 @@ ReactDOM.render(
               <ReactResponsiveSelect
                 multiselect
                 name="make6"
-                options={[ // (Required) an array of options - see above const options
-                    { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
-                    { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
-                    { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-                    { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
-                    { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
-                    { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-                    { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-                    { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-                    { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-                    { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-                    { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
-                  ]}
-                onSubmit={() => { this.form.submit(); }}
+                options={[
+                  // (Required) an array of options - see above const options
+                  {
+                    text: 'Cars',
+                    optHeader: true,
+                  },
+                  {
+                    text: 'AMC',
+                    value: 'amc',
+                    markup: multiSelectOptionMarkup('AMC'),
+                  },
+                  {
+                    text: 'BMW',
+                    value: 'bmw',
+                    markup: multiSelectOptionMarkup('BMW'),
+                  },
+                  {
+                    text: 'Delorean',
+                    value: 'delorean',
+                    markup: multiSelectOptionMarkup('Delorean'),
+                  },
+                  {
+                    text: 'Fiat',
+                    value: 'fiat',
+                    markup: multiSelectOptionMarkup('Fiat'),
+                  },
+                  {
+                    text: 'Ford',
+                    value: 'ford',
+                    markup: multiSelectOptionMarkup('Ford'),
+                  },
+                  {
+                    text: 'Mazda',
+                    value: 'mazda',
+                    markup: multiSelectOptionMarkup('Mazda'),
+                  },
+                  {
+                    text: 'Oldsmobile',
+                    value: 'oldsmobile',
+                    markup: multiSelectOptionMarkup('Oldsmobile'),
+                  },
+                  {
+                    text: 'Subaru',
+                    value: 'subaru',
+                    markup: multiSelectOptionMarkup('Subaru'),
+                  },
+                  {
+                    text: 'Tesla',
+                    value: 'tesla',
+                    markup: multiSelectOptionMarkup('Tesla'),
+                  },
+                  {
+                    text: 'Toyota',
+                    value: 'toyota',
+                    markup: multiSelectOptionMarkup('Toyota'),
+                  },
+                ]}
+                onSubmit={() => {
+                  this.form.submit();
+                }}
                 noSelectionLabel="Please select"
                 caretIcon={caretIcon}
                 onChange={this.reportChange}
               />
             </div>
 
-            <div className="view-console-message">View the onChange object via the console</div>
+            <div className="view-console-message">
+              View the onChange object via the console
+            </div>
           </div>
-
 
           <CodeBlock>
             {`import React, { Component } from 'react';
@@ -803,7 +1230,7 @@ export default class Form extends Component {
           multiselect
           name="make6"
           options={[ // (Required) an array of options - see above const options
-              { text: 'Any', value: 'null', markup: multiSelectOptionMarkup('Any') },
+              { text: 'Cars', optHeader: true },
               { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
               { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
               { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
@@ -832,19 +1259,25 @@ ReactDOM.render(
 );
 `}
           </CodeBlock>
-
         </div>
 
         <div className="row centered">
-          <h3>When inside a &lt;form /&gt;, submit will happen like a standard html form</h3>
-          <button type="submit" className="button">Submit page</button><br /><div className="view-console-message"> Check the URL after you submit the page</div>
+          <h3>
+            When inside a &lt;form /&gt;, submit will happen like a standard
+            html form
+          </h3>
+          <button type="submit" className="button">
+            Submit page
+          </button>
+          <br />
+          <div className="view-console-message">
+            {' '}
+            Check the URL after you submit the page
+          </div>
         </div>
       </form>
     );
   }
 }
 
-ReactDOM.render(
-  <Form />,
-  document.getElementById('root'),
-);
+ReactDOM.render(<Form />, document.getElementById('root'));

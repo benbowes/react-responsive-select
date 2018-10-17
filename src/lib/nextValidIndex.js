@@ -12,15 +12,21 @@ export function nextValidIndex(
     possibleOptionIndexes.indexOf(nextPotentialSelectionIndex) === -1;
 
   if (indexNotFocusable && mode === 'INCREMENT') {
-    return options[nextPotentialSelectionIndex + 1]
+    const nextSelectionPossible =
+      options[nextPotentialSelectionIndex + 1] &&
+      !options[nextPotentialSelectionIndex + 1].optHeader;
+
+    return nextSelectionPossible
       ? nextPotentialSelectionIndex + 1
       : possibleOptionIndexes[0];
   }
 
   if (indexNotFocusable && mode === 'DECREMENT') {
-    return options[nextPotentialSelectionIndex - 1]
-      ? nextPotentialSelectionIndex - 1
-      : possibleOptionIndexes[possibleOptionIndexes.length - 1];
+    const nextSelectionPossible =
+      options[nextPotentialSelectionIndex - 1] &&
+      !options[nextPotentialSelectionIndex - 1].optHeader;
+
+    return nextSelectionPossible;
   }
 
   return nextPotentialSelectionIndex;
