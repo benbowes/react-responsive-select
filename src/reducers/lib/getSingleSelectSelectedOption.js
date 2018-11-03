@@ -24,7 +24,10 @@ export default function getSingleSelectSelectedOption(
   const selectionIndex = initialSelectedIndex === -1 ? 0 : initialSelectedIndex;
 
   // if optHeader, then use existing state.singleSelectSelectedOption, or findClosestValidOption
-  if (state.options[selectionIndex].optHeader) {
+  if (
+    state.options[selectionIndex] &&
+    state.options[selectionIndex].optHeader
+  ) {
     const closestValidOption = findClosestValidOption(state);
 
     return {

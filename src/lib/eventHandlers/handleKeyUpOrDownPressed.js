@@ -6,7 +6,7 @@ export default function handleKeyUpOrDownPressed({
   ReactResponsiveSelectClassRef,
   type,
 }) {
-  const { isOptionsPanelOpen, disabled } = state;
+  const { isOptionsPanelOpen, disabled, hasOptHeaders } = state;
 
   if (disabled) return;
 

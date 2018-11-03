@@ -13,9 +13,36 @@ export default class MultiSelectOption extends Component {
       index,
       isOptionsPanelOpen,
       nextPotentialSelectionIndex,
+      optionsContainerRef,
+      optHeaderLabel,
     } = this.props;
+
     if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
       this.optionRef.current.focus();
+
+      if (optHeaderLabel) {
+        const scrollDiff = Math.ceil(
+          this.optionRef.current.getBoundingClientRect().top -
+            optionsContainerRef.current.getBoundingClientRect().top,
+        );
+
+        this.scrollOffset =
+          this.scrollOffset ||
+          Math.ceil(
+            document
+              .querySelector('.rrs__option--header')
+              .getBoundingClientRect().height,
+          );
+
+        if (scrollDiff < this.scrollOffset) {
+          optionsContainerRef.current.scroll(
+            0,
+            Math.floor(
+              optionsContainerRef.current.scrollTop - this.scrollOffset,
+            ),
+          );
+        }
+      }
     }
   }
 

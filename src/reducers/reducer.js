@@ -21,7 +21,7 @@ export default function reducer(state, action) {
     case actionTypes.INITIALISE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value);
       const initialSelectedIndexes = getMultiSelectSelectedValueIndexes(
-        action.value.options,
+        action.value,
         action.value.selectedValues,
         action.value.noSelectionLabel,
       );
@@ -86,16 +86,10 @@ export default function reducer(state, action) {
         nextPotentialSelectionIndex: (() => {
           if (state.multiselect) {
             return state.multiSelectSelectedIndexes.length
-              ? nextValidIndex(
-                  state.options,
-                  state.multiSelectSelectedIndexes[0],
-                )
-              : nextValidIndex(state.options, 0);
+              ? nextValidIndex(state, state.multiSelectSelectedIndexes[0])
+              : nextValidIndex(state, 0);
           }
-          return nextValidIndex(
-            state.options,
-            state.nextPotentialSelectionIndex,
-          );
+          return nextValidIndex(state, state.nextPotentialSelectionIndex);
         })(),
 
         singleSelectSelectedOption: getSingleSelectSelectedOption(
@@ -131,6 +125,10 @@ export default function reducer(state, action) {
       return {
         ...state,
         nextPotentialSelectionIndex: action.optionIndex,
+        singleSelectSelectedOption: getSingleSelectSelectedOption(
+          state,
+          action.optionIndex,
+        ),
       };
 
     case actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC:
@@ -197,7 +195,7 @@ export default function reducer(state, action) {
 
       // With optHeader, action.optionIndex can go out of bounds - check and adjust the value of optionIndex when requried
       const actionOptionIndexAdjusted = nextValidIndex(
-        state.options,
+        state,
         action.optionIndex,
       );
 
@@ -224,13 +222,13 @@ export default function reducer(state, action) {
         // Reset to noSelectionLabel if user has deselected all items and has set a `noSelectionLabel` prop
         if (state.noSelectionLabel) {
           const initialSelectedIndexes = getMultiSelectSelectedValueIndexes(
-            state.options,
+            state,
             state.selectedValues,
           );
           nextState = {
             ...nextState,
             nextPotentialSelectionIndex: state.hasOptHeaders
-              ? nextValidIndex(state.options, -1)
+              ? nextValidIndex(state, -1)
               : -1,
             multiSelectSelectedOptions: {
               options: getMultiSelectInitialSelectedOptions(

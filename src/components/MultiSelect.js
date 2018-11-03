@@ -139,6 +139,7 @@ export default class MultiSelect extends Component {
                 <MultiSelectOption
                   key={index}
                   optHeaderLabel={optHeaderLabel}
+                  optionsContainerRef={this.optionsContainer}
                   index={index}
                   option={option}
                   isDragging={isDragging}

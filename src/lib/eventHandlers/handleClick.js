@@ -53,9 +53,9 @@ export default function handleClick({
           ? actionTypes.SET_OPTIONS_PANEL_CLOSED
           : actionTypes.SET_OPTIONS_PANEL_OPEN,
       },
-      () => {
+      newState => {
         // After state update, check if focus should be moved to the button
-        if (ReactResponsiveSelectClassRef.state.isOptionsPanelOpen === false) {
+        if (newState.isOptionsPanelOpen === false) {
           ReactResponsiveSelectClassRef.focusButton();
         }
       },

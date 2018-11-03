@@ -13,25 +13,41 @@ export default class SingleSelect extends Component {
   componentDidUpdate(prevProps) {
     /*
       Focus selectBox button if options panel has just closed,
-      there has been an interaction, the value has changed,
+      there has been an interaction,
       or isOptionsPanelOpen and nextPotentialSelectionIndex === -1
     */
-    const {
-      singleSelectSelectedIndex,
-      isOptionsPanelOpen,
-      nextPotentialSelectionIndex,
-    } = this.props;
+    const { isOptionsPanelOpen, nextPotentialSelectionIndex } = this.props;
 
-    if (
-      !isOptionsPanelOpen &&
-      prevProps.isOptionsPanelOpen &&
-      prevProps.singleSelectSelectedIndex !== singleSelectSelectedIndex
-    ) {
+    if (!isOptionsPanelOpen && prevProps.isOptionsPanelOpen) {
       this.optionsButton.current.focus();
     }
 
     if (isOptionsPanelOpen && nextPotentialSelectionIndex === -1) {
       this.optionsButton.current.focus();
+
+      if (optHeaderLabel) {
+        const scrollDiff = Math.ceil(
+          this.optionRef.current.getBoundingClientRect().top -
+            optionsContainerRef.current.getBoundingClientRect().top,
+        );
+
+        this.scrollOffset =
+          this.scrollOffset ||
+          Math.ceil(
+            document
+              .querySelector('.rrs__option--header')
+              .getBoundingClientRect().height,
+          );
+
+        if (scrollDiff < this.scrollOffset) {
+          optionsContainerRef.current.scroll(
+            0,
+            Math.floor(
+              optionsContainerRef.current.scrollTop - this.scrollOffset,
+            ),
+          );
+        }
+      }
     }
   }
 
@@ -166,6 +182,7 @@ export default class SingleSelect extends Component {
                 <SingleSelectOption
                   key={index}
                   optHeaderLabel={optHeaderLabel}
+                  optionsContainerRef={this.optionsContainer}
                   index={index}
                   isDragging={isDragging}
                   isOptionsPanelOpen={isOptionsPanelOpen}
