@@ -71,28 +71,13 @@ export default class ReactResponsiveSelect extends Component {
   /* Broadcast change when there has been one */
   componentDidUpdate(prevProps, prevState) {
     const {
-      singleSelectInitialIndex,
       singleSelectSelectedOption,
       multiSelectSelectedOptions,
       multiselect,
       altered,
-      multiSelectInitialSelectedIndexes,
     } = this.state;
 
-    const { onChange, selectedValue, selectedValues } = this.props;
-
-    /**
-     * Check if there is a need to broadcast a change, props can now change state given
-     * that the component can be controlled.
-     * Exit if - the same single select option is selected as before
-     * Exit if - the same multi select options are selected as before
-     */
-    if (
-      selectedValue === singleSelectInitialIndex ||
-      isEqual(selectedValues, multiSelectInitialSelectedIndexes)
-    ) {
-      return false;
-    }
+    const { onChange } = this.props;
 
     if (multiselect) {
       multiSelectBroadcastChange(
@@ -115,7 +100,11 @@ export default class ReactResponsiveSelect extends Component {
 
   updateState(action, callback) {
     const nextState = this.reducer(this.state, action);
-    this.setState(nextState, () => callback && callback());
+    this.setState(nextState, () => {
+      if (callback) {
+        callback(nextState);
+      }
+    });
 
     /* To debug actions plus their resulting state whilst developing, add ?debug=true */
     debugReportChange(this.props.name, action, nextState);
@@ -130,6 +119,7 @@ export default class ReactResponsiveSelect extends Component {
     const {
       altered,
       singleSelectInitialIndex,
+      hasOptHeaders,
       isOptionsPanelOpen,
       isDragging,
       noSelectionLabel,
@@ -151,10 +141,12 @@ export default class ReactResponsiveSelect extends Component {
 
     return (
       <div
+        data-name={name}
         className={singleline(`
           rrs
           ${isOptionsPanelOpen === true ? 'rrs--options-visible' : ''}
           ${altered ? 'rrs--has-changed' : ''}
+          ${hasOptHeaders ? 'rrs--has-opt-headers' : ''} 
         `)}
         ref={r => {
           this.selectBox = r;

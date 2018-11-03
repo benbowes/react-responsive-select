@@ -13,8 +13,14 @@ export default class SingleSelectOption extends Component {
       index,
       isOptionsPanelOpen,
       nextPotentialSelectionIndex,
+      optionsContainerRef,
+      optHeaderLabel,
     } = this.props;
+
     if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
+      if (optHeaderLabel) {
+        optionsContainerRef.current.scroll(0, -10000); // Ensure option is always in view and not obscured by a sticky header
+      }
       this.optionRef.current.focus();
     }
   }

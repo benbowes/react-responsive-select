@@ -1,8 +1,9 @@
 export function nextValidIndex(
-  options,
+  state,
   nextPotentialSelectionIndex,
   mode = 'INCREMENT',
 ) {
+  const { options } = state;
   const possibleOptionIndexes = options.reduce((acc, option, index) => {
     if (!option.optHeader) acc.push(index);
     return acc;
@@ -26,7 +27,9 @@ export function nextValidIndex(
       options[nextPotentialSelectionIndex - 1] &&
       !options[nextPotentialSelectionIndex - 1].optHeader;
 
-    return nextSelectionPossible;
+    return nextSelectionPossible
+      ? nextPotentialSelectionIndex - 1
+      : possibleOptionIndexes[possibleOptionIndexes.length - 1];
   }
 
   return nextPotentialSelectionIndex;

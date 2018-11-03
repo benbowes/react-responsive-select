@@ -31,9 +31,11 @@ export default function getMultiSelectInitialSelectedOptions(state) {
         .map(option => ({ name: state.name, ...option }));
     } else {
       // ELSE - Grab first option and merge in `name`
-      const option = state.options[0].optHeader
-        ? findClosestValidOption(state)
-        : state.options[0];
+      const option =
+        state.options[0] && state.options[0].optHeader
+          ? findClosestValidOption(state)
+          : state.options[0];
+
       selectedOptionsToReturn = [
         {
           name: state.name,

@@ -760,6 +760,10 @@ ReactDOM.render(
               <ReactResponsiveSelect
                 name="make3a"
                 options={[
+                  {
+                    text: 'Cars',
+                    optHeader: true,
+                  },
                   { value: 'alfa-romeo', text: 'Alfa Romeo' },
                   { value: 'bmw', text: 'BMW' },
                   { value: 'fiat', text: 'Fiat' },
@@ -803,6 +807,10 @@ export default class Form extends Component {
         <ReactResponsiveSelect
           name="make3a"
           options={[
+            {
+              text: 'Cars',
+              optHeader: true,
+            },
             { value: 'alfa-romeo', text: 'Alfa Romeo' },
             { value: 'bmw', text: 'BMW' },
             { value: 'fiat', text: 'Fiat' },
@@ -1128,60 +1136,57 @@ ReactDOM.render(
                 multiselect
                 name="make6"
                 options={[
-                  // (Required) an array of options - see above const options
+                  { text: 'Cheap', optHeader: true },
                   {
-                    text: 'Cars',
-                    optHeader: true,
+                    value: 'alfa-romeo',
+                    text: 'Alfa Romeo',
+                    markup: multiSelectOptionMarkup('Alfa Romeo'),
                   },
                   {
-                    text: 'AMC',
-                    value: 'amc',
-                    markup: multiSelectOptionMarkup('AMC'),
-                  },
-                  {
-                    text: 'BMW',
-                    value: 'bmw',
-                    markup: multiSelectOptionMarkup('BMW'),
-                  },
-                  {
-                    text: 'Delorean',
-                    value: 'delorean',
-                    markup: multiSelectOptionMarkup('Delorean'),
-                  },
-                  {
-                    text: 'Fiat',
                     value: 'fiat',
+                    text: 'Fiat',
                     markup: multiSelectOptionMarkup('Fiat'),
                   },
                   {
-                    text: 'Ford',
-                    value: 'ford',
-                    markup: multiSelectOptionMarkup('Ford'),
-                  },
-                  {
-                    text: 'Mazda',
-                    value: 'mazda',
-                    markup: multiSelectOptionMarkup('Mazda'),
-                  },
-                  {
-                    text: 'Oldsmobile',
-                    value: 'oldsmobile',
-                    markup: multiSelectOptionMarkup('Oldsmobile'),
-                  },
-                  {
-                    text: 'Subaru',
                     value: 'subaru',
+                    text: 'Subaru',
                     markup: multiSelectOptionMarkup('Subaru'),
                   },
                   {
-                    text: 'Tesla',
+                    value: 'suzuki',
+                    text: 'Suzuki',
+                    markup: multiSelectOptionMarkup('Suzuki'),
+                  },
+                  { text: 'Expensive', optHeader: true },
+                  {
+                    value: 'bmw',
+                    text: 'BMW',
+                    markup: multiSelectOptionMarkup('BMW'),
+                  },
+                  {
+                    value: 'ferrari',
+                    text: 'Ferrari',
+                    markup: multiSelectOptionMarkup('Ferrari'),
+                  },
+                  {
+                    value: 'mercedes',
+                    text: 'Mercedes',
+                    markup: multiSelectOptionMarkup('Mercedes'),
+                  },
+                  {
                     value: 'tesla',
+                    text: 'Tesla',
                     markup: multiSelectOptionMarkup('Tesla'),
                   },
                   {
-                    text: 'Toyota',
-                    value: 'toyota',
-                    markup: multiSelectOptionMarkup('Toyota'),
+                    value: 'volvo',
+                    text: 'Volvo',
+                    markup: multiSelectOptionMarkup('Volvo'),
+                  },
+                  {
+                    value: 'zonda',
+                    text: 'Zonda',
+                    markup: multiSelectOptionMarkup('Zonda'),
                   },
                 ]}
                 onSubmit={() => {
@@ -1229,19 +1234,60 @@ export default class Form extends Component {
         <ReactResponsiveSelect
           multiselect
           name="make6"
-          options={[ // (Required) an array of options - see above const options
-              { text: 'Cars', optHeader: true },
-              { text: 'AMC', value: 'amc', markup: multiSelectOptionMarkup('AMC') },
-              { text: 'BMW', value: 'bmw', markup: multiSelectOptionMarkup('BMW') },
-              { text: 'Delorean', value: 'delorean', markup: multiSelectOptionMarkup('Delorean') },
-              { text: 'Fiat', value: 'fiat', markup: multiSelectOptionMarkup('Fiat') },
-              { text: 'Ford', value: 'ford', markup: multiSelectOptionMarkup('Ford') },
-              { text: 'Mazda', value: 'mazda', markup: multiSelectOptionMarkup('Mazda') },
-              { text: 'Oldsmobile', value: 'oldsmobile', markup: multiSelectOptionMarkup('Oldsmobile') },
-              { text: 'Subaru', value: 'subaru', markup: multiSelectOptionMarkup('Subaru') },
-              { text: 'Tesla', value: 'tesla', markup: multiSelectOptionMarkup('Tesla') },
-              { text: 'Toyota', value: 'toyota', markup: multiSelectOptionMarkup('Toyota') },
-            ]}
+          options={[
+            { text: 'Cheap', optHeader: true },
+            {
+              value: 'alfa-romeo',
+              text: 'Alfa Romeo',
+              markup: multiSelectOptionMarkup('Alfa Romeo'),
+            },
+            {
+              value: 'fiat',
+              text: 'Fiat',
+              markup: multiSelectOptionMarkup('Fiat'),
+            },
+            {
+              value: 'subaru',
+              text: 'Subaru',
+              markup: multiSelectOptionMarkup('Subaru'),
+            },
+            {
+              value: 'suzuki',
+              text: 'Suzuki',
+              markup: multiSelectOptionMarkup('Suzuki'),
+            },
+            { text: 'Expensive', optHeader: true },
+            {
+              value: 'bmw',
+              text: 'BMW',
+              markup: multiSelectOptionMarkup('BMW'),
+            },
+            {
+              value: 'ferrari',
+              text: 'Ferrari',
+              markup: multiSelectOptionMarkup('Ferrari'),
+            },
+            {
+              value: 'mercedes',
+              text: 'Mercedes',
+              markup: multiSelectOptionMarkup('Mercedes'),
+            },
+            {
+              value: 'tesla',
+              text: 'Tesla',
+              markup: multiSelectOptionMarkup('Tesla'),
+            },
+            {
+              value: 'volvo',
+              text: 'Volvo',
+              markup: multiSelectOptionMarkup('Volvo'),
+            },
+            {
+              value: 'zonda',
+              text: 'Zonda',
+              markup: multiSelectOptionMarkup('Zonda'),
+            },
+          ]}
           onSubmit={() => { console.log("Handle form submit here") }}
           noSelectionLabel="Please select"
           caretIcon={caretIcon}
