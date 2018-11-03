@@ -16,9 +16,17 @@ export default class SingleSelect extends Component {
       there has been an interaction,
       or isOptionsPanelOpen and nextPotentialSelectionIndex === -1
     */
-    const { isOptionsPanelOpen, nextPotentialSelectionIndex } = this.props;
+    const {
+      isOptionsPanelOpen,
+      nextPotentialSelectionIndex,
+      singleSelectSelectedIndex,
+    } = this.props;
 
-    if (!isOptionsPanelOpen && prevProps.isOptionsPanelOpen) {
+    if (
+      !isOptionsPanelOpen &&
+      prevProps.isOptionsPanelOpen &&
+      prevProps.singleSelectSelectedIndex !== singleSelectSelectedIndex
+    ) {
       this.optionsButton.current.focus();
     }
 

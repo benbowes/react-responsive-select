@@ -14,7 +14,12 @@ Built with keyboard and screen reader accessibility in mind.
 - Touch friendly
 - Keyboard friendly
 - Similar interaction experience across platforms
-- Easy to style
+- Custom label rendering
+- Custom option markup
+- Option headers
+- Mimics keyboard funcoinality where possible (sans multiselect)
+- Easy slot-in, to your design system
+- No global styling
 
 ## Demo
 
@@ -48,10 +53,11 @@ Example usage:
 import React from 'react';
 import ReactResponsiveSelect from 'react-responsive-select';
 
-const reportChange = (newValue) => console.log(newValue);
+const onChange = (newValue) => console.log('onChange', newValue);
+const onSubmit = () => console.log('onSubmit');
 
 const Form = () => (
-  <form ref={r => this.form = r}>
+  <form>
     <ReactResponsiveSelect
       name="make"
       options={[
@@ -61,8 +67,8 @@ const Form = () => (
       ]}
       prefix="Make:"
       selectedValue="mazda"
-      onSubmit={() => { this.form.submit(); }}
-      onChange={reportChange}
+      onSubmit={onSubmit}
+      onChange={onChange}
       caretIcon={<span>+</span>}
     />
   </form>
@@ -74,38 +80,13 @@ A more detailed usage example can be found here:
 
 ---
 
-## Altering styling
+## Styling
 
-The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Include it in your project via an import or copy paste it's contents into your stylesheet.
-Customisations can be done via overriding the styles or rewriting the classes.
+The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Use as-is or alter it to meet your projects needs.
 
-The class names themselves are not configurable.
+You can either include the base styles into your project via an import, or copy paste it's contents into your theming solution - be it css modules, sass/less, css-in-js. The styles are self contained (not global).
 
-To aid in styling the hover/selected states in the options list, I would suggest overriding the class that hides the options temporarily e.g.
-
-```
-.rrs__button + .rrs__options {
-  /* height: 0;
-  visibility: hidden; */
-  height: auto;
-  visibility: visible;
-}
-```
----
-
-## Custom labelling
-
-You can hook into the onChange function via the `customLabelRenderer` function prop. This allows you to render a custom label. See the API table for what the `selectedOption` object has in it.
-
-```
-<ReactResponsiveSelect
-  name="make2"
-  options={options}
-  onSubmit={() => { this.form.submit(); }}
-  // (Optional) format your own label text like this
-  customLabelRenderer={selectedOption => `Selected make is ${selectedOption.text} :)`}
-/>
-```
+The class-names themselves are not configurable.
 
 ---
 
