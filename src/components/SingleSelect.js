@@ -19,13 +19,15 @@ export default class SingleSelect extends Component {
     const {
       isOptionsPanelOpen,
       nextPotentialSelectionIndex,
-      singleSelectSelectedIndex,
+      selectBoxRef,
     } = this.props;
 
+    const optionsPanelJustClosed =
+      !isOptionsPanelOpen && prevProps.isOptionsPanelOpen;
+
     if (
-      !isOptionsPanelOpen &&
-      prevProps.isOptionsPanelOpen &&
-      prevProps.singleSelectSelectedIndex !== singleSelectSelectedIndex
+      optionsPanelJustClosed &&
+      selectBoxRef.contains(document.activeElement)
     ) {
       this.optionsButton.current.focus();
     }

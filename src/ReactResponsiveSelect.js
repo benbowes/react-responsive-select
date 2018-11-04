@@ -212,6 +212,7 @@ export default class ReactResponsiveSelect extends Component {
             nextPotentialSelectionIndex={nextPotentialSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
             options={options}
+            selectBoxRef={this.selectBox}
           />
         ) : (
           <SingleSelect
@@ -229,6 +230,7 @@ export default class ReactResponsiveSelect extends Component {
             nextPotentialSelectionIndex={nextPotentialSelectionIndex}
             isOptionsPanelOpen={isOptionsPanelOpen}
             options={options}
+            selectBoxRef={this.selectBox}
           />
         )}
       </div>
