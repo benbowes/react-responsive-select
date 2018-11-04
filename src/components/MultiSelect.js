@@ -12,14 +12,18 @@ export default class MultiSelect extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    /* Focus selectBox button if options panel has just closed, there has been an interaction or the value has changed */
+    /*
+      Focus selectBox button if options panel has just closed, 
+      there has been an interaction or the value has changed
+    */
+    const { isOptionsPanelOpen, selectBoxRef } = this.props;
+
+    const optionsPanelJustClosed =
+      !isOptionsPanelOpen && prevProps.isOptionsPanelOpen;
+
     if (
-      !this.props.isOptionsPanelOpen &&
-      prevProps.isOptionsPanelOpen &&
-      !isEqual(
-        prevProps.multiSelectSelectedIndexes,
-        this.props.multiSelectSelectedIndexes,
-      )
+      optionsPanelJustClosed &&
+      selectBoxRef.contains(document.activeElement)
     ) {
       this.optionsButton.current.focus();
     }
