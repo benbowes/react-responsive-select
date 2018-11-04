@@ -63,11 +63,10 @@ const Form = () => (
         { text: 'Oldsmobile', value: 'oldsmobile', markup: <span>Oldsmobile</span> },
         { text: 'Ford', value: 'ford', markup: <span>Ford</span> }
       ]}
-      prefix="Make:"
-      selectedValue="mazda"
+      selectedValue="oldsmobile"
       onSubmit={onSubmit}
       onChange={onChange}
-      caretIcon={<span>+</span>}
+      caretIcon={<CaretIcon />}
     />
   </form>
 );
