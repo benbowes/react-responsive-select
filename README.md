@@ -1,5 +1,3 @@
-# New Document
-
 # React Responsive Select
 ![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
 
