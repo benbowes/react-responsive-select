@@ -16,7 +16,7 @@ Built with keyboard and screen reader accessibility in mind.
 - Custom option markup
 - Option headers
 - Mimics keyboard funcoinality where possible (sans multiselect)
-- Easy slot-in, to your design system
+- Easy slot-in to your design system
 - No global styling
 
 ## Demo
@@ -40,10 +40,6 @@ https://benbowes.github.io/react-responsive-select/demo/
 Install the dependency - https://www.npmjs.com/package/react-responsive-select
 
 `npm install react-responsive-select -D`
-
-Add **ReactResponsiveSelect.js**
-
-And include the CSS file in your project via an import, or by copy/pasting the CSS from:  `../node_modules/react-responsive-select/dist/ReactResponsiveSelect.css`
 
 Example usage:
 
@@ -79,7 +75,7 @@ A more detailed usage example can be found here:
 
 ## Styling
 
-The CSS in `./dist/ReactResponsiveSelect.css` is plain css. Use as-is or alter it to meet your projects needs.
+The CSS in `react-responsive-select/dist/ReactResponsiveSelect.css` is plain css. Use as-is, or alter it to meet your projects needs.
 
 You can either include the base styles into your project via an import, or copy paste it's contents into your theming solution - be it css modules, sass/less, css-in-js. The styles are self contained (not global).
 
