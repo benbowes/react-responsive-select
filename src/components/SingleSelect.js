@@ -34,30 +34,6 @@ export default class SingleSelect extends Component {
 
     if (isOptionsPanelOpen && nextPotentialSelectionIndex === -1) {
       this.optionsButton.current.focus();
-
-      if (optHeaderLabel) {
-        const scrollDiff = Math.ceil(
-          this.optionRef.current.getBoundingClientRect().top -
-            optionsContainerRef.current.getBoundingClientRect().top,
-        );
-
-        this.scrollOffset =
-          this.scrollOffset ||
-          Math.ceil(
-            document
-              .querySelector('.rrs__option--header')
-              .getBoundingClientRect().height,
-          );
-
-        if (scrollDiff < this.scrollOffset) {
-          optionsContainerRef.current.scroll(
-            0,
-            Math.floor(
-              optionsContainerRef.current.scrollTop - this.scrollOffset,
-            ),
-          );
-        }
-      }
     }
   }
 

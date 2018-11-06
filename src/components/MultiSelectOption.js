@@ -20,7 +20,7 @@ export default class MultiSelectOption extends Component {
     if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
       this.optionRef.current.focus();
 
-      if (optHeaderLabel) {
+      if (optHeaderLabel !== '') {
         const scrollDiff = Math.ceil(
           this.optionRef.current.getBoundingClientRect().top -
             optionsContainerRef.current.getBoundingClientRect().top,
