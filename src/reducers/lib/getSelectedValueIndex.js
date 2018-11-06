@@ -3,7 +3,9 @@ export default function getSelectedValueIndex({
   selectedValue,
   noSelectionLabel,
 }) {
-  const index = options.map(option => option.value).indexOf(selectedValue);
+  const index = selectedValue
+    ? options.map(option => option.value).indexOf(selectedValue)
+    : -1;
 
   // Allow a negative index if user wants to display a noSelectionLabel
   // Keyboard will not focus on an option when first opened
