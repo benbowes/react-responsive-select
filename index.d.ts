@@ -31,6 +31,7 @@ declare namespace ReactResponsiveSelect {
   interface IProps {
     name: string;
     options: Option[];
+    noSelectionLabel?: string;
     onSubmit?: () => void;
     onChange?: (changes: IOnChangeSingleSelect | IOnChangeMultiSelect) => void;
     onBlur?: (changes: IOnBlurSingleSelect | IOnBlurMultiSelect) => void;
