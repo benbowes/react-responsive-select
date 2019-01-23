@@ -118,6 +118,7 @@ export default function reducer(state, action) {
     case actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR:
       return {
         ...state,
+        nextPotentialSelectionIndex: state.singleSelectSelectedIndex,
         isOptionsPanelOpen: false,
       };
 
@@ -125,10 +126,6 @@ export default function reducer(state, action) {
       return {
         ...state,
         nextPotentialSelectionIndex: action.optionIndex,
-        singleSelectSelectedOption: getSingleSelectSelectedOption(
-          state,
-          action.optionIndex,
-        ),
       };
 
     case actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC:
