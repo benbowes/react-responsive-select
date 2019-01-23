@@ -15,7 +15,7 @@ Built with keyboard and screen reader accessibility in mind.
 - Custom label rendering
 - Custom option markup
 - Option headers
-- Mimics keyboard funcoinality where possible (sans multiselect)
+- Mimics keyboard functionality where possible (sans multiselect)
 - Easy slot-in to your design system
 - No global styling
 

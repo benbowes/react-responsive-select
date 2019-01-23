@@ -63,6 +63,46 @@
   max-height: 230px;
 }
 
+@media screen and (max-width: 768px) {
+  .rrs {
+    position: static;
+  }
+
+  .rrs.rrs--options-visible:after {
+    content: '';
+    cursor: pointer;
+    position: fixed;
+    animation: fadeIn 0.3s ease forwards;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .rrs--options-visible .rrs__options {
+    max-height: initial;
+    position: fixed;
+    width: auto;
+    left: 1rem;
+    right: 1rem;
+    top: 15%;
+    bottom: 1rem;
+    border: 0;
+    border-radius: 4px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .rrs__option {
   cursor: pointer;
   padding: 0.75rem 1rem;
@@ -167,7 +207,7 @@
   display: inline-block;
 }
 
-/* 
+/*
 
   Checkbox
 
