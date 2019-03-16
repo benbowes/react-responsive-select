@@ -46,6 +46,16 @@ export default function handleClick({
       return;
     }
 
+    // When the options panel is open, treat clicking the label/select button as a 'no action'
+    if (isOptionsPanelOpen && containsClassName(event.target, 'rrs__label')) {
+      ReactResponsiveSelectClassRef.updateState(
+        { type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION },
+        () => ReactResponsiveSelectClassRef.focusButton(),
+      );
+
+      return;
+    }
+
     /* Else user clicked close or open the options panel */
     ReactResponsiveSelectClassRef.updateState(
       {

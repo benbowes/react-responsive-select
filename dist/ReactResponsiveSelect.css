@@ -48,7 +48,8 @@
   border-top: 1px solid #eee;
   border-radius: 0 0 2px 2px;
   top: 44px;
-  width: 100%;
+  left: 0;
+  right: 0;
   height: 0;
   visibility: hidden;
   overflow: hidden;
@@ -165,6 +166,10 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.rrs__label * {
+  pointer-events: none;
 }
 
 .rrs--options-visible .rrs__label,
