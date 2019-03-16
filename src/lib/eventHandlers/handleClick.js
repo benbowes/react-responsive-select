@@ -46,7 +46,11 @@ export default function handleClick({
       return;
     }
 
-    // When the options panel is open, treat clicking the label/select button as a 'no action'
+    /*
+      When the options panel is open, treat clicking 
+      the label/select button or the background overlay on mobile
+      as a 'no action'
+    */
     if (
       isOptionsPanelOpen &&
       // button on desktop (rrs__label) or overlay on mobile (rrs)
