@@ -47,13 +47,12 @@ export default function handleClick({
     }
 
     /*
-      When the options panel is open, treat clicking 
-      the label/select button or the background overlay on mobile
-      as a 'no action'
+      When the options panel is open, treat clicking the label/select button
+      or the background overlay on small screen as a 'no action'
     */
     if (
       isOptionsPanelOpen &&
-      // button on desktop (rrs__label) or overlay on mobile (rrs)
+      // button on desktop (rrs__label) or overlay on small screen (rrs)
       (containsClassName(event.target, 'rrs__label') ||
         containsClassName(event.target, 'rrs'))
     ) {
