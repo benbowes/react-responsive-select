@@ -46,6 +46,24 @@ export default function handleClick({
       return;
     }
 
+    /*
+      When the options panel is open, treat clicking the label/select button
+      or the background overlay on small screen as a 'no action'
+    */
+    if (
+      isOptionsPanelOpen &&
+      // button on desktop (rrs__label) or overlay on small screen (rrs)
+      (containsClassName(event.target, 'rrs__label') ||
+        containsClassName(event.target, 'rrs'))
+    ) {
+      ReactResponsiveSelectClassRef.updateState(
+        { type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION },
+        () => ReactResponsiveSelectClassRef.focusButton(),
+      );
+
+      return;
+    }
+
     /* Else user clicked close or open the options panel */
     ReactResponsiveSelectClassRef.updateState(
       {
