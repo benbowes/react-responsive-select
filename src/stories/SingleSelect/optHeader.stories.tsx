@@ -40,7 +40,7 @@ stories.add(
                 console.log('onSubmit');
             }}
             caretIcon={<CaretIcon />}
-            prefix="Car1: "
+            prefix="Vehicle: "
             noSelectionLabel="Please select"
             selectedValue=""
             onChange={(): void => {
