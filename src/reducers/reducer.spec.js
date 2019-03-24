@@ -1,77 +1,74 @@
-import reducer from './reducer';
-import initialState from './initialState';
-import * as actionTypes from '../constants/actionTypes';
+import reducer from "./reducer";
+import initialState from "./initialState";
+import * as actionTypes from "../constants/actionTypes";
 
-describe('reducer', () => {
-  it('should update state when INITIALISE is fired', () => {
+describe("reducer", () => {
+  it("should update state when INITIALISE is fired", () => {
     const result = reducer(initialState, {
       type: actionTypes.INITIALISE,
       value: {
         ...initialState,
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" }
         ],
-        selectedValue: 'fiat',
-        name: 'thing',
-      },
+        selectedValue: "fiat",
+        name: "thing"
+      }
     });
-    expect(result.name).toEqual('thing');
+    expect(result.name).toEqual("thing");
     expect(result.singleSelectSelectedOption).toMatchObject({
-      name: 'thing',
-      text: 'Fiat',
-      value: 'fiat',
+      name: "thing",
+      text: "Fiat",
+      value: "fiat"
     });
   });
 
-  it('should update state.isDragging when SET_IS_DRAGGING is fired', () => {
+  it("should update state.isDragging when SET_IS_DRAGGING is fired", () => {
     const result = reducer(initialState, {
       type: actionTypes.SET_IS_DRAGGING,
-      value: true,
+      value: true
     });
 
     expect(result).toMatchObject({
       ...initialState,
-      isDragging: true,
+      isDragging: true
     });
   });
 
-  it('should update state.isOptionsPanelOpen when SET_OPTIONS_PANEL_OPEN is fired', () => {
+  it("should update state.isOptionsPanelOpen when SET_OPTIONS_PANEL_OPEN is fired", () => {
     const mockInitialState = {
       nextPotentialSelectionIndex: 0,
       singleSelectSelectedIndex: 0,
-      name: 'make1',
-      options: [{ text: 'Any', value: 'null' }],
+      name: "make1",
+      options: [{ text: "Any", value: "null" }]
     };
     const result = reducer(mockInitialState, {
       type: actionTypes.SET_OPTIONS_PANEL_OPEN,
-      value: true,
+      value: true
     });
 
     expect(result).toMatchObject({
       ...mockInitialState,
       altered: true,
       singleSelectSelectedOption: {
-        name: 'make1',
-        text: 'Any',
-        value: 'null',
+        name: "make1",
+        text: "Any",
+        value: "null"
       },
-      isOptionsPanelOpen: true,
+      isOptionsPanelOpen: true
     });
   });
 
-  it('should update state.singleSelectSelectedIndex when SET_SINGLESELECT_OPTIONS is fired', () => {
+  it("should update state.singleSelectSelectedIndex when SET_SINGLESELECT_OPTIONS is fired", () => {
     const mockState = {
       ...initialState,
-      name: 'make1',
-      options: [
-        { text: 'Any', value: 'null' },
-        { text: 'Fiat', value: 'fiat' },
-      ],
+      name: "make1",
+      options: [{ text: "Any", value: "null" }, { text: "Fiat", value: "fiat" }]
     };
     const result = reducer(mockState, {
       type: actionTypes.SET_SINGLESELECT_OPTIONS,
-      optionIndex: 1,
+      value: 1
     });
 
     expect(result).toMatchObject({
@@ -80,260 +77,260 @@ describe('reducer', () => {
       nextPotentialSelectionIndex: 1,
       singleSelectSelectedIndex: 1,
       singleSelectSelectedOption: {
-        name: 'make1',
-        text: 'Fiat',
-        value: 'fiat',
-      },
+        name: "make1",
+        text: "Fiat",
+        value: "fiat"
+      }
     });
   });
 
-  describe('MultiSelect', () => {
-    it('should deselect all and select first option when first option requested', () => {
+  describe("MultiSelect", () => {
+    it("should deselect all and select first option when first option requested", () => {
       const state = {
-        name: 'thing',
+        name: "thing",
         multiselect: true,
         altered: false,
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" },
+          { text: "Mazda", value: "mazda" }
         ],
         multiSelectInitialSelectedIndexes: [1, 2],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
           options: [
-            { name: 'make2', text: 'Fiat', value: 'fiat' },
-            { name: 'make2', text: 'Mazda', value: 'mazda' },
-          ],
+            { name: "make2", text: "Fiat", value: "fiat" },
+            { name: "make2", text: "Mazda", value: "mazda" }
+          ]
         },
-        nextPotentialSelectionIndex: 2,
+        nextPotentialSelectionIndex: 2
       };
 
       const result = reducer(state, {
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        optionIndex: 0,
+        value: 0
       });
 
       expect(result).toMatchObject({
         multiselect: true,
         altered: true,
-        name: 'thing',
+        name: "thing",
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" },
+          { text: "Mazda", value: "mazda" }
         ],
         multiSelectInitialSelectedIndexes: [1, 2],
         multiSelectSelectedIndexes: [0],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Any', value: 'null' }],
+          options: [{ name: "thing", text: "Any", value: "null" }]
         },
-        nextPotentialSelectionIndex: 0,
+        nextPotentialSelectionIndex: 0
       });
     });
 
-    it('should deselect first option and select requested option when NOT first option requested', () => {
+    it("should deselect first option and select requested option when NOT first option requested", () => {
       const state = {
         multiselect: true,
         altered: false,
-        name: 'thing',
+        name: "thing",
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" }
         ],
         multiSelectInitialSelectedIndexes: [0],
         multiSelectSelectedIndexes: [0],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Any', value: 'null' }],
+          options: [{ name: "thing", text: "Any", value: "null" }]
         },
-        nextPotentialSelectionIndex: 0,
+        nextPotentialSelectionIndex: 0
       };
 
       const result = reducer(state, {
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        optionIndex: 1,
+        value: 1
       });
 
       expect(result).toMatchObject({
         multiselect: true,
         altered: true,
-        name: 'thing',
+        name: "thing",
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" }
         ],
         multiSelectInitialSelectedIndexes: [0],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
+          options: [{ name: "thing", text: "Fiat", value: "fiat" }]
         },
-        nextPotentialSelectionIndex: 1,
+        nextPotentialSelectionIndex: 1
       });
     });
 
-    it('should add to multiselect options when requested item if does not exist', () => {
+    it("should add to multiselect options when requested item if does not exist", () => {
       const state = {
         multiselect: true,
-        name: 'thing',
+        name: "thing",
         altered: false,
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" },
+          { text: "Mazda", value: "mazda" }
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
+          options: [{ name: "thing", text: "Fiat", value: "fiat" }]
         },
-        nextPotentialSelectionIndex: 1,
+        nextPotentialSelectionIndex: 1
       };
 
       const result = reducer(state, {
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        optionIndex: 2,
+        value: 2
       });
 
       expect(result).toMatchObject({
         multiselect: true,
         altered: true,
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" },
+          { text: "Mazda", value: "mazda" }
         ],
-        name: 'thing',
+        name: "thing",
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
           options: [
-            { name: 'thing', text: 'Fiat', value: 'fiat' },
-            { name: 'thing', text: 'Mazda', value: 'mazda' },
-          ],
+            { name: "thing", text: "Fiat", value: "fiat" },
+            { name: "thing", text: "Mazda", value: "mazda" }
+          ]
         },
-        nextPotentialSelectionIndex: 2,
+        nextPotentialSelectionIndex: 2
       });
     });
 
-    it('should remove from multiselect options when requested item exists', () => {
+    it("should remove from multiselect options when requested item exists", () => {
       const state = {
         multiselect: true,
         altered: false,
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" },
+          { text: "Mazda", value: "mazda" }
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1, 2],
         multiSelectSelectedOptions: {
           options: [
-            { name: 'make2', text: 'Fiat', value: 'fiat' },
-            { name: 'make2', text: 'Mazda', value: 'mazda' },
-          ],
+            { name: "make2", text: "Fiat", value: "fiat" },
+            { name: "make2", text: "Mazda", value: "mazda" }
+          ]
         },
-        nextPotentialSelectionIndex: 2,
+        nextPotentialSelectionIndex: 2
       };
 
       const result = reducer(state, {
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        optionIndex: 2,
+        value: 2
       });
 
       expect(result).toMatchObject({
         multiselect: true,
         altered: false,
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
-          { text: 'Mazda', value: 'mazda' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" },
+          { text: "Mazda", value: "mazda" }
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'make2', text: 'Fiat', value: 'fiat' }],
+          options: [{ name: "make2", text: "Fiat", value: "fiat" }]
         },
-        nextPotentialSelectionIndex: 2,
+        nextPotentialSelectionIndex: 2
       });
     });
 
-    it('should select first item if all options are deselected', () => {
+    it("should select first item if all options are deselected", () => {
       const state = {
         multiselect: true,
         altered: false,
-        name: 'thing',
+        name: "thing",
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" }
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
+          options: [{ name: "thing", text: "Fiat", value: "fiat" }]
         },
-        nextPotentialSelectionIndex: 1,
+        nextPotentialSelectionIndex: 1
       };
 
       const result = reducer(state, {
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        optionIndex: 1,
+        value: 1
       });
 
       expect(result).toMatchObject({
         multiselect: true,
         altered: true,
-        name: 'thing',
+        name: "thing",
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" }
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [0],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Any', value: 'null' }],
+          options: [{ name: "thing", text: "Any", value: "null" }]
         },
-        nextPotentialSelectionIndex: 0,
+        nextPotentialSelectionIndex: 0
       });
     });
 
-    it('should select default no selection state if noSelectionLabel prop set and all options are deselected', () => {
+    it("should select default no selection state if noSelectionLabel prop set and all options are deselected", () => {
       const state = {
-        noSelectionLabel: 'Please select',
+        noSelectionLabel: "Please select",
         multiselect: true,
         altered: false,
-        name: 'thing',
+        name: "thing",
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" }
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [1],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Fiat', value: 'fiat' }],
+          options: [{ name: "thing", text: "Fiat", value: "fiat" }]
         },
-        nextPotentialSelectionIndex: 1,
+        nextPotentialSelectionIndex: 1
       };
 
       const result = reducer(state, {
         type: actionTypes.SET_MULTISELECT_OPTIONS,
-        optionIndex: 1,
+        value: 1
       });
 
       expect(result).toMatchObject({
-        noSelectionLabel: 'Please select',
+        noSelectionLabel: "Please select",
         multiselect: true,
         altered: true,
-        name: 'thing',
+        name: "thing",
         options: [
-          { text: 'Any', value: 'null' },
-          { text: 'Fiat', value: 'fiat' },
+          { text: "Any", value: "null" },
+          { text: "Fiat", value: "fiat" }
         ],
         multiSelectInitialSelectedIndexes: [1],
         multiSelectSelectedIndexes: [],
         multiSelectSelectedOptions: {
-          options: [{ name: 'thing', text: 'Please select', value: 'null' }],
+          options: [{ name: "thing", text: "Please select", value: "null" }]
         },
-        nextPotentialSelectionIndex: -1,
+        nextPotentialSelectionIndex: -1
       });
     });
   });

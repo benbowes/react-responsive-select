@@ -1,0 +1,1 @@
+{"version":3,"file":"preventDefaultForKeyCodes.js","sourceRoot":"","sources":["../../src/lib/preventDefaultForKeyCodes.ts"],"names":[],"mappings":";;AAAA,mBAAe,UAAC,QAAkB,EAAE,CAAgB;IAClD,QAAQ,CAAC,OAAO,CAAC,UAAC,OAAe;QAC/B,IAAI,OAAO,KAAK,CAAC,CAAC,OAAO,EAAE;YACzB,CAAC,CAAC,cAAc,EAAE,CAAC;SACpB;IACH,CAAC,CAAC,CAAC;AACL,CAAC,EAAC"}

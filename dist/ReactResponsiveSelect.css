@@ -5,6 +5,7 @@
 */
 
 .rrs {
+  font-family: sans-serif;
   position: relative;
   box-sizing: border-box;
 }
@@ -68,7 +69,7 @@
     position: static;
   }
 
-  .rrs.rrs--options-visible:after {
+   .rrs.rrs--options-visible:after {
     content: '';
     cursor: pointer;
     position: fixed;
@@ -81,7 +82,7 @@
     background: rgba(0, 0, 0, 0.5);
   }
 
-  .rrs--options-visible .rrs__options {
+   .rrs--options-visible .rrs__options {
     max-height: initial;
     position: fixed;
     width: auto;
@@ -94,7 +95,7 @@
   }
 }
 
-@keyframes fadeIn {
+ @keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -167,6 +168,10 @@
   overflow: hidden;
 }
 
+.rrs__label * {
+  pointer-events: none;
+}
+
 .rrs--options-visible .rrs__label,
 .rrs__button:focus .rrs__label {
   border-bottom: 1px solid #fff;
@@ -196,7 +201,7 @@
   text-overflow: ellipsis;
 }
 
-.rrs__multiselect-label__badge{
+.rrs__multiselect-label__badge {
   border: 1px solid #ccc;
   padding: 1px 6px;
   margin: 0 0 0 4px;
@@ -207,7 +212,7 @@
   display: inline-block;
 }
 
-/*
+/* 
 
   Checkbox
 
@@ -239,7 +244,6 @@
 .rrs__option.rrs__option--selected .checkbox-icon {
   fill: #0273b5;
 }
-
 
 /*
 
