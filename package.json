@@ -2,34 +2,19 @@
   "name": "react-responsive-select-next",
   "version": "5.0.0-alpha-1",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
-  "main": "dist/ReactResponsiveSelect.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.demo.js --port 3001 & yarn prettier-watch",
-    "build": "./auto/build.sh",
-    "deploy": "./auto/deploy.sh",
-    "eslint": "eslint src/**",
-    "test": "yarn eslint && jest",
-    "coverage": "rm -rf coverage && jest --coverage && open $(pwd)/coverage/index.html",
-    "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
+    "compile": "rm -rf dist && tsc && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
+    "test": "echo \"Test step is yet to be implemented\"",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "deploy-storybook": "storybook-to-ghpages",
+    "start": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
-  "jest": {
-    "testURL": "http://localhost/",
-    "coverageReporters": [
-      "html"
-    ],
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "moduleFileExtensions": [
-      "jsx",
-      "js",
-      "json"
-    ]
-  },
-  "author": "Ben Bowes <bb@benbowes.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/benbowes/react-responsive-select"
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint && npm test"
+    }
   },
   "keywords": [
     "select",
@@ -45,39 +30,51 @@
     "accessible",
     "multiselect"
   ],
+  "author": "Ben Bowes <bb@benbowes.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benbowes/react-responsive-select"
+  },
   "dependencies": {
     "lodash.isequal": "^4.5.0",
-    "prop-types": "^15.6.1",
-    "singleline": "1.0.x"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.11",
-    "deep-freeze": "0.0.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^5.3.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.10.0",
-    "jest": "^23.4.2",
-    "onchange": "^4.0.0",
-    "prettier": "^1.14.2",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "sinon": "^4.5.0",
-    "style-loader": "^0.20.3",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^3.1.3",
-    "webpack-node-externals": "^1.7.2"
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "singleline-next": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "0.14.9 || >15.3.0"
+    "react": "^16.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@storybook/addon-actions": "^5.0.3",
+    "@storybook/addon-info": "^5.0.3",
+    "@storybook/addon-knobs": "^5.0.3",
+    "@storybook/addon-links": "^5.0.3",
+    "@storybook/addon-options": "^5.0.3",
+    "@storybook/addons": "^5.0.3",
+    "@storybook/react": "^5.0.3",
+    "@storybook/storybook-deployer": "^2.8.1",
+    "@storybook/theming": "^5.0.3",
+    "@types/jest": "^24.0.11",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.7",
+    "@types/react-test-renderer": "^16.0.2",
+    "@types/storybook__addon-actions": "^3.4.1",
+    "@types/storybook__addon-info": "^3.4.2",
+    "@types/storybook__addon-knobs": "^3.4.1",
+    "@types/storybook__addon-options": "^3.2.2",
+    "@types/storybook__react": "^3.0.9",
+    "babel-loader": "^8.0.0",
+    "cache-loader": "^1.2.2",
+    "husky": "^1.3.1",
+    "jest": "^24.5.0",
+    "react-docgen-typescript-loader": "^3.0.0",
+    "react-test-renderer": "^16.5.2",
+    "ts-jest": "^24.0.0",
+    "ts-loader": "^5.1.1",
+    "tslint": "^5.14.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.0.3"
   }
 }
