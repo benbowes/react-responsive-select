@@ -21,7 +21,7 @@ Built with keyboard and screen reader accessibility in mind.
 
 ## Demo
 
-https://benbowes.github.io/react-responsive-select/demo/
+https://benbowes.github.io/react-responsive-select-next/
 
 ## Codepen
 
@@ -31,7 +31,7 @@ https://benbowes.github.io/react-responsive-select/demo/
 
 ## Screen reader demo
 
-![Voice over demo gif](./demo/react-responsive-select-voice-over.gif)
+![Voice over demo gif](./docs/react-responsive-select-voice-over.gif)
 
 ---
 
