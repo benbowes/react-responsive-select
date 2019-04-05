@@ -7,7 +7,7 @@
     "compile": "rm -rf dist && tsc && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "echo \"Test step is yet to be implemented\"",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "deploy-storybook": "storybook-to-ghpages",
+    "deploy-storybook": "auto/deploy-storybook.sh",
     "start": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
