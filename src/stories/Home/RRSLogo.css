@@ -1,0 +1,13 @@
+.RRSLogo {
+  /* background: rgba(255,255,255,0.05); */
+  /* margin: 0rem 0 2rem 0; */
+  display: inline-block;
+  width: 170px;
+  height: 120px;
+  /* border-radius: 60%; */
+  /* padding: 2.25rem 0.25rem 0 0.75rem; */
+}
+
+.RRSLogo * {
+  stroke: #333;
+}
