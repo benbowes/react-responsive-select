@@ -8,3 +8,7 @@
 .controlling-radio {
   margin: 0.5rem;
 }
+
+.first-letter-instructions b {
+  font-size: 1.5rem;
+}

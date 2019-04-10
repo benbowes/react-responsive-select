@@ -5,6 +5,7 @@ addParameters({
   options: {
     panelPosition: 'right',
     name: 'React Responsive Select',
+    url: '/',
     showPanel: false,
     isToolshown: false,
   },

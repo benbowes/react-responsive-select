@@ -2,22 +2,22 @@ import * as React from 'react';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
 import { CaretIcon } from '../components/CaretIcon';
 import { Context } from './Context';
-import { IState } from './types';
+import { IContext } from './types';
 
 import '../../ReactResponsiveSelect.css';
 import './Controlled.css';
 
-export const Form = (): React.ReactElement => (
+export const Form = (): React.ReactElement<HTMLFormElement> => (
     <Context.Consumer>
         {({
             isSingleSelect,
             isDisabled,
-            initialSingleSelectOptions,
-            // initialSelectedValue,
-            // initialSelectedValues,
             selectedValue,
             selectedValues,
-            initialMultiSelectOptions,
+            initialState: {
+                singleSelectOptions,
+                multiSelectOptions,
+            },
             functions: {
                 handleSelectOption,
                 handleSingleSelectChange,
@@ -27,17 +27,16 @@ export const Form = (): React.ReactElement => (
                 handleDisabledChange,
                 handleSubmit,
             },
-        }: IState): React.ReactElement => (
+        }: IContext): React.ReactElement<HTMLFormElement> => (
                 <form>
                     {isSingleSelect
                         ? (
                             <ReactResponsiveSelect
                                 name="make1"
                                 disabled={isDisabled}
-                                options={initialSingleSelectOptions}
+                                options={singleSelectOptions}
                                 caretIcon={<CaretIcon />}
                                 prefix="Make1: "
-                                // altered={initialSelectedValue !== selectedValue}
                                 selectedValue={selectedValue}
                                 onChange={handleSingleSelectChange}
                                 onSubmit={handleSubmit}
@@ -48,10 +47,7 @@ export const Form = (): React.ReactElement => (
                                 multiselect={true}
                                 disabled={isDisabled}
                                 name="make2"
-                                // altered={
-                                //     initialSelectedValues.join('_') !== selectedValues.join('_')
-                                // }
-                                options={initialMultiSelectOptions}
+                                options={multiSelectOptions}
                                 caretIcon={<CaretIcon />}
                                 noSelectionLabel="Please select"
                                 selectedValues={selectedValues}
@@ -89,9 +85,8 @@ export const Form = (): React.ReactElement => (
                             />
                         )}
 
-                        <span>
-                            Possible options are: <b>
-                                a</b>lfa-romeo, <b>b</b>mw, <b>f</b>iat, <b>l</b>exus, <b>m</b>organ, <b>s</b>ubaru
+                        <span className="first-letter-instructions">
+                            <b>a</b>lfa-romeo, <b>b</b>mw, <b>f</b>iat, <b>l</b>exus, <b>m</b>organ, <b>s</b>ubaru
                         </span>
 
                         <br/>{' '}<br/>

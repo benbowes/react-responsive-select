@@ -6,7 +6,6 @@ import { MultiSelectOptionMarkup } from '../components/MultiSelectOptionMarkup';
 import { ViewIframe } from '../components/ViewIframe';
 import { FeaturesList } from './FeaturesList';
 import { Header } from './Header';
-// import { LogoLinks } from './LogoLinks';
 
 import '../../ReactResponsiveSelect.css';
 import '../stories.css';
@@ -65,50 +64,22 @@ stories.add(
                                 {
                                     value: 'bmw',
                                     text: 'BMW',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                B
-                        </span>{' '}
-                                            BMW
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">B</span>{' '}BMW</span>,
                                 },
                                 {
                                     value: 'fiat',
                                     text: 'Fiat',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                F
-                        </span>{' '}
-                                            Fiat
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">F</span>{' '}Fiat</span>,
                                 },
                                 {
                                     value: 'subaru',
                                     text: 'Subaru',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                S
-                        </span>{' '}
-                                            Subaru
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">S</span>{' '}Subaru</span>,
                                 },
                                 {
                                     value: 'tesla',
                                     text: 'Tesla',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                T
-                        </span>{' '}
-                                            Tesla
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">T</span>{' '}Tesla</span>,
                                 },
                             ]}
                             onSubmit={(): void  => {
@@ -133,50 +104,22 @@ stories.add(
                                 {
                                     value: 'bmw',
                                     text: 'BMW',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                B
-                        </span>{' '}
-                                            BMW
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">B</span>{' '}BMW</span>,
                                 },
                                 {
                                     value: 'fiat',
                                     text: 'Fiat',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                F
-                        </span>{' '}
-                                            Fiat
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">F</span>{' '}Fiat</span>,
                                 },
                                 {
                                     value: 'subaru',
                                     text: 'Subaru',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                S
-                        </span>{' '}
-                                            Subaru
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">S</span>{' '}Subaru</span>,
                                 },
                                 {
                                     value: 'tesla',
                                     text: 'Tesla',
-                                    markup: (
-                                        <span>
-                                            <span className="badge" aria-hidden="true">
-                                                T
-                        </span>{' '}
-                                            Tesla
-                        </span>
-                                    ),
+                                    markup: <span><span className="badge" aria-hidden="true">T</span>{' '}Tesla</span>,
                                 },
                             ]}
                             onSubmit={(): void  => {
@@ -205,57 +148,57 @@ stories.add(
                                 {
                                     text: 'Any',
                                     value: 'null',
-                                    markup: MultiSelectOptionMarkup('Any'),
+                                    markup: <MultiSelectOptionMarkup text="Any" />,
                                 },
                                 {
                                     text: 'AMC',
                                     value: 'amc',
-                                    markup: MultiSelectOptionMarkup('AMC'),
+                                    markup: <MultiSelectOptionMarkup text="AMC" />,
                                 },
                                 {
                                     text: 'BMW',
                                     value: 'bmw',
-                                    markup: MultiSelectOptionMarkup('BMW'),
+                                    markup: <MultiSelectOptionMarkup text="BMW" />,
                                 },
                                 {
                                     text: 'Delorean',
                                     value: 'delorean',
-                                    markup: MultiSelectOptionMarkup('Delorean'),
+                                    markup: <MultiSelectOptionMarkup text="Delorean" />,
                                 },
                                 {
                                     text: 'Fiat',
                                     value: 'fiat',
-                                    markup: MultiSelectOptionMarkup('Fiat'),
+                                    markup: <MultiSelectOptionMarkup text="Fiat" />,
                                 },
                                 {
                                     text: 'Ford',
                                     value: 'ford',
-                                    markup: MultiSelectOptionMarkup('Ford'),
+                                    markup: <MultiSelectOptionMarkup text="Ford" />,
                                 },
                                 {
                                     text: 'Mazda',
                                     value: 'mazda',
-                                    markup: MultiSelectOptionMarkup('Mazda'),
+                                    markup: <MultiSelectOptionMarkup text="Mazda" />,
                                 },
                                 {
                                     text: 'Oldsmobile',
                                     value: 'oldsmobile',
-                                    markup: MultiSelectOptionMarkup('Oldsmobile'),
+                                    markup: <MultiSelectOptionMarkup text="Oldsmobile" />,
                                 },
                                 {
                                     text: 'Subaru',
                                     value: 'subaru',
-                                    markup: MultiSelectOptionMarkup('Subaru'),
+                                    markup: <MultiSelectOptionMarkup text="Subaru" />,
                                 },
                                 {
                                     text: 'Tesla',
                                     value: 'tesla',
-                                    markup: MultiSelectOptionMarkup('Tesla'),
+                                    markup: <MultiSelectOptionMarkup text="Tesla" />,
                                 },
                                 {
                                     text: 'Toyota',
                                     value: 'toyota',
-                                    markup: MultiSelectOptionMarkup('Toyota'),
+                                    markup: <MultiSelectOptionMarkup text="Toyota" />,
                                 },
                             ]}
                             onSubmit={(): void  => {

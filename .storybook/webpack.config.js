@@ -15,20 +15,15 @@ module.exports = async ({ config }) => {
           reportFiles: ["../src"]
         }
       },
-      require.resolve("react-docgen-typescript-loader"),
+      {
+        loader: require.resolve("react-docgen-typescript-loader"),
+        // options: {
+        //   skipPropsWithoutDoc: true,
+        // }
+      },
     ]
   });
   config.resolve.extensions.push(".ts", ".tsx");
 
   return config;
 };
-
-// config.module.rules.push({
-//   test: /\.(ts|tsx)$/,
-//   loader: require.resolve('babel-loader'),
-//   options: {
-//     presets: [['react-app', { flow: false, typescript: true }]],
-//   },
-// });
-// config.resolve.extensions.push('.ts', '.tsx');
-// return config;

@@ -1,11 +1,7 @@
 import * as React from 'react';
-// import { RRSLogo } from './RRSLogo';
-// <RRSLogo />
-import { LogoLinks } from './LogoLinks';
-
 import './Header.css';
 
-export const Header = (): React.ReactElement => (
+export const Header = (): React.ReactElement<HTMLDivElement> => (
     <div className="header">
         <div className="header__wrapper">
             <div>
@@ -14,7 +10,6 @@ export const Header = (): React.ReactElement => (
                     A customisable, touchable, <b>React select</b> / <b>multi-select</b> form component.
                     <br />Built with keyboard and screen reader accessibility in mind.
                 </h2>
-                {/* <LogoLinks /> */}
             </div>
         </div>
     </div>

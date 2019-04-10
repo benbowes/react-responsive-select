@@ -1,67 +1,68 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { wInfo } from '../../utils/wInfo';
+import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
 import { MultiSelectOptionMarkup } from '../components/MultiSelectOptionMarkup';
 import { Context } from './Context';
 import { Form } from './Form';
-import { IState } from './types';
+import { IContext, INewSingleSelectValue, INewMultiSelectValue } from './types';
+import { IOption } from '../../types/index'; // from ReactResponsiceSelect types
 
-class ControlledExampleApp extends React.Component<{}, IState> {
+class ControlledExampleApp extends React.Component<{}, IContext> {
     constructor(props: {}) {
         super(props);
         this.state = {
             selectedValue: 'null',
-            initialSelectedValue: 'null',
             selectedValues: [],
-            initialSelectedValues: [],
             isSingleSelect: true,
             isDisabled: false,
-            initialSingleSelectOptions: [
-                { value: 'null', text: 'Any' },
-                { value: 'alfa-romeo', text: 'Alfa Romeo' },
-                { value: 'bmw', text: 'BMW' },
-                { value: 'fiat', text: 'Fiat' },
-                { value: 'lexus', text: 'Lexus' },
-                { value: 'morgan', text: 'Morgan' },
-                { value: 'subaru', text: 'Subaru' },
-            ],
-            initialMultiSelectOptions: [
-                {
-                    value: 'null',
-                    text: 'Any',
-                    markup: <MultiSelectOptionMarkup text="Any" />,
-                },
-                {
-                    value: 'alfa-romeo',
-                    text: 'Alfa Romeo',
-                    markup: <MultiSelectOptionMarkup text="Alfa Romeo" />,
-                },
-                {
-                    value: 'bmw',
-                    text: 'BMW',
-                    markup: <MultiSelectOptionMarkup text="BMW" />,
-                },
-                {
-                    value: 'fiat',
-                    text: 'Fiat',
-                    markup: <MultiSelectOptionMarkup text="Fiat" />,
-                },
-                {
-                    value: 'lexus',
-                    text: 'Lexus',
-                    markup: <MultiSelectOptionMarkup text="Lexus" />,
-                },
-                {
-                    value: 'morgan',
-                    text: 'Morgan',
-                    markup: <MultiSelectOptionMarkup text="Morgan" />,
-                },
-                {
-                    value: 'subaru',
-                    text: 'Subaru',
-                    markup: <MultiSelectOptionMarkup text="Subaru" />,
-                },
-            ],
+            initialState: {
+                singleSelectOptions: [
+                    { value: 'null', text: 'Any' },
+                    { value: 'alfa-romeo', text: 'Alfa Romeo' },
+                    { value: 'bmw', text: 'BMW' },
+                    { value: 'fiat', text: 'Fiat' },
+                    { value: 'lexus', text: 'Lexus' },
+                    { value: 'morgan', text: 'Morgan' },
+                    { value: 'subaru', text: 'Subaru' },
+                ],
+                multiSelectOptions: [
+                    {
+                        value: 'null',
+                        text: 'Any',
+                        markup: <MultiSelectOptionMarkup text="Any" />,
+                    },
+                    {
+                        value: 'alfa-romeo',
+                        text: 'Alfa Romeo',
+                        markup: <MultiSelectOptionMarkup text="Alfa Romeo" />,
+                    },
+                    {
+                        value: 'bmw',
+                        text: 'BMW',
+                        markup: <MultiSelectOptionMarkup text="BMW" />,
+                    },
+                    {
+                        value: 'fiat',
+                        text: 'Fiat',
+                        markup: <MultiSelectOptionMarkup text="Fiat" />,
+                    },
+                    {
+                        value: 'lexus',
+                        text: 'Lexus',
+                        markup: <MultiSelectOptionMarkup text="Lexus" />,
+                    },
+                    {
+                        value: 'morgan',
+                        text: 'Morgan',
+                        markup: <MultiSelectOptionMarkup text="Morgan" />,
+                    },
+                    {
+                        value: 'subaru',
+                        text: 'Subaru',
+                        markup: <MultiSelectOptionMarkup text="Subaru" />,
+                    },
+                ],
+            },
             functions: {
                 handleSelectOption: this.handleSelectOption,
                 handleSelectOptions: this.handleSelectOptions,
@@ -74,22 +75,8 @@ class ControlledExampleApp extends React.Component<{}, IState> {
         };
     }
 
-    public getMultiSelectValue = (newValue: {
-        options: Array<{
-            name: string;
-            text: string;
-            value: string;
-        }>;
-        altered?: boolean;
-    }): {
-        [key: string]: {
-            options: Array<{
-                name: string;
-                text: string;
-                value: string;
-            }>;
-            altered?: boolean;
-        },
+    public getMultiSelectValue = (newValue: INewMultiSelectValue): {
+        [key: string]: INewMultiSelectValue,
     } => ({
         [newValue.options[0].name]: {
             options: [...newValue.options],
@@ -97,32 +84,30 @@ class ControlledExampleApp extends React.Component<{}, IState> {
         },
     })
 
-    public handleSelectOption = (e: any): void => {
-        const { initialSingleSelectOptions } = this.state;
-        const firstLetter = e.target.value.charAt(0);
-        const foundValue: any =
-            initialSingleSelectOptions.filter(
-                (v: { value: string }) => v.value.charAt(0) === firstLetter,
+    public handleSelectOption = (event: any): void => {
+        const { initialState } = this.state;
+        const firstLetter = event.target.value.charAt(0);
+        const foundValue: { text?: string; value?: string; } =
+        initialState.singleSelectOptions.filter(
+                (option: { value: string }) => option.value.charAt(0) === firstLetter,
             )[0] || {};
 
-        this.setState({
-            selectedValue: foundValue.value || '',
-        });
+        this.setState({ selectedValue: foundValue.value || '' });
     }
 
-    public handleSelectOptions = ({ target: { value = '' }}: any): void => {
-        const { initialMultiSelectOptions } = this.state;
+    public handleSelectOptions = ({ target: { value = '' }}: any ): void => {
+        const { initialState } = this.state;
         const firstLetters = value.split(',');
-        const foundValues = initialMultiSelectOptions
-            .filter((option: any) =>
+        const foundValues = initialState.multiSelectOptions
+            .filter((option: IOption) =>
                 firstLetters.some((letter: string) => option.value.charAt(0) === letter.charAt(0)),
             )
-            .map((option: any) => option.value);
+            .map((option: IOption) => option.value);
 
         this.setState({ selectedValues: foundValues });
     }
 
-    public handleSingleSelectChange = (newValue: any): void => {
+    public handleSingleSelectChange = (newValue: INewSingleSelectValue): void => {
         const formValue = {
             [newValue.name]: {
                 text: newValue.text,
@@ -132,32 +117,30 @@ class ControlledExampleApp extends React.Component<{}, IState> {
             selectedValue: newValue.value,
         };
 
-        // Merge new value over top of existing value
-        this.setState({ ...this.state, ...formValue }, () =>
-            console.log('handleChange()', this.state),
-        );
+        this.setState({ ...this.state, ...formValue });
     }
 
-    public handleMultiSelectChange = (newValue: any): void => {
+    public handleMultiSelectChange = (newValue: INewMultiSelectValue): void => {
         const formValue = this.getMultiSelectValue(newValue);
-        console.log(newValue);
-        // Merge new value over top of existing value
+
         this.setState({
             ...this.state,
             ...formValue,
             selectedValues: newValue.options.reduce(
-                (acc: any, v: any) => (v.value !== 'null' ? [...acc, v.value] : acc),
+                (acc: string[], option: IOption) => (
+                    option.value !== 'null' ? [...acc, option.value] : acc
+                ),
                 [],
             ),
         });
     }
 
-    public handleSelectTypeChange = (e: any): void => {
-        this.setState({ isSingleSelect: e.target.value === 'single-select' });
+    public handleSelectTypeChange = (event: any): void => {
+        this.setState({ isSingleSelect: event.target.value === 'single-select' });
     }
 
-    public handleDisabledChange = (e: any): void => {
-        this.setState({ isDisabled: e.target.checked });
+    public handleDisabledChange = (event: any): void => {
+        this.setState({ isDisabled: event.target.checked });
     }
 
     public handleSubmit = (): void => {
@@ -181,7 +164,7 @@ const stories = storiesOf('Controlled', module);
 
 stories.add(
     'Using RRS as a controlled component with the ContextAPI',
-    wInfo()(() => (
+    withStoryBookInfo()(() => (
         <ControlledExampleApp />
     )),
 );

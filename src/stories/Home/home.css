@@ -7,7 +7,6 @@
 }
 
 .home h1 {
-  /* color: #ffffff; */
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.75px;
@@ -21,20 +20,17 @@
   border-top: #9fc5d4 solid 2px;
   line-height: 1;
   padding: 2rem 0 0 0;
-  margin: 0 0 .5rem 0;
-  font-size: 1.25rem;
-  font-weight: 400;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
   display: block;
 }
 
 .home h2.subh1 {
-  /* color: rgba(255, 255, 255, 0.9); */
   font-weight: 400;
   margin: 0;
   padding: 0;
   line-height: 1.4;
   border: 0;
-  /* max-width: 90%; */
 }
 
 .home .row:first-of-type h2 {
@@ -43,6 +39,7 @@
 
 .home h3 {
   font-weight: 400;
+  margin: 0 0 1rem 0;
 }
 
 .home h4 {

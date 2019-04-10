@@ -1,20 +1,17 @@
-// import { action } from '@storybook/addon-actions';
-// import { /* boolean, text, */withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
-import { wInfo } from '../../utils/wInfo';
+import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
 import { CaretIcon } from '../components/CaretIcon';
 
 import '../../ReactResponsiveSelect.css';
 import '../stories.css';
 
 const stories = storiesOf('Single Select', module);
-// stories.addDecorator(withKnobs);
 
 stories.add(
     'No selection label (noSelectionLabel)',
-    wInfo()(() => (
+    withStoryBookInfo()(() => (
         <ReactResponsiveSelect
             noSelectionLabel="Please select"
             name="make2"

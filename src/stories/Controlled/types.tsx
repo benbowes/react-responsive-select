@@ -1,23 +1,42 @@
-export interface IState {
+export interface IContext {
     selectedValue: string;
-    initialSelectedValue: string;
     selectedValues: string[];
-    initialSelectedValues: string[];
     isSingleSelect: boolean;
     isDisabled: boolean;
-    initialSingleSelectOptions: Array<{ value: string; text: string; }>;
-    initialMultiSelectOptions: Array<{
-        value: string;
-        text: string;
-        markup: React.ReactElement;
-    }>;
+    initialState: {
+        singleSelectOptions: Array<{
+            value: string;
+            text: string;
+        }>;
+        multiSelectOptions: Array<{
+            value: string;
+            text: string;
+            markup: React.ReactNode;
+        }>;
+    }
     functions: {
         handleSelectOption?: (event: any) => void,
         handleSelectOptions?: (event: any) => void,
-        handleSingleSelectChange?: (event: any) => void,
-        handleMultiSelectChange?: (newValue: { text: string; value: string; altered: boolean; }) => void,
+        handleSingleSelectChange?: (newValue: INewSingleSelectValue) => void,
+        handleMultiSelectChange?: (newValue: INewMultiSelectValue) => void,
         handleSelectTypeChange?: (event: any) => void,
         handleDisabledChange?: (event: any) => void,
         handleSubmit?: () => void,
     };
+}
+
+export interface INewMultiSelectValue {
+    options: Array<{
+        text: string;
+        value: string;
+        name: string;
+    }>;
+    altered: boolean;
+}
+
+export interface INewSingleSelectValue {
+    text: string;
+    value: string;
+    altered: boolean;
+    name: string;
 }
