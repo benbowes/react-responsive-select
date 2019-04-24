@@ -51,11 +51,7 @@ export const Form = (): React.ReactElement<HTMLFormElement> => (
                                 caretIcon={<CaretIcon />}
                                 noSelectionLabel="Please select"
                                 selectedValues={selectedValues}
-                                onChange={(newValue: any): void => {
-                                    if (handleMultiSelectChange !== undefined) {
-                                        handleMultiSelectChange(newValue);
-                                    }
-                                }}
+                                onChange={handleMultiSelectChange}
                                 onSubmit={handleSubmit}
                             />
                         )
@@ -70,18 +66,20 @@ export const Form = (): React.ReactElement<HTMLFormElement> => (
                             <input
                                 className="controlling-input"
                                 type="text"
+                                autoFocus={true}
                                 name="firstLetter"
                                 placeholder="Select option by typing the first letter"
-                                onKeyUp={(e: any): void => handleSelectOption && handleSelectOption(e)}
+                                onKeyUp={handleSelectOption}
                             />
                         )
                         : (
                             <input
                                 className="controlling-input"
                                 type="text"
+                                autoFocus={true}
                                 name="firstLetters"
                                 placeholder="Select options via comma-delimited first letters e.g. 'a,s,f'"
-                                onKeyUp={(e: any): void => handleSelectOptions && handleSelectOptions(e)}
+                                onKeyUp={handleSelectOptions}
                             />
                         )}
 
@@ -91,41 +89,47 @@ export const Form = (): React.ReactElement<HTMLFormElement> => (
 
                         <br/>{' '}<br/>
 
-                        <div>
-                            <label>
-                                <input
-                                    className="controlling-radio"
-                                    checked={isSingleSelect}
-                                    onChange={handleSelectTypeChange}
-                                    type="radio"
-                                    name="selectType"
-                                    value="single-select"
-                                />
-                                Single Select
-                            </label>
-                            <label>
-                                <input
-                                    className="controlling-radio"
-                                    checked={!isSingleSelect}
-                                    onChange={handleSelectTypeChange}
-                                    type="radio"
-                                    name="selectType"
-                                    value="multi-select"
-                                />
-                                Multi Select
-                            </label>
-                            <label>
-                                <input
-                                    className="controlling-radio"
-                                    checked={isDisabled}
-                                    onChange={handleDisabledChange}
-                                    type="checkbox"
-                                    name="disabled"
-                                    value="is-disabled"
-                                />
-                                Disabled
-                            </label>
-                        </div>
+                        <ul>
+                            <li>
+                                <label>
+                                    <input
+                                        className="controlling-radio"
+                                        checked={isSingleSelect}
+                                        onChange={handleSelectTypeChange}
+                                        type="radio"
+                                        name="selectType"
+                                        value="single-select"
+                                    />
+                                    Single Select
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input
+                                        className="controlling-radio"
+                                        checked={!isSingleSelect}
+                                        onChange={handleSelectTypeChange}
+                                        type="radio"
+                                        name="selectType"
+                                        value="multi-select"
+                                    />
+                                    Multi Select
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input
+                                        className="controlling-radio"
+                                        checked={isDisabled}
+                                        onChange={handleDisabledChange}
+                                        type="checkbox"
+                                        name="disabled"
+                                        value="is-disabled"
+                                    />
+                                    Disabled
+                                </label>
+                            </li>
+                        </ul>
                     </fieldset>
                 </form>
             )}

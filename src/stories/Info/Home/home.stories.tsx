@@ -1,15 +1,15 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import ReactResponsiveSelect from '../../ReactResponsiveSelect';
-import { CaretIcon } from '../components/CaretIcon';
-import { MultiSelectOptionMarkup } from '../components/MultiSelectOptionMarkup';
-import { ViewIframe } from '../components/ViewIframe';
+import ReactResponsiveSelect from '../../../ReactResponsiveSelect';
+import { CaretIcon } from '../../components/CaretIcon';
+import { MultiSelectOptionMarkup } from '../../components/MultiSelectOptionMarkup';
+import { ViewIframe } from '../../components/ViewIframe';
 import { FeaturesList } from './FeaturesList';
 import { Header } from './Header';
 
-import '../../ReactResponsiveSelect.css';
-import '../stories.css';
-import './home.css';
+import '../../../ReactResponsiveSelect.css';
+import '../../stories.css';
+import './Home.css';
 
 const stories = storiesOf('Info', module);
 

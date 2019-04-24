@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CheckboxIcon } from '../components/MultiSelectOptionMarkup';
+import { CheckboxIcon } from '../../components/MultiSelectOptionMarkup';
 import './FeaturesList.css';
 
 export const FeaturesList = (): React.ReactElement => (

@@ -3,18 +3,9 @@ import * as React from 'react';
 import singleline from 'singleline-next';
 import * as actionTypes from './constants/actionTypes';
 import debugReportChange from './lib/debugReportChange';
-import {
-  handleBlur,
-  handleClick,
-  handleKeyEvent,
-  handleTouchMove,
-  handleTouchStart,
-} from './lib/eventHandlers';
+import { handleBlur, handleClick, handleKeyEvent, handleTouchMove, handleTouchStart } from './lib/eventHandlers';
 import getCustomLabelText from './lib/getCustomLabelText';
-import {
-  multiSelectBroadcastChange,
-  singleSelectBroadcastChange,
-} from './lib/onChangeBroadcasters';
+import { multiSelectBroadcastChange, singleSelectBroadcastChange } from './lib/onChangeBroadcasters';
 import initialState from './reducers/initialState';
 import reducer from './reducers/reducer';
 import { IAction, IProps, IState } from './types/';
@@ -22,10 +13,7 @@ import { IAction, IProps, IState } from './types/';
 import MultiSelect from './components/MultiSelect';
 import SingleSelect from './components/SingleSelect';
 
-export default class ReactResponsiveSelect extends React.Component<
-  IProps,
-  IState
-> {
+export default class ReactResponsiveSelect extends React.Component<IProps, IState> {
   public selectBox: HTMLDivElement | null;
   private reducer: (state: IState, action: IAction) => IState;
 
@@ -102,10 +90,7 @@ export default class ReactResponsiveSelect extends React.Component<
     return true;
   }
 
-  public updateState(
-    action: IAction,
-    callback?: (nextState: IState) => any,
-  ): void {
+  public updateState(action: IAction, callback?: (nextState: IState) => any): void {
     const nextState = this.reducer(this.state, action);
     this.setState(nextState, () => {
       if (callback) {
@@ -120,7 +105,7 @@ export default class ReactResponsiveSelect extends React.Component<
   public focusButton(): void {
     const el: HTMLDivElement | null =
       this.selectBox && this.selectBox.querySelector('.rrs__button');
-    // tslint:disable-next-line
+    // tslint:disable-next-line no-unused-expression
     el && el.focus();
   }
 

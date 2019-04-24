@@ -65,6 +65,12 @@
   max-height: 230px;
 }
 
+/*
+
+  Open in a modal when smaller potentially touch screen
+
+*/
+
 @media screen and (max-width: 768px) {
   .rrs {
     position: static;
@@ -86,6 +92,7 @@
    .rrs--options-visible .rrs__options {
     max-height: initial;
     position: fixed;
+    font-size: 1.25rem;
     width: auto;
     left: 1rem;
     right: 1rem;

@@ -1,11 +1,11 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { IOption } from '../../types/index'; // from ReactResponsiceSelect types
 import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
 import { MultiSelectOptionMarkup } from '../components/MultiSelectOptionMarkup';
 import { Context } from './Context';
 import { Form } from './Form';
-import { IContext, INewSingleSelectValue, INewMultiSelectValue } from './types';
-import { IOption } from '../../types/index'; // from ReactResponsiceSelect types
+import { IContext, INewMultiSelectValue, INewSingleSelectValue } from './types';
 
 class ControlledExampleApp extends React.Component<{}, IContext> {
     constructor(props: {}) {
@@ -95,7 +95,7 @@ class ControlledExampleApp extends React.Component<{}, IContext> {
         this.setState({ selectedValue: foundValue.value || '' });
     }
 
-    public handleSelectOptions = ({ target: { value = '' }}: any ): void => {
+    public handleSelectOptions = ({ target: { value = '' }}: any): void => {
         const { initialState } = this.state;
         const firstLetters = value.split(',');
         const foundValues = initialState.multiSelectOptions
@@ -153,6 +153,7 @@ class ControlledExampleApp extends React.Component<{}, IContext> {
             <>
                 <Context.Provider value={this.state}>
                     <Form />
+                    <h3>State:</h3>
                     <pre>{JSON.stringify({ selectedValue, selectedValues, isSingleSelect, isDisabled }, null, 2)}</pre>
                 </Context.Provider>
             </>

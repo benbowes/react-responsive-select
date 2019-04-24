@@ -13,7 +13,9 @@ addParameters({
 
 function loadStories(): void {
   // Info
-  require('../src/stories/Home/home.stories.tsx');
+  require('../src/stories/Info/Home/Home.stories.tsx');
+  require('../src/stories/Info/ScreenReader/ScreenReader.stories.tsx');
+  require('../src/stories/Info/API/API.stories.tsx');
 
   // SingleSelect
   require('../src/stories/SingleSelect/basic.stories.tsx');

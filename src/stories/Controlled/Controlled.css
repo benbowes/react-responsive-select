@@ -1,8 +1,8 @@
 .controlling-input {
   width: 100%;
   margin: 1rem 0;
-  font: inherit;
-  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  padding: 1rem;
 }
 
 .controlling-radio {
@@ -10,5 +10,5 @@
 }
 
 .first-letter-instructions b {
-  font-size: 1.5rem;
+  color: #ff5722;
 }
