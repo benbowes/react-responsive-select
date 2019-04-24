@@ -11,6 +11,9 @@ export interface IProps {
   }>;
   noSelectionLabel?: string;
   onSubmit?: () => void;
+  /**
+   * singleselect mode | multiselect mode
+   */
   onChange?: (changes: {
     altered?: boolean; // Property added when outputed via onChange, onBlur etc. Passed around without this property
     text: string;
@@ -24,6 +27,9 @@ export interface IProps {
       value: string;
     }>;
   }) => void;
+  /**
+   * singleselect mode | multiselect mode
+   */
   onBlur?: (changes: {
     altered?: boolean; // Property added when outputed via onChange, onBlur etc. Passed around without this property
     text: string;
@@ -41,6 +47,9 @@ export interface IProps {
   selectedValue?: string;
   prefix?: string;
   disabled?: boolean;
+  /**
+   * singleselect mode | multiselect mode
+   */
   customLabelRenderer?: (
     selected:
       | {

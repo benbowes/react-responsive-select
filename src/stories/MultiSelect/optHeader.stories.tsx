@@ -1,8 +1,7 @@
-import { /*boolean, text, */withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
-import { wInfo } from '../../utils/wInfo';
+import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
 import { CaretIcon } from '../components/CaretIcon';
 import { MultiSelectOptionMarkup } from '../components/MultiSelectOptionMarkup';
 
@@ -10,11 +9,10 @@ import '../../ReactResponsiveSelect.css';
 import '../stories.css';
 
 const stories = storiesOf('Multi Select', module);
-stories.addDecorator(withKnobs);
 
 stories.add(
     'optHeader',
-    wInfo()(() => (
+    withStoryBookInfo()(() => (
         <ReactResponsiveSelect
             multiselect={true}
             name="make6"
@@ -23,7 +21,7 @@ stories.add(
                 {
                     value: 'any',
                     text: 'Any',
-                    markup: MultiSelectOptionMarkup('Any'),
+                    markup: <MultiSelectOptionMarkup text="Any" />,
                 },
                 {
                     text: 'Cheap',
@@ -33,17 +31,17 @@ stories.add(
                 {
                     value: 'fiat',
                     text: 'Fiat',
-                    markup: MultiSelectOptionMarkup('Fiat'),
+                    markup: <MultiSelectOptionMarkup text="Fiat" />,
                 },
                 {
                     value: 'subaru',
                     text: 'Subaru',
-                    markup: MultiSelectOptionMarkup('Subaru'),
+                    markup: <MultiSelectOptionMarkup text="Subaru" />,
                 },
                 {
                     value: 'suzuki',
                     text: 'Suzuki',
-                    markup: MultiSelectOptionMarkup('Suzuki'),
+                    markup: <MultiSelectOptionMarkup text="Suzuki" />,
                 },
                 {
                     text: 'Expensive',
@@ -53,32 +51,32 @@ stories.add(
                 {
                     value: 'bmw',
                     text: 'BMW',
-                    markup: MultiSelectOptionMarkup('BMW'),
+                    markup: <MultiSelectOptionMarkup text="BMW" />,
                 },
                 {
                     value: 'ferrari',
                     text: 'Ferrari',
-                    markup: MultiSelectOptionMarkup('Ferrari'),
+                    markup: <MultiSelectOptionMarkup text="Ferrari" />,
                 },
                 {
                     value: 'mercedes',
                     text: 'Mercedes',
-                    markup: MultiSelectOptionMarkup('Mercedes'),
+                    markup: <MultiSelectOptionMarkup text="Mercedes" />,
                 },
                 {
                     value: 'tesla',
                     text: 'Tesla',
-                    markup: MultiSelectOptionMarkup('Tesla'),
+                    markup: <MultiSelectOptionMarkup text="Tesla" />,
                 },
                 {
                     value: 'volvo',
                     text: 'Volvo',
-                    markup: MultiSelectOptionMarkup('Volvo'),
+                    markup: <MultiSelectOptionMarkup text="Volvo" />,
                 },
                 {
                     value: 'zonda',
                     text: 'Zonda',
-                    markup: MultiSelectOptionMarkup('Zonda'),
+                    markup: <MultiSelectOptionMarkup text="Zonda" />,
                 },
             ]}
             onSubmit={(): void => {

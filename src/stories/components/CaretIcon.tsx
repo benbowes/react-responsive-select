@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 /* tslint:disable:max-line-length*/
-export const CaretIcon = (): any => (
+export const CaretIcon = (): React.ReactElement => (
     <svg
         className="caret-icon"
         x="0px"
