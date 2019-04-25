@@ -1,7 +1,7 @@
 import { IState } from '../types/';
 import { nextValidIndex } from './nextValidIndex';
 
-export default function getNextIndex(
+export function getNextIndex(
   mode: 'INCREMENT' | 'DECREMENT',
   state: IState,
 ): number {

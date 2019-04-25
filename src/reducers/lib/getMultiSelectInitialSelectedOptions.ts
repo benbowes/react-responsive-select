@@ -29,7 +29,7 @@ function findClosestValidOption(state: IState): IOutputMultiSelectOption {
   };
 }
 
-export default function getMultiSelectInitialSelectedOptions(
+export function getMultiSelectInitialSelectedOptions(
   state: IState,
   selectedValues?: string[],
 ): IOutputMultiSelectOption[] {

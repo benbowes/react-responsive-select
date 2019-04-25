@@ -12,7 +12,7 @@ interface TArgs {
   props: IProps;
 }
 
-export default function handleBlur({
+export function handleBlur({
   state,
   ReactResponsiveSelectClassRef,
   props,

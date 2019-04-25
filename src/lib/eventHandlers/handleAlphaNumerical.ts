@@ -2,17 +2,13 @@ import * as actionTypes from '../../constants/actionTypes';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
 import { IOption, IState } from '../../types/';
 
-interface TArgs {
+interface IArgs {
   event: KeyboardEvent;
   state: IState;
   ReactResponsiveSelectClassRef: ReactResponsiveSelect;
 }
 
-export default ({
-  event,
-  state,
-  ReactResponsiveSelectClassRef,
-}: TArgs): void => {
+export function handleAlphaNumerical({ event, state, ReactResponsiveSelectClassRef }: IArgs): void {
   const { options, disabled } = state;
 
   if (disabled) {
@@ -29,4 +25,4 @@ export default ({
       type: actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC,
     });
   }
-};
+}

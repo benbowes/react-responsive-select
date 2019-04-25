@@ -1,4 +1,2 @@
-import multiSelectBroadcastChange from './multiSelectBroadcastChange';
-import singleSelectBroadcastChange from './singleSelectBroadcastChange';
-
-export { multiSelectBroadcastChange, singleSelectBroadcastChange };
+export { multiSelectBroadcastChange } from './multiSelectBroadcastChange';
+export { singleSelectBroadcastChange } from './singleSelectBroadcastChange';

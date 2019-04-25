@@ -1,7 +1,7 @@
 import * as React from 'react';
 import singleline from 'singleline-next';
 import { IOption, IOutputSingleSelect } from '../types/';
-import SingleSelectOption from './SingleSelectOption';
+import { SingleSelectOption } from './SingleSelectOption';
 
 interface TProps {
   prefix: string;
@@ -18,7 +18,7 @@ interface TProps {
   options: IOption[];
 }
 
-export default class SingleSelect extends React.Component<TProps> {
+export class SingleSelect extends React.Component<TProps> {
   private optionsButton: React.RefObject<HTMLDivElement>;
   private optionsContainer: React.RefObject<HTMLUListElement>;
 

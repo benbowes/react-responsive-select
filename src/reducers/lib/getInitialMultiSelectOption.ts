@@ -34,7 +34,7 @@ function findClosestValidOption(state: IState): { option: IOutputMultiSelectOpti
   return possibleOptions[0];
 }
 
-export default function getInitialMultiSelectOption(state: IState): IState {
+export function getInitialMultiSelectOption(state: IState): IState {
   const {
     option,
     index,

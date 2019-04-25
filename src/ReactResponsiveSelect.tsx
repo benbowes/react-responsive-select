@@ -2,16 +2,16 @@ import * as isEqual from 'lodash.isequal';
 import * as React from 'react';
 import singleline from 'singleline-next';
 import * as actionTypes from './constants/actionTypes';
-import debugReportChange from './lib/debugReportChange';
+import { debugReportChange } from './lib/debugReportChange';
 import { handleBlur, handleClick, handleKeyEvent, handleTouchMove, handleTouchStart } from './lib/eventHandlers';
-import getCustomLabelText from './lib/getCustomLabelText';
+import { getCustomLabelText } from './lib/getCustomLabelText';
 import { multiSelectBroadcastChange, singleSelectBroadcastChange } from './lib/onChangeBroadcasters';
-import initialState from './reducers/initialState';
-import reducer from './reducers/reducer';
+import { initialState } from './reducers/initialState';
+import { reducer } from './reducers/reducer';
 import { IAction, IProps, IState } from './types/';
 
-import MultiSelect from './components/MultiSelect';
-import SingleSelect from './components/SingleSelect';
+import { MultiSelect } from './components/MultiSelect';
+import { SingleSelect } from './components/SingleSelect';
 
 export default class ReactResponsiveSelect extends React.Component<IProps, IState> {
   public selectBox: HTMLDivElement | null;

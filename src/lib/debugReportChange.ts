@@ -1,7 +1,7 @@
 /* tslint:disable */
 import { IAction, IState } from "../types/";
 
-export default function debugReportChange(
+export function debugReportChange(
   name: string,
   action: IAction,
   nextState: IState

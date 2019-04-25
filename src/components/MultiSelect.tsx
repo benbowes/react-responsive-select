@@ -5,7 +5,7 @@ import {
   IOutputMultiSelect,
   IOutputMultiSelectOption,
 } from '../types/';
-import MultiSelectOption from './MultiSelectOption';
+import { MultiSelectOption } from './MultiSelectOption';
 
 interface TProps {
   selectBoxRef: HTMLDivElement | null;
@@ -22,7 +22,7 @@ interface TProps {
   prefix: string;
 }
 
-export default class MultiSelect extends React.Component<TProps> {
+export class MultiSelect extends React.Component<TProps> {
   private optionsButton: React.RefObject<HTMLDivElement>;
   private optionsContainer: React.RefObject<HTMLUListElement>;
 

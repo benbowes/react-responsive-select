@@ -2,24 +2,19 @@ import * as actionTypes from '../../constants/actionTypes';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
 import { IProps, IState } from '../../types/';
 
-interface TArgs {
+interface IArgs {
   event: KeyboardEvent;
   state: IState;
   props: IProps;
   ReactResponsiveSelectClassRef: ReactResponsiveSelect;
 }
 
-export default ({
-  event,
-  state,
-  props,
-  ReactResponsiveSelectClassRef,
-}: TArgs): void => {
+export function handleEnterPressed({ event, state, props, ReactResponsiveSelectClassRef }: IArgs): void {
   const {
-    multiselect,
-    isOptionsPanelOpen,
-    nextPotentialSelectionIndex,
     disabled,
+    isOptionsPanelOpen,
+    multiselect,
+    nextPotentialSelectionIndex,
     options,
   } = state;
 
@@ -54,4 +49,4 @@ export default ({
     // tslint:disable-next-line
     props.onSubmit && props.onSubmit(); // Submit the form
   }
-};
+}

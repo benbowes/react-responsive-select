@@ -1,6 +1,6 @@
 import { IOutputMultiSelectOption, IState } from '../../types/';
 
-export default function removeMultiSelectOption(
+export function removeMultiSelectOption(
   state: IState,
   indexLocation: number,
 ): {

@@ -1,7 +1,7 @@
 import { nextValidIndex } from '../../lib/nextValidIndex';
 import { IState } from '../../types/';
 
-export default function getMultiSelectSelectedValueIndexes(
+export function getMultiSelectSelectedValueIndexes(
   state: IState,
   selectedValues: string[] = [],
   noSelectionLabel?: string,
