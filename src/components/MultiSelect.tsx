@@ -65,7 +65,7 @@ export default class MultiSelect extends React.Component<TProps> {
       selectedOptionsLength === 1 ? 'is' : 'are'
     }
       ${multiSelectSelectedOptions.options
-        .map((option: IOutputMultiSelectOption): string => option.text)
+        .map((option: IOutputMultiSelectOption): string => option.text || '')
         .join(' and ')}
     `);
   }

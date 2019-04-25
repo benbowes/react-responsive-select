@@ -15,6 +15,7 @@ stories.add(
         <ReactResponsiveSelect
             name="carType1"
             options={[
+                { value: 'any', text: 'Any' },
                 { optHeader: true, text: 'Cars', value: null },
                 { value: 'alfa-romeo', text: 'Alfa Romeo' },
                 { value: 'bmw', text: 'BMW' },

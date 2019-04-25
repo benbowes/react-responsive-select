@@ -12,7 +12,7 @@ export default {
   // Single select
   singleSelectInitialIndex: 0,
   singleSelectSelectedIndex: 0,
-  singleSelectSelectedOption: { name: '', value: '', text: '' },
+  singleSelectSelectedOption: {},
 
   // For determining highlighted item on Keyboard navigation
   nextPotentialSelectionIndex: 0,
@@ -21,7 +21,7 @@ export default {
   multiSelectInitialSelectedIndexes: [0],
   multiSelectSelectedOptions: {
     altered: false,
-    options: [{ name: '', value: '', text: '' }],
+    options: [],
   },
   multiSelectSelectedIndexes: [],
 };

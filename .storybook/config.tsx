@@ -13,7 +13,7 @@ addParameters({
 
 function loadStories(): void {
   // Info
-  require('../src/stories/Info/Home/Home.stories.tsx');
+  require('../src/stories/Info/Home/HomePage.stories.tsx');
   require('../src/stories/Info/ScreenReader/ScreenReader.stories.tsx');
   require('../src/stories/Info/API/API.stories.tsx');
 
