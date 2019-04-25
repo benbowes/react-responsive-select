@@ -20,7 +20,7 @@ export default ({
   }
 
   const value = options
-    .map((option: IOption) => option.text.toLowerCase().charAt(0))
+    .map((option: IOption) => (option.text || '').toLowerCase().charAt(0))
     .indexOf(event.key);
 
   if (value > -1) {

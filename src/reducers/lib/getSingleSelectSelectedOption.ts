@@ -3,7 +3,7 @@ import { IOption, IState } from '../../types/';
 /*
   use existing state.singleSelectSelectedOption, or first possible option to use as a selection
 */
-function closestValidOption(state: IState): IOption & { name: string; } {
+function closestValidOption(state: IState): IOption & { name?: string; } {
   if (state.singleSelectSelectedOption) {
     return state.singleSelectSelectedOption;
   }
@@ -28,7 +28,7 @@ function closestValidOption(state: IState): IOption & { name: string; } {
 export default function getSingleSelectSelectedOption(
   state: IState,
   initialSelectedIndex: number = 0,
-): IOption & { name: string; } {
+): IOption & { name?: string; } {
   const selectionIndex = (initialSelectedIndex === -1 && !state.noSelectionLabel)
     ? 0
     : initialSelectedIndex;
