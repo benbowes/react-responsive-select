@@ -185,7 +185,7 @@
 .logo-link__logo {
     display: flex;
     width: 80px;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     border-right: 1px solid #ddd;
     justify-content: center;
     margin-right: 1rem;

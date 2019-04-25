@@ -3,8 +3,8 @@ import * as React from 'react';
 export interface IProps {
   name: string;
   options: Array<{
-    text: string;
-    value: string;
+    text?: string;
+    value?: string;
     optHeader?: boolean;
     markup?: React.ReactNode;
     disabled?: boolean;
@@ -16,15 +16,15 @@ export interface IProps {
    */
   onChange?: (changes: {
     altered?: boolean; // Property added when outputed via onChange, onBlur etc. Passed around without this property
-    text: string;
-    name: string;
-    value: string;
+    text?: string;
+    name?: string;
+    value?: string;
   } | {
     altered?: boolean; // Property added when outputed via onChange, onBlur etc. Passed around without this property
     options: Array<{
-      text: string;
-      name: string;
-      value: string;
+      text?: string;
+      name?: string;
+      value?: string;
     }>;
   }) => void;
   /**
@@ -32,15 +32,15 @@ export interface IProps {
    */
   onBlur?: (changes: {
     altered?: boolean; // Property added when outputed via onChange, onBlur etc. Passed around without this property
-    text: string;
-    name: string;
-    value: string;
+    text?: string;
+    name?: string;
+    value?: string;
   } | {
     altered?: boolean; // Property added when outputed via onChange, onBlur etc. Passed around without this property
     options: Array<{
-      text: string;
-      name: string;
-      value: string;
+      text?: string;
+      name?: string;
+      value?: string;
     }>;
   }) => void;
   caretIcon?: React.ReactNode;
@@ -53,14 +53,14 @@ export interface IProps {
   customLabelRenderer?: (
     selected:
       | {
-        text: string;
-        value: string;
+        text?: string;
+        value?: string;
         disabled?: boolean;
       }
       | {
         options: Array<{
-          text: string;
-          value: string;
+          text?: string;
+          value?: string;
           disabled?: boolean;
         }>;
       },
@@ -81,17 +81,17 @@ export interface IState {
   multiSelectSelectedOptions: {
     altered?: boolean;
     options: Array<{
-      value: string;
-      text: string;
-      name: string;
+      value?: string;
+      text?: string;
+      name?: string;
     }>;
   };
   multiselect: boolean;
   name: string;
   nextPotentialSelectionIndex: number;
   options: Array<{
-    text: string;
-    value: string;
+    text?: string;
+    value?: string;
     optHeader?: boolean;
     markup?: React.ReactNode;
     disabled?: boolean;
@@ -100,9 +100,9 @@ export interface IState {
   singleSelectSelectedIndex: number;
   singleSelectSelectedOption: {
     altered?: boolean; // Property added when outputed via onChange, onBlur etc. Passed around without this property
-    text: string;
-    name: string;
-    value: string;
+    text?: string;
+    name?: string;
+    value?: string;
   };
 }
 
@@ -114,33 +114,33 @@ export interface IState {
 */
 
 export interface IOption {
-  text: string;
-  value: string;
+  text?: string;
+  value?: string;
   optHeader?: boolean;
   markup?: React.ReactNode;
   disabled?: boolean;
 }
 
 export interface IOutputSingleSelect {
-  name: string;
-  text: string;
-  value: string;
+  name?: string;
+  text?: string;
+  value?: string;
   altered?: boolean;
 }
 
 export interface IOutputMultiSelect {
   options: Array<{
-    name: string;
-    text: string;
-    value: string;
+    name?: string;
+    text?: string;
+    value?: string;
   }>;
   altered?: boolean;
 }
 
 export interface IOutputMultiSelectOption {
-  name: string;
-  text: string;
-  value: string;
+  name?: string;
+  text?: string;
+  value?: string;
   disabled?: boolean;
 }
 

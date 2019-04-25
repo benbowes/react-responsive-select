@@ -9,7 +9,7 @@ import { Header } from './Header';
 
 import '../../../ReactResponsiveSelect.css';
 import '../../stories.css';
-import './Home.css';
+import './HomePage.css';
 
 const stories = storiesOf('Info', module);
 
