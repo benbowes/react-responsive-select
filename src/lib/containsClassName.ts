@@ -1,4 +1,4 @@
-export default function containsClassName(
+export function containsClassName(
   element: HTMLElement,
   classNameStr: string,
 ): boolean {

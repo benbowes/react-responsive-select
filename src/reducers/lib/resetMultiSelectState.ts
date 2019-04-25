@@ -1,7 +1,7 @@
 import { IState } from '../../types/';
-import initialState from '../initialState';
+import { initialState } from '../initialState';
 
-export default function resetMultiSelectState(state: IState): IState {
+export function resetMultiSelectState(state: IState): IState {
   return {
     // reset multiSelect state
     ...state,

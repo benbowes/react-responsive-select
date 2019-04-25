@@ -1,19 +1,8 @@
-import handleAlphaNumerical from './handleAlphaNumerical';
-import handleBlur from './handleBlur';
-import handleClick from './handleClick';
-import handleEnterPressed from './handleEnterPressed';
-import handleKeyEvent from './handleKeyEvent';
-import handleKeyUpOrDownPressed from './handleKeyUpOrDownPressed';
-import handleTouchMove from './handleTouchMove';
-import handleTouchStart from './handleTouchStart';
-
-export {
-  handleAlphaNumerical,
-  handleBlur,
-  handleClick,
-  handleEnterPressed,
-  handleKeyEvent,
-  handleKeyUpOrDownPressed,
-  handleTouchMove,
-  handleTouchStart,
-};
+export { handleAlphaNumerical } from './handleAlphaNumerical';
+export { handleBlur } from './handleBlur';
+export { handleClick } from './handleClick';
+export { handleEnterPressed } from './handleEnterPressed';
+export { handleKeyEvent } from './handleKeyEvent';
+export { handleKeyUpOrDownPressed } from './handleKeyUpOrDownPressed';
+export { handleTouchMove } from './handleTouchMove';
+export { handleTouchStart } from './handleTouchStart';

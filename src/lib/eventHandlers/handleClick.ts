@@ -1,6 +1,6 @@
 import * as actionTypes from '../../constants/actionTypes';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
-import containsClassName from '../containsClassName';
+import { containsClassName } from '../containsClassName';
 
 import { IState } from '../../types/';
 
@@ -10,7 +10,7 @@ interface TArgs {
   ReactResponsiveSelectClassRef: ReactResponsiveSelect;
 }
 
-export default function handleClick({
+export function handleClick({
   event,
   state,
   ReactResponsiveSelectClassRef,

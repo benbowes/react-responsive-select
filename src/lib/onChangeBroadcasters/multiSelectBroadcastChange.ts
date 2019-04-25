@@ -1,12 +1,12 @@
 import * as isEqual from 'lodash.isequal';
 import { IOutputMultiSelect, IOutputMultiSelectOption } from '../../types/';
 
-export default (
+export function multiSelectBroadcastChange(
   currOptions: IOutputMultiSelectOption[],
   altered: boolean,
   fn?: (changes: IOutputMultiSelect) => void,
   prevOptions?: IOutputMultiSelectOption[],
-): void => {
+): void {
   if (!fn) {
     return;
   }
@@ -24,4 +24,4 @@ export default (
       altered,
     });
   }
-};
+}

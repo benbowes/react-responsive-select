@@ -12,7 +12,7 @@ interface TProps {
   optHeaderLabel: string;
 }
 
-export default class SingleSelectOption extends React.Component<TProps> {
+export class SingleSelectOption extends React.Component<TProps> {
   private optionRef: React.RefObject<HTMLLIElement>;
   private scrollOffset: number;
 

@@ -16,7 +16,7 @@ import {
   resetMultiSelectState,
 } from './lib';
 
-export default function reducer(state: IState, action: IAction): IState {
+export function reducer(state: IState, action: IAction): IState {
   switch (action.type) {
     case actionTypes.UPDATE_VIA_PROPS:
     case actionTypes.INITIALISE: {

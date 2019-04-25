@@ -1,7 +1,7 @@
 import * as actionTypes from '../../constants/actionTypes';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
 import { IState } from '../../types/';
-import getNextIndex from '../getNextIndex';
+import { getNextIndex } from '../getNextIndex';
 
 interface TArgs {
   state: IState;
@@ -9,7 +9,7 @@ interface TArgs {
   ReactResponsiveSelectClassRef: ReactResponsiveSelect;
 }
 
-export default function handleKeyUpOrDownPressed({
+export function handleKeyUpOrDownPressed({
   state,
   ReactResponsiveSelectClassRef,
   type,

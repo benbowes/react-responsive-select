@@ -6,7 +6,7 @@ interface TArgs {
   noSelectionLabel: string;
 }
 
-export default function getSelectedValueIndex({
+export function getSelectedValueIndex({
   options,
   selectedValue,
   noSelectionLabel,

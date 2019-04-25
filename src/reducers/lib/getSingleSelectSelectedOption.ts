@@ -25,7 +25,7 @@ function closestValidOption(state: IState): IOption & { name?: string; } {
   };
 }
 
-export default function getSingleSelectSelectedOption(
+export function getSingleSelectSelectedOption(
   state: IState,
   initialSelectedIndex: number = 0,
 ): IOption & { name?: string; } {

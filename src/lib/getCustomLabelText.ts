@@ -6,7 +6,7 @@ interface TArgs {
   props: IProps;
 }
 
-export default function getCustomLabelText({
+export function getCustomLabelText({
   state,
   props,
 }: TArgs): React.ReactNode {

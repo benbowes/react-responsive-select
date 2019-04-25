@@ -1,25 +1,11 @@
-import addMultiSelectIndex from './addMultiSelectIndex';
-import addMultiSelectOption from './addMultiSelectOption';
-import getInitialMultiSelectOption from './getInitialMultiSelectOption';
-import getMultiSelectInitialSelectedOptions from './getMultiSelectInitialSelectedOptions';
-import getMultiSelectSelectedValueIndexes from './getMultiSelectSelectedValueIndexes';
-import getSelectedValueIndex from './getSelectedValueIndex';
-import getSingleSelectSelectedOption from './getSingleSelectSelectedOption';
-import mergeIsAlteredState from './mergeIsAlteredState';
-import removeMultiSelectIndex from './removeMultiSelectIndex';
-import removeMultiSelectOption from './removeMultiSelectOption';
-import resetMultiSelectState from './resetMultiSelectState';
-
-export {
-  getSelectedValueIndex,
-  getMultiSelectSelectedValueIndexes,
-  getMultiSelectInitialSelectedOptions,
-  addMultiSelectIndex,
-  removeMultiSelectIndex,
-  addMultiSelectOption,
-  removeMultiSelectOption,
-  mergeIsAlteredState,
-  getInitialMultiSelectOption,
-  getSingleSelectSelectedOption,
-  resetMultiSelectState,
-};
+export { addMultiSelectIndex } from './addMultiSelectIndex';
+export { addMultiSelectOption } from './addMultiSelectOption';
+export { getInitialMultiSelectOption } from './getInitialMultiSelectOption';
+export { getMultiSelectInitialSelectedOptions } from './getMultiSelectInitialSelectedOptions';
+export { getMultiSelectSelectedValueIndexes } from './getMultiSelectSelectedValueIndexes';
+export { getSelectedValueIndex } from './getSelectedValueIndex';
+export { getSingleSelectSelectedOption } from './getSingleSelectSelectedOption';
+export { mergeIsAlteredState } from './mergeIsAlteredState';
+export { removeMultiSelectIndex } from './removeMultiSelectIndex';
+export { removeMultiSelectOption } from './removeMultiSelectOption';
+export { resetMultiSelectState } from './resetMultiSelectState';

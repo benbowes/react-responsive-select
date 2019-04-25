@@ -12,7 +12,7 @@ interface TProps {
   option: IOption;
 }
 
-export default class MultiSelectOption extends React.Component<TProps> {
+export class MultiSelectOption extends React.Component<TProps> {
   private optionRef: React.RefObject<HTMLLIElement>;
   private scrollOffset: number;
 

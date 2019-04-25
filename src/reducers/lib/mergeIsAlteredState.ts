@@ -10,7 +10,7 @@ export function isAltered(newState: IState): boolean {
       );
 }
 
-export default function mergeIsAlteredState(newState: IState): IState {
+export function mergeIsAlteredState(newState: IState): IState {
   return {
     ...newState,
     altered: isAltered(newState),

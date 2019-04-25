@@ -1,12 +1,12 @@
 import * as actionTypes from '../../constants/actionTypes';
-import keyCodes from '../../constants/keyCodes';
+import { keyCodes } from '../../constants/keyCodes';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
 import { IProps, IState } from '../../types/';
-import preventDefaultForKeyCodes from '../preventDefaultForKeyCodes';
-import handleAlphaNumerical from './handleAlphaNumerical';
-import handleClick from './handleClick';
-import handleEnterPressed from './handleEnterPressed';
-import handleKeyUpOrDownPressed from './handleKeyUpOrDownPressed';
+import { preventDefaultForKeyCodes } from '../preventDefaultForKeyCodes';
+import { handleAlphaNumerical } from './handleAlphaNumerical';
+import { handleClick } from './handleClick';
+import { handleEnterPressed } from './handleEnterPressed';
+import { handleKeyUpOrDownPressed } from './handleKeyUpOrDownPressed';
 
 interface TArgs {
   event: KeyboardEvent;
@@ -15,7 +15,7 @@ interface TArgs {
   ReactResponsiveSelectClassRef: ReactResponsiveSelect;
 }
 
-export default function handleKeyEvent({
+export function handleKeyEvent({
   event,
   state,
   props,

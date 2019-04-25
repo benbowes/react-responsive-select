@@ -7,7 +7,7 @@ interface TArgs {
   ReactResponsiveSelectClassRef: ReactResponsiveSelect;
 }
 
-export default function handleTouchMove({
+export function handleTouchMove({
   state,
   ReactResponsiveSelectClassRef,
 }: TArgs): void {

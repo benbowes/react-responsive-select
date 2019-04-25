@@ -15,7 +15,7 @@ stories.add(
         <ReactResponsiveSelect
             name="make2"
             options={[{
-                    value: null,
+                    value: 'null',
                     text: 'Any',
                     markup: <span>Any</span>,
                 }, {

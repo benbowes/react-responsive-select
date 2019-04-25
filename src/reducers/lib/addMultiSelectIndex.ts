@@ -1,6 +1,6 @@
 import { IState } from '../../types/';
 
-export default function addMultiSelectIndex(
+export function addMultiSelectIndex(
   state: IState,
   index: number,
 ): number[] {

@@ -1,12 +1,12 @@
 import * as isEqual from 'lodash.isequal';
 import { IOutputSingleSelect } from '../../types/';
 
-export default (
+export function singleSelectBroadcastChange(
   currValue: IOutputSingleSelect,
-  altered: boolean,
+  altered?: boolean,
   fn?: (changes: IOutputSingleSelect) => void,
   prevValue?: IOutputSingleSelect,
-): void => {
+): void {
   if (!fn) {
     return;
   }
@@ -21,4 +21,4 @@ export default (
       altered,
     });
   }
-};
+}
