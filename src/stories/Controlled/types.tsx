@@ -13,7 +13,7 @@ export interface IContext {
             text: string;
             markup: React.ReactNode;
         }>;
-    }
+    };
     functions: {
         handleSelectOption?: (event: any) => void,
         handleSelectOptions?: (event: any) => void,

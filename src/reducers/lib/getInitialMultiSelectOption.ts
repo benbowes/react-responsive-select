@@ -1,16 +1,18 @@
 import { IOption, IState } from '../../types/';
 
-type TOutputMultiSelectOptionSansDisabled = { value: string; text: string; name: string; }
+interface IOutputMultiSelectOptionSansDisabled {
+  value?: string;
+  text?: string;
+  name?: string;
+}
 
 interface IFindClosestValidOptionOutput {
-  option: TOutputMultiSelectOptionSansDisabled;
+  option: IOutputMultiSelectOptionSansDisabled;
   index: number;
 }
 
 // Use existing state.singleSelectSelectedOption, or first possible option to use as a selection
-function findClosestValidOption(
-  state: IState,
-): { option: TOutputMultiSelectOptionSansDisabled; index: number } {
+function findClosestValidOption(state: IState): { option: IOutputMultiSelectOptionSansDisabled; index: number } {
   const possibleOptions = state.options.reduce(
     (acc: IFindClosestValidOptionOutput[], option: IOption, index: number) => {
       if (!option.optHeader) {
@@ -37,7 +39,7 @@ export default function getInitialMultiSelectOption(state: IState): IState {
     option,
     index,
   }: {
-    option: TOutputMultiSelectOptionSansDisabled;
+    option: IOutputMultiSelectOptionSansDisabled;
     index: number;
   } = findClosestValidOption(state);
 
