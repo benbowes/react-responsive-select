@@ -4,12 +4,12 @@ import ReactResponsiveSelect from '../../../ReactResponsiveSelect';
 import { CaretIcon } from '../../components/CaretIcon';
 import { MultiSelectOptionMarkup } from '../../components/MultiSelectOptionMarkup';
 import { ViewIframe } from '../../components/ViewIframe';
-import { FeaturesList } from './FeaturesList';
-import { Header } from './Header';
+import { FeaturesList } from './elements/FeaturesList';
+import { Header } from './elements/Header';
 
 import '../../../ReactResponsiveSelect.css';
 import '../../stories.css';
-import './HomePage.css';
+import './Home.css';
 
 const stories = storiesOf('Info', module);
 
@@ -125,13 +125,13 @@ stories.add(
                             onSubmit={(): void  => {
                                 console.log('onSubmit');
                             }}
-                            customLabelRenderer={(singleSelectSelectedOption: {
+                            customLabelRenderer={(selectedOption: {
                                 text: string;
                                 value: string;
                                 disabled?: boolean;
-                            }): React.ReactNode =>
-                                `You selected ${singleSelectSelectedOption.text}`
-                            }
+                            }): React.ReactNode => (
+                                <span>🎉 You selected 👉{selectedOption.text}</span>
+                            )}
                             caretIcon={<CaretIcon />}
                             prefix="Car3: "
                             selectedValue="bmw"

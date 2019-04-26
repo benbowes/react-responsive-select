@@ -1,19 +1,25 @@
 import { addParameters, configure } from '@storybook/react';
+import { create } from '@storybook/theming';
 
 // Global configuration
 addParameters({
   options: {
+    theme: create({
+      base: 'light',
+      brandTitle: 'React Responsive Select',
+      brandUrl: 'https://github.com/benbowes/react-responsive-select',
+      brandImage: null,
+    }),
     panelPosition: 'right',
-    name: 'React Responsive Select',
-    url: '/',
     showPanel: false,
     isToolshown: false,
+    enableShortcuts: false,
   },
 });
 
 function loadStories(): void {
   // Info
-  require('../src/stories/Info/Home/HomePage.stories.tsx');
+  require('../src/stories/Info/Home/Home.stories.tsx');
   require('../src/stories/Info/ScreenReader/ScreenReader.stories.tsx');
   require('../src/stories/Info/API/API.stories.tsx');
 

@@ -1,6 +1,4 @@
 import * as React from 'react';
-// import GitHubButton from 'react-github-btn';
-
 import './LogoLinks.css';
 
 export const LogoLinks = (): React.ReactElement => (
@@ -51,14 +49,5 @@ export const LogoLinks = (): React.ReactElement => (
                 </g>
             </svg>
         </a>
-        {/* <GitHubButton
-            className="github-button"
-            href="https://github.com/benbowes/react-responsive-select"
-            data-icon="octicon-star"
-            data-show-count="true"
-            aria-label="Star benbowes/react-responsive-select on GitHub"
-        >
-            Star
-        </GitHubButton> */}
     </div>
 );

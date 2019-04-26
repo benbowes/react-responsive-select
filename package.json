@@ -1,8 +1,8 @@
 {
   "name": "react-responsive-select-next",
-  "version": "5.0.0-alpha-1",
+  "version": "5.0.0-alpha-2",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
-  "main": "index.js",
+  "main": "dist/ReactResponsiveSelect.js",
   "scripts": {
     "compile": "rm -rf dist && tsc && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "echo \"Test step is yet to be implemented\"",
@@ -52,6 +52,7 @@
     "@types/storybook__addon-info": "^4.1.1",
     "@types/storybook__addon-options": "^4.0.1",
     "@types/storybook__react": "^4.0.1",
+    "acorn": "^6.1.1",
     "babel-loader": "^8.0.0",
     "cache-loader": "^1.2.2",
     "jest": "^24.7.1",
