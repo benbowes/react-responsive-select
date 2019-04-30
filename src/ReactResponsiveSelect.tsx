@@ -2,7 +2,6 @@ import * as isEqual from 'lodash.isequal';
 import * as React from 'react';
 import singleline from 'singleline-next';
 import * as actionTypes from './constants/actionTypes';
-import { debugReportChange } from './lib/debugReportChange';
 import { handleBlur, handleClick, handleKeyEvent, handleTouchMove, handleTouchStart } from './lib/eventHandlers';
 import { getCustomLabelText } from './lib/getCustomLabelText';
 import { multiSelectBroadcastChange, singleSelectBroadcastChange } from './lib/onChangeBroadcasters';
@@ -62,13 +61,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
 
   /* Broadcast change when there has been one */
   public componentDidUpdate(prevProps: IProps, prevState: IState): boolean {
-    const {
-      singleSelectSelectedOption,
-      multiSelectSelectedOptions,
-      multiselect,
-      altered,
-    } = this.state;
-
+    const { singleSelectSelectedOption, multiSelectSelectedOptions, multiselect, altered } = this.state;
     const { onChange } = this.props;
 
     if (multiselect) {
@@ -91,15 +84,26 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
   }
 
   public updateState(action: IAction, callback?: (nextState: IState) => any): void {
+    const { onListen, name } = this.props;
     const nextState = this.reducer(this.state, action);
+
     this.setState(nextState, () => {
       if (callback) {
         callback(nextState);
       }
     });
 
-    /* To debug actions plus their resulting state whilst developing, add ?debug=true */
-    debugReportChange(this.props.name, action, nextState);
+    /* Allow user to listen to actions being fired */
+    if (onListen) {
+      const isOpen = [
+        actionTypes.SET_OPTIONS_PANEL_OPEN,
+        actionTypes.SET_NEXT_SELECTED_INDEX,
+        actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC,
+        actionTypes.SET_IS_DRAGGING,
+      ].some((actionType: string) => action.type === actionType);
+
+      onListen(isOpen, action, newState, name);
+    }
   }
 
   public focusButton(): void {
@@ -107,6 +111,45 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
       this.selectBox && this.selectBox.querySelector('.rrs__button');
     // tslint:disable-next-line no-unused-expression
     el && el.focus();
+  }
+
+  public onHandleKeyEvent = (e: any): void => {
+    handleKeyEvent({
+      event: e,
+      ReactResponsiveSelectClassRef: this,
+      state: this.state,
+      props: this.props,
+    });
+  }
+
+  public onHandleTouchStart = (): void => {
+    handleTouchStart({
+      ReactResponsiveSelectClassRef: this,
+      state: this.state,
+    });
+  }
+
+  public onHandleTouchMove = (): void => {
+    handleTouchMove({
+      ReactResponsiveSelectClassRef: this,
+      state: this.state,
+    });
+  }
+
+  public onHandleClick = (e: any): void => {
+      handleClick({
+        event: e,
+        ReactResponsiveSelectClassRef: this,
+        state: this.state,
+      });
+    }
+
+  public onHandleBlur = (): void => {
+    handleBlur({
+      ReactResponsiveSelectClassRef: this,
+      state: this.state,
+      props: this.props,
+    });
   }
 
   public render(): React.ReactNode {
@@ -145,47 +188,12 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
           this.selectBox = r;
         }}
         tabIndex={-1}
-        onKeyDown={(e: any): void => {
-          handleKeyEvent({
-            event: e,
-            ReactResponsiveSelectClassRef: this,
-            state: this.state,
-            props: this.props,
-          });
-        }}
-        onTouchStart={(): void =>
-          handleTouchStart({
-            ReactResponsiveSelectClassRef: this,
-            state: this.state,
-          })
-        }
-        onTouchMove={(): void =>
-          handleTouchMove({
-            ReactResponsiveSelectClassRef: this,
-            state: this.state,
-          })
-        }
-        onTouchEnd={(e: any): void =>
-          handleClick({
-            event: e,
-            ReactResponsiveSelectClassRef: this,
-            state: this.state,
-          })
-        }
-        onMouseDown={(e: any): void =>
-          handleClick({
-            event: e,
-            ReactResponsiveSelectClassRef: this,
-            state: this.state,
-          })
-        }
-        onBlur={(): void =>
-          handleBlur({
-            ReactResponsiveSelectClassRef: this,
-            state: this.state,
-            props: this.props,
-          })
-        }
+        onKeyDown={this.onHandleKeyEvent}
+        onTouchStart={this.onHandleTouchStart}
+        onTouchMove={this.onHandleTouchMove}
+        onTouchEnd={this.onHandleClick}
+        onMouseDown={this.onHandleClick}
+        onBlur={this.onHandleBlur}
       >
         {multiselect ? (
           <MultiSelect

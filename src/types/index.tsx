@@ -67,6 +67,16 @@ export interface IProps {
   ) => React.ReactNode;
   multiselect?: boolean;
   selectedValues?: string[];
+  /**
+   * `onListen` is handy for those situations where you need to change something potentially outside of your
+   * control, e.g. setting a class on <body/> when the options panel opens to inhibit body scrolling.
+   */
+  onListen?: (
+    isOpen?: boolean,
+    action?: IAction,
+    newState?: IState,
+    name?: string,
+  ) => void;
 }
 
 export interface IState {

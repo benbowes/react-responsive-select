@@ -36,6 +36,9 @@ function loadStories(): void {
 
   // Controlled
   require('../src/stories/Controlled/Controlled.stories.tsx');
+
+  // Recipes
+  require('../src/stories/Recipes/listening-for-rrs-changes.stories.tsx');
 }
 
 configure(loadStories, module);
