@@ -9,6 +9,10 @@
   margin: 0.5rem;
 }
 
+.first-letter-instructions {
+  font-weight: 300;
+}
+
 .first-letter-instructions b {
-  color: #ff5722;
+  font-weight: 900;
 }
