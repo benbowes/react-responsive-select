@@ -102,7 +102,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
         actionTypes.SET_IS_DRAGGING,
       ].some((actionType: string) => action.type === actionType);
 
-      onListen(isOpen, action, newState, name);
+      onListen(isOpen, action, nextState, name);
     }
   }
 
