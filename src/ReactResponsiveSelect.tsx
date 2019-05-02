@@ -230,5 +230,3 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
     );
   }
 }
-
-export * from './types/';
