@@ -1,8 +1,8 @@
 {
   "name": "react-responsive-select-next",
-  "version": "5.0.0-alpha-10",
+  "version": "5.0.0-alpha-9",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
-  "main": "dist/index.js",
+  "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "compile": "rm -rf dist && tsc && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
