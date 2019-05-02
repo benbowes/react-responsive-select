@@ -21,3 +21,4 @@ yarn.lock
 .prettierrc.js
 .cache-loader
 storybook-static
+public
