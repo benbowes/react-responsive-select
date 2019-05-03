@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select-next",
-  "version": "5.0.0-alpha-11",
+  "version": "5.0.0-alpha-12",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/ReactResponsiveSelect.d.ts",
@@ -9,7 +9,7 @@
     "test": "echo \"Test step is yet to be implemented\"",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "deploy-storybook": "auto/check-git.sh && npm run compile && npm run build-storybook && storybook-to-ghpages",
-    "start": "start-storybook -s ./public -p 6006",
+    "start": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "keywords": [

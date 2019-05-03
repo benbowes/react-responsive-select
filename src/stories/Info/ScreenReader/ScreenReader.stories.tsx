@@ -8,7 +8,11 @@ stories.add(
     () => (
         <>
             <h2>SCREEN READER DEMO</h2>
-            <img src="/react-responsive-select-voice-over.gif" alt="Screen reader demo gif" />
+            <video width="100%" controls={true}>
+                <source src="http://media2.giphy.com/media/FiGiRei2ICzzG/giphy.webp" type="video/webp" />
+                <source src="https://media.giphy.com/media/WoWhYjqxdOu8TJdegw/giphy.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
         </>
     ),
 );
