@@ -1,162 +1,91 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { IOption } from '../../types/index'; // from ReactResponsiceSelect types
+import RRS, { IOption } from '../../ReactResponsiveSelect';
 import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
-import { MultiSelectOptionMarkup } from '../components/MultiSelectOptionMarkup';
-import { Context } from './Context';
-import { Form } from './Form';
-import { IContext, INewMultiSelectValue, INewSingleSelectValue } from './types';
 
-class ControlledExampleApp extends React.Component<{}, IContext> {
+interface IData {
+    year: number;
+    quarters: number[];
+}
+
+const DATA = [
+    { year: 2000, quarters: [1, 2, 3, 4] },
+    { year: 2001, quarters: [1, 2, 3] },
+    { year: 2002, quarters: [2, 3] },
+    { year: 2004, quarters: [1, 4] },
+    { year: 2005, quarters: [1, 2, 3, 4] },
+];
+
+interface IState {
+    years: IOption[];
+    quarters: IOption[];
+    selectedYear: string;
+    selectedQuarter: string;
+}
+
+class ControlledExampleApp extends React.Component<{}, IState> {
     constructor(props: {}) {
         super(props);
+
         this.state = {
-            selectedValue: 'null',
-            selectedValues: [],
-            isSingleSelect: true,
-            isDisabled: false,
-            initialState: {
-                singleSelectOptions: [
-                    { value: 'null', text: 'Any' },
-                    { value: 'alfa-romeo', text: 'Alfa Romeo' },
-                    { value: 'bmw', text: 'BMW' },
-                    { value: 'fiat', text: 'Fiat' },
-                    { value: 'lexus', text: 'Lexus' },
-                    { value: 'morgan', text: 'Morgan' },
-                    { value: 'subaru', text: 'Subaru' },
-                ],
-                multiSelectOptions: [
-                    {
-                        value: 'null',
-                        text: 'Any',
-                        markup: <MultiSelectOptionMarkup text="Any" />,
-                    },
-                    {
-                        value: 'alfa-romeo',
-                        text: 'Alfa Romeo',
-                        markup: <MultiSelectOptionMarkup text="Alfa Romeo" />,
-                    },
-                    {
-                        value: 'bmw',
-                        text: 'BMW',
-                        markup: <MultiSelectOptionMarkup text="BMW" />,
-                    },
-                    {
-                        value: 'fiat',
-                        text: 'Fiat',
-                        markup: <MultiSelectOptionMarkup text="Fiat" />,
-                    },
-                    {
-                        value: 'lexus',
-                        text: 'Lexus',
-                        markup: <MultiSelectOptionMarkup text="Lexus" />,
-                    },
-                    {
-                        value: 'morgan',
-                        text: 'Morgan',
-                        markup: <MultiSelectOptionMarkup text="Morgan" />,
-                    },
-                    {
-                        value: 'subaru',
-                        text: 'Subaru',
-                        markup: <MultiSelectOptionMarkup text="Subaru" />,
-                    },
-                ],
-            },
-            functions: {
-                handleSelectOption: this.handleSelectOption,
-                handleSelectOptions: this.handleSelectOptions,
-                handleSingleSelectChange: this.handleSingleSelectChange,
-                handleMultiSelectChange: this.handleMultiSelectChange,
-                handleSelectTypeChange: this.handleSelectTypeChange,
-                handleDisabledChange: this.handleDisabledChange,
-                handleSubmit: this.handleSubmit,
-            },
+            years: DATA.map((item: IData) => ({
+                text: item.year.toString(),
+                value: item.year.toString(),
+            })),
+            quarters: this.extractQuarters(DATA[0].quarters),
+            selectedYear: DATA[0].year.toString(),
+            selectedQuarter: DATA[0].quarters[0].toString(),
         };
     }
 
-    public getMultiSelectValue = (newValue: INewMultiSelectValue): {
-        [key: string]: INewMultiSelectValue,
-    } => ({
-        [newValue.options[0].name]: {
-            options: [...newValue.options],
-            altered: newValue.altered,
-        },
-    })
-
-    public handleSelectOption = (event: any): void => {
-        const { initialState } = this.state;
-        const firstLetter = event.target.value.charAt(0);
-        const foundValue: { text?: string; value?: string; } =
-        initialState.singleSelectOptions.filter(
-                (option: { value: string }) => option.value.charAt(0) === firstLetter,
-            )[0] || {};
-
-        this.setState({ selectedValue: foundValue.value || '' });
+    public extractQuarters(quarters: number[]): IOption[] {
+        return quarters.map((quarter: number) => ({
+            text: quarter.toString(),
+            value: quarter.toString(),
+        }));
     }
 
-    public handleSelectOptions = ({ target: { value = '' }}: any): void => {
-        const { initialState } = this.state;
-        const firstLetters = value.split(',');
-        const foundValues = initialState.multiSelectOptions
-            .filter((option: IOption) =>
-                firstLetters.some((letter: string) => option.value.charAt(0) === letter.charAt(0)),
-            )
-            .map((option: IOption) => option.value);
-
-        this.setState({ selectedValues: foundValues });
-    }
-
-    public handleSingleSelectChange = (newValue: INewSingleSelectValue): void => {
-        const formValue = {
-            [newValue.name]: {
-                text: newValue.text,
-                value: newValue.value,
-                altered: newValue.altered,
-            },
-            selectedValue: newValue.value,
-        };
-
-        this.setState({ ...this.state, ...formValue });
-    }
-
-    public handleMultiSelectChange = (newValue: INewMultiSelectValue): void => {
-        const formValue = this.getMultiSelectValue(newValue);
+    public onChangeYear = (newValue: IOption): void => {
+        const selectedYearDataFragment = DATA.find(
+            (item: IData): boolean => item.year.toString() === newValue.value,
+        );
 
         this.setState({
-            ...this.state,
-            ...formValue,
-            selectedValues: newValue.options.reduce(
-                (acc: string[], option: IOption) => (
-                    option.value !== 'null' ? [...acc, option.value] : acc
-                ),
-                [],
-            ),
+            selectedYear: newValue.value,
+            selectedQuarter: selectedYearDataFragment.quarters[0].toString(),
+            quarters: this.extractQuarters(selectedYearDataFragment.quarters),
         });
     }
 
-    public handleSelectTypeChange = (event: any): void => {
-        this.setState({ isSingleSelect: event.target.value === 'single-select' });
-    }
-
-    public handleDisabledChange = (event: any): void => {
-        this.setState({ isDisabled: event.target.checked });
-    }
-
-    public handleSubmit = (): void => {
-        console.log('handleSubmit()', this.state);
+    public onChangeQuarter = (newValue: IOption): void => {
+        this.setState({ selectedQuarter: newValue.value });
     }
 
     public render(): React.ReactNode {
-        const { selectedValue, selectedValues, isSingleSelect, isDisabled } = this.state;
+        const { years, selectedYear, quarters, selectedQuarter } = this.state;
+
         return (
-            <>
-                <Context.Provider value={this.state}>
-                    <Form />
-                    <h3>State:</h3>
-                    <pre>{JSON.stringify({ selectedValue, selectedValues, isSingleSelect, isDisabled }, null, 2)}</pre>
-                </Context.Provider>
-            </>
+            <div className="App">
+                <div>
+                    <label htmlFor="rrs-year-menu">Year</label>
+                    <RRS
+                        selectedValue={selectedYear}
+                        name="year"
+                        options={years}
+                        onChange={this.onChangeYear}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="rrs-year-menu">Quarter</label>
+                    <RRS
+                        key={selectedYear} // Added key, will reset this RRS when selectedYear changes
+                        selectedValue={selectedQuarter}
+                        name="quarters"
+                        options={quarters}
+                        onChange={this.onChangeQuarter}
+                    />
+                </div>
+            </div>
         );
     }
 }
@@ -164,7 +93,7 @@ class ControlledExampleApp extends React.Component<{}, IContext> {
 const stories = storiesOf('Controlled', module);
 
 stories.add(
-    'Using RRS as a controlled component with the ContextAPI',
+    'Using RRS as a controlled component',
     withStoryBookInfo()(() => (
         <ControlledExampleApp />
     )),
