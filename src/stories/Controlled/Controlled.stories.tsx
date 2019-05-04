@@ -3,6 +3,8 @@ import * as React from 'react';
 import RRS, { IOption } from '../../ReactResponsiveSelect';
 import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
 
+import './Controlled.css';
+
 interface IData {
     year: number;
     quarters: number[];
@@ -65,8 +67,8 @@ class ControlledExampleApp extends React.Component<{}, IState> {
         const { years, selectedYear, quarters, selectedQuarter } = this.state;
 
         return (
-            <div className="App">
-                <div>
+            <div className="form">
+                <div className="form__item">
                     <label htmlFor="rrs-year-menu">Year</label>
                     <RRS
                         selectedValue={selectedYear}
@@ -75,8 +77,8 @@ class ControlledExampleApp extends React.Component<{}, IState> {
                         onChange={this.onChangeYear}
                     />
                 </div>
-                <div>
-                    <label htmlFor="rrs-year-menu">Quarter</label>
+                <div className="form__item">
+                    <label htmlFor="rrs-year-menu">Financial quarter</label>
                     <RRS
                         key={selectedYear} // Added key, will reset this RRS when selectedYear changes
                         selectedValue={selectedQuarter}
