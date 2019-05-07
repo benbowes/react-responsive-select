@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "lib",
     "module": "commonjs",
     "target": "es5",
     "lib": ["es5", "es6", "es7", "es2017", "dom"],
@@ -25,6 +25,8 @@
   "exclude": [
     "node_modules",
     "dist",
+    "lib",
+    "lib-esm",
     "auto",
     ".storybook",
     "src/**/*.spec.tsx",
