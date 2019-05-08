@@ -5,13 +5,12 @@
   "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/ReactResponsiveSelect.d.ts",
   "scripts": {
-    "compile": "rm -rf dist && tsc && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
+    "compile": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "echo \"Test step is yet to be implemented\"",
-    "prepublish": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
+    "prepublish": "auto/check-git.sh && npm run compile",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "deploy-storybook": "auto/check-git.sh && npm run compile && npm run build-storybook && storybook-to-ghpages",
-    "start": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "deploy-storybook": "auto/check-git.sh && npm run compile && build-storybook && storybook-to-ghpages",
+    "start": "start-storybook -p 6006"
   },
   "keywords": [
     "select",
