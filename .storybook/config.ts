@@ -31,6 +31,7 @@ function loadStories(): void {
   require('../src/stories/SingleSelect/customLabelRenderer.stories.tsx');
 
   // MultiSelect
+  require('../src/stories/MultiSelect/basic.stories.tsx');
   require('../src/stories/MultiSelect/noSelectionLabel-w-optHeader.stories.tsx');
   require('../src/stories/MultiSelect/optHeader.stories.tsx');
 
