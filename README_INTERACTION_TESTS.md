@@ -12,11 +12,11 @@
 
 - hitting **TAB** key should blur Select Input.
 
-- hitting **DOWN** key should open the options panel and signify **SELECTED ITEM**.
+- hitting **DOWN** key should open the options panel and highlight **SELECTED ITEM**.
 
-- hitting **UP** key should open the options panel and signify **SELECTED ITEM**.
+- hitting **UP** key should open the options panel and highlight **SELECTED ITEM**.
 
-- hitting **SPACE** key should open the options panel and signify **SELECTED ITEM**.
+- hitting **SPACE** key should open the options panel and highlight **SELECTED ITEM**.
 
 - hitting **ENTER** key should submit the form.
 
@@ -26,15 +26,15 @@
 
 - hitting **TAB** key should not blur the Select Input.
 
-- hitting **DOWN** key should decrement down the options panel - signifying next potential selection (must be a **FOCUSSABLE ITEM**). When the bottom of the options list is reached, it cycles the next potential selection up to the top of the list. It cycles infinitely.
+- hitting **DOWN** key should decrement down the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the bottom of the options list is reached, it cycles the next potential selection up to the top of the list. It cycles infinitely.
 
-- hitting **UP** key should increment up the options panel - signifying next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
+- hitting **UP** key should increment up the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
 
 - hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**).
 
-- hitting **ENTER** key should select the current signified option and close the options panel, but not blur the Select Input.
+- hitting **ENTER** key should select the current highlighted option and close the options panel, but not blur the Select Input.
 
-- hitting **SPACE** key should select the current signified option and close the options panel, but not blur the Select Input.
+- hitting **SPACE** key should select the current highlighted option and close the options panel, but not blur the Select Input.
 
 - hitting **ESC** key should close the options panel and keep the user's last selection, or the initial selection, but not blur the Select Input.
 
@@ -60,11 +60,11 @@
 
 - hitting **TAB** key should blur Select Input.
 
-- hitting **DOWN** key should open the options panel and signify **SELECTED ITEM**.
+- hitting **DOWN** key should open the options panel and highlight **SELECTED ITEM**.
 
-- hitting **UP** key should open the options panel and signify **SELECTED ITEM**.
+- hitting **UP** key should open the options panel and highlight **SELECTED ITEM**.
 
-- hitting **SPACE** key should open the options panel and signify **SELECTED ITEM**.
+- hitting **SPACE** key should open the options panel and highlight **SELECTED ITEM**.
 
 - hitting **ENTER** key should submit the form.
 
@@ -75,27 +75,27 @@
 
 - hitting **TAB** key should close options panel but retain focus on the select.
 
-- hitting **DOWN** key should decrement down the options panel - signifying next potential selection (must be a **FOCUSSABLE ITEM**). When the bottom of the options list is reached, it cycles the next potential selection up to the top of the list. It cycles infinitely.
+- hitting **DOWN** key should decrement down the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the bottom of the options list is reached, it cycles the next potential selection up to the top of the list. It cycles infinitely.
 
-- hitting **UP** key should increment up the options panel - signifying next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
+- hitting **UP** key should increment up the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
 
 - hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**).
 
-- hitting **ENTER** key should select/unselect the current signified option.
+- hitting **ENTER** key should select/unselect the current highlighted option.
 
-- hitting **SPACE** key should select/unselect the current signified option.
+- hitting **SPACE** key should select/unselect the current highlighted option.
 
-- hitting **ESC** key should close the options panel and keep current selection
+- hitting **ESC** key should close the options panel and keep the user's last selection, or the initial selection, but not blur the Select Input.
 
 ---
 
 ## Multi-Select Touch Device, As above with these ammendments
 
-- **TAPPING** on a select will open it's options
+- **TAPPING** on a select will open it's options.
 
-- **TAPPING** on an option will check/uncheck it's value
+- **TAPPING** on an option will check/uncheck it's value.
 
-- **DRAGGING** on an options panel that is scrollable, will scroll the options panel
+- **DRAGGING** on an options panel that is scrollable, will scroll the options panel.
 
 ---
 
