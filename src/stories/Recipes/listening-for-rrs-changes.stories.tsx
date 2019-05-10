@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
-import { IAction } from '../../types';
 import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
 import { CaretIcon } from '../components/CaretIcon';
 
@@ -11,10 +10,11 @@ import './listening-for-rrs-changes.css';
 
 let prevIsOpenValue;
 
-function onListen(isOpen: boolean, action: IAction): void {
+function onListen(isOpen: boolean, name: string, actionType: string): void {
   console.log(`
     isOpen: ${isOpen}
-    type: ${action.type}
+    name: ${name}
+    type: ${actionType}
   `);
 
   if (isOpen && prevIsOpenValue !== isOpen) {

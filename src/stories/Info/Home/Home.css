@@ -1,19 +1,5 @@
-.home {
-  padding: 0 1rem 1rem 1rem;
-}
-
 .home a {
   color: inherit;
-}
-
-.home h1 {
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.75px;
-  margin: 0 0 2rem 0;
-  padding: 0;
-  font-size: 2rem;
-  display: inline-block;
 }
 
 .home h2 {
@@ -27,7 +13,7 @@
 
 .home h2.subh1 {
   font-weight: 400;
-  margin: 0;
+  margin: 0 0 2rem 0;
   padding: 0;
   line-height: 1.4;
   border: 0;
@@ -55,12 +41,6 @@
 .home li {
   margin: 0 0 4px 0;
   display: flex;
-}
-
-.home pre {
-  background: #333;
-  color: #f1f1f1;
-  padding: 1rem;
 }
 
 .home input[type="text"] {
@@ -111,6 +91,7 @@
 
 .home .row--hero {
   display: block;
+  margin-bottom: 4rem;
 }
 
 .home .row--hero > * {
@@ -131,22 +112,6 @@
   margin: 0 1rem 1rem 0;
 }
 
-.home .--margin-bottom-1 {
-  margin-bottom: 1rem;
-}
-
-.home .--margin-bottom-2 {
-  margin-bottom: 2rem;
-}
-
-.home .--margin-bottom-3 {
-  margin-bottom: 3rem;
-}
-
-.home .--margin-bottom-4 {
-  margin-bottom: 4rem;
-}
-
 @media only screen and (min-width: 900px) {
   .home .row--hero {
     display: flex;
@@ -158,9 +123,6 @@
 }
 
 @media only screen and (max-width: 480px) {
-  .root {
-    padding: 0 1rem;
-  }
   h1 {
     font-size: 1.25rem;
   }
