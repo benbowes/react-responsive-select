@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select-next",
-  "version": "5.0.0-alpha-16",
+  "version": "5.0.0-alpha-17",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/ReactResponsiveSelect.d.ts",
@@ -30,7 +30,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/benbowes/react-responsive-select"
+    "url": "https://github.com/benbowes/react-responsive-select-next"
   },
   "dependencies": {
     "lodash.isequal": "^4.5.0",
