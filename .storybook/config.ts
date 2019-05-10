@@ -6,7 +6,7 @@ addParameters({
   options: {
     theme: create({
       base: 'light',
-      brandTitle: 'React Responsive Select',
+      brandTitle: 'react-responsive-select',
       brandUrl: 'https://github.com/benbowes/react-responsive-select',
       brandImage: null,
     }),

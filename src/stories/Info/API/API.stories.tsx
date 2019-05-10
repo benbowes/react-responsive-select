@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { Code } from '../../components/Code';
 
 import '../../stories.css';
 
@@ -10,7 +11,10 @@ stories.add(
     () => (
         <div>
             <h1>API</h1>
-            <h2 className="table-header">SingleSelect</h2>
+            <h2 className="table-header">
+                SingleSelect mode
+                <small>* And MultiSelect mode - some ammendments below</small>
+            </h2>
             <table>
                 <tr>
                     <th>Prop</th>
@@ -30,45 +34,78 @@ stories.add(
                     <td>Array of objects</td>
                     <td>
                         <p>Array of shape:</p>
+                        
                         <p>
-                            <code>
-                                {'{'}
-                                    text: "Fiat",
-                                    value: "fiat",
-                                    markup: &lt;span&gt;Fiat&lt;/span&gt;,
-                                    disabled: true
-                                {'}'}
-                            </code>
+                            
+                            <Code>
+                            {
+`{
+    text: "Fiat",
+    value: "fiat",
+    markup: <span>Fiat</span>,
+    disabled: true
+}`
+                            }
+                            </Code>
+                            
                         </p>
                         <p>or</p>
                         <p>
-                            <code>
-                                {'{'}
-                                text: "Cars",
-                                optHeader: true
-                                {'}'}
-                            </code>
+                            
+                            <Code>
+                                {
+`{
+    text: "Cars",
+    optHeader: true
+}`
+                                }
+                            </Code>
+                            
                         </p>
-                        <hr />
-                        <p>
-                            <code>text: </code>
-                                (Required) display value for the select and the default for the option label
-                        </p>
-                        <p>
-                            <code>value: </code> (Required) value that is submitted
-                        </p>
-                        <p>
-                            <code>markup: </code>
-                            (Optional) JSX markup used as the option label. Allows for the use of badges and icons...
-                        </p>
-                        <p>
-                            <code>optHeader: </code>
-                            (Optional) Will display an option header when present. Use with a <code>text</code> property
-                        </p>
-                        <p><code>disabled: </code>
-                            (Optional) disable option - option cannot be selected and is greyed</p>
-                        <p>Note: <code>
-                            text</code> is used as the option label when <code>markup</code> is not present</p>
+
+                        <table>
+                            <tr>
+                                <th>param</th>
+                                <th>type</th>
+                                <th>required</th>
+                                <th>description</th>
+                            </tr>
+                            <tr>
+                                <td>text</td>
+                                <td>String</td>
+                                <td>yes</td>
+                                <td>display value for the select and the default for the option label</td>
+                            </tr>
+                            <tr>
+                                <td>value</td>
+                                <td>String</td>
+                                <td>yes</td>
+                                <td>value that is submitted</td>
+                            </tr>
+                            <tr>
+                                <td>markup</td>
+                                <td>JSX</td>
+                                <td>&nbsp;</td>
+                                <td>JSX markup used as the option label. Allows for the use of badges and icons...</td>
+                            </tr>
+                            <tr>
+                                <td>optHeader</td>
+                                <td>Boolean</td>
+                                <td>&nbsp;</td>
+                                <td>Will display an option header when present. Use with a <code>text</code> property</td>
+                            </tr>
+                            <tr>
+                                <td>disabled</td>
+                                <td>Boolean</td>
+                                <td>&nbsp;</td>
+                                <td>disable option - option cannot be selected and is greyed</td>
+                            </tr>
+                        </table>
+
+                        <br />
+                        
+                        
+                        <p>Note: <code>text</code> is used as the option label when <code>markup</code> is not present</p>
                     </td>
                 </tr>
                 <tr>
@@ -80,11 +117,16 @@ stories.add(
                     <td>onChange</td>
                     <td>Function</td>
                     <td><p>Listen for changes on selected option change</p>
-                        <p>returns:
-                            <br />
-                            <code>
-                            {'{'}altered: boolean, name: select.name, value: option.value, text: option.text{'}'}
-                            </code>
+                        <p>returns:</p>
+                        <p>
+                            <Code>
+                            {`{
+    altered: boolean,
+    value: option.value,
+    text: option.text,
+    name: The name prop you gave RRS
+}`}
+                            </Code>
                         </p>
                         <p>Note: {' '}
                             <code>altered</code> signifies whether a select has been changed from it's original value.
@@ -97,14 +139,16 @@ stories.add(
                     <td><p>Listen for blur when select loses focus</p>
                         <p>returns:
                             <br />
-                            <code>
-                                {'{'}
-                                    altered: boolean,
-                                    name: select.name,
-                                    value: option.value,
-                                    text: option.text
-                                {'}'}
-                            </code>
+                            
+                            <Code>
+                            {`{
+    altered: boolean,
+    value: option.value,
+    text: option.text,
+    name: The name prop you gave RRS
+}`}
+                            </Code>
+                            
                         </p>
                         <p>
                             Note: <code>
@@ -146,25 +190,67 @@ stories.add(
                     <td>customLabelRenderer</td>
                     <td>Function</td>
                     <td>
-                        <p>Allows you to format your own select label</p>
+                        <p>Allows you to format your own custom select label.</p>
                         <p>
-                            The customLabelRenderer function returns an option object
-                            <br />
-                            e.g.
-                            <code>
-                                {'{'}name: select.name, value: option.value, text: option.text{'}'}
-                            </code>
+                            The customLabelRenderer function returns an array option objects.
+                            To use this feature, you need to construct and return some JSX using the below param
                         </p>
                         <p>
-                            To use this feature you need to return some JSX;
-                            using values from the above object to create your own custom label.
+                            <Code>
+                            {`{
+    value: option.value,
+    text: option.text,
+    name: The name prop you gave RRS
+}`}
+                            </Code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>onListen</td>
+                    <td>Function</td>
+                    <td>
+                        <p>Allows you to hook into changes in RRS</p>
+                        <p>
+                            The onListen function returns the following:
+                        </p>
+                        <table>
+                            <tr>
+                                <th>param</th>
+                                <th>type</th>
+                                <th>description</th>
+                            </tr>
+                            <tr>
+                                <td>isOpen</td>
+                                <td>Boolean</td>
+                                <td>Whether the options panel is currently open or closed</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>string</td>
+                                <td>The name prop you passed into the ReactResponsiveSelect component</td>
+                            </tr>
+                            <tr>
+                                <td>actionType</td>
+                                <td>String</td>
+                                <td>The internal action type that was fired within RRS</td>
+                            </tr>
+                        </table>
+                        
+                        <br />
+
+                        <p>
+                         Handy for those situations where you need to change something potentially
+                         outside of your control, e.g. setting a class on {'<body/>'} when the options panel opens to inhibit body scrolling.
                         </p>
                     </td>
                 </tr>
             </table>
 
-            <h2 className="table-header">Multi Select</h2>
-            <p>Same as Single Select API but with the following amendments</p>
+            <h2 className="table-header">
+                MultiSelect mode
+                <small>* Same as SingleSelect mode, but with the following amendments</small>
+            </h2>
 
             <table>
                 <tr>
@@ -181,41 +267,26 @@ stories.add(
                         </p>
                         <p>e.g. <code>selectedValues={'{['}'mazda', 'ford'{']}'}</code></p>
                     </td>
-                </tr>
-                <tr>
-                    <td>customLabelRenderer</td>
-                    <td>Function</td>
-                    <td>
-                        <p>Allows you to format your own select label</p>
-                        <p>The customLabelRenderer function returns an array option objects
-                            <br />
-                            e.g. <code>{'[{'}name: select.name, value: option.value, text: option.text{'}]'}</code>
-                        </p>
-                        <p>To use this feature you need to return some JSX; using
-                        values from the above object to create your own custom label.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>noSelectionLabel</td>
-                    <td>string</td>
-                    <td>
-                        A custom label to be used when nothing is selected.
-                        When used, the first option is not automatically selected
-                    </td>
-                </tr>
+                </tr> 
                 <tr>
                     <td>onChange</td>
                     <td>Function</td>
                     <td><p>Listen for changes in selection</p>
                         <p>returns:
                             <br />
-                            <code>
-                            {'{'}
-                            altered: boolean,
-                            options: {'{['}name: select.name, value: option.value, text: option.text
-                            {']}}'}
-                        </code>
+                            <Code>
+                            {`{
+    altered: boolean,
+    options: [{
+        text: option.text,
+        value: option.value,
+        name: The name prop you gave RRS
+    ]
+}`}
+                            </Code>
+                            
                         </p>
+                        <br />
                         <p>
                             Note: {' '}
                             <code>altered</code> signifies whether a select has been changed from it's original value.
@@ -229,13 +300,19 @@ stories.add(
                         <p>
                             returns:
                             <br />
-                            <code>
-                            {'{'}
-                            altered: boolean,
-                            options: {'[{'} name: select.name, value: option.value, text: option.text {'}]}'}
-                            </code>
+                            <Code>
+                            {`{
+    altered: boolean,
+    options: [{
+        value: option.value,
+        text: option.text,
+        name: The name prop you gave RRS
+    }]
+}`}
+                            </Code>
                         </p>
-                        <p>Note: {' '}
+                        <p>
+                            Note: {' '}
                             <code>altered</code> signifies whether a select has been changed from it's original value.
                         </p>
                     </td>
