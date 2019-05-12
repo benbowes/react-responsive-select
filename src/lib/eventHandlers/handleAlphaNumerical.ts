@@ -15,8 +15,11 @@ export function handleAlphaNumerical({ event, state, ReactResponsiveSelectClassR
     return;
   }
 
-  const value = options
-    .map((option: IOption) => (option.text || '').toLowerCase().charAt(0))
+  const value = options.map((option: IOption) => {
+      return !option.optHeader
+        && !option.disabled
+        && (option.text || '').toLowerCase().charAt(0);
+    })
     .indexOf(event.key);
 
   if (value > -1) {
