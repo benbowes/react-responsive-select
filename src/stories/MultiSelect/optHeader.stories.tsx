@@ -29,6 +29,11 @@ stories.add(
                     value: null,
                 },
                 {
+                    value: 'citroen',
+                    text: 'Citroen',
+                    markup: <MultiSelectOptionMarkup text="Citroen" />,
+                },
+                {
                     value: 'fiat',
                     text: 'Fiat',
                     markup: <MultiSelectOptionMarkup text="Fiat" />,
