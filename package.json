@@ -1,13 +1,13 @@
 {
   "name": "react-responsive-select-next",
-  "version": "5.0.0-alpha-15",
+  "version": "5.0.0-alpha-17",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/ReactResponsiveSelect.d.ts",
   "scripts": {
     "compile": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "echo \"Test step is yet to be implemented\"",
-    "prepublish": "auto/check-git.sh && npm run compile",
+    "prepublishOnly": "auto/check-git.sh && npm run compile",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "deploy-storybook": "auto/check-git.sh && npm run compile && build-storybook && storybook-to-ghpages",
     "start": "start-storybook -p 6006"
@@ -30,7 +30,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/benbowes/react-responsive-select"
+    "url": "https://github.com/benbowes/react-responsive-select-next"
   },
   "dependencies": {
     "lodash.isequal": "^4.5.0",
@@ -56,9 +56,10 @@
     "acorn": "^6.1.1",
     "babel-loader": "^8.0.0",
     "cache-loader": "^1.2.2",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "react-docgen-typescript-loader": "^3.0.0",
     "react-test-renderer": "^16.5.2",
+    "react-testing-library": "^7.0.0",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.1.1",
     "tslint": "^5.16.0",

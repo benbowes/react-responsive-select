@@ -1,4 +1,4 @@
-# React Responsive Select Next
+# react-responsive-select-next
 
 A reworking of https://www.npmjs.com/package/react-responsive-select into TypeScript for consumption of JavaScript and TypeScript projects alike.
 
@@ -31,3 +31,7 @@ https://benbowes.github.io/react-responsive-select-next/
 - JavaScript: https://codesandbox.io/s/2v8jjwq1ly
 
 - TypeScript: https://codesandbox.io/s/3yvw9xmw1p
+
+## How does React-Responsive-Select operate?
+
+Have a read of README_INTERACTION_TESTS.md
