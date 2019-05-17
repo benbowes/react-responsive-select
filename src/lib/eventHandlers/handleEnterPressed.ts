@@ -47,6 +47,6 @@ export function handleEnterPressed({ event, state, props, ReactResponsiveSelectC
     event.stopPropagation(); // Do not submit form
   } else {
     // tslint:disable-next-line
-    props.onSubmit && props.onSubmit(); // Submit the form
+    props.onSubmit && props.onSubmit(event); // Submit the form
   }
 }
