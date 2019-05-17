@@ -34,12 +34,11 @@ function loadStories(): void {
   require('../src/stories/MultiSelect/basic.stories.tsx');
   require('../src/stories/MultiSelect/noSelectionLabel-w-optHeader.stories.tsx');
   require('../src/stories/MultiSelect/optHeader.stories.tsx');
-
-  // Controlled
-  require('../src/stories/Controlled/Controlled.stories.tsx');
-
+  
   // Recipes
   require('../src/stories/Recipes/listening-for-rrs-changes.stories.tsx');
+  require('../src/stories/Recipes/ControlledExample1/ControlledExample1.stories.tsx');
+  require('../src/stories/Recipes/ControlledExample2/ControlledExample2.stories.tsx');
 }
 
 configure(loadStories, module);

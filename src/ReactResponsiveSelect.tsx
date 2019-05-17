@@ -15,11 +15,13 @@ import { SingleSelect } from './components/SingleSelect';
 export default class ReactResponsiveSelect extends React.Component<IProps, IState> {
   public selectBox: HTMLDivElement | null;
   private reducer: (state: IState, action: IAction) => IState;
+  private firstLoad: boolean;
 
   constructor(props: IProps) {
     super(props);
     this.state = initialState;
     this.reducer = reducer;
+    this.firstLoad = true;
   }
 
   public componentDidMount(): void {
@@ -63,6 +65,11 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
   public componentDidUpdate(prevProps: IProps, prevState: IState): boolean {
     const { singleSelectSelectedOption, multiSelectSelectedOptions, multiselect, altered } = this.state;
     const { onChange } = this.props;
+
+    if (this.firstLoad) {
+      this.firstLoad = false;
+      return false;
+    }
 
     if (multiselect) {
       multiSelectBroadcastChange(
