@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import RRS, { IOption } from '../../ReactResponsiveSelect';
-import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
+import RRS, { IOption } from '../../../ReactResponsiveSelect';
+import { withStoryBookInfo } from '../../../utils/withStoryBookInfo';
 
 import './Controlled.css';
 
@@ -92,10 +92,10 @@ class ControlledExampleApp extends React.Component<{}, IState> {
     }
 }
 
-const stories = storiesOf('Controlled', module);
+const stories = storiesOf('Recipes', module);
 
 stories.add(
-    'Using RRS as a controlled component',
+    'Controlled example 1',
     withStoryBookInfo()(() => (
         <ControlledExampleApp />
     )),

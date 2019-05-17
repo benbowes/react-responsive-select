@@ -10,7 +10,7 @@ export interface IProps {
     disabled?: boolean;
   }>;
   noSelectionLabel?: string;
-  onSubmit?: () => void;
+  onSubmit?: (event: any) => void;
   /**
    * singleselect mode | multiselect mode
    */
