@@ -4,6 +4,7 @@ import { IOption } from '../types/';
 
 interface TProps {
   index: number;
+  name: string;
   isOptionsPanelOpen: boolean;
   optionsContainerRef: React.RefObject<HTMLUListElement>;
   nextPotentialSelectionIndex: number;
@@ -67,6 +68,7 @@ export class SingleSelectOption extends React.Component<TProps> {
   public render(): React.ReactNode {
     const {
       index,
+      name,
       nextPotentialSelectionIndex,
       option,
       singleSelectSelectedIndex,
@@ -76,6 +78,7 @@ export class SingleSelectOption extends React.Component<TProps> {
     return (
       <li
         role="menuitem"
+        data-testid={`rrs-option_${name}_${index}`}
         tabIndex={-1}
         aria-disabled={this.isDisabled(option) ? 'true' : 'false'}
         aria-label={`
@@ -85,7 +88,6 @@ export class SingleSelectOption extends React.Component<TProps> {
         }
         `}
         data-key={index}
-        // index={index}
         ref={this.optionRef}
         className={singleline(`
           rrs__option

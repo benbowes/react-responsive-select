@@ -184,6 +184,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
 
     return (
       <div
+        data-testid={name}
         data-name={name}
         className={singleline(`
           rrs

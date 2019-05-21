@@ -107,6 +107,7 @@ export class MultiSelect extends React.Component<TProps> {
                 aria-label={this.getAriaLabel()}
                 className="rrs__label__text"
                 id={`rrs-${name}-label`}
+                data-testid={`rrs-label_${name}`}
               >
                 {customLabelText}
               </span>
@@ -120,6 +121,7 @@ export class MultiSelect extends React.Component<TProps> {
                 aria-label={this.getAriaLabel()}
                 className="rrs__label__text"
                 id={`rrs-${name}-label`}
+                data-testid={`rrs-label_${name}`}
               >
                 <span className="rrs__multiselect-label">
                   <span className="rrs__multiselect-label__text">
@@ -145,6 +147,7 @@ export class MultiSelect extends React.Component<TProps> {
             <input
               type="hidden"
               name={name}
+              data-testid={`rrs-input_${name}`}
               value={[
                 multiSelectSelectedOptions.options.map(
                   (v: IOutputMultiSelectOption) => v.value,
@@ -173,6 +176,7 @@ export class MultiSelect extends React.Component<TProps> {
               return (
                 <MultiSelectOption
                   key={index}
+                  name={name}
                   optHeaderLabel={optHeaderLabel}
                   optionsContainerRef={this.optionsContainer}
                   index={index}

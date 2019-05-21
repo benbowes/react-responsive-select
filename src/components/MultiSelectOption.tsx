@@ -3,6 +3,7 @@ import singleline from 'singleline-next';
 import { IOption } from '../types/';
 
 interface TProps {
+  name: string;
   index: number;
   isOptionsPanelOpen: boolean;
   nextPotentialSelectionIndex: number;
@@ -67,6 +68,7 @@ export class MultiSelectOption extends React.Component<TProps> {
   public render(): React.ReactNode {
     const {
       index,
+      name,
       multiSelectSelectedIndexes,
       nextPotentialSelectionIndex,
       option,
@@ -79,6 +81,7 @@ export class MultiSelectOption extends React.Component<TProps> {
     return (
       <li
         role="checkbox"
+        data-testid={`rrs-option_${name}_${index}`}
         tabIndex={-1}
         aria-checked={isSelected}
         aria-label={`
@@ -90,7 +93,6 @@ export class MultiSelectOption extends React.Component<TProps> {
         aria-live="assertive"
         aria-disabled={this.isDisabled(option) ? 'true' : 'false'}
         data-key={index}
-        // index={index}
         ref={this.optionRef}
         className={singleline(`
           rrs__option
