@@ -5,3 +5,4 @@ storybook-static
 dist
 lib
 lib-esm
+src/coverage

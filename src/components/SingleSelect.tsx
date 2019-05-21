@@ -75,6 +75,7 @@ export class SingleSelect extends React.Component<TProps> {
           } selected`}
           className="rrs__label__text"
           id={`rrs-${name}-label`}
+          data-testid={`rrs-label_${name}`}
         >
           {customLabelText}
         </span>
@@ -100,6 +101,7 @@ export class SingleSelect extends React.Component<TProps> {
             aria-label={noSelectionLabel}
             className="rrs__label__text"
             id={`rrs-${name}-label`}
+            data-testid={`rrs-label_${name}`}
           >
             {prefix && <span>{prefix}</span>}
             {noSelectionLabel}
@@ -117,6 +119,7 @@ export class SingleSelect extends React.Component<TProps> {
           } selected`}
           className="rrs__label__text"
           id={`rrs-${name}-label`}
+          data-testid={`rrs-label_${name}`}
         >
           {prefix && <span>{prefix}</span>}
           {singleSelectSelectedOption.text ? (
@@ -165,6 +168,7 @@ export class SingleSelect extends React.Component<TProps> {
             <input
               type="hidden"
               name={name}
+              data-testid={`rrs-input_${name}`}
               value={singleSelectSelectedOption.value}
             />
           )}
@@ -189,6 +193,7 @@ export class SingleSelect extends React.Component<TProps> {
               return (
                 <SingleSelectOption
                   key={index}
+                  name={name}
                   optHeaderLabel={optHeaderLabel}
                   optionsContainerRef={this.optionsContainer}
                   index={index}
