@@ -7,9 +7,9 @@
   "scripts": {
     "compile": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "jest",
-    "prepublishOnly": "auto/check-git.sh && npm run compile",
+    "prepublishOnly": "auto/git-check.sh && npm run compile && auto/git-tag.sh",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "deploy-storybook": "auto/check-git.sh && npm run compile && build-storybook && storybook-to-ghpages",
+    "deploy-storybook": "auto/git-check.sh && npm run compile && build-storybook && storybook-to-ghpages",
     "start": "start-storybook -p 6006"
   },
   "keywords": [
