@@ -1,6 +1,4 @@
-# Interaction Business Rules
-
----
+# Business Rules
 
 ## Single-Select Desktop Keyboard
 

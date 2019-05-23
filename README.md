@@ -19,6 +19,40 @@ Built with keyboard and screen reader accessibility in mind.
 - Easy slot-in to your design system
 - No global styling
 
+
+## Getting started
+
+Install the dependency - https://www.npmjs.com/package/react-responsive-select
+
+`npm install react-responsive-select -save-dev`
+
+Example usage:
+
+```
+import React from 'react';
+import RRS from 'react-responsive-select';
+ 
+const onChange = (newValue) => console.log('onChange', newValue);
+const onSubmit = () => console.log('onSubmit');
+ 
+const Form = () => (
+  <form>
+    <RRS
+      name="make"
+      options={[
+        { text: 'Any', value: 'null' },
+        { text: 'Oldsmobile', value: 'oldsmobile', markup: <span>Oldsmobile</span> },
+        { text: 'Ford', value: 'ford', markup: <span>Ford</span> }
+      ]}
+      selectedValue="oldsmobile"
+      onSubmit={onSubmit}
+      onChange={onChange}
+      caretIcon={<CaretIcon />}
+    />
+  </form>
+);
+```
+
 ## StoryBook Examples & Demo 
 
 https://benbowes.github.io/react-responsive-select/
@@ -39,4 +73,4 @@ https://benbowes.github.io/react-responsive-select/?path=/story/info--screen-rea
 
 ## Business Rules
 
-Have a read of [README_INTERACTION_TESTS.md](./README_INTERACTION_TESTS.md)
+Have a read of [README_BUSINESS_RULES.md](./README_BUSINESS_RULES.md)
