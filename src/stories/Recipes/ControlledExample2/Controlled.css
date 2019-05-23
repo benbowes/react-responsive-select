@@ -1,0 +1,12 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form__item {
+    flex: 0 1 49%;
+}
+
+form > * {
+    margin: 1rem;
+}

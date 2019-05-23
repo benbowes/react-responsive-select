@@ -1,5 +1,8 @@
-.DS_Store
 node_modules
-npm-debug.log
-coverage
-.nyc_output
+.DS_Store
+.cache-loader
+storybook-static
+dist
+lib
+lib-esm
+src/coverage

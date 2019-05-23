@@ -19,3 +19,6 @@ webpack.config.demo.js
 webpack.config.react-responsive-select.js
 yarn.lock
 .prettierrc.js
+.cache-loader
+storybook-static
+public

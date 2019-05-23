@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDirs": ["src", ".storybook"],
+    "baseUrl": "./",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": false,
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*", ".storybook/**/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib",
+    "lib-esm",
+    "auto",
+    ".storybook",
+    "src/**/*.spec.tsx",
+    "src/**/*.stories.tsx"
+  ]
+}
