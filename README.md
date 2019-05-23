@@ -1,9 +1,5 @@
 # react-responsive-select-next
 
-A reworking of https://www.npmjs.com/package/react-responsive-select into TypeScript for consumption of JavaScript and TypeScript projects alike.
-
-This will eventually become `react-responsive-select@5.0.0`
-
 A customisable, touchable, React single-select / multi-select form control.
 
 Built with keyboard and screen reader accessibility in mind.
@@ -24,14 +20,24 @@ Built with keyboard and screen reader accessibility in mind.
 
 ## StoryBook Demo
 
-https://benbowes.github.io/react-responsive-select-next/
+https://benbowes.github.io/react-responsive-select/
+
+## ReactResponsiveSelect API
+
+https://benbowes.github.io/react-responsive-select/?path=/story/info--api
+
+## ReactResponsiveSelect Screen Reader Demo
+
+https://benbowes.github.io/react-responsive-select/?path=/story/info--screen-reader-demo
 
 ## CodeSandbox.io examples
 
-- JavaScript: https://codesandbox.io/s/2v8jjwq1ly
+- Single-Select Example: https://codesandbox.io/s/mo8j53wvwp
 
-- TypeScript: https://codesandbox.io/s/3yvw9xmw1p
+- Multi-Select Example https://codesandbox.io/s/multiselect-example-reactresponsiveselect-jo9se
 
-## How does React-Responsive-Select operate?
+- Controlled Example https://codesandbox.io/s/controlled-example-reactresponsiveselect-jcp1n
 
-Have a read of README_INTERACTION_TESTS.md
+## React-Responsive-Select business rules
+
+Have a read of [README_INTERACTION_TESTS.md](./README_INTERACTION_TESTS.md)
