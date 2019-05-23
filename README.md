@@ -1,4 +1,4 @@
-# react-responsive-select-next
+# react-responsive-select
 
 A customisable, touchable, React single-select / multi-select form control.
 
@@ -18,7 +18,7 @@ Built with keyboard and screen reader accessibility in mind.
 - Easy slot-in to your design system
 - No global styling
 
-## StoryBook Demo
+## StoryBook Examples & Demo 
 
 https://benbowes.github.io/react-responsive-select/
 
@@ -30,14 +30,12 @@ https://benbowes.github.io/react-responsive-select/?path=/story/info--api
 
 https://benbowes.github.io/react-responsive-select/?path=/story/info--screen-reader-demo
 
-## CodeSandbox.io examples
+## CodeSandbox.io Examples
 
 - Single-Select Example: https://codesandbox.io/s/mo8j53wvwp
-
 - Multi-Select Example https://codesandbox.io/s/multiselect-example-reactresponsiveselect-jo9se
-
 - Controlled Example https://codesandbox.io/s/controlled-example-reactresponsiveselect-jcp1n
 
-## React-Responsive-Select business rules
+## React-Responsive-Select Business Rules
 
 Have a read of [README_INTERACTION_TESTS.md](./README_INTERACTION_TESTS.md)
