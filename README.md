@@ -1,4 +1,5 @@
 # react-responsive-select
+![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
 
 A customisable, touchable, React single-select / multi-select form control.
 
