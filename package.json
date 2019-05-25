@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "5.0.0-alpha-20",
+  "version": "5.0.0-alpha-21",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/ReactResponsiveSelect.d.ts",
@@ -8,7 +8,6 @@
     "compile": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "jest",
     "prepublishOnly": "auto/git-check.sh && npm run compile && auto/git-tag.sh",
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "deploy-storybook": "auto/git-check.sh && npm run compile && build-storybook && storybook-to-ghpages",
     "start": "start-storybook -p 6006"
   },
@@ -62,8 +61,6 @@
     "react-testing-library": "^7.0.0",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.1.1",
-    "tslint": "^5.16.0",
-    "tslint-react": "^3.6.0",
     "typescript": "^3.0.3",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack-cli": "^3.3.2"

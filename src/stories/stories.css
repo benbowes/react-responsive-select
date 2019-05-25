@@ -111,3 +111,7 @@ img {
 video {
   border: 1px solid #ccc;
 }
+
+form > * {
+    margin: 1rem;
+}

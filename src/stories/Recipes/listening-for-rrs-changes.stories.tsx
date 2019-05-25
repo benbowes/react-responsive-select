@@ -29,26 +29,28 @@ function onListen(isOpen: boolean, name: string, actionType: string): void {
 storiesOf('Recipes', module).add(
   `Listening for RRS changes with the "report" prop - check console output & body class`,
   withStoryBookInfo()(() => (
-      <ReactResponsiveSelect
-        onListen={onListen}
-        name="carType1"
-        options={[
-          { value: 'null', text: 'Any' },
-          { value: 'alfa-romeo', text: 'Alfa Romeo' },
-          { value: 'bmw', text: 'BMW' },
-          { value: 'fiat', text: 'Fiat' },
-          { value: 'subaru', text: 'Subaru' },
-          { value: 'suzuki', text: 'Suzuki' },
-          { value: 'tesla', text: 'Tesla' },
-          { value: 'volvo', text: 'Volvo' },
-          { value: 'zonda', text: 'Zonda' },
-        ]}
-        onSubmit={(): void => {
-          console.log('onSubmit');
-        }}
-        caretIcon={<CaretIcon />}
-        prefix="Car1: "
-        selectedValue="subaru"
-      />
+      <form>
+        <ReactResponsiveSelect
+          onListen={onListen}
+          name="carType1"
+          options={[
+            { value: 'null', text: 'Any' },
+            { value: 'alfa-romeo', text: 'Alfa Romeo' },
+            { value: 'bmw', text: 'BMW' },
+            { value: 'fiat', text: 'Fiat' },
+            { value: 'subaru', text: 'Subaru' },
+            { value: 'suzuki', text: 'Suzuki' },
+            { value: 'tesla', text: 'Tesla' },
+            { value: 'volvo', text: 'Volvo' },
+            { value: 'zonda', text: 'Zonda' },
+          ]}
+          onSubmit={(): void => {
+            console.log('onSubmit');
+          }}
+          caretIcon={<CaretIcon />}
+          prefix="Car1: "
+          selectedValue="subaru"
+        />
+      </form>
   )),
 );

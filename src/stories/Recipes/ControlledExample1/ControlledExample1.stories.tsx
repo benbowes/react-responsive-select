@@ -67,7 +67,7 @@ class ControlledExampleApp extends React.Component<{}, IState> {
         const { years, selectedYear, quarters, selectedQuarter } = this.state;
 
         return (
-            <div className="form">
+            <form className="form">
                 <div className="form__item">
                     <label htmlFor="rrs-year-menu">Year</label>
                     <RRS
@@ -87,7 +87,7 @@ class ControlledExampleApp extends React.Component<{}, IState> {
                         onChange={this.onChangeQuarter}
                     />
                 </div>
-            </div>
+            </form>
         );
     }
 }

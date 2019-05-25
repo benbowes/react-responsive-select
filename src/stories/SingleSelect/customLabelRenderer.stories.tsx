@@ -12,41 +12,43 @@ const stories = storiesOf('Single Select', module);
 stories.add(
     'Custom selection label (customLabelRenderer)',
     withStoryBookInfo()(() => (
-        <ReactResponsiveSelect
-            customLabelRenderer={(selectedOption: any): React.ReactNode => (
-                <span>🎉 You selected 👉{selectedOption.text}</span>
-            )}
-            name="make2"
-            options={[{
-                value: 'null',
-                text: 'Any',
-                markup: <span>Any</span>,
-            }, {
-                value: 'bmw',
-                text: 'BMW',
-                markup: <span><span className="badge" aria-hidden="true">B</span>{' '}BMW</span>,
-            }, {
-                value: 'fiat',
-                text: 'Fiat',
-                markup: <span><span className="badge" aria-hidden="true">F</span>{' '}Fiat</span>,
-            }, {
-                value: 'subaru',
-                text: 'Subaru',
-                markup: <span><span className="badge" aria-hidden="true">S</span>{' '}Subaru</span>,
-            },
-            {
-                value: 'tesla',
-                text: 'Tesla',
-                markup: <span><span className="badge" aria-hidden="true">T</span>{' '}Tesla</span>,
-            },
-            ]}
-            onSubmit={(): void => {
-                this.form.submit();
-            }}
-            caretIcon={<CaretIcon />}
-            prefix="Make2: "
-            selectedValue="fiat"
-            onChange={this.reportChange}
-        />
+        <form>
+            <ReactResponsiveSelect
+                customLabelRenderer={(selectedOption: any): React.ReactNode => (
+                    <span>🎉 You selected 👉{selectedOption.text}</span>
+                )}
+                name="make2"
+                options={[{
+                    value: 'null',
+                    text: 'Any',
+                    markup: <span>Any</span>,
+                }, {
+                    value: 'bmw',
+                    text: 'BMW',
+                    markup: <span><span className="badge" aria-hidden="true">B</span>{' '}BMW</span>,
+                }, {
+                    value: 'fiat',
+                    text: 'Fiat',
+                    markup: <span><span className="badge" aria-hidden="true">F</span>{' '}Fiat</span>,
+                }, {
+                    value: 'subaru',
+                    text: 'Subaru',
+                    markup: <span><span className="badge" aria-hidden="true">S</span>{' '}Subaru</span>,
+                },
+                {
+                    value: 'tesla',
+                    text: 'Tesla',
+                    markup: <span><span className="badge" aria-hidden="true">T</span>{' '}Tesla</span>,
+                },
+                ]}
+                onSubmit={(): void => {
+                    this.form.submit();
+                }}
+                caretIcon={<CaretIcon />}
+                prefix="Make2: "
+                selectedValue="fiat"
+                onChange={this.reportChange}
+            />
+        </form>
     )),
 );
