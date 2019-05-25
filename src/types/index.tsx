@@ -70,7 +70,6 @@ export interface IProps {
   /**
    * `onListen` is handy for those situations where you need to change something potentially outside of your
    * control, e.g. setting a class on <body/> when the options panel opens to inhibit body scrolling.
-   * New state is also included
    */
   onListen?: (
     isOpen?: boolean,
