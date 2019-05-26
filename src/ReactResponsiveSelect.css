@@ -169,6 +169,7 @@
 .rrs__label {
   padding: 0 2rem 0 1rem;
   display: inline-flex;
+  height: 100%;
   width: 100%;
   max-width: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
