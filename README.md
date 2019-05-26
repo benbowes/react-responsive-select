@@ -65,12 +65,16 @@ https://benbowes.github.io/react-responsive-select/?path=/story/info--api
 
 https://benbowes.github.io/react-responsive-select/?path=/story/info--screen-reader-demo
 
-## CodeSandbox.io Examples
+## CodeSandbox.io JavaScript Examples
 
 - Single-Select Example: https://codesandbox.io/s/mo8j53wvwp
 - Multi-Select Example https://codesandbox.io/s/multiselect-example-reactresponsiveselect-jo9se
 - Controlled Example https://codesandbox.io/s/controlled-example-reactresponsiveselect-jcp1n
 - Using with Formik Example https://codesandbox.io/s/using-reactresponsiveselect-with-formik-l234rznkl
+
+## TypeScript Examples
+
+- See the StoryBook `*.stories.tsx` files in here: https://github.com/benbowes/react-responsive-select/tree/master/src/stories
 
 ## Business Rules
 
