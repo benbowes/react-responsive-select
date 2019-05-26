@@ -39,6 +39,7 @@ function loadStories(): void {
   require('../src/stories/Recipes/listening-for-rrs-changes.stories.tsx');
   require('../src/stories/Recipes/ControlledExample1/ControlledExample1.stories.tsx');
   require('../src/stories/Recipes/ControlledExample2/ControlledExample2.stories.tsx');
+  require('../src/stories/Recipes/using-formik.stories.tsx');
 }
 
 configure(loadStories, module);
