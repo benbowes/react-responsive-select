@@ -1,11 +1,11 @@
 {
   "name": "react-responsive-select-next",
-  "version": "5.0.0",
+  "version": "5.0.1-aplha.0",
   "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
   "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/ReactResponsiveSelect.d.ts",
   "scripts": {
-    "compile": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
+    "compile": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js --json > stats.json && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "jest",
     "prepublishOnly": "auto/git-check.sh && npm run compile && auto/git-tag.sh",
     "deploy-storybook": "auto/git-check.sh && npm run compile && build-storybook && storybook-to-ghpages",
@@ -31,10 +31,10 @@
     "type": "git",
     "url": "https://github.com/benbowes/react-responsive-select"
   },
+  "peerDependencies": {
+    "react": ">16.0.0"
+  },
   "dependencies": {
-    "lodash.isequal": "^4.5.0",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
     "singleline-next": "^2.0.0"
   },
   "devDependencies": {
@@ -57,6 +57,8 @@
     "cache-loader": "^1.2.2",
     "formik": "^1.5.7",
     "jest": "^24.8.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
     "react-docgen-typescript-loader": "^3.0.0",
     "react-test-renderer": "^16.5.2",
     "react-testing-library": "^7.0.0",
