@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
 import RRS, { IOutputSingleSelect } from '../../ReactResponsiveSelect';
 import { withStoryBookInfo } from '../../utils/withStoryBookInfo';
-import { CaretIcon } from '../components/CaretIcon';
+import { CaretIcon, ErrorIcon } from '../components/Icons';
 
 import '../../ReactResponsiveSelect.css';
 import '../stories.css';
@@ -19,17 +19,17 @@ storiesOf('Recipes', module).add(
                 car: "lexus"
             }}
             onSubmit={(values, { setSubmitting }) => {
+                // Mimic sending to an endpoint
                 setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
                     setSubmitting(false);
-                }, 500);
+                    alert(JSON.stringify(values, null, 2));
+                }, 2000);
             }}
-            validationSchema={Yup.object().shape({
-                email: Yup.string()
-                    .email()
-                    .required("Required"),
-                car: Yup.mixed().notOneOf(["null"], "Please select a car")
-            })}
+            validationSchema={
+                Yup.object().shape({
+                    car: Yup.mixed().notOneOf(["null"], "Please select a car")
+                })
+            }
         >
             {props => {
                 const {
@@ -68,26 +68,31 @@ storiesOf('Recipes', module).add(
                                     handleBlur({ target: { value, name } });
                                 }}
                             />
-
                             {errors.car && touched.car && (
-                                <div className="field-error-message">⚠️{errors.car}</div>
+                                <div className="field-error-message"><ErrorIcon /> {errors.car}</div>
                             )}
                         </div>
+                        
+                        <div>
+                            <button
+                                type="button"
+                                className="outline"
+                                onClick={handleReset}
+                                disabled={!dirty || isSubmitting}
+                            >
+                                Reset
+                            </button>
 
-                        <button
-                            type="button"
-                            className="outline"
-                            onClick={handleReset}
-                            disabled={!dirty || isSubmitting}
-                        >
-                            Reset
-                        </button>
-
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
-
-                        <pre><code>{JSON.stringify(props, null, 2)}</code></pre>
+                            <button type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? '...' : 'Submit'}
+                            </button>
+                        </div>
+                        
+                        <div>
+                            <pre>
+                                <code>{JSON.stringify(props, null, 2)}</code>
+                            </pre>
+                        </div>
                     </form>
                 );
             }}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import RRS, { IOption, IOutputSingleSelect } from '../../../ReactResponsiveSelect';
-import { CaretIcon } from '../../components/CaretIcon';
+import { CaretIcon } from '../../components/Icons';
 
 interface IFormProps {
     brands: IOption[];
