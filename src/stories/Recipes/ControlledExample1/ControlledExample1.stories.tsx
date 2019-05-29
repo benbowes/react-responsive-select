@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import RRS, { IOption } from '../../../ReactResponsiveSelect';
 import { withStoryBookInfo } from '../../../utils/withStoryBookInfo';
+import { CaretIcon } from '../../components/Icons';
 
 import './Controlled.css';
 
@@ -75,6 +76,7 @@ class ControlledExampleApp extends React.Component<{}, IState> {
                         name="year"
                         options={years}
                         onChange={this.onChangeYear}
+                        caretIcon={<CaretIcon key="c1" />}
                     />
                 </div>
                 <div className="form__item">
@@ -85,6 +87,7 @@ class ControlledExampleApp extends React.Component<{}, IState> {
                         name="quarters"
                         options={quarters}
                         onChange={this.onChangeQuarter}
+                        caretIcon={<CaretIcon key="c2" />}
                     />
                 </div>
             </form>
