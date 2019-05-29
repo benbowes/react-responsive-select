@@ -2,45 +2,57 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    mode: 'production',
+  mode: 'production',
 
-    entry: {
-        'ReactResponsiveSelect': './src/ReactResponsiveSelect.tsx',
-        'ReactResponsiveSelect.min': './src/ReactResponsiveSelect.tsx'
-    },
+  externals: {
+    "react": "React" // Use external version of React
+  },
 
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'umd',
-        library: 'ReactResponsiveSelect',
-        umdNamedDefine: true
-    },
+  entry: {
+    'ReactResponsiveSelect': './src/ReactResponsiveSelect.tsx',
+    'ReactResponsiveSelect.min': './src/ReactResponsiveSelect.tsx'
+  },
 
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js']
-    },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+    libraryTarget: 'umd',
+    library: 'ReactResponsiveSelect',
+    umdNamedDefine: true
+  },
 
-    devtool: 'source-map',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
 
-    optimization: {
-        minimizer: [
-          new UglifyJSPlugin({
-            sourceMap: true,
-            uglifyOptions: {
-              compress: {
-                inline: false
-              }
-            }
-          })
-        ],
-    },
+  devtool: 'source-map',
 
-    module: {
-        rules: [{
-            test: /\.tsx?$/,
-            loader: 'ts-loader',
-            exclude: /node_modules/,
-        }]
-    }
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        sourceMap: true,
+        uglifyOptions: {
+          compress: {
+            inline: false
+          },
+          warnings: false,
+          parse: {},
+          mangle: true, // Note `mangle.properties` is `false` by default.
+          output: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: false,
+        }
+      })
+    ],
+  },
+
+  module: {
+    rules: [{
+      test: /\.tsx?$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/,
+    }]
+  }
 };

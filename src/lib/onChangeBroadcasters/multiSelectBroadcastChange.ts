@@ -1,4 +1,3 @@
-import * as isEqual from 'lodash.isequal';
 import { IOutputMultiSelect, IOutputMultiSelectOption } from '../../types/';
 
 export function multiSelectBroadcastChange(
@@ -12,7 +11,7 @@ export function multiSelectBroadcastChange(
   }
 
   const shouldBroadcastChange =
-    !prevOptions || !isEqual(prevOptions, currOptions);
+    !prevOptions || !(JSON.stringify(prevOptions) === JSON.stringify(currOptions));
 
   if (shouldBroadcastChange) {
     fn({

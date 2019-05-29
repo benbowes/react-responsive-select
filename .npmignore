@@ -22,3 +22,4 @@ yarn.lock
 .cache-loader
 storybook-static
 public
+stats.json
