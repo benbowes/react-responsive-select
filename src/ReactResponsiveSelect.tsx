@@ -1,4 +1,3 @@
-import * as isEqual from 'lodash.isequal';
 import * as React from 'react';
 import singleline from 'singleline-next';
 import * as actionTypes from './constants/actionTypes';
@@ -53,7 +52,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
    * Allow for the component to be updated/controlled via props after componentDidMount
    */
   public componentWillReceiveProps(nextProps: IProps): void {
-    if (!isEqual(nextProps, this.props)) {
+    if (!(JSON.stringify(nextProps) === JSON.stringify(this.props))) {
       this.updateState({
         type: actionTypes.UPDATE_VIA_PROPS,
         value: { ...this.props, ...nextProps },

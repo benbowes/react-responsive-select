@@ -76,6 +76,15 @@ https://benbowes.github.io/react-responsive-select/?path=/story/info--screen-rea
 
 - See the StoryBook `*.stories.tsx` files in here: https://github.com/benbowes/react-responsive-select/tree/master/src/stories
 
+## Via CDN
+
+- JS:
+[ReactResponsiveSelect.js on unpkg.com](https://unpkg.com/react-responsive-select@latest/dist/ReactResponsiveSelect.js)
+- CSS:
+[ReactResponsiveSelect.css on unpkg.com](https://unpkg.com/react-responsive-select@latest/dist/ReactResponsiveSelect.css)
+
+The [Codepen examples](https://codepen.io/collection/DrjWEk/) are consuming react-responsive-select via CDN if you'd like a guide.
+
 ## Business Rules
 
 Have a read of [README_BUSINESS_RULES.md](./README_BUSINESS_RULES.md)

@@ -1,4 +1,3 @@
-import * as isEqual from 'lodash.isequal';
 import { IOutputSingleSelect } from '../../types/';
 
 export function singleSelectBroadcastChange(
@@ -11,7 +10,7 @@ export function singleSelectBroadcastChange(
     return;
   }
 
-  const shouldBroadcastChange = !isEqual(prevValue, currValue);
+  const shouldBroadcastChange = !(JSON.stringify(prevValue) === JSON.stringify(currValue));
 
   if (shouldBroadcastChange) {
     fn({
