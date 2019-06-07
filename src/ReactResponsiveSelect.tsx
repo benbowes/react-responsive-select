@@ -6,6 +6,7 @@ import { getCustomLabelText } from './lib/getCustomLabelText';
 import { multiSelectBroadcastChange, singleSelectBroadcastChange } from './lib/onChangeBroadcasters';
 import { initialState } from './reducers/initialState';
 import { reducer } from './reducers/reducer';
+import { isEqual } from './lib/isEqual';
 import { IAction, IProps, IState } from './types/';
 
 import { MultiSelect } from './components/MultiSelect';
@@ -52,7 +53,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
    * Allow for the component to be updated/controlled via props after componentDidMount
    */
   public componentWillReceiveProps(nextProps: IProps): void {
-    if (!(JSON.stringify(nextProps) === JSON.stringify(this.props))) {
+    if (!isEqual(nextProps, this.props)) {
       this.updateState({
         type: actionTypes.UPDATE_VIA_PROPS,
         value: { ...this.props, ...nextProps },

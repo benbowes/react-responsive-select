@@ -53,12 +53,12 @@ storiesOf('Recipes', module).add(
                                 selectedValue={values.car}
                                 options={[
                                     {value: "null", text: "Any" },
-                                    {value: "alfa-romeo", text: "Alfa Romeo" },
-                                    {value: "bmw", text: "BMW" },
-                                    {value: "fiat", text: "Fiat" },
-                                    {value: "lexus", text: "Lexus" },
-                                    {value: "morgan", text: "Morgan" },
-                                    {value: "subaru", text: "Subaru" }
+                                    { value: "alfa-romeo", text: "Alfa Romeo" },
+                                    { value: "bmw", text: "BMW" },
+                                    { value: "fiat", text: "Fiat" },
+                                    { value: "lexus", text: "Lexus" },
+                                    { value: "morgan", text: "Morgan" },
+                                    { value: "subaru", text: "Subaru" }
                                 ]}
                                 caretIcon={<CaretIcon key="car-caret" />}
                                 onChange={({ value, name }: IOutputSingleSelect): void => {
@@ -90,7 +90,7 @@ storiesOf('Recipes', module).add(
                         
                         <div>
                             <pre>
-                                <code>{JSON.stringify(props, null, 2)}</code>
+                                {/* <code>{JSON.stringify(props, null, 2)}</code> */}
                             </pre>
                         </div>
                     </form>

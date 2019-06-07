@@ -1,10 +1,7 @@
 import { IState } from '../types/';
 import { nextValidIndex } from './nextValidIndex';
 
-export function getNextIndex(
-  mode: 'INCREMENT' | 'DECREMENT',
-  state: IState,
-): number {
+export function getNextIndex(mode: 'INCREMENT' | 'DECREMENT', state: IState): number {
   const { isOptionsPanelOpen, nextPotentialSelectionIndex, options } = state;
 
   switch (mode) {
@@ -20,11 +17,7 @@ export function getNextIndex(
       }
 
       // Else increment
-      return nextValidIndex(
-        state,
-        nextPotentialSelectionIndex + 1,
-        'INCREMENT',
-      );
+      return nextValidIndex(state, nextPotentialSelectionIndex + 1, 'INCREMENT');
 
     case 'DECREMENT':
       // Hold selection on current selected option when options panel first opens
@@ -38,11 +31,7 @@ export function getNextIndex(
       }
 
       // Else decrement
-      return nextValidIndex(
-        state,
-        nextPotentialSelectionIndex - 1,
-        'DECREMENT',
-      );
+      return nextValidIndex(state, nextPotentialSelectionIndex - 1, 'DECREMENT');
 
     default:
       return nextValidIndex(state, 0, 'DECREMENT');

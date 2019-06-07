@@ -1,4 +1,5 @@
 import { IOutputMultiSelect, IOutputMultiSelectOption } from '../../types/';
+import { isEqual } from '../../lib/isEqual';
 
 export function multiSelectBroadcastChange(
   currOptions: IOutputMultiSelectOption[],
@@ -11,7 +12,7 @@ export function multiSelectBroadcastChange(
   }
 
   const shouldBroadcastChange =
-    !prevOptions || !(JSON.stringify(prevOptions) === JSON.stringify(currOptions));
+    !prevOptions || !isEqual(prevOptions, currOptions);
 
   if (shouldBroadcastChange) {
     fn({

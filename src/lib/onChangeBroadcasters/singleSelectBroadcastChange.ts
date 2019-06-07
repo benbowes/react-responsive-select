@@ -1,4 +1,5 @@
 import { IOutputSingleSelect } from '../../types/';
+import { isEqual } from '../../lib/isEqual';
 
 export function singleSelectBroadcastChange(
   currValue: IOutputSingleSelect,
@@ -10,7 +11,7 @@ export function singleSelectBroadcastChange(
     return;
   }
 
-  const shouldBroadcastChange = !(JSON.stringify(prevValue) === JSON.stringify(currValue));
+  const shouldBroadcastChange = !isEqual(prevValue, currValue);
 
   if (shouldBroadcastChange) {
     fn({

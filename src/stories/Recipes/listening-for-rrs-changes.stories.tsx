@@ -27,7 +27,7 @@ function onListen(isOpen: boolean, name: string, actionType: string): void {
 }
 
 storiesOf('Recipes', module).add(
-  `Listening for RRS changes with the "report" prop - check console output & body class`,
+  'Listening for RRS changes with the "onListen" prop. This example blocks body scolling on small screen when options are open.',
   withStoryBookInfo()(() => (
       <form>
         <ReactResponsiveSelect
