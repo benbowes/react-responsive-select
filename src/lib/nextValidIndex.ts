@@ -3,7 +3,7 @@ import { IOption, IState } from '../types/';
 export function nextValidIndex(
   state: IState,
   nextPotentialSelectionIndex: number,
-  mode: 'INCREMENT' | 'DECREMENT' = 'INCREMENT',
+  mode: 'INCREMENT' | 'DECREMENT' = 'INCREMENT'
 ): number {
   const { options } = state;
   const possibleOptionIndexes = options.reduce(

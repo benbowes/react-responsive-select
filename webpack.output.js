@@ -5,7 +5,8 @@ module.exports = {
   mode: 'production',
 
   externals: {
-    "react": "React" // Use external version of React
+    "react": "React",
+    "react-dom": "ReactDOM"
   },
 
   entry: {

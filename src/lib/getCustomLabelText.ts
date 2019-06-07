@@ -6,16 +6,17 @@ interface TArgs {
   props: IProps;
 }
 
-export function getCustomLabelText({
-  state,
-  props,
-}: TArgs): React.ReactNode {
+export function getCustomLabelText({ state, props }: TArgs): React.ReactNode {
   const { multiselect, customLabelRenderer } = props;
   const { multiSelectSelectedOptions, singleSelectSelectedOption } = state;
 
-  if (!customLabelRenderer) { return false; }
+  if (!customLabelRenderer) {
+    return false;
+  }
 
-  if (multiselect) { return customLabelRenderer(multiSelectSelectedOptions); }
+  if (multiselect) {
+    return customLabelRenderer(multiSelectSelectedOptions);
+  }
 
   return customLabelRenderer(singleSelectSelectedOption);
 }
