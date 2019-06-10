@@ -4,10 +4,10 @@ const path = require('path');
 module.exports = {
   mode: 'production',
 
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
-  },
+  // externals: {
+  //   "react": "React",
+  //   "react-dom": "ReactDOM"
+  // },
 
   entry: {
     'ReactResponsiveSelect': './src/ReactResponsiveSelect.tsx',
