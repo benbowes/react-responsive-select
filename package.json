@@ -5,7 +5,7 @@
   "main": "dist/ReactResponsiveSelect.js",
   "types": "dist/ReactResponsiveSelect.d.ts",
   "scripts": {
-    "compile": "rm -rf dist lib lib-esm && tsc && tsc -m es6 --outDir lib-esm && webpack --config webpack.output.js --json > stats.json && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
+    "compile": "rm -rf dist ts ts-esm && tsc && tsc -m es6 --outDir ts-esm && webpack --config webpack.output.js --json > stats.json && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "jest",
     "prepublishOnly": "auto/git-check.sh && npm run compile && auto/git-tag.sh",
     "deploy-storybook": "auto/git-check.sh && npm run compile && build-storybook && storybook-to-ghpages",
