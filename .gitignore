@@ -3,5 +3,7 @@ node_modules
 .cache-loader
 storybook-static
 dist
+ts
+ts-esm
 src/coverage
 stats.json
