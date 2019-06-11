@@ -47,7 +47,6 @@ stories.add(
                             }}
                             caretIcon={<CaretIcon />}
                             prefix="Car1: "
-                            selectedValue="subaru"
                             onChange={(): void => console.log('onChange')}
                         />
                         <div className="label">Single-select basic</div>
