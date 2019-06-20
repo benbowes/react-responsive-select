@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, act, cleanup, fireEvent, wait, prettyDOM } from 'react-testing-library';
+import { render, act, cleanup, fireEvent, wait } from 'react-testing-library';
 import { BASIC_OPTIONS, MULTISELECT_OPTIONS } from '../__mocks__/options';
 import RRS from '../ReactResponsiveSelect';
 
@@ -343,8 +343,6 @@ describe('Keyboard MultiSelect', () => {
                 
                 // Should NOT have updated label with new selection
                 expect(String(rrsLabel.textContent).trim()).toEqual('Subaru');
-                
-                console.log(prettyDOM(select))
 
                 // Should not have called onSubmit
                 expect(submitSpy).not.toHaveBeenCalled();
