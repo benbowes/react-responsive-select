@@ -38,13 +38,19 @@
 
 ---
 
-## Single-Select Touch Device, As above with these ammendments
+## Single-Select Clickable/Touch Device, As above with these ammendments
 
 - **TAPPING** on a select will open it's options.
 
+- **CLICKING** on a select will open it's options.
+
 - **TAPPING** on an option will select it's value.
 
+- **CLICKING** on an option will select it's value.
+
 - **DRAGGING** on an options panel that is scrollable, will scroll the options panel.
+
+- **SCROLLING** on an options panel that is scrollable, will scroll the options panel.
 
 ---
 
@@ -87,13 +93,19 @@
 
 ---
 
-## Multi-Select Touch Device, As above with these ammendments
+## Multi-Select Clickable/Touch Device, As above with these ammendments
 
 - **TAPPING** on a select will open it's options.
 
+- **CLICKING** on a select will open it's options.
+
 - **TAPPING** on an option will check/uncheck it's value.
 
+- **CLICKING** on an option will check/uncheck it's value.
+
 - **DRAGGING** on an options panel that is scrollable, will scroll the options panel.
+
+- **SCROLLING** on an options panel that is scrollable, will scroll the options panel.
 
 ---
 
