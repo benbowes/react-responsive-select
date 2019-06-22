@@ -161,7 +161,8 @@ export function reducer(state: IState, action: IAction): IState {
         const shouldDeselectAllAndSelectFirstOption =
           state.multiSelectSelectedIndexes.length > 0 &&
           !isFirstOptionInListSelected &&
-          action.value === 0;
+          action.value === 0 &&
+          !state.noSelectionLabel;
 
         // Deselect first option when any other value is requested
         const shouldDeselectFirstOptionAndSelectRequestedOption =
@@ -223,7 +224,7 @@ export function reducer(state: IState, action: IAction): IState {
               options: getMultiSelectInitialSelectedOptions(state),
             },
           };
-        } else {
+        } else if (!state.noSelectionLabel) {
           // Select first option if user has deselected all items
           nextState = getInitialMultiSelectOption(state);
         }

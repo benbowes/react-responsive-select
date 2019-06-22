@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
-import { BASIC_OPTIONS, MULTISELECT_OPTIONS } from '../__mocks__/options';
+import { BASIC_OPTIONS } from '../__mocks__/options';
 import RRS from '../ReactResponsiveSelect';
 
 afterEach(cleanup);
@@ -24,7 +24,7 @@ describe('SingleSelect', () => {
 
 describe('MultiSelect', () => {
     test('MouseDown on an option will add it to the selected options', () => {
-        const wrapper = render(<RRS multiselect={true} name="cars" options={MULTISELECT_OPTIONS} />);
+        const wrapper = render(<RRS multiselect={true} noSelectionLabel="Please select" name="cars" options={BASIC_OPTIONS} />);
 
         // Open options panel
         const select = wrapper.getByTestId('cars');
@@ -32,11 +32,11 @@ describe('MultiSelect', () => {
 
         // Click some options
         const rrsOption8 = wrapper.getByTestId('rrs-option_cars_8');
-        const rrsOption7 = wrapper.getByTestId('rrs-option_cars_7');
+        const rrsOption9 = wrapper.getByTestId('rrs-option_cars_9');
         const rrsOption5 = wrapper.getByTestId('rrs-option_cars_5');
 
+        fireEvent.mouseDown(rrsOption9);
         fireEvent.mouseDown(rrsOption8);
-        fireEvent.mouseDown(rrsOption7);
         fireEvent.mouseDown(rrsOption5);
         
         // Expect that the label updates with 3 options
