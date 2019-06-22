@@ -7,9 +7,15 @@
   "scripts": {
     "compile": "rm -rf dist ts ts-esm && tsc && tsc -m es6 --outDir ts-esm && webpack --config webpack.output.js --json > stats.json && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
     "test": "jest",
+    "lint": "tsc --noEmit",
     "prepublishOnly": "auto/git-check.sh && npm run compile && auto/git-tag.sh",
     "deploy-storybook": "auto/git-check.sh && npm run compile && build-storybook && storybook-to-ghpages",
     "start": "rm -rf .cache-loader storybook-static && start-storybook -p 6006"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint && npm test"
+    }
   },
   "keywords": [
     "select",
@@ -56,6 +62,7 @@
     "babel-loader": "^8.0.0",
     "cache-loader": "^1.2.2",
     "formik": "^1.5.7",
+    "husky": "^2.4.1",
     "jest": "^24.8.0",
     "react": "^16.8.5",
     "react-docgen-typescript-loader": "^3.0.0",

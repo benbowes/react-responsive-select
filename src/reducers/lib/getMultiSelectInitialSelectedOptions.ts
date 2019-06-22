@@ -51,9 +51,9 @@ export function getMultiSelectInitialSelectedOptions(state: IState, selectedValu
   }
 
   selectedOptionsToReturn = selectedValues && selectedValues.length > 0
-    ? options.reduce((acc: IOutputMultiSelectOption[], option: IOption) => {
+    ? options.reduce((acc: any[], option: IOption) => {
         if (selectedValues.some((selectedValue: string) => selectedValue === option.value)) {
-          acc.push({ name: state.name, ...option });
+          acc.push({ ...option });
         }
         return acc;
       }, [])
