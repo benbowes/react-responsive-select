@@ -17,7 +17,7 @@ stories.add(
             <ReactResponsiveSelect
                 multiselect={true}
                 name="make6"
-                selectedValues={['fiat']}
+                noSelectionLabel="Please select"
                 options={[
                     {
                         value: 'any',

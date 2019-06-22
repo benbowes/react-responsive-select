@@ -6,15 +6,11 @@ export function nextValidIndex(
   mode: 'INCREMENT' | 'DECREMENT' = 'INCREMENT'
 ): number {
   const { options } = state;
-  const possibleOptionIndexes = options.reduce(
-    (acc: number[], option: IOption, index: number) => {
-      if (!option.optHeader) {
-        acc.push(index);
-      }
-      return acc;
-    },
-    [],
-  );
+
+  const possibleOptionIndexes = options.reduce((acc: number[], option: IOption, index: number) => {
+    if (!option.optHeader) acc.push(index);
+    return acc;
+  }, []);
 
   const indexNotFocusable =
     possibleOptionIndexes.indexOf(nextPotentialSelectionIndex) === -1;
