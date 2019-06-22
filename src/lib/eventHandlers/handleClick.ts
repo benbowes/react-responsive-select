@@ -7,14 +7,10 @@ import { IState } from '../../types/';
 interface TArgs {
   event: MouseEvent | KeyboardEvent;
   state: IState;
-  ReactResponsiveSelectClassRef: ReactResponsiveSelect;
+  RRSClassRef: ReactResponsiveSelect;
 }
 
-export function handleClick({
-  event,
-  state,
-  ReactResponsiveSelectClassRef,
-}: TArgs): void {
+export function handleClick({ event, state, RRSClassRef }: TArgs): void {
   const {
     multiselect,
     isOptionsPanelOpen,
@@ -23,18 +19,13 @@ export function handleClick({
     options,
   } = state;
 
-  if (disabled) {
-    return;
-  }
+  if (disabled) return;
 
   if (isDragging === false) {
     /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
     event.preventDefault();
 
-    if (
-      event &&
-      containsClassName(event.target as HTMLElement, 'rrs__options')
-    ) {
+    if (event && containsClassName(event.target as HTMLElement, 'rrs__options')) {
       return;
     }
 
@@ -42,16 +33,13 @@ export function handleClick({
       (event.target as any).getAttribute('data-key'),
     );
 
-    if (
-      (options[value] && options[value].disabled === true) ||
-      (options[value] && options[value].optHeader === true)
-    ) {
+    if (options[value] && (options[value].disabled === true || options[value].optHeader === true)) {
       return;
     }
 
     /* Select option index, if user selected option */
     if (containsClassName(event.target as HTMLElement, 'rrs__option')) {
-      ReactResponsiveSelectClassRef.updateState({
+      RRSClassRef.updateState({
         type: multiselect
           ? actionTypes.SET_MULTISELECT_OPTIONS
           : actionTypes.SET_SINGLESELECT_OPTIONS,
@@ -71,16 +59,18 @@ export function handleClick({
       (containsClassName(event.target as HTMLElement, 'rrs__label') ||
         containsClassName(event.target as HTMLElement, 'rrs'))
     ) {
-      ReactResponsiveSelectClassRef.updateState(
-        { type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION },
-        () => ReactResponsiveSelectClassRef.focusButton(),
+      RRSClassRef.updateState(
+        {
+          type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION
+        },
+        () => RRSClassRef.focusButton(),
       );
 
       return;
     }
 
     /* Else user clicked close or open the options panel */
-    ReactResponsiveSelectClassRef.updateState(
+    RRSClassRef.updateState(
       {
         type: isOptionsPanelOpen
           ? actionTypes.SET_OPTIONS_PANEL_CLOSED
@@ -89,7 +79,7 @@ export function handleClick({
       (newState: IState) => {
         // After state update, check if focus should be moved to the button
         if (newState.isOptionsPanelOpen === false) {
-          ReactResponsiveSelectClassRef.focusButton();
+          RRSClassRef.focusButton();
         }
       },
     );

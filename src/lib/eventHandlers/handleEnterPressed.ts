@@ -6,10 +6,10 @@ interface IArgs {
   event: KeyboardEvent;
   state: IState;
   props: IProps;
-  ReactResponsiveSelectClassRef: ReactResponsiveSelect;
+  RRSClassRef: ReactResponsiveSelect;
 }
 
-export function handleEnterPressed({ event, state, props, ReactResponsiveSelectClassRef }: IArgs): void {
+export function handleEnterPressed({ event, state, props, RRSClassRef }: IArgs): void {
   const {
     disabled,
     isOptionsPanelOpen,
@@ -18,26 +18,21 @@ export function handleEnterPressed({ event, state, props, ReactResponsiveSelectC
     options,
   } = state;
 
-  if (disabled) {
-    return;
-  }
+  if (disabled) return;
 
   const value = parseFloat((event.target as any).getAttribute('data-key'));
 
-  if (
-    (options[value] && options[value].disabled === true) ||
-    (options[value] && options[value].optHeader === true)
-  ) {
+  if (options[value] && (options[value].disabled === true || options[value].optHeader === true)) {
     return;
   }
 
   if (multiselect) {
-    ReactResponsiveSelectClassRef.updateState({
+    RRSClassRef.updateState({
       type: actionTypes.SET_MULTISELECT_OPTIONS,
       value: nextPotentialSelectionIndex,
     });
   } else {
-    ReactResponsiveSelectClassRef.updateState({
+    RRSClassRef.updateState({
       type: actionTypes.SET_SINGLESELECT_OPTIONS,
       value: nextPotentialSelectionIndex,
     });

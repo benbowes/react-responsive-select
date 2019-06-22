@@ -6,11 +6,7 @@ interface TArgs {
   noSelectionLabel: string;
 }
 
-export function getSelectedValueIndex({
-  options,
-  selectedValue,
-  noSelectionLabel,
-}: TArgs): number {
+export function getSelectedValueIndex({ options, selectedValue, noSelectionLabel }: TArgs): number {
   const index = selectedValue
     ? options.map((option: IOption) => option.value).indexOf(selectedValue)
     : -1;

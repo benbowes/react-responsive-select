@@ -123,7 +123,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
   public onHandleKeyEvent = (e: any): void => {
     handleKeyEvent({
       event: e,
-      ReactResponsiveSelectClassRef: this,
+      RRSClassRef: this,
       state: this.state,
       props: this.props,
     });
@@ -131,14 +131,14 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
 
   public onHandleTouchStart = (): void => {
     handleTouchStart({
-      ReactResponsiveSelectClassRef: this,
+      RRSClassRef: this,
       state: this.state,
     });
   }
 
   public onHandleTouchMove = (): void => {
     handleTouchMove({
-      ReactResponsiveSelectClassRef: this,
+      RRSClassRef: this,
       state: this.state,
     });
   }
@@ -146,14 +146,14 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
   public onHandleClick = (e: any): void => {
       handleClick({
         event: e,
-        ReactResponsiveSelectClassRef: this,
+        RRSClassRef: this,
         state: this.state,
       });
     }
 
   public onHandleBlur = (): void => {
     handleBlur({
-      ReactResponsiveSelectClassRef: this,
+      RRSClassRef: this,
       state: this.state,
       props: this.props,
     });

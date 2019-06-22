@@ -1,9 +1,6 @@
 import { IOutputMultiSelect, IState } from '../../types/';
 
-export function addMultiSelectOption(
-  state: IState,
-  index: number,
-): IOutputMultiSelect {
+export function addMultiSelectOption(state: IState, index: number): IOutputMultiSelect {
   return {
     options: [
       ...state.multiSelectSelectedOptions.options,
