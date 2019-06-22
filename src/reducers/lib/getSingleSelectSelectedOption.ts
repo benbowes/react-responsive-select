@@ -1,4 +1,4 @@
-import { IOption, IState } from '../../types/';
+import { IOption, IState, IOutputSingleSelect } from '../../types/';
 
 /*
   use existing state.singleSelectSelectedOption, or first possible option to use as a selection
@@ -8,15 +8,12 @@ function closestValidOption(state: IState): IOption & { name?: string; } {
     return state.singleSelectSelectedOption;
   }
 
-  const possibleOptions: IOption[] = state.options.reduce(
-    (acc: IOption[], option: IOption): IOption[] => {
-      if (!option.optHeader) {
-        acc.push(option);
-      }
-      return acc;
-    },
-    [],
-  );
+  const possibleOptions: IOption[] = state.options.reduce((acc: IOption[], option: IOption): IOption[] => {
+    if (!option.optHeader) {
+      acc.push(option);
+    }
+    return acc;
+  }, []);
 
   // Note: Will fail if no non-optHeader options exist
   return {
@@ -25,10 +22,7 @@ function closestValidOption(state: IState): IOption & { name?: string; } {
   };
 }
 
-export function getSingleSelectSelectedOption(
-  state: IState,
-  initialSelectedIndex: number = 0,
-): IOption & { name?: string; } {
+export function getSingleSelectSelectedOption(state: IState, initialSelectedIndex: number = 0): IOutputSingleSelect {
   const selectionIndex = (initialSelectedIndex === -1 && !state.noSelectionLabel)
     ? 0
     : initialSelectedIndex;

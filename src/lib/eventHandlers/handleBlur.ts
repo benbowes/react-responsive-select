@@ -8,15 +8,12 @@ import {
 
 interface TArgs {
   state: IState;
-  ReactResponsiveSelectClassRef: ReactResponsiveSelect;
+  RRSClassRef: ReactResponsiveSelect;
   props: IProps;
 }
 
-export function handleBlur({
-  state,
-  ReactResponsiveSelectClassRef,
-  props,
-}: TArgs): void {
+export function handleBlur({ state, RRSClassRef, props }: TArgs): void {
+  const { onBlur, multiselect } = props;
   const {
     isOptionsPanelOpen,
     disabled,
@@ -24,19 +21,16 @@ export function handleBlur({
     singleSelectSelectedOption,
     multiSelectSelectedOptions,
   } = state;
-  const { onBlur, multiselect } = props;
 
-  if (disabled) {
-    return;
-  }
+  if (disabled) return;
 
   const isOutsideSelectBox =
-    ReactResponsiveSelectClassRef.selectBox &&
-    !ReactResponsiveSelectClassRef.selectBox.contains(document.activeElement);
+    RRSClassRef.selectBox &&
+    !RRSClassRef.selectBox.contains(document.activeElement);
 
   /* Handle click outside of selectbox */
   if (isOptionsPanelOpen && isOutsideSelectBox) {
-    ReactResponsiveSelectClassRef.updateState({
+    RRSClassRef.updateState({
       type: actionTypes.SET_OPTIONS_PANEL_CLOSED_ONBLUR,
     });
   }

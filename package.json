@@ -64,6 +64,7 @@
     "react-testing-library": "^7.0.0",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.4.5",
+    "tslint": "^5.18.0",
     "typescript": "^3.0.3",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack-cli": "^3.3.2",

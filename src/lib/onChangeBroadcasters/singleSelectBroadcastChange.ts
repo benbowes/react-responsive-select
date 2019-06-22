@@ -7,9 +7,7 @@ export function singleSelectBroadcastChange(
   fn?: (changes: IOutputSingleSelect) => void,
   prevValue?: IOutputSingleSelect,
 ): void {
-  if (!fn) {
-    return;
-  }
+  if (!fn) return;
 
   const shouldBroadcastChange = !isEqual(prevValue, currValue);
 

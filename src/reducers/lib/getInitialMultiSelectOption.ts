@@ -11,7 +11,6 @@ interface IFindClosestValidOptionOutput {
   index: number;
 }
 
-// Use existing state.singleSelectSelectedOption, or first possible option to use as a selection
 function findClosestValidOption(state: IState): { option: IOutputMultiSelectOptionSansDisabled; index: number } {
   const { options, name } = state;
   const possibleOptions = options.reduce(
@@ -25,29 +24,18 @@ function findClosestValidOption(state: IState): { option: IOutputMultiSelectOpti
       return acc;
     }, []);
 
-  // Note: Will fail if no non-optHeader options exist
+  // Note: Will fail if there is only one option, and it is an optHeader
   return possibleOptions[0];
 }
 
 export function getInitialMultiSelectOption(state: IState): IState {
-  const {
-    option,
-    index,
-  }: {
-    option: IOutputMultiSelectOptionSansDisabled;
-    index: number;
-  } = findClosestValidOption(state);
+  //: { option: IOutputMultiSelectOptionSansDisabled; index: number; }
+  const { option, index } = findClosestValidOption(state);
 
   return {
     ...state,
     multiSelectSelectedIndexes: [index],
-    multiSelectSelectedOptions: {
-      options: [
-        {
-          ...option,
-        },
-      ],
-    },
+    multiSelectSelectedOptions: { options: [{ ...option }] },
     nextPotentialSelectionIndex: index,
   };
 }

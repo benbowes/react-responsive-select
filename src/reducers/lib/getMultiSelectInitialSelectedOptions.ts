@@ -1,8 +1,6 @@
 import { IOption, IOutputMultiSelectOption, IState } from '../../types/';
 
-/*
-  Use existing state.singleSelectSelectedOption, or first possible option to use as a selection
-*/
+/* Use existing state.singleSelectSelectedOption, or first possible option to use as a selection */
 function findClosestValidOption(state: IState): IOutputMultiSelectOption {
   const { multiSelectSelectedOptions, options, name } = state;
 
@@ -52,22 +50,18 @@ export function getMultiSelectInitialSelectedOptions(state: IState, selectedValu
     return selectedOptionsToReturn;
   }
 
-  selectedOptionsToReturn =
-    selectedValues && selectedValues.length > 0
-      ? options
-          .filter((option: IOption) =>
-            selectedValues.some(
-              (selectedValue: string) => selectedValue === option.value,
-            ),
-          )
-          .map((option: IOption) => ({ name: state.name, ...option }))
-      : [
-          {
-            name: state.name,
-            text: noSelectionLabel,
-            value: 'null',
-          },
-        ];
+  selectedOptionsToReturn = selectedValues && selectedValues.length > 0
+    ? options.reduce((acc: IOutputMultiSelectOption[], option: IOption) => {
+        if (selectedValues.some((selectedValue: string) => selectedValue === option.value)) {
+          acc.push({ name: state.name, ...option });
+        }
+        return acc;
+      }, [])
+    : [{
+          name: state.name,
+          text: noSelectionLabel,
+          value: 'null',
+      }];
 
   return selectedOptionsToReturn;
 }

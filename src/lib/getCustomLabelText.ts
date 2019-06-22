@@ -10,9 +10,7 @@ export function getCustomLabelText({ state, props }: TArgs): React.ReactNode {
   const { multiselect, customLabelRenderer } = props;
   const { multiSelectSelectedOptions, singleSelectSelectedOption } = state;
 
-  if (!customLabelRenderer) {
-    return false;
-  }
+  if (!customLabelRenderer) return false;
 
   if (multiselect) {
     return customLabelRenderer(multiSelectSelectedOptions);

@@ -5,15 +5,13 @@ import { IOption, IState } from '../../types/';
 interface IArgs {
   event: KeyboardEvent;
   state: IState;
-  ReactResponsiveSelectClassRef: ReactResponsiveSelect;
+  RRSClassRef: ReactResponsiveSelect;
 }
 
-export function handleAlphaNumerical({ event, state, ReactResponsiveSelectClassRef }: IArgs): void {
+export function handleAlphaNumerical({ event, state, RRSClassRef }: IArgs): void {
   const { options, disabled } = state;
 
-  if (disabled) {
-    return;
-  }
+  if (disabled) return;
 
   const value = options.map((option: IOption) => {
       return !option.optHeader
@@ -23,7 +21,7 @@ export function handleAlphaNumerical({ event, state, ReactResponsiveSelectClassR
     .indexOf(event.key);
 
   if (value > -1) {
-    ReactResponsiveSelectClassRef.updateState({
+    RRSClassRef.updateState({
       value,
       type: actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC,
     });
