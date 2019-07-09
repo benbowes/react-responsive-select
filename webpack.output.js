@@ -19,6 +19,7 @@ module.exports = {
     filename: '[name].js',
     libraryTarget: 'umd',
     library: 'ReactResponsiveSelect',
+    globalObject: 'this',
     umdNamedDefine: true
   },
 
