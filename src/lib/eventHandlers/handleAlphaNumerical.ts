@@ -27,7 +27,7 @@ export function handleAlphaNumerical({ event, state, RRSClassRef }: IArgs): void
 
     // Eventually (after 250ms) check if the accumulation of their keypresses matches the text of an option
     setTimeout(() => {
-      const foundIndex:number[] = options.reduce((acc: number[], option: IOption, index: number) => {
+      const foundIndexes:number[] = options.reduce((acc: number[], option: IOption, index: number) => {
         if (
           !option.optHeader
           && !option.disabled
@@ -39,9 +39,9 @@ export function handleAlphaNumerical({ event, state, RRSClassRef }: IArgs): void
         return acc;
       }, []);
 
-      if (foundIndex.length > 0) {
+      if (foundIndexes.length > 0) {
         RRSClassRef.updateState({
-          value: foundIndex[0],
+          value: foundIndexes[0],
           type: actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC,
         });
       }
