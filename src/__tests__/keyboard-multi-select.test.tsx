@@ -144,7 +144,7 @@ describe('Keyboard MultiSelect', () => {
             expect(submitSpy).toHaveBeenCalled();
         });
 
-        test('hitting **a-z or 0-9** key should open the options panel and highlight first option that starts with this character (must be a **FOCUSSABLE ITEM**)', () => {
+        test('hitting **a-z or 0-9** keys in quick succession (250ms) should open the options panel and highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**)', () => {
             jest.useFakeTimers();
 
             const wrapper = render(
@@ -249,7 +249,7 @@ describe('Keyboard MultiSelect', () => {
             expect(rrsOption3.classList.contains('rrs__option--next-selection')).toEqual(true);
         });
 
-        test('hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**)', () => {
+        test('hitting **a-z or 0-9** keys in quick succession (250ms) should highlight first item that starts with key pressed character/s  (must be a **FOCUSSABLE ITEM**)', () => {
             jest.useFakeTimers();
 
             const wrapper = render(
