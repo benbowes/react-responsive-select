@@ -3,6 +3,8 @@ import { render, act, cleanup, fireEvent, wait } from 'react-testing-library';
 import { BASIC_OPTIONS } from '../__mocks__/options';
 import RRS from '../ReactResponsiveSelect';
 
+jest.useFakeTimers();
+
 /**
  *  **SELECTED ITEM** is the item set with selectedValue or the first **FIRST AVAILABLE OPTION**.
  *
@@ -154,8 +156,11 @@ describe('Keyboard SingleSelect', () => {
             // Focus
             act(() => select.focus());
 
-            // Hit `f` key
+            // Hit `f` and `i` key
             fireEvent.keyDown(select, { key: "f", keyCode: 70 });
+            fireEvent.keyDown(select, { key: "i", keyCode: 73 });
+
+            jest.runTimersToTime(250);
 
             // `fiat` option was found and highlighted
             expect(rrsOption4.classList.contains('rrs__option')).toEqual(true);
@@ -254,8 +259,11 @@ describe('Keyboard SingleSelect', () => {
             // Open panel
             fireEvent.keyDown(select, { key: "Up", keyCode: 38 });
 
-            // Hit the `f` key
+            // Hit `f` and `i` key
             fireEvent.keyDown(select, { key: "f", keyCode: 70 });
+            fireEvent.keyDown(select, { key: "i", keyCode: 73 });
+
+            jest.runTimersToTime(250);
 
             // `fiat` option was found and highlighted
             expect(rrsOption4.classList.contains('rrs__option')).toEqual(true);
