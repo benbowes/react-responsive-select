@@ -144,7 +144,9 @@ describe('Keyboard MultiSelect', () => {
             expect(submitSpy).toHaveBeenCalled();
         });
 
-        test('hitting **a-z or 0-9** key should open the options panel and highlight first option that starts with this character (must be a **FOCUSSABLE ITEM**)', () => {
+        test('hitting **a-z or 0-9** keys in quick succession (250ms) should open the options panel and highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**)', () => {
+            jest.useFakeTimers();
+
             const wrapper = render(
                 <RRS
                     multiselect
@@ -159,8 +161,11 @@ describe('Keyboard MultiSelect', () => {
             // Focus
             act(() => select.focus());
 
-            // Hit `f` key
+            // Hit `f` and `i` key
             fireEvent.keyDown(select, { key: "f", keyCode: 70 });
+            fireEvent.keyDown(select, { key: "i", keyCode: 73 });
+
+            jest.runTimersToTime(250);
 
             // `fiat` option was found and highlighted
             expect(rrsOption4.classList.contains('rrs__option')).toEqual(true);
@@ -244,7 +249,9 @@ describe('Keyboard MultiSelect', () => {
             expect(rrsOption3.classList.contains('rrs__option--next-selection')).toEqual(true);
         });
 
-        test('hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**)', () => {
+        test('hitting **a-z or 0-9** keys in quick succession (250ms) should highlight first item that starts with key pressed character/s  (must be a **FOCUSSABLE ITEM**)', () => {
+            jest.useFakeTimers();
+
             const wrapper = render(
                 <RRS
                     multiselect
@@ -258,13 +265,15 @@ describe('Keyboard MultiSelect', () => {
             
             // Focus
             act(() => select.focus());
-
             
             // Open panel
             fireEvent.keyDown(select, { key: "Up", keyCode: 38 });
             
-            // Hit the `f` key
+            // Hit `f` and `i` key
             fireEvent.keyDown(select, { key: "f", keyCode: 70 });
+            fireEvent.keyDown(select, { key: "i", keyCode: 73 });
+
+            jest.runTimersToTime(250);
 
             // `fiat` option was found and highlighted
             expect(rrsOption3.classList.contains('rrs__option')).toEqual(true);

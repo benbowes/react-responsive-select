@@ -18,7 +18,7 @@
 
 - hitting **ENTER** key should submit the form.
 
-- hitting **a-z or 0-9** key should open the options panel and highlight first option that starts with this character (must be a **FOCUSSABLE ITEM**).
+- hitting **a-z or 0-9** keys in quick succession (250ms) should open the options panel and highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 ##### When focused and open
 
@@ -28,7 +28,7 @@
 
 - hitting **UP** key should increment up the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
 
-- hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**).
+- hitting **a-z or 0-9** keys in quick succession (250ms) should highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 - hitting **ENTER** key should select the current highlighted option and close the options panel, but not blur the Select Input.
 
@@ -72,7 +72,7 @@
 
 - hitting **ENTER** key should submit the form.
 
-- hitting **a-z or 0-9** key should open the options panel and highlight first option that starts with this character (must be a **FOCUSSABLE ITEM**).
+- hitting **a-z or 0-9** keys in quick succession (250ms) should open the options panel and highlight first option that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 
 #### When focused and open
@@ -83,7 +83,7 @@
 
 - hitting **UP** key should increment up the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
 
-- hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**).
+- hitting **a-z or 0-9** keys in quick succession (250ms) should highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 - hitting **ENTER** key should select/unselect the current highlighted option.
 
