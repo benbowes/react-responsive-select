@@ -47,6 +47,7 @@ export interface IProps {
   selectedValue?: string;
   prefix?: string;
   disabled?: boolean;
+  required?: boolean;
   /**
    * singleselect mode | multiselect mode
    */

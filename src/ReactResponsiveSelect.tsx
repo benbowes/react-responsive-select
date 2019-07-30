@@ -160,7 +160,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
   }
 
   public render(): React.ReactNode {
-    const { prefix, caretIcon, disabled } = this.props;
+    const { prefix, caretIcon, disabled, required } = this.props;
     const {
       altered,
       hasOptHeaders,
@@ -205,6 +205,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
       >
         {multiselect ? (
           <MultiSelect
+            required={Boolean(required)}
             disabled={Boolean(disabled)}
             isDragging={isDragging}
             caretIcon={caretIcon}
@@ -221,6 +222,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
         ) : (
           <SingleSelect
             noSelectionLabel={noSelectionLabel || ''}
+            required={Boolean(required)}
             disabled={Boolean(disabled)}
             caretIcon={caretIcon}
             prefix={prefix || ''}

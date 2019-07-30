@@ -15,6 +15,7 @@ interface TProps {
   selectBoxRef: HTMLDivElement | null;
   customLabelText: React.ReactNode;
   disabled: boolean;
+  required: boolean;
   options: IOption[];
 }
 
@@ -137,6 +138,7 @@ export class SingleSelect extends React.Component<TProps> {
     const {
       customLabelText,
       disabled,
+      required,
       isOptionsPanelOpen,
       name,
       nextPotentialSelectionIndex,
@@ -152,6 +154,7 @@ export class SingleSelect extends React.Component<TProps> {
         <div
           role="button"
           tabIndex={0}
+          aria-required={required}
           aria-disabled={disabled}
           aria-haspopup="true"
           aria-expanded={isOptionsPanelOpen}

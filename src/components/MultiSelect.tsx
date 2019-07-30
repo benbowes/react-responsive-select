@@ -12,6 +12,7 @@ interface TProps {
   caretIcon: React.ReactNode;
   customLabelText: React.ReactNode;
   disabled: boolean;
+  required: boolean;
   isDragging: boolean;
   isOptionsPanelOpen: boolean;
   multiSelectSelectedIndexes: number[];
@@ -75,6 +76,7 @@ export class MultiSelect extends React.Component<TProps> {
       caretIcon,
       customLabelText,
       disabled,
+      required,
       isOptionsPanelOpen,
       multiSelectSelectedIndexes,
       multiSelectSelectedOptions,
@@ -87,10 +89,11 @@ export class MultiSelect extends React.Component<TProps> {
     let optHeaderLabel: string = '';
 
     return (
-      <div>
+      <>
         <div
           role="button"
           tabIndex={0}
+          aria-required={required}
           aria-disabled={disabled}
           aria-haspopup="true"
           aria-expanded={isOptionsPanelOpen}
@@ -188,7 +191,7 @@ export class MultiSelect extends React.Component<TProps> {
               );
             })}
         </ul>
-      </div>
+      </>
     );
   }
 }

@@ -31,6 +31,7 @@ stories.add(
                     <div>
                         <ReactResponsiveSelect
                             name="carType1"
+                            required
                             options={[
                                 { value: 'null', text: 'Any' },
                                 { value: 'alfa-romeo', text: 'Alfa Romeo' },
@@ -141,6 +142,7 @@ stories.add(
                     <div>
                         <ReactResponsiveSelect
                             multiselect={true}
+                            required={true}
                             name="carType4"
                             options={[
                                 // (Required) an array of options - see above const options
