@@ -52,7 +52,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
   /**
    * Allow for the component to be updated/controlled via props after componentDidMount
    */
-  public componentWillReceiveProps(nextProps: IProps): void {
+  public UNSAFE_componentWillReceiveProps(nextProps: IProps): void {
     if (!isEqual(nextProps, this.props)) {
       this.updateState({
         type: actionTypes.UPDATE_VIA_PROPS,
