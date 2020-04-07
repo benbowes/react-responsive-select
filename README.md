@@ -28,7 +28,7 @@ Install the dependency - https://www.npmjs.com/package/react-responsive-select
 
 Example usage:
 
-```
+```jsx
 import React from 'react';
 import RRS from 'react-responsive-select';
  
