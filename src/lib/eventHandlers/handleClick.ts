@@ -2,17 +2,19 @@ import * as actionTypes from '../../constants/actionTypes';
 import ReactResponsiveSelect from '../../ReactResponsiveSelect';
 import { containsClassName } from '../containsClassName';
 
-import { IState } from '../../types/';
+import { IState, IProps } from '../../types/';
 
 interface TArgs {
   event: MouseEvent | KeyboardEvent;
   state: IState;
   RRSClassRef: ReactResponsiveSelect;
+  props: IProps;
 }
 
-export function handleClick({ event, state, RRSClassRef }: TArgs): void {
+export function handleClick({ event, state, RRSClassRef, props }: TArgs): void {
   const {
     multiselect,
+    multiSelectSelectedOptions,
     isOptionsPanelOpen,
     isDragging,
     disabled,
@@ -39,6 +41,20 @@ export function handleClick({ event, state, RRSClassRef }: TArgs): void {
 
     /* Select option index, if user selected option */
     if (containsClassName(event.target as HTMLElement, 'rrs__option')) {
+      if (multiselect) {
+        const isExistingSelection = multiSelectSelectedOptions.options.some(
+          (option) => option.value === options[value].value
+        );
+
+        if (!isExistingSelection && props.onSelect) {
+          props.onSelect(options[value]);
+        } else if (isExistingSelection && props.onDeselect) {
+          props.onDeselect(options[value]);
+        }
+      } else if (!multiselect && props.onSelect){
+        props.onSelect(options[value])
+      }
+
       RRSClassRef.updateState({
         type: multiselect
           ? actionTypes.SET_MULTISELECT_OPTIONS

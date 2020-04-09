@@ -27,11 +27,25 @@ export function handleEnterPressed({ event, state, props, RRSClassRef }: IArgs):
   }
 
   if (multiselect) {
+    const isExistingSelection = state.multiSelectSelectedOptions.options.some(
+      (option) => option.value === options[value].value
+    );
+
+    if (!isExistingSelection && props.onSelect) {
+      props.onSelect(options[value]);
+    } else if (isExistingSelection && props.onDeselect) {
+      props.onDeselect(options[value]);
+    }
+    
     RRSClassRef.updateState({
       type: actionTypes.SET_MULTISELECT_OPTIONS,
       value: nextPotentialSelectionIndex,
     });
   } else {
+    if (props.onSelect){
+      props.onSelect(options[value])
+    }
+
     RRSClassRef.updateState({
       type: actionTypes.SET_SINGLESELECT_OPTIONS,
       value: nextPotentialSelectionIndex,

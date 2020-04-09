@@ -76,6 +76,14 @@ export interface IProps {
     name?: string,
     actionType?: string,
   ) => void;
+  /**
+   * `onSelect` passes back the option you just selected (singleselect/multiselect)
+   */
+  onSelect?: (option: IOption) => void;
+  /**
+   * `onDeselect` passes back the option you just deselected (multiselect)
+   */
+  onDeselect?: (option: IOption) => void;
 }
 
 export interface IState {

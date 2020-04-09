@@ -148,6 +148,7 @@ export default class ReactResponsiveSelect extends React.Component<IProps, IStat
         event: e,
         RRSClassRef: this,
         state: this.state,
+        props: this.props,
       });
     }
 
