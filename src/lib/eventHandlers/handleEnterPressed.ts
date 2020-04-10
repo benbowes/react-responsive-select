@@ -27,8 +27,6 @@ export function handleEnterPressed({
 
   const value = parseFloat((event.target as any).getAttribute("data-key"));
 
-  console.log("options", JSON.stringify(options));
-
   if (
     options[value] &&
     (options[value].disabled === true || options[value].optHeader === true)
