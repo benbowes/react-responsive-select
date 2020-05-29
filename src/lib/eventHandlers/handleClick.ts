@@ -1,18 +1,20 @@
-import * as actionTypes from '../../constants/actionTypes';
-import ReactResponsiveSelect from '../../ReactResponsiveSelect';
-import { containsClassName } from '../containsClassName';
+import * as actionTypes from "../../constants/actionTypes";
+import ReactResponsiveSelect from "../../ReactResponsiveSelect";
+import { containsClassName } from "../containsClassName";
 
-import { IState } from '../../types/';
+import { IState, IProps } from "../../types/";
 
 interface TArgs {
   event: MouseEvent | KeyboardEvent;
   state: IState;
   RRSClassRef: ReactResponsiveSelect;
+  props: IProps;
 }
 
-export function handleClick({ event, state, RRSClassRef }: TArgs): void {
+export function handleClick({ event, state, RRSClassRef, props }: TArgs): void {
   const {
     multiselect,
+    multiSelectSelectedOptions,
     isOptionsPanelOpen,
     isDragging,
     disabled,
@@ -25,20 +27,41 @@ export function handleClick({ event, state, RRSClassRef }: TArgs): void {
     /* Disallow natural event flow - don't allow blur to happen from button focus to selected option focus */
     event.preventDefault();
 
-    if (event && containsClassName(event.target as HTMLElement, 'rrs__options')) {
+    if (
+      event &&
+      containsClassName(event.target as HTMLElement, "rrs__options")
+    ) {
       return;
     }
 
-    const value = parseFloat(
-      (event.target as any).getAttribute('data-key'),
-    );
+    const value = parseFloat((event.target as any).getAttribute("data-key"));
 
-    if (options[value] && (options[value].disabled === true || options[value].optHeader === true)) {
+    if (
+      options[value] &&
+      (options[value].disabled === true || options[value].optHeader === true)
+    ) {
       return;
     }
 
     /* Select option index, if user selected option */
-    if (containsClassName(event.target as HTMLElement, 'rrs__option')) {
+    if (containsClassName(event.target as HTMLElement, "rrs__option")) {
+      if (multiselect) {
+        const isExistingSelection = multiSelectSelectedOptions.options.some(
+          (option) =>
+            options[value] &&
+            options[value].hasOwnProperty("value") &&
+            option.value === options[value].value
+        );
+
+        if (!isExistingSelection && props.onSelect) {
+          props.onSelect(options[value]);
+        } else if (isExistingSelection && props.onDeselect) {
+          props.onDeselect(options[value]);
+        }
+      } else if (!multiselect && props.onSelect) {
+        props.onSelect(options[value]);
+      }
+
       RRSClassRef.updateState({
         type: multiselect
           ? actionTypes.SET_MULTISELECT_OPTIONS
@@ -56,14 +79,14 @@ export function handleClick({ event, state, RRSClassRef }: TArgs): void {
     if (
       isOptionsPanelOpen &&
       // button on desktop (rrs__label) or overlay on small screen (rrs)
-      (containsClassName(event.target as HTMLElement, 'rrs__label') ||
-        containsClassName(event.target as HTMLElement, 'rrs'))
+      (containsClassName(event.target as HTMLElement, "rrs__label") ||
+        containsClassName(event.target as HTMLElement, "rrs"))
     ) {
       RRSClassRef.updateState(
         {
-          type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION
+          type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION,
         },
-        () => RRSClassRef.focusButton(),
+        () => RRSClassRef.focusButton()
       );
 
       return;
@@ -81,7 +104,7 @@ export function handleClick({ event, state, RRSClassRef }: TArgs): void {
         if (newState.isOptionsPanelOpen === false) {
           RRSClassRef.focusButton();
         }
-      },
+      }
     );
   }
 }

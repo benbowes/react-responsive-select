@@ -245,6 +245,26 @@ stories.add(
                         </p>
                     </td>
                 </tr>
+                <tr>
+                    <td>onSelect</td>
+                    <td>Function</td>
+                    <td>
+                        <p>
+                            The onSelect function returns the following:
+
+                            <br />
+                            
+                            <Code>
+                            {`{
+    value: option.value,
+    text: option.text,
+    name: The name prop you gave RRS
+}`}
+                            </Code>
+                            
+                        </p>
+                    </td>
+                </tr>
             </table>
 
             <h2 className="table-header">
@@ -314,6 +334,46 @@ stories.add(
                         <p>
                             Note: {' '}
                             <code>altered</code> signifies whether a select has been changed from it's original value.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>onSelect</td>
+                    <td>Function</td>
+                    <td>
+                        <p>
+                            The onSelect function returns the following:
+
+                            <br />
+                            
+                            <Code>
+                            {`{
+    value: option.value,
+    text: option.text,
+    name: The name prop you gave RRS
+}`}
+                            </Code>
+                            
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>onDeselect</td>
+                    <td>Function</td>
+                    <td>
+                        <p>
+                            The onDeselect function returns the following:
+
+                            <br />
+                            
+                            <Code>
+                            {`{
+    value: option.value,
+    text: option.text,
+    name: The name prop you gave RRS
+}`}
+                            </Code>
+                            
                         </p>
                     </td>
                 </tr>

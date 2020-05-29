@@ -69,7 +69,7 @@ export function handleKeyEvent({ event, state, props, RRSClassRef }: TArgs): voi
     case keyCodes.SPACE:
       /* close the panel and select option when open, or open the panel if closed */
       if (isOptionsPanelOpen) {
-        handleClick({ event, state, RRSClassRef });
+        handleClick({ event, state, RRSClassRef, props });
       } else {
         RRSClassRef.updateState({
           type: actionTypes.SET_OPTIONS_PANEL_OPEN,

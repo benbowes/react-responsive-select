@@ -94,6 +94,7 @@ stories.add(
                     <div>
                         <ReactResponsiveSelect
                             name="carType3"
+                            onSelect={(selectedOption) => console.log('onSelect', selectedOption)}
                             options={[
                                 {
                                     value: 'null',
@@ -141,6 +142,8 @@ stories.add(
                     <div>
                         <ReactResponsiveSelect
                             multiselect={true}
+                            onDeselect={(deselectedOption) => console.log('onDeselect', deselectedOption)}
+                            onSelect={(selectedOption) => console.log('onSelect', selectedOption)}
                             name="carType4"
                             options={[
                                 // (Required) an array of options - see above const options
