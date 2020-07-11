@@ -5,8 +5,7 @@
   "typings": "dist/index.d.ts",
   "version": "6.0.0-aplha.9",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
