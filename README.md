@@ -1,8 +1,6 @@
-# react-responsive-select-next
+# react-responsive-select
 
-![Build status](https://api.travis-ci.org/benbowes/react-responsive-select-next.svg?branch=master)
-
-The in-progess, and **next** version of react-responsive-select [https://www.npmjs.com/package/react-responsive-select]
+![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
 
 A customisable, touchable, React single-select / multi-select form control.
 
@@ -20,39 +18,43 @@ Built with keyboard and screen reader accessibility in mind.
 - Option headers
 - Mimics keyboard functionality where possible (sans multiselect)
 - Easy slot-in to your design system
-- No global styling
 
 ## Getting started
 
-Install the dependency - https://www.npmjs.com/package/react-responsive-select-next
+Install the dependency - https://www.npmjs.com/package/react-responsive-select
 
-`npm install react-responsive-select-next -save-dev`
+`npm install react-responsive-select -save-dev`
 
 Example usage:
 
 ```jsx
 import React from 'react';
-import { Select, CaretIcon } from 'react-responsive-select-next';
+import { Select, CaretIcon, ModalCloseButton } from 'react-responsive-select';
 
 // for default styles...
-import 'react-responsive-select-next/dist/react-responsive-select.css';
-
-const onChange = newValue => console.log('onChange', newValue);
-const onSubmit = () => console.log('onSubmit');
+import 'react-responsive-select/dist/react-responsive-select.css';
 
 const Form = () => (
   <form>
     <Select
-      name="make"
+      name="carType1"
+      modalCloseButton={<ModalCloseButton />}
       options={[
-        { text: 'Any', value: 'null' },
-        { text: 'Oldsmobile', value: 'oldsmobile', markup: <span>Oldsmobile</span> },
-        { text: 'Ford', value: 'ford', markup: <span>Ford</span> },
+        { value: 'null', text: 'Any' },
+        { value: 'alfa-romeo', text: 'Alfa Romeo' },
+        { value: 'bmw', text: 'BMW' },
+        { value: 'fiat', text: 'Fiat' },
+        { value: 'subaru', text: 'Subaru' },
+        { value: 'suzuki', text: 'Suzuki' },
+        { value: 'tesla', text: 'Tesla' },
+        { value: 'volvo', text: 'Volvo' },
+        { value: 'zonda', text: 'Zonda' },
       ]}
-      selectedValue="oldsmobile"
-      onSubmit={onSubmit}
-      onChange={onChange}
       caretIcon={<CaretIcon />}
+      prefix="Car1: "
+      selectedValue="subaru"
+      onChange={(newValue) => console.log('onChange', newValue)}
+      onSubmit={() => console.log('onSubmit')}
     />
   </form>
 );
@@ -60,24 +62,19 @@ const Form = () => (
 
 ## Examples & Demo
 
-https://benbowes.github.io/react-responsive-select-next/
+https://benbowes.github.io/react-responsive-select/
 
 ## API
 
-https://benbowes.github.io/react-responsive-select-next/#/API
+https://benbowes.github.io/react-responsive-select/#/API
 
 ## Screen Reader Demo
 
-https://benbowes.github.io/react-responsive-select-next/#/Screen%20reader%20demo
+https://benbowes.github.io/react-responsive-select/#/Screen%20reader%20demo
 
 ## CodeSandbox.io JavaScript Examples
 
 Coming soon...
-
-<!-- - Single-Select Example: https://codesandbox.io/s/mo8j53wvwp
-- Multi-Select Example https://codesandbox.io/s/multiselect-example-reactresponsiveselect-jo9se
-- Controlled Example https://codesandbox.io/s/controlled-example-reactresponsiveselect-jcp1n
-- Using with Formik Example https://codesandbox.io/s/using-reactresponsiveselect-with-formik-l234rznkl -->
 
 ## Business Rules
 
