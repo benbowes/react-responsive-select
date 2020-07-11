@@ -25,7 +25,7 @@ Install the dependency - https://www.npmjs.com/package/react-responsive-select
 
 `npm install react-responsive-select -save-dev`
 
-Example usage:
+Example usage (Single Select):
 
 ```jsx
 import React from 'react';
@@ -54,6 +54,52 @@ const Form = () => (
       prefix="Car1: "
       selectedValue="subaru"
       onChange={(newValue) => console.log('onChange', newValue)}
+      onSubmit={() => console.log('onSubmit')}
+    />
+  </form>
+);
+```
+
+Example usage (Multi Select):
+
+```jsx
+import React from 'react';
+import { Select, CaretIcon, MultiSelectOptionMarkup, ModalCloseButton } from 'react-responsive-select';
+
+// for default styles...
+import 'react-responsive-select/dist/react-responsive-select.css';
+
+const Form = () => (
+  <form>
+    <Select
+      multiselect={true}
+      name="make6"
+      selectedValues={['fiat']}
+      modalCloseButton={<ModalCloseButton />}
+      options={[
+        {
+          value: 'any',
+          text: 'Any',
+          markup: <MultiSelectOptionMarkup text="Any" />,
+        },
+        {
+          value: 'fiat',
+          text: 'Fiat',
+          markup: <MultiSelectOptionMarkup text="Fiat" />,
+        },
+        {
+          value: 'subaru',
+          text: 'Subaru',
+          markup: <MultiSelectOptionMarkup text="Subaru" />,
+        },
+        {
+          value: 'suzuki',
+          text: 'Suzuki',
+          markup: <MultiSelectOptionMarkup text="Suzuki" />,
+        },
+      ]}
+      caretIcon={<CaretIcon />}
+      onChange={(...rest) => console.log(rest)}
       onSubmit={() => console.log('onSubmit')}
     />
   </form>
