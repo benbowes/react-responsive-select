@@ -1,45 +1,28 @@
-import * as actionTypes from "../../constants/actionTypes";
-import ReactResponsiveSelect from "../../ReactResponsiveSelect";
-import { IProps, IState } from "../../types/";
+import * as actionTypes from '../../constants/actionTypes';
+import { Select } from '../../react-responsive-select';
+import { IProps, IState } from '../../types/';
 
 interface IArgs {
   event: KeyboardEvent;
   state: IState;
   props: IProps;
-  RRSClassRef: ReactResponsiveSelect;
+  RRSClassRef: Select;
 }
 
-export function handleEnterPressed({
-  event,
-  state,
-  props,
-  RRSClassRef,
-}: IArgs): void {
-  const {
-    disabled,
-    isOptionsPanelOpen,
-    multiselect,
-    nextPotentialSelectionIndex,
-    options,
-  } = state;
+export function handleEnterPressed({ event, state, props, RRSClassRef }: IArgs): void {
+  const { disabled, isOptionsPanelOpen, multiselect, nextPotentialSelectionIndex, options } = state;
 
   if (disabled) return;
 
-  const value = parseFloat((event.target as any).getAttribute("data-key"));
+  const value = parseFloat((event.target as any).getAttribute('data-key'));
 
-  if (
-    options[value] &&
-    (options[value].disabled === true || options[value].optHeader === true)
-  ) {
+  if (options[value] && (options[value].disabled === true || options[value].optHeader === true)) {
     return;
   }
 
   if (multiselect) {
     const isExistingSelection = state.multiSelectSelectedOptions.options.some(
-      (option) =>
-        options[value] &&
-        options[value].hasOwnProperty("value") &&
-        option.value === options[value].value
+      option => options[value] && options[value].hasOwnProperty('value') && option.value === options[value].value
     );
 
     if (!isExistingSelection && props.onSelect) {

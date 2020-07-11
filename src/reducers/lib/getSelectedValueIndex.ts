@@ -7,9 +7,7 @@ interface TArgs {
 }
 
 export function getSelectedValueIndex({ options, selectedValue, noSelectionLabel }: TArgs): number {
-  const index = selectedValue
-    ? options.map((option: IOption) => option.value).indexOf(selectedValue)
-    : -1;
+  const index = selectedValue ? options.map((option: IOption) => option.value).indexOf(selectedValue) : -1;
 
   // Allow a negative index if user wants to display a noSelectionLabel
   // Keyboard will not focus on an option when first opened

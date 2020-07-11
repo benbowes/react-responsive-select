@@ -74,7 +74,6 @@
 
 - hitting **a-z or 0-9** keys in quick succession (250ms) should open the options panel and highlight first option that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
-
 #### When focused and open
 
 - hitting **TAB** key should close options panel but retain focus on the select.
@@ -110,9 +109,11 @@
 ---
 
 ##### Terms definition
+
 - **SELECTED ITEM** is the item set with selectedValue or the first **FIRST AVAILABLE OPTION**.
 
 - **FIRST AVAILABLE OPTION** is the first option in the options list that is selectable. E.g:
+
   - Is not an option header.
   - Is not disabled.
 

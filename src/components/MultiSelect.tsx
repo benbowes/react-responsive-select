@@ -1,10 +1,6 @@
 import * as React from 'react';
-import singleline from 'singleline-next';
-import {
-  IOption,
-  IOutputMultiSelect,
-  IOutputMultiSelectOption,
-} from '../types/';
+import singleline from 'singleline';
+import { IOption, IOutputMultiSelect, IOutputMultiSelectOption } from '../types/';
 import { MultiSelectOption } from './MultiSelectOption';
 
 interface TProps {
@@ -39,14 +35,9 @@ export class MultiSelect extends React.Component<TProps> {
     */
     const { isOptionsPanelOpen, selectBoxRef } = this.props;
 
-    const optionsPanelJustClosed =
-      !isOptionsPanelOpen && prevProps.isOptionsPanelOpen;
+    const optionsPanelJustClosed = !isOptionsPanelOpen && prevProps.isOptionsPanelOpen;
 
-    if (
-      optionsPanelJustClosed &&
-      selectBoxRef &&
-      selectBoxRef.contains(document.activeElement)
-    ) {
+    if (optionsPanelJustClosed && selectBoxRef && selectBoxRef.contains(document.activeElement)) {
       // tslint:disable-next-line
       this.optionsButton.current && this.optionsButton.current.focus();
     }
@@ -58,12 +49,8 @@ export class MultiSelect extends React.Component<TProps> {
 
     return singleline(`
       Checkbox group ${prefix ? `${prefix} ` : ''} has
-      ${selectedOptionsLength} item${
-      selectedOptionsLength === 1 ? '' : 's'
-    } selected.
-      Selected option${selectedOptionsLength === 1 ? '' : 's'} ${
-      selectedOptionsLength === 1 ? 'is' : 'are'
-    }
+      ${selectedOptionsLength} item${selectedOptionsLength === 1 ? '' : 's'} selected.
+      Selected option${selectedOptionsLength === 1 ? '' : 's'} ${selectedOptionsLength === 1 ? 'is' : 'are'}
       ${multiSelectSelectedOptions.options
         .map((option: IOutputMultiSelectOption): string => option.text || '')
         .join(' and ')}
@@ -126,11 +113,7 @@ export class MultiSelect extends React.Component<TProps> {
                 <span className="rrs__multiselect-label">
                   <span className="rrs__multiselect-label__text">
                     {`${prefix ? `${prefix} ` : ''}
-                  ${
-                    multiSelectSelectedOptions.options.length > 0
-                      ? multiSelectSelectedOptions.options[0].text
-                      : ''
-                  }`}
+                  ${multiSelectSelectedOptions.options.length > 0 ? multiSelectSelectedOptions.options[0].text : ''}`}
                   </span>
                   {multiSelectSelectedOptions.options.length > 1 && (
                     <span className="rrs__multiselect-label__badge">
@@ -148,11 +131,7 @@ export class MultiSelect extends React.Component<TProps> {
               type="hidden"
               name={name}
               data-testid={`rrs-input_${name}`}
-              value={[
-                multiSelectSelectedOptions.options.map(
-                  (v: IOutputMultiSelectOption) => v.value,
-                ),
-              ].join(',')}
+              value={[multiSelectSelectedOptions.options.map((v: IOutputMultiSelectOption) => v.value)].join(',')}
             />
           )}
         </div>
@@ -167,11 +146,7 @@ export class MultiSelect extends React.Component<TProps> {
           {options.length > 0 &&
             options.map((option: IOption, index: number) => {
               if (option.optHeader) {
-                optHeaderLabel =
-                  option.text ||
-                  (option.markup &&
-                    (option.markup as HTMLElement).textContent) ||
-                  '';
+                optHeaderLabel = option.text || (option.markup && (option.markup as HTMLElement).textContent) || '';
               }
               return (
                 <MultiSelectOption

@@ -5,7 +5,7 @@ export function multiSelectBroadcastChange(
   currOptions: IOutputMultiSelectOption[],
   altered: boolean,
   fn?: (changes: IOutputMultiSelect) => void,
-  prevOptions?: IOutputMultiSelectOption[],
+  prevOptions?: IOutputMultiSelectOption[]
 ): void {
   if (!fn) return;
 

@@ -1,21 +1,42 @@
 {
   "name": "react-responsive-select",
-  "version": "5.1.1",
-  "description": "A React customisable, touchable, single-select / multi-select form component. Built with keyboard and screen reader accessibility in mind.",
-  "main": "dist/ReactResponsiveSelect.js",
-  "types": "ts/ReactResponsiveSelect.d.ts",
+  "version": "6.0.0-aplha.9",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/react-responsive-select.esm.js",
+  "author": "Ben Bowes <benbowes@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benbowes/react-responsive-select"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "compile": "rm -rf dist ts ts-esm && tsc && tsc -m es6 --outDir ts-esm && webpack --config webpack.output.js --json > stats.json && cp src/ReactResponsiveSelect.css dist/ReactResponsiveSelect.css",
-    "test": "jest",
-    "lint": "tsc --noEmit",
-    "prepublishOnly": "auto/git-check.sh && npm run compile && auto/git-tag.sh",
-    "deploy-storybook": "auto/git-check.sh && npm run compile && build-storybook && storybook-to-ghpages",
-    "start": "rm -rf .cache-loader storybook-static && start-storybook -p 6006"
+    "prepublishOnly": "npm run build",
+    "start": "npx styleguidist server",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "build:styleguide": "npx styleguidist build --ts",
+    "build": "tsdx build --format cjs,esm,umd && npm run copyfiles && npm run deleteUnwantedDistEntries && npm run build:styleguide",
+    "copyfiles": "cp src/react-responsive-select.css dist/react-responsive-select.css",
+    "deleteUnwantedDistEntries": "rm -rf dist/docs && rm -rf dist/__mocks__"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint && npm test"
+      "pre-commit": "tsdx lint"
     }
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "keywords": [
     "select",
@@ -31,50 +52,28 @@
     "accessible",
     "multiselect"
   ],
-  "author": "Ben Bowes <bb@benbowes.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/benbowes/react-responsive-select"
+  "dependencies": {
+    "singleline": "^2.0.0"
   },
   "peerDependencies": {
-    "react": ">16.0.0"
-  },
-  "dependencies": {
-    "singleline-next": "^2.0.0"
+    "react": ">=16"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@storybook/addon-info": "^5.1.0-alpha.35",
-    "@storybook/addon-options": "^5.1.0-alpha.35",
-    "@storybook/addons": "^5.1.0-alpha.35",
-    "@storybook/react": "^5.1.0-alpha.35",
-    "@storybook/storybook-deployer": "^2.8.1",
-    "@storybook/theming": "^5.0.10",
-    "@types/jest": "^24.0.11",
-    "@types/react": "^16.8.14",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-test-renderer": "^16.8.1",
-    "@types/storybook__addon-info": "^4.1.1",
-    "@types/storybook__addon-options": "^4.0.1",
-    "@types/storybook__react": "^4.0.1",
-    "acorn": "^6.1.1",
-    "babel-loader": "^8.0.0",
-    "cache-loader": "^1.2.2",
-    "formik": "^1.5.7",
-    "husky": "^2.4.1",
-    "jest": "^24.8.0",
-    "react": "^16.8.5",
-    "react-docgen-typescript-loader": "^3.0.0",
-    "react-dom": "^16.8.5",
-    "react-test-renderer": "^16.5.2",
-    "react-testing-library": "^7.0.0",
-    "ts-jest": "^24.0.2",
-    "ts-loader": "^5.4.5",
-    "tslint": "^5.18.0",
-    "typescript": "^3.0.3",
-    "uglifyjs-webpack-plugin": "^2.1.2",
-    "webpack-cli": "^3.3.2",
-    "yup": "^0.27.0"
+    "@testing-library/react": "^10.4.5",
+    "@types/react": "^16.9.42",
+    "@types/react-dom": "^16.9.8",
+    "css-loader": "^3.6.0",
+    "formik": "^2.1.4",
+    "husky": "^4.2.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-styleguidist": "^11.0.8",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.5",
+    "tsdx": "^0.13.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.6",
+    "webpack": "^4.43.0",
+    "yup": "^0.29.1"
   }
 }

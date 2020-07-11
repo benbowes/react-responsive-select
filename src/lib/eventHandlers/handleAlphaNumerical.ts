@@ -1,15 +1,15 @@
 import * as actionTypes from '../../constants/actionTypes';
-import ReactResponsiveSelect from '../../ReactResponsiveSelect';
+import { Select } from '../../react-responsive-select';
 import { IOption, IState } from '../../types/';
 
 interface IArgs {
   event: KeyboardEvent;
   state: IState;
-  RRSClassRef: ReactResponsiveSelect;
+  RRSClassRef: Select;
 }
 
-let stringMatch:string = '';
-let timeoutActive:boolean;
+let stringMatch: string = '';
+let timeoutActive: boolean;
 
 /**
  * User types some keys in quick successsion whilst focused on a select - search for this combonation in their options
@@ -27,12 +27,12 @@ export function handleAlphaNumerical({ event, state, RRSClassRef }: IArgs): void
 
     // Eventually (after 250ms) check if the accumulation of their keypresses matches the text of an option
     setTimeout(() => {
-      const foundIndexes:number[] = options.reduce((acc: number[], option: IOption, index: number) => {
+      const foundIndexes: number[] = options.reduce((acc: number[], option: IOption, index: number) => {
         if (
-          !option.optHeader
-          && !option.disabled
-          && option.text
-          && option.text.toLowerCase().indexOf(stringMatch) !== -1
+          !option.optHeader &&
+          !option.disabled &&
+          option.text &&
+          option.text.toLowerCase().indexOf(stringMatch) !== -1
         ) {
           acc.push(index);
         }
@@ -49,6 +49,6 @@ export function handleAlphaNumerical({ event, state, RRSClassRef }: IArgs): void
       // allow for the creation of a new search
       timeoutActive = false;
       stringMatch = '';
-    }, 250)
+    }, 250);
   }
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import singleline from 'singleline-next';
+import singleline from 'singleline';
 import { IOption } from '../types/';
 
 interface TProps {
@@ -20,6 +20,7 @@ export class MultiSelectOption extends React.Component<TProps> {
   constructor(props: TProps) {
     super(props);
     this.optionRef = React.createRef();
+    this.scrollOffset = 0;
   }
 
   public getScrollOffset(): number {
@@ -28,13 +29,7 @@ export class MultiSelectOption extends React.Component<TProps> {
   }
 
   public componentDidUpdate(): void {
-    const {
-      index,
-      isOptionsPanelOpen,
-      nextPotentialSelectionIndex,
-      optionsContainerRef,
-      optHeaderLabel,
-    } = this.props;
+    const { index, isOptionsPanelOpen, nextPotentialSelectionIndex, optionsContainerRef, optHeaderLabel } = this.props;
 
     if (index === nextPotentialSelectionIndex && isOptionsPanelOpen) {
       if (this.optionRef.current && optionsContainerRef.current) {
@@ -42,8 +37,7 @@ export class MultiSelectOption extends React.Component<TProps> {
 
         if (optHeaderLabel !== '') {
           const scrollDiff = Math.ceil(
-            this.optionRef.current.getBoundingClientRect().top -
-              optionsContainerRef.current.getBoundingClientRect().top,
+            this.optionRef.current.getBoundingClientRect().top - optionsContainerRef.current.getBoundingClientRect().top
           );
 
           this.scrollOffset = this.scrollOffset || this.getScrollOffset();
@@ -51,9 +45,7 @@ export class MultiSelectOption extends React.Component<TProps> {
           if (scrollDiff < this.scrollOffset) {
             optionsContainerRef.current.scroll(
               0,
-              Math.floor(
-                optionsContainerRef.current.scrollTop - this.scrollOffset,
-              ),
+              Math.floor(optionsContainerRef.current.scrollTop - this.scrollOffset)
             );
           }
         }
@@ -66,17 +58,8 @@ export class MultiSelectOption extends React.Component<TProps> {
   }
 
   public render(): React.ReactNode {
-    const {
-      index,
-      name,
-      multiSelectSelectedIndexes,
-      nextPotentialSelectionIndex,
-      option,
-      optHeaderLabel,
-    } = this.props;
-    const isSelected = multiSelectSelectedIndexes.some(
-      (i: number) => i === index,
-    );
+    const { index, name, multiSelectSelectedIndexes, nextPotentialSelectionIndex, option, optHeaderLabel } = this.props;
+    const isSelected = multiSelectSelectedIndexes.some((i: number) => i === index);
 
     return (
       <li
@@ -85,8 +68,7 @@ export class MultiSelectOption extends React.Component<TProps> {
         tabIndex={-1}
         aria-checked={isSelected}
         aria-label={`
-        ${option.text ||
-          (option.markup && (option.markup as HTMLElement).textContent)} ${
+        ${option.text || (option.markup && (option.markup as HTMLElement).textContent)} ${
           optHeaderLabel !== '' ? ` of ${optHeaderLabel}` : ''
         }
       `}
@@ -97,11 +79,7 @@ export class MultiSelectOption extends React.Component<TProps> {
         className={singleline(`
           rrs__option
           ${isSelected ? 'rrs__option--selected' : ''}
-          ${
-            nextPotentialSelectionIndex === index
-              ? 'rrs__option--next-selection'
-              : ''
-          }
+          ${nextPotentialSelectionIndex === index ? 'rrs__option--next-selection' : ''}
           ${option.disabled === true ? 'rrs__option--disabled' : ''}
           ${option.optHeader === true ? 'rrs__option--header' : ''}
         `)}

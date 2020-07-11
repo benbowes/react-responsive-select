@@ -12,23 +12,18 @@ export function nextValidIndex(
     return acc;
   }, []);
 
-  const indexNotFocusable =
-    possibleOptionIndexes.indexOf(nextPotentialSelectionIndex) === -1;
+  const indexNotFocusable = possibleOptionIndexes.indexOf(nextPotentialSelectionIndex) === -1;
 
   if (indexNotFocusable && mode === 'INCREMENT') {
     const nextSelectionPossible =
-      options[nextPotentialSelectionIndex + 1] &&
-      !options[nextPotentialSelectionIndex + 1].optHeader;
+      options[nextPotentialSelectionIndex + 1] && !options[nextPotentialSelectionIndex + 1].optHeader;
 
-    return nextSelectionPossible
-      ? nextPotentialSelectionIndex + 1
-      : possibleOptionIndexes[0];
+    return nextSelectionPossible ? nextPotentialSelectionIndex + 1 : possibleOptionIndexes[0];
   }
 
   if (indexNotFocusable && mode === 'DECREMENT') {
     const nextSelectionPossible =
-      options[nextPotentialSelectionIndex - 1] &&
-      !options[nextPotentialSelectionIndex - 1].optHeader;
+      options[nextPotentialSelectionIndex - 1] && !options[nextPotentialSelectionIndex - 1].optHeader;
 
     return nextSelectionPossible
       ? nextPotentialSelectionIndex - 1

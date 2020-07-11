@@ -13,16 +13,15 @@ interface IFindClosestValidOptionOutput {
 
 function findClosestValidOption(state: IState): { option: IOutputMultiSelectOptionSansDisabled; index: number } {
   const { options, name } = state;
-  const possibleOptions = options.reduce(
-    (acc: IFindClosestValidOptionOutput[], option: IOption, index: number) => {
-      if (!option.optHeader) {
-        acc.push({
-          option: { value: option.value, text: option.text, name },
-          index,
-        });
-      }
-      return acc;
-    }, []);
+  const possibleOptions = options.reduce((acc: IFindClosestValidOptionOutput[], option: IOption, index: number) => {
+    if (!option.optHeader) {
+      acc.push({
+        option: { value: option.value, text: option.text, name },
+        index,
+      });
+    }
+    return acc;
+  }, []);
 
   // Note: Will fail if there is only one option, and it is an optHeader
   return possibleOptions[0];

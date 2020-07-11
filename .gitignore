@@ -1,9 +1,5 @@
-node_modules
+*.log
 .DS_Store
-.cache-loader
-storybook-static
+node_modules
+.cache
 dist
-ts
-ts-esm
-src/coverage
-stats.json

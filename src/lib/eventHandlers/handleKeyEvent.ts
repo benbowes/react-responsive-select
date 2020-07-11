@@ -1,6 +1,6 @@
 import * as actionTypes from '../../constants/actionTypes';
 import { keyCodes } from '../../constants/keyCodes';
-import ReactResponsiveSelect from '../../ReactResponsiveSelect';
+import { Select } from '../../react-responsive-select';
 import { IProps, IState } from '../../types/';
 import { preventDefaultForKeyCodes } from '../preventDefaultForKeyCodes';
 import { handleAlphaNumerical } from './handleAlphaNumerical';
@@ -12,7 +12,7 @@ interface TArgs {
   event: KeyboardEvent;
   state: IState;
   props: IProps;
-  RRSClassRef: ReactResponsiveSelect;
+  RRSClassRef: Select;
 }
 
 export function handleKeyEvent({ event, state, props, RRSClassRef }: TArgs): void {
@@ -20,16 +20,7 @@ export function handleKeyEvent({ event, state, props, RRSClassRef }: TArgs): voi
 
   if (disabled) return;
 
-  preventDefaultForKeyCodes(
-    [
-      keyCodes.ENTER,
-      keyCodes.SPACE,
-      keyCodes.ESCAPE,
-      keyCodes.UP,
-      keyCodes.DOWN,
-    ],
-    event,
-  );
+  preventDefaultForKeyCodes([keyCodes.ENTER, keyCodes.SPACE, keyCodes.ESCAPE, keyCodes.UP, keyCodes.DOWN], event);
 
   /* handle alpha-nemeric key press */
   if (/^[a-z0-9]+$/.test(event.key)) {
@@ -47,10 +38,7 @@ export function handleKeyEvent({ event, state, props, RRSClassRef }: TArgs): voi
          * TODO add a test for this
          */
         if (multiselect) {
-          RRSClassRef.updateState(
-            { type: actionTypes.SET_OPTIONS_PANEL_CLOSED },
-            () => RRSClassRef.focusButton(),
-          );
+          RRSClassRef.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED }, () => RRSClassRef.focusButton());
         }
       }
       break;
@@ -79,9 +67,8 @@ export function handleKeyEvent({ event, state, props, RRSClassRef }: TArgs): voi
 
     case keyCodes.ESCAPE:
       /* remove focus from the panel when focussed */
-      RRSClassRef.updateState(
-        { type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION },
-        () => RRSClassRef.focusButton(),
+      RRSClassRef.updateState({ type: actionTypes.SET_OPTIONS_PANEL_CLOSED_NO_SELECTION }, () =>
+        RRSClassRef.focusButton()
       );
       break;
 

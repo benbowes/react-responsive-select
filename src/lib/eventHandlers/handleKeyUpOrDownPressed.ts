@@ -1,12 +1,12 @@
 import * as actionTypes from '../../constants/actionTypes';
-import ReactResponsiveSelect from '../../ReactResponsiveSelect';
+import { Select } from '../../react-responsive-select';
 import { IState } from '../../types/';
 import { getNextIndex } from '../getNextIndex';
 
 interface TArgs {
   state: IState;
   type: 'INCREMENT' | 'DECREMENT';
-  RRSClassRef: ReactResponsiveSelect;
+  RRSClassRef: Select;
 }
 
 export function handleKeyUpOrDownPressed({ state, RRSClassRef, type }: TArgs): void {

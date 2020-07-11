@@ -5,7 +5,7 @@ export function singleSelectBroadcastChange(
   currValue: IOutputSingleSelect,
   altered?: boolean,
   fn?: (changes: IOutputSingleSelect) => void,
-  prevValue?: IOutputSingleSelect,
+  prevValue?: IOutputSingleSelect
 ): void {
   if (!fn) return;
 

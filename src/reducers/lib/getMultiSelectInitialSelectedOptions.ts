@@ -21,47 +21,52 @@ function findClosestValidOption(state: IState): IOutputMultiSelectOption {
   };
 }
 
-export function getMultiSelectInitialSelectedOptions(state: IState, selectedValues?: string[]): IOutputMultiSelectOption[] {
+export function getMultiSelectInitialSelectedOptions(
+  state: IState,
+  selectedValues?: string[]
+): IOutputMultiSelectOption[] {
   const { noSelectionLabel, options, name } = state;
 
   let selectedOptionsToReturn;
 
-  if (!noSelectionLabel ) {
+  if (!noSelectionLabel) {
     // Preselect the first item in the list when if no noSelectionLabel exists
     if (selectedValues && selectedValues.length > 0) {
       // Grab selected options by matching option.value with selectedValues, and merge in `name`
       selectedOptionsToReturn = options
         .filter((option: IOption) => selectedValues.some((selectedValue: string) => selectedValue === option.value))
         .map((option: IOption) => ({ name, ...option }));
-    
     } else {
       // Grab first option and merge in `name`
-      const option = options[0] && options[0].optHeader
-        ? findClosestValidOption(state)
-        : options[0];
+      const option = options[0] && options[0].optHeader ? findClosestValidOption(state) : options[0];
 
-      selectedOptionsToReturn = [{
-        name,
-        text: option.text,
-        value: option.value,
-      }];
+      selectedOptionsToReturn = [
+        {
+          name,
+          text: option.text,
+          value: option.value,
+        },
+      ];
     }
 
     return selectedOptionsToReturn;
   }
 
-  selectedOptionsToReturn = selectedValues && selectedValues.length > 0
-    ? options.reduce((acc: any[], option: IOption) => {
-        if (selectedValues.some((selectedValue: string) => selectedValue === option.value)) {
-          acc.push({ ...option });
-        }
-        return acc;
-      }, [])
-    : [{
-          name: state.name,
-          text: noSelectionLabel,
-          value: 'null',
-      }];
+  selectedOptionsToReturn =
+    selectedValues && selectedValues.length > 0
+      ? options.reduce((acc: any[], option: IOption) => {
+          if (selectedValues.some((selectedValue: string) => selectedValue === option.value)) {
+            acc.push({ ...option });
+          }
+          return acc;
+        }, [])
+      : [
+          {
+            name: state.name,
+            text: noSelectionLabel,
+            value: 'null',
+          },
+        ];
 
   return selectedOptionsToReturn;
 }

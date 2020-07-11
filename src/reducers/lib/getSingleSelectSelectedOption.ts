@@ -3,7 +3,7 @@ import { IOption, IState } from '../../types/';
 /*
   use existing state.singleSelectSelectedOption, or first possible option to use as a selection
 */
-function closestValidOption(state: IState): IOption & { name?: string; } {
+function closestValidOption(state: IState): IOption & { name?: string } {
   if (state.singleSelectSelectedOption) {
     return state.singleSelectSelectedOption;
   }
@@ -22,16 +22,14 @@ function closestValidOption(state: IState): IOption & { name?: string; } {
   };
 }
 
-export function getSingleSelectSelectedOption(state: IState, initialSelectedIndex: number = 0): IOption & { name?: string; } {
-  const selectionIndex = (initialSelectedIndex === -1 && !state.noSelectionLabel)
-    ? 0
-    : initialSelectedIndex;
+export function getSingleSelectSelectedOption(
+  state: IState,
+  initialSelectedIndex: number = 0
+): IOption & { name?: string } {
+  const selectionIndex = initialSelectedIndex === -1 && !state.noSelectionLabel ? 0 : initialSelectedIndex;
 
   // if optHeader, then use existing state.singleSelectSelectedOption, or findClosestValidOption
-  if (
-    state.options[selectionIndex] &&
-    state.options[selectionIndex].optHeader
-  ) {
+  if (state.options[selectionIndex] && state.options[selectionIndex].optHeader) {
     return closestValidOption(state);
   }
 

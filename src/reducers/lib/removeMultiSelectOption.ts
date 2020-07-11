@@ -2,7 +2,7 @@ import { IOutputMultiSelectOption, IState } from '../../types/';
 
 export function removeMultiSelectOption(
   state: IState,
-  indexLocation: number,
+  indexLocation: number
 ): {
   options: IOutputMultiSelectOption[];
 } {

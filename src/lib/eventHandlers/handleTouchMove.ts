@@ -1,10 +1,10 @@
 import * as actionTypes from '../../constants/actionTypes';
-import ReactResponsiveSelect from '../../ReactResponsiveSelect';
+import { Select } from '../../react-responsive-select';
 import { IState } from '../../types/';
 
 interface TArgs {
   state: IState;
-  RRSClassRef: ReactResponsiveSelect;
+  RRSClassRef: Select;
 }
 
 export function handleTouchMove({ state, RRSClassRef }: TArgs): void {

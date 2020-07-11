@@ -1,5 +1,5 @@
 import * as React from 'react';
-import singleline from 'singleline-next';
+import singleline from 'singleline';
 import { IOption, IOutputSingleSelect } from '../types/';
 import { SingleSelectOption } from './SingleSelectOption';
 
@@ -34,21 +34,12 @@ export class SingleSelect extends React.Component<TProps> {
       there has been an interaction,
       or isOptionsPanelOpen and nextPotentialSelectionIndex === -1
     */
-    const {
-      isOptionsPanelOpen,
-      nextPotentialSelectionIndex,
-      selectBoxRef,
-    } = this.props;
+    const { isOptionsPanelOpen, nextPotentialSelectionIndex, selectBoxRef } = this.props;
 
-    const optionsPanelJustClosed =
-      !isOptionsPanelOpen && prevProps.isOptionsPanelOpen;
+    const optionsPanelJustClosed = !isOptionsPanelOpen && prevProps.isOptionsPanelOpen;
 
     if (this.optionsButton.current) {
-      if (
-        optionsPanelJustClosed &&
-        selectBoxRef &&
-        selectBoxRef.contains(document.activeElement)
-      ) {
+      if (optionsPanelJustClosed && selectBoxRef && selectBoxRef.contains(document.activeElement)) {
         this.optionsButton.current.focus();
       }
 
@@ -59,20 +50,12 @@ export class SingleSelect extends React.Component<TProps> {
   }
 
   public getCustomLabel(): React.ReactNode {
-    const {
-      prefix,
-      name,
-      singleSelectSelectedOption,
-      caretIcon,
-      customLabelText,
-    } = this.props;
+    const { prefix, name, singleSelectSelectedOption, caretIcon, customLabelText } = this.props;
 
     return (
       <div className="rrs__label">
         <span
-          aria-label={`${prefix ? `${prefix} ` : ''}${
-            singleSelectSelectedOption.text
-          } selected`}
+          aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
           className="rrs__label__text"
           id={`rrs-${name}-label`}
           data-testid={`rrs-label_${name}`}
@@ -114,19 +97,13 @@ export class SingleSelect extends React.Component<TProps> {
     return (
       <div className="rrs__label">
         <span
-          aria-label={`${prefix ? `${prefix} ` : ''}${
-            singleSelectSelectedOption.text
-          } selected`}
+          aria-label={`${prefix ? `${prefix} ` : ''}${singleSelectSelectedOption.text} selected`}
           className="rrs__label__text"
           id={`rrs-${name}-label`}
           data-testid={`rrs-label_${name}`}
         >
           {prefix && <span>{prefix}</span>}
-          {singleSelectSelectedOption.text ? (
-            singleSelectSelectedOption.text
-          ) : (
-            <div>&nbsp;</div>
-          )}
+          {singleSelectSelectedOption.text ? singleSelectSelectedOption.text : <div>&nbsp;</div>}
         </span>
         {caretIcon && caretIcon}
       </div>
@@ -184,11 +161,7 @@ export class SingleSelect extends React.Component<TProps> {
           {options.length > 0 &&
             options.map((option: IOption, index: number) => {
               if (option.optHeader) {
-                optHeaderLabel =
-                  option.text ||
-                  (option.markup &&
-                    (option.markup as HTMLElement).textContent) ||
-                  '';
+                optHeaderLabel = option.text || (option.markup && (option.markup as HTMLElement).textContent) || '';
               }
               return (
                 <SingleSelectOption

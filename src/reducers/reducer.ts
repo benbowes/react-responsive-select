@@ -24,15 +24,13 @@ export function reducer(state: IState, action: IAction): IState {
       const initialSelectedIndexes = getMultiSelectSelectedValueIndexes(
         action.value,
         action.value.selectedValues,
-        action.value.noSelectionLabel,
+        action.value.noSelectionLabel
       );
 
       return {
         ...state,
 
-        hasOptHeaders: action.value.options.some(
-          (option: IOption) => option.optHeader === true,
-        ),
+        hasOptHeaders: action.value.options.some((option: IOption) => option.optHeader === true),
 
         // Constants
         multiselect: action.value.multiselect || false,
@@ -49,10 +47,7 @@ export function reducer(state: IState, action: IAction): IState {
         // Single select
         singleSelectInitialIndex: initialSelectedIndex,
         singleSelectSelectedIndex: initialSelectedIndex,
-        singleSelectSelectedOption: getSingleSelectSelectedOption(
-          action.value,
-          initialSelectedIndex,
-        ),
+        singleSelectSelectedOption: getSingleSelectSelectedOption(action.value, initialSelectedIndex),
 
         // For determining highlighted item on Keyboard navigation and selection via UPDATE_VIA_PROPS
         // If UPDATE_VIA_PROPS and state exists, re-select nextPotentialSelectionIndex from state
@@ -64,10 +59,7 @@ export function reducer(state: IState, action: IAction): IState {
         multiSelectInitialSelectedIndexes: initialSelectedIndexes,
         multiSelectSelectedIndexes: initialSelectedIndexes,
         multiSelectSelectedOptions: {
-          options: getMultiSelectInitialSelectedOptions(
-            action.value,
-            action.value.selectedValues,
-          ),
+          options: getMultiSelectInitialSelectedOptions(action.value, action.value.selectedValues),
         },
       };
     }
@@ -93,10 +85,7 @@ export function reducer(state: IState, action: IAction): IState {
           return nextValidIndex(state, state.nextPotentialSelectionIndex);
         })(),
 
-        singleSelectSelectedOption: getSingleSelectSelectedOption(
-          state,
-          state.nextPotentialSelectionIndex,
-        ),
+        singleSelectSelectedOption: getSingleSelectSelectedOption(state, state.nextPotentialSelectionIndex),
       };
 
       return mergeIsAlteredState(newState);
@@ -107,10 +96,7 @@ export function reducer(state: IState, action: IAction): IState {
         ...state,
         isOptionsPanelOpen: false,
         singleSelectSelectedIndex: state.nextPotentialSelectionIndex,
-        singleSelectSelectedOption: getSingleSelectSelectedOption(
-          state,
-          state.nextPotentialSelectionIndex,
-        ),
+        singleSelectSelectedOption: getSingleSelectSelectedOption(state, state.nextPotentialSelectionIndex),
       };
       return mergeIsAlteredState(newState);
     }
@@ -141,10 +127,7 @@ export function reducer(state: IState, action: IAction): IState {
         nextPotentialSelectionIndex: action.value,
         singleSelectSelectedIndex: action.value,
         isOptionsPanelOpen: false,
-        singleSelectSelectedOption: getSingleSelectSelectedOption(
-          state,
-          action.value,
-        ),
+        singleSelectSelectedOption: getSingleSelectSelectedOption(state, action.value),
       };
 
       // Set altered state
@@ -154,8 +137,7 @@ export function reducer(state: IState, action: IAction): IState {
     case actionTypes.SET_MULTISELECT_OPTIONS: {
       if (!state.noSelectionLabel) {
         const isFirstOptionInListSelected =
-          state.multiSelectSelectedIndexes[0] === 0 &&
-          state.multiSelectSelectedIndexes.length === 1;
+          state.multiSelectSelectedIndexes[0] === 0 && state.multiSelectSelectedIndexes.length === 1;
 
         // If anything selected and first option was requested, deselect all, then select first option
         const shouldDeselectAllAndSelectFirstOption =
@@ -165,8 +147,7 @@ export function reducer(state: IState, action: IAction): IState {
           !state.noSelectionLabel;
 
         // Deselect first option when any other value is requested
-        const shouldDeselectFirstOptionAndSelectRequestedOption =
-          isFirstOptionInListSelected && action.value !== 0;
+        const shouldDeselectFirstOptionAndSelectRequestedOption = isFirstOptionInListSelected && action.value !== 0;
 
         // If any thing selected and first option was requested, deselect all, and return first option
         if (shouldDeselectAllAndSelectFirstOption) {
@@ -181,11 +162,7 @@ export function reducer(state: IState, action: IAction): IState {
       }
 
       // Remove noSelectionLabel from selected options if something is selected
-      if (
-        state.noSelectionLabel &&
-        state.multiSelectSelectedOptions.options[0].text ===
-          state.noSelectionLabel
-      ) {
+      if (state.noSelectionLabel && state.multiSelectSelectedOptions.options[0].text === state.noSelectionLabel) {
         // eslint-disable-next-line no-param-reassign
         state.multiSelectSelectedOptions.options = [];
       }
@@ -194,9 +171,7 @@ export function reducer(state: IState, action: IAction): IState {
       const actionOptionIndexAdjusted = nextValidIndex(state, action.value);
 
       // Find index of requested option
-      const indexLocation = state.multiSelectSelectedIndexes.indexOf(
-        actionOptionIndexAdjusted,
-      );
+      const indexLocation = state.multiSelectSelectedIndexes.indexOf(actionOptionIndexAdjusted);
 
       // If requested item does not exist, add it. Else remove it
       let nextState = {
@@ -217,9 +192,7 @@ export function reducer(state: IState, action: IAction): IState {
         if (state.noSelectionLabel) {
           nextState = {
             ...nextState,
-            nextPotentialSelectionIndex: state.hasOptHeaders
-              ? nextValidIndex(state, -1)
-              : -1,
+            nextPotentialSelectionIndex: state.hasOptHeaders ? nextValidIndex(state, -1) : -1,
             multiSelectSelectedOptions: {
               options: getMultiSelectInitialSelectedOptions(state),
             },
