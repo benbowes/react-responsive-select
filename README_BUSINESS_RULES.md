@@ -18,7 +18,7 @@
 
 - hitting **ENTER** key should submit the form.
 
-- hitting **a-z or 0-9** key should open the options panel and highlight first option that starts with this character (must be a **FOCUSSABLE ITEM**).
+- hitting **a-z or 0-9** keys in quick succession (250ms) should open the options panel and highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 ##### When focused and open
 
@@ -28,7 +28,7 @@
 
 - hitting **UP** key should increment up the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
 
-- hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**).
+- hitting **a-z or 0-9** keys in quick succession (250ms) should highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 - hitting **ENTER** key should select the current highlighted option and close the options panel, but not blur the Select Input.
 
@@ -38,13 +38,19 @@
 
 ---
 
-## Single-Select Touch Device, As above with these ammendments
+## Single-Select Clickable/Touch Device, As above with these ammendments
 
 - **TAPPING** on a select will open it's options.
 
+- **CLICKING** on a select will open it's options.
+
 - **TAPPING** on an option will select it's value.
 
+- **CLICKING** on an option will select it's value.
+
 - **DRAGGING** on an options panel that is scrollable, will scroll the options panel.
+
+- **SCROLLING** on an options panel that is scrollable, will scroll the options panel.
 
 ---
 
@@ -66,8 +72,7 @@
 
 - hitting **ENTER** key should submit the form.
 
-- hitting **a-z or 0-9** key should open the options panel and highlight first option that starts with this character (must be a **FOCUSSABLE ITEM**).
-
+- hitting **a-z or 0-9** keys in quick succession (250ms) should open the options panel and highlight first option that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 #### When focused and open
 
@@ -77,7 +82,7 @@
 
 - hitting **UP** key should increment up the options panel - highlighting next potential selection (must be a **FOCUSSABLE ITEM**). When the top of the options list is reached, it cycles the next potential selection to the bottom of the list. It cycles infinitely.
 
-- hitting **a-z or 0-9** key should highlight first item that starts with this character (must be a **FOCUSSABLE ITEM**).
+- hitting **a-z or 0-9** keys in quick succession (250ms) should highlight first item that starts with key pressed character/s (must be a **FOCUSSABLE ITEM**).
 
 - hitting **ENTER** key should select/unselect the current highlighted option.
 
@@ -87,20 +92,28 @@
 
 ---
 
-## Multi-Select Touch Device, As above with these ammendments
+## Multi-Select Clickable/Touch Device, As above with these ammendments
 
 - **TAPPING** on a select will open it's options.
 
+- **CLICKING** on a select will open it's options.
+
 - **TAPPING** on an option will check/uncheck it's value.
 
+- **CLICKING** on an option will check/uncheck it's value.
+
 - **DRAGGING** on an options panel that is scrollable, will scroll the options panel.
+
+- **SCROLLING** on an options panel that is scrollable, will scroll the options panel.
 
 ---
 
 ##### Terms definition
+
 - **SELECTED ITEM** is the item set with selectedValue or the first **FIRST AVAILABLE OPTION**.
 
 - **FIRST AVAILABLE OPTION** is the first option in the options list that is selectable. E.g:
+
   - Is not an option header.
   - Is not disabled.
 
