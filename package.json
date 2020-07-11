@@ -1,0 +1,80 @@
+{
+  "license": "MIT",
+  "name": "react-responsive-select-next",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "version": "6.0.0-aplha.9",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "start": "npx styleguidist server",
+    "build:styleguide": "npx styleguidist build --ts",
+    "build": "tsdx build --format cjs,esm,umd && npm run copyfiles && npm run deleteUnwantedDistEntries && npm run build:styleguide",
+    "copyfiles": "cp src/react-responsive-select.css dist/react-responsive-select.css",
+    "deleteUnwantedDistEntries": "rm -rf dist/docs && rm -rf dist/__mocks__",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "keywords": [
+    "select",
+    "react select",
+    "react dropdown",
+    "accessible react select",
+    "component",
+    "responsive",
+    "mobile",
+    "touch",
+    "select",
+    "dropdown",
+    "accessible",
+    "multiselect"
+  ],
+  "author": "Ben Bowes <bb@benbowes.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benbowes/react-responsive-select"
+  },
+  "module": "dist/react-responsive-select-next.esm.js",
+  "devDependencies": {
+    "@testing-library/react": "^10.2.1",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "css-loader": "^3.5.3",
+    "formik": "^2.1.4",
+    "husky": "^4.2.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-styleguidist": "^11.0.8",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.5",
+    "tsdx": "^0.13.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "yup": "^0.29.1"
+  },
+  "dependencies": {
+    "singleline": "^2.0.0"
+  }
+}

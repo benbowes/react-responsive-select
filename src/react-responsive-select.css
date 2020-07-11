@@ -1,0 +1,329 @@
+/*
+
+  React Responsive Select - Default styles
+
+*/
+
+.rrs {
+  font-family: sans-serif;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.rrs *,
+.rrs *:before,
+.rrs *:after {
+  box-sizing: border-box;
+}
+
+.rrs__button {
+  color: #555;
+  position: relative;
+  cursor: pointer;
+  line-height: 44px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.rrs__button--disabled {
+  color: #999999;
+  background: #f5f5f5;
+  cursor: default;
+}
+
+.rrs__button:focus {
+  outline: 0;
+}
+
+.rrs--options-visible .rrs__button {
+  border-radius: 4px 4px 0 0;
+}
+
+.rrs__button + .rrs__options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  position: absolute;
+  z-index: 2;
+  border: 1px solid #999;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 4px 4px;
+  top: 44px;
+  left: 0;
+  right: 0;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.rrs--options-visible .rrs__options {
+  height: auto;
+  visibility: visible;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 230px;
+}
+
+/*
+
+  Mobile Close Icon
+
+*/
+
+.mobile-close {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.rrs__option {
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  margin: 0;
+}
+
+.rrs__option * {
+  pointer-events: none;
+}
+
+.rrs__option:focus {
+  outline: 1px solid #e0e0e0;
+}
+
+.rrs__option:hover {
+  background: #f5f5f5;
+  color: #0273b5;
+}
+
+.rrs__option:active {
+  background: #e1f5fe;
+}
+
+.rrs__option.rrs__option--next-selection {
+  background: #f1f8fb;
+  color: #0273b5;
+}
+
+.rrs__option.rrs__option--selected {
+  color: #0273b5;
+}
+
+.rrs__option.rrs__option--disabled {
+  color: #999999;
+  background: #f5f5f5;
+  cursor: default;
+}
+
+.rrs__option.rrs__option--header {
+  color: #666666;
+  cursor: default;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #f5f5f5;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.rrs__label {
+  padding: 0 2rem 0 1rem;
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-size: inherit;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.rrs__label * {
+  pointer-events: none;
+}
+
+.rrs--options-visible .rrs__label,
+.rrs__button:focus .rrs__label {
+  outline: 0;
+  border: 1px solid #999;
+}
+
+.rrs--options-visible .rrs__label {
+  border-radius: 4px 4px 0 0;
+}
+
+.rrs--has-changed .rrs__label {
+  color: #0273b5;
+}
+
+/*
+
+  Multiselect overrides
+
+*/
+
+.rrs__multiselect-label {
+  display: inline-flex;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.rrs__multiselect-label__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rrs__multiselect-label__badge {
+  border: 1px solid #ccc;
+  padding: 1px 6px;
+  margin: 0 0 0 4px;
+  border-radius: 8px;
+  color: #666;
+  font-size: 11px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* 
+
+  Checkbox
+
+*/
+
+.rrs .checkbox {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  top: -1px;
+  border: 1px solid #ccc;
+  margin: 2px 8px 2px 0;
+  border-radius: 4px;
+}
+
+.rrs__option.rrs__option--selected .checkbox {
+  border: 1px solid #0273b5;
+}
+
+.rrs .checkbox-icon {
+  fill: transparent;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+
+.rrs__option.rrs__option--selected .checkbox-icon {
+  fill: #0273b5;
+}
+
+/*
+
+  Caret Icon
+
+*/
+
+.rrs .caret-icon {
+  position: absolute;
+  right: 1rem;
+  top: 1.25rem;
+  fill: #333;
+}
+
+.rrs--options-visible .caret-icon {
+  transform: rotate(180deg);
+}
+
+/* 
+
+  Badge
+
+*/
+
+.badge {
+  background: #f1f1f1;
+  padding: 0.25rem 1rem;
+  margin: 2px 10px 2px 0;
+  border-radius: 3px;
+}
+
+/*
+
+  Open in a modal when smaller potentially touch screen
+
+*/
+
+@media screen and (max-width: 768px) {
+  .rrs {
+    position: static;
+  }
+
+  .rrs.rrs--options-visible:after {
+    content: '';
+    cursor: pointer;
+    position: fixed;
+    animation: fadeIn 0.3s ease forwards;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .rrs--options-visible .rrs__options {
+    max-height: initial;
+    position: fixed;
+    font-size: 1.25rem;
+    width: auto;
+    left: 1rem;
+    right: 1rem;
+    top: 15%;
+    bottom: 1rem;
+    border: 0;
+    border-radius: 4px;
+  }
+
+  /*
+
+    Mobile Close Icon
+
+  */
+
+  .mobile-close {
+    display: block;
+    cursor: pointer;
+    line-height: 1;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    -webkit-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  .mobile-close__icon {
+    fill: #fff;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+  }
+}
