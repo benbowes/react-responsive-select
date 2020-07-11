@@ -1,9 +1,15 @@
 {
+  "name": "react-responsive-select",
+  "version": "6.0.0-aplha.9",
   "license": "MIT",
-  "name": "react-responsive-select-next",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "version": "6.0.0-aplha.9",
+  "module": "dist/react-responsive-select.esm.js",
+  "author": "Ben Bowes <benbowes@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benbowes/react-responsive-select"
+  },
   "files": [
     "dist"
   ],
@@ -13,16 +19,13 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "start": "npx styleguidist server",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
     "build:styleguide": "npx styleguidist build --ts",
     "build": "tsdx build --format cjs,esm,umd && npm run copyfiles && npm run deleteUnwantedDistEntries && npm run build:styleguide",
     "copyfiles": "cp src/react-responsive-select.css dist/react-responsive-select.css",
-    "deleteUnwantedDistEntries": "rm -rf dist/docs && rm -rf dist/__mocks__",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build"
-  },
-  "peerDependencies": {
-    "react": ">=16"
+    "deleteUnwantedDistEntries": "rm -rf dist/docs && rm -rf dist/__mocks__"
   },
   "husky": {
     "hooks": {
@@ -49,17 +52,17 @@
     "accessible",
     "multiselect"
   ],
-  "author": "Ben Bowes <bb@benbowes.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/benbowes/react-responsive-select"
+  "dependencies": {
+    "singleline": "^2.0.0"
   },
-  "module": "dist/react-responsive-select-next.esm.js",
+  "peerDependencies": {
+    "react": ">=16"
+  },
   "devDependencies": {
-    "@testing-library/react": "^10.2.1",
-    "@types/react": "^16.9.35",
+    "@testing-library/react": "^10.4.5",
+    "@types/react": "^16.9.42",
     "@types/react-dom": "^16.9.8",
-    "css-loader": "^3.5.3",
+    "css-loader": "^3.6.0",
     "formik": "^2.1.4",
     "husky": "^4.2.5",
     "react": "^16.13.1",
@@ -69,11 +72,8 @@
     "ts-loader": "^7.0.5",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3",
+    "typescript": "^3.9.6",
     "webpack": "^4.43.0",
     "yup": "^0.29.1"
-  },
-  "dependencies": {
-    "singleline": "^2.0.0"
   }
 }
