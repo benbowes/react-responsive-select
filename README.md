@@ -118,10 +118,6 @@ https://benbowes.github.io/react-responsive-select/#/API
 
 https://benbowes.github.io/react-responsive-select/#/Screen%20reader%20demo
 
-## CodeSandbox.io JavaScript Examples
-
-Coming soon...
-
 ## Business Rules
 
 Have a read of [README_BUSINESS_RULES.md](./README_BUSINESS_RULES.md)
