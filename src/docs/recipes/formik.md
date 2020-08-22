@@ -1,4 +1,6 @@
-Using ReactResponsiveSelect with Formik
+Using react-responsive-select with Formik - an example of how to convert this into a formik component in your local component library.
+
+Certainly not the only way to do this. If you have a different solution; please share in the github issues for others to benefit.
 
 ```jsx
 import { Select, CaretIcon, ErrorIcon, MultiSelectOptionMarkup } from '../../react-responsive-select'; // 'react-responsive-select'
