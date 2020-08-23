@@ -1,3 +1,8 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
 a {
   color: inherit;
 }
@@ -238,7 +243,7 @@ td:last-of-type {
   top: 0;
 }
 
-pre {
+td pre {
   background: #333;
   color: #ccc;
   padding: 1rem;
@@ -271,7 +276,7 @@ pre {
 
 .field-error-message {
   color: #f44336;
-  font-size: 12px;
+  font-size: 14px;
   padding: 0.5rem;
   display: flex;
   align-items: center;
