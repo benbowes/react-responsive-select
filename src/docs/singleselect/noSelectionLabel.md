@@ -1,4 +1,6 @@
-Use `noSelectionLabel` to set the default text. By default the firt option is selected when `noSelectionLabel` is not present.
+Use `noSelectionLabel` to set the default text.
+
+By default the first option is selected when `noSelectionLabel` is not present.
 
 ```jsx
 import { Select, CaretIcon } from '../../react-responsive-select'; // 'react-responsive-select'

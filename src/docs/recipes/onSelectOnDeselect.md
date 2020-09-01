@@ -1,25 +1,25 @@
-Listening for RRS changes with the "onListen" prop. This example blocks body scolling on small screen when options are open
+For a multi-select you can see what value changed via the function props:
+
+`onSelect` and `onDeselect`
+
+For a single-select you can see what value changed via the function prop:
+
+`onSelect`
 
 ```jsx
 import { Select, CaretIcon, MultiSelectOptionMarkup } from '../../react-responsive-select'; // 'react-responsive-select'
 
-let prevIsOpenValue;
+function onSelect(selectedValue) {
+  console.log({ selectedValue });
+}
 
-function onListen(isOpen, name, actionType) {
-  if (isOpen && prevIsOpenValue !== isOpen) {
-    document.body.classList.add('no-scroll-y');
-    prevIsOpenValue = isOpen;
-  } else if (!isOpen && prevIsOpenValue !== isOpen) {
-    document.body.classList.remove('no-scroll-y');
-    prevIsOpenValue = isOpen;
-  }
-
-  console.log({ isOpen, name, actionType });
+function onDeselect(deselectedValue) {
+  console.log({ deselectedValue });
 }
 
 <form>
   <Select
-    onListen={onListen}
+    onSelect={onSelect}
     name="carType1"
     options={[
       { value: 'null', text: 'Any' },
@@ -38,7 +38,8 @@ function onListen(isOpen, name, actionType) {
   />
   <Select
     multiselect={true}
-    onListen={onListen}
+    onSelect={onSelect}
+    onDeselect={onDeselect}
     name="make6"
     selectedValues={['fiat']}
     options={[
