@@ -27,6 +27,7 @@ module.exports = {
       name: 'Single Select',
       pagePerSection: true,
       exampleMode: 'expand',
+      sectionDepth: 1,
       sections: [
         {
           name: 'Basic',
@@ -57,6 +58,7 @@ module.exports = {
     {
       name: 'Multi Select',
       pagePerSection: true,
+      sectionDepth: 1,
       sections: [
         {
           name: 'Basic',
@@ -79,6 +81,7 @@ module.exports = {
     {
       name: 'Recipes',
       pagePerSection: true,
+      sectionDepth: 1,
       sections: [
         {
           name: 'Controlled example 1',
