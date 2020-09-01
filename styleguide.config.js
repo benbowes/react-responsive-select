@@ -12,7 +12,7 @@ module.exports = {
   exampleMode: 'expand',
   sections: [
     {
-      name: 'React-Responsive-Select',
+      name: 'Introduction',
       content: 'src/docs/home.md',
     },
     {
@@ -99,7 +99,21 @@ module.exports = {
           name: 'Listening for changes',
           content: 'src/docs/recipes/onListen.md',
         },
+        {
+          name: 'onSelect and onDeselect',
+          content: 'src/docs/recipes/onSelectOnDeselect.md',
+        },
       ],
+    },
+    {
+      name: 'Npm',
+      external: true,
+      href: 'https://www.npmjs.com/package/react-responsive-select',
+    },
+    {
+      name: 'Github',
+      external: true,
+      href: 'https://github.com/benbowes/react-responsive-select/',
     },
   ],
   // Custom webpack - only for Styleguidist

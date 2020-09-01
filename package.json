@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -71,7 +71,7 @@
     "react-styleguidist": "^11.0.8",
     "style-loader": "^1.2.1",
     "ts-loader": "^7.0.5",
-    "tsdx": "^0.13.2",
+    "tsdx": "^0.13.3",
     "tslib": "^2.0.0",
     "typescript": "^3.9.6",
     "webpack": "^4.43.0",
