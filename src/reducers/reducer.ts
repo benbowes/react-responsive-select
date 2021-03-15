@@ -18,7 +18,6 @@ import {
 
 export function reducer(state: IState, action: IAction): IState {
   switch (action.type) {
-    case actionTypes.UPDATE_VIA_PROPS:
     case actionTypes.INITIALISE: {
       const initialSelectedIndex = getSelectedValueIndex(action.value);
       const initialSelectedIndexes = getMultiSelectSelectedValueIndexes(
@@ -49,8 +48,6 @@ export function reducer(state: IState, action: IAction): IState {
         singleSelectSelectedIndex: initialSelectedIndex,
         singleSelectSelectedOption: getSingleSelectSelectedOption(action.value, initialSelectedIndex),
 
-        // For determining highlighted item on Keyboard navigation and selection via UPDATE_VIA_PROPS
-        // If UPDATE_VIA_PROPS and state exists, re-select nextPotentialSelectionIndex from state
         nextPotentialSelectionIndex: state.nextPotentialSelectionIndex
           ? state.nextPotentialSelectionIndex
           : initialSelectedIndex,
