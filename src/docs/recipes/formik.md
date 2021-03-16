@@ -103,6 +103,9 @@ const FormikSingleSelect = ({ formikProps, name, options, ...otherProps }) => (
       onChange={({ value, name }) => {
         formikProps.handleChange({ target: { value, name } });
       }}
+      onBlur={({ value, name }) => {
+        formikProps.handleBlur({ target: { value, name } });
+      }}
       {...otherProps}
     />
     <CustomFormikError formikProps={formikProps} name={name} />
@@ -120,9 +123,10 @@ const FormikMultiSelect = ({ formikProps, name, options, ...otherProps }) => (
       onSubmit={formikProps.handleSubmit}
       options={options}
       onChange={({ altered, options }) => {
-        if (altered) {
-          formikProps.handleChange({ target: { value: options.map(option => option.value), name } });
-        }
+        formikProps.handleChange({ target: { value: options.map(option => option.value), name } });
+      }}
+      onBlur={({ altered, options }) => {
+        formikProps.handleBlur({ target: { value: options.map(option => option.value), name } });
       }}
       {...otherProps}
     />

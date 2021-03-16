@@ -18,6 +18,7 @@ Built with keyboard and screen reader accessibility in mind.
 - Option headers
 - Mimics keyboard functionality where possible (sans multiselect)
 - Easy slot-in to your design system
+- It's about 25kb
 
 ## Getting started
 
@@ -53,7 +54,7 @@ const Form = () => (
       caretIcon={<CaretIcon />}
       prefix="Car1: "
       selectedValue="subaru"
-      onChange={(newValue) => console.log('onChange', newValue)}
+      onChange={newValue => console.log('onChange', newValue)}
       onSubmit={() => console.log('onSubmit')}
     />
   </form>
@@ -121,3 +122,9 @@ https://benbowes.github.io/react-responsive-select/#/Screen%20reader%20demo
 ## Business Rules
 
 Have a read of [README_BUSINESS_RULES.md](./README_BUSINESS_RULES.md)
+
+## Upgrade from v6 - v7
+
+From version 7.0.0 on, you will need to use a `key` prop to update react-responsive-select's internal state. More on that here: https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+
+There are some examples in the recipe section here: https://benbowes.github.io/react-responsive-select/

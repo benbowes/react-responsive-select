@@ -6,7 +6,6 @@ import { getCustomLabelText } from './lib/getCustomLabelText';
 import { multiSelectBroadcastChange, singleSelectBroadcastChange } from './lib/onChangeBroadcasters';
 import { initialState } from './reducers/initialState';
 import { reducer } from './reducers/reducer';
-import { isEqual } from './lib/isEqual';
 import { IAction, IProps, IState } from './types/';
 
 import { MultiSelect } from './components/MultiSelect';
@@ -42,19 +41,6 @@ export class Select extends React.Component<IProps, IState> {
     });
   }
 
-  /**
-   * Allow for the component to be updated/controlled via props after componentDidMount
-   */
-  public UNSAFE_componentWillReceiveProps(nextProps: IProps): void {
-    if (!isEqual(nextProps, this.props)) {
-      this.updateState({
-        type: actionTypes.UPDATE_VIA_PROPS,
-        value: { ...this.props, ...nextProps },
-      });
-    }
-  }
-
-  /* Broadcast change when there has been one */
   public componentDidUpdate(_prevProps: IProps, prevState: IState): boolean {
     const { singleSelectSelectedOption, multiSelectSelectedOptions, multiselect, altered } = this.state;
     const { onChange } = this.props;
