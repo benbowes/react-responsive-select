@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-select",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/benbowes/react-responsive-select"
   },
-  "homepage": "https://benbowes.github.io/react-responsive-select/#/React-Responsive-Select",
+  "homepage": "https://benbowes.github.io/react-responsive-select",
   "files": [
     "dist"
   ],
