@@ -139,9 +139,10 @@ export class Select extends React.Component<IProps, IState> {
   };
 
   public render(): React.ReactNode {
-    const { prefix, caretIcon, disabled, modalCloseButton } = this.props;
+    const { prefix, caretIcon, modalCloseButton } = this.props;
     const {
       altered,
+      disabled,
       hasOptHeaders,
       isOptionsPanelOpen,
       isDragging,

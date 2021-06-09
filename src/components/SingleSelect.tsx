@@ -103,7 +103,7 @@ export class SingleSelect extends React.Component<TProps> {
           data-testid={`rrs-label_${name}`}
         >
           {prefix && <span>{prefix}</span>}
-          {singleSelectSelectedOption.text ? singleSelectSelectedOption.text : <div>&nbsp;</div>}
+          {singleSelectSelectedOption.text ? singleSelectSelectedOption.text : <span>&nbsp;</span>}
         </span>
         {caretIcon && caretIcon}
       </div>
@@ -158,7 +158,7 @@ export class SingleSelect extends React.Component<TProps> {
           className="rrs__options"
           ref={this.optionsContainer}
         >
-          {options.length > 0 &&
+          {!!(options.length > 0) &&
             options.map((option: IOption, index: number) => {
               if (option.optHeader) {
                 optHeaderLabel = option.text || (option.markup && (option.markup as HTMLElement).textContent) || '';
