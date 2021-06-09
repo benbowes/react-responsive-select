@@ -158,7 +158,7 @@ export class SingleSelect extends React.Component<TProps> {
           className="rrs__options"
           ref={this.optionsContainer}
         >
-          {!!(options.length > 0) &&
+          {options.length > 0 &&
             options.map((option: IOption, index: number) => {
               if (option.optHeader) {
                 optHeaderLabel = option.text || (option.markup && (option.markup as HTMLElement).textContent) || '';
