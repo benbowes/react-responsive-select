@@ -235,6 +235,29 @@ const Badge = ({ text }) => (
       </div>
     </div>
 
+    <div className="row">
+      <h2>VERSION 7+ CHANGE</h2>
+      <p>
+        From version 7.0.0 on, you will need to use a <b>"key"</b> prop to update react-responsive-select's internal
+        state.
+      </p>
+      <p>
+        More on the reason for the change here:
+        <br />
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key"
+        >
+          https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+        </a>
+      </p>
+      <p>
+        There are some examples in the <b>Recipes</b> section:{' '}
+        <a href="/#/Recipes/Controlled%20example%201">/#/Recipes/Controlled example 1</a>
+      </p>
+    </div>
+
     <div className="logo-links">
       <h2>LINKS</h2>
       <ul>

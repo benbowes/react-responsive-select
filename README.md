@@ -24,7 +24,7 @@ Built with keyboard and screen reader accessibility in mind.
 
 Install the dependency - https://www.npmjs.com/package/react-responsive-select
 
-`npm install react-responsive-select -save-dev`
+`npm install react-responsive-select --save-dev`
 
 Example usage (Single Select):
 

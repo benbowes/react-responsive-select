@@ -41,7 +41,7 @@ export function reducer(state: IState, action: IAction): IState {
         name: action.value.name,
         options: action.value.options,
         altered: action.value.altered || false,
-        disabled: action.value.disabled || false,
+        disabled: action.value.options.length === 0 || action.value.disabled || false,
 
         // Single select
         singleSelectInitialIndex: initialSelectedIndex,
@@ -56,7 +56,10 @@ export function reducer(state: IState, action: IAction): IState {
         multiSelectInitialSelectedIndexes: initialSelectedIndexes,
         multiSelectSelectedIndexes: initialSelectedIndexes,
         multiSelectSelectedOptions: {
-          options: getMultiSelectInitialSelectedOptions(action.value, action.value.selectedValues),
+          options:
+            action.value.options.length > 0
+              ? getMultiSelectInitialSelectedOptions(action.value, action.value.selectedValues)
+              : [],
         },
       };
     }

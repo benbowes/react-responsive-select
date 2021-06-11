@@ -294,6 +294,13 @@ describe('Keyboard MultiSelect', () => {
     });
   });
 
+  test('Multiselect - empty options should disable the select', () => {
+    const submitSpy = jest.fn();
+    const wrapper = render(<Select multiselect name="cars" onSubmit={submitSpy} options={[]} />);
+
+    expect(wrapper.getByRole('button').getAttribute('aria-disabled')).toBe('true');
+  });
+
   describe('Mouse/Touch Device', () => {
     test("**TAPPING** on a select will open it's options", () => {});
 

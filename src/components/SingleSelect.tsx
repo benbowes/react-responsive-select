@@ -103,7 +103,7 @@ export class SingleSelect extends React.Component<TProps> {
           data-testid={`rrs-label_${name}`}
         >
           {prefix && <span>{prefix}</span>}
-          {singleSelectSelectedOption.text ? singleSelectSelectedOption.text : <div>&nbsp;</div>}
+          {singleSelectSelectedOption.text ? singleSelectSelectedOption.text : <span>&nbsp;</span>}
         </span>
         {caretIcon && caretIcon}
       </div>
