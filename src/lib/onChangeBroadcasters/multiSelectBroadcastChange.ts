@@ -9,7 +9,7 @@ export function multiSelectBroadcastChange(
 ): void {
   if (!fn) return;
 
-  const shouldBroadcastChange = !prevOptions || !isEqual(prevOptions, currOptions);
+  const shouldBroadcastChange = !prevOptions || !isEqual(prevOptions.values, currOptions.values);
 
   if (shouldBroadcastChange) {
     fn({
