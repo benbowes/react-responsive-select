@@ -9,7 +9,7 @@ export function singleSelectBroadcastChange(
 ): void {
   if (!fn) return;
 
-  const shouldBroadcastChange = !isEqual(prevValue, currValue);
+  const shouldBroadcastChange = !isEqual(prevValue?.value, currValue?.value);
 
   if (shouldBroadcastChange) {
     fn({
