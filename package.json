@@ -65,7 +65,7 @@
     "@types/react-dom": "^16.9.8",
     "css-loader": "^5.2.5",
     "formik": "^2.1.4",
-    "husky": "^4.2.5",
+    "husky": "^4.3.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-styleguidist": "^11.2.0",
