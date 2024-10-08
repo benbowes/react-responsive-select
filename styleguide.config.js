@@ -122,9 +122,8 @@ module.exports = {
       rules: [
         {
           test: /\.tsx?$/,
-          exclude: /node_modules/,
           loader: 'ts-loader',
-          options: { configFile: 'tsconfig.styleguidist.json' },
+          options: { transpileOnly: true, configFile: 'tsconfig.styleguidist.json' },
         },
         {
           test: /\.css$/,
