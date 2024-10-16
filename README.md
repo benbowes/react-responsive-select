@@ -1,11 +1,5 @@
 # react-responsive-select
 
-## Deprecated
-
-> Use another select component please. This one was created many years ago as there was not a sensible WCAG select. Now there are plenty. Use one of those. I will not be updating this one in the foreseeable future.
-
-![Build status](https://api.travis-ci.org/benbowes/react-responsive-select.svg?branch=master)
-
 A customisable, touchable, React single-select / multi-select form control.
 
 Built with keyboard and screen reader accessibility in mind.
@@ -23,6 +17,11 @@ Built with keyboard and screen reader accessibility in mind.
 - Mimics keyboard functionality where possible (sans multiselect)
 - Easy slot-in to your design system
 - It's about 25kb
+
+## Recommendation
+
+> This select component was created many years ago when there was no React WCAG select available. Now there are plenty. I suggest using one of those, their communities and contributer lists are larger.
+> I will continue to run patches on this one in the foreseeable future for security upgrades if any issues arise.
 
 ## Getting started
 
