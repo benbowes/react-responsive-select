@@ -255,6 +255,34 @@ describe('Keyboard MultiSelect', () => {
       // TODO: FOCUS/BLUR NOT TESTED
     });
 
+    test('hitting **ENTER** key should select the current highlighted option and trigger onChange with { options, altered: true }', () => {
+      const changeSpy = jest.fn();
+      const wrapper = render(<Select multiselect name="cars" onChange={changeSpy} options={MULTISELECT_OPTIONS} />);
+
+      const select = wrapper.getByTestId('cars');
+
+      // Focus
+      act(() => select.focus());
+
+      // Open panel
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+
+      // Choose Fiat by keypressing Down
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+
+      // Select it
+      fireEvent.keyDown(select, { key: 'Enter', keyCode: 13 });
+
+      // onChange prop was called with { options, altered: true }
+      expect(changeSpy).toHaveBeenCalledTimes(1);
+      expect(changeSpy).toHaveBeenCalledWith({
+        options: [{ name: 'cars', text: 'Fiat', value: 'fiat' }],
+        altered: true,
+      });
+    });
+
     test("hitting **ESC** key should close the options panel and keep the user's last selection, or the initial selection, but not blur the Select Input", () => {
       const submitSpy = jest.fn();
       const wrapper = render(
