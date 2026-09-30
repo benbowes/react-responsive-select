@@ -73,3 +73,63 @@ describe('MultiSelect', () => {
     });
   });
 });
+
+describe('onListen', () => {
+  test('invokes onListen with isOpen=true when selecting and deselecting options in multiselect while open', () => {
+    const onListenSpy = jest.fn();
+    const wrapper = render(
+      <Select
+        multiselect={true}
+        noSelectionLabel="Please select"
+        name="cars"
+        options={BASIC_OPTIONS}
+        onListen={onListenSpy}
+      />
+    );
+
+    // Initial mount action is INITIALISE (isOpen=false)
+    expect(onListenSpy).toHaveBeenCalledWith(false, 'cars', 'INITIALISE');
+
+    // Open options panel
+    const select = wrapper.getByTestId('cars');
+    fireEvent.mouseDown(select);
+    expect(onListenSpy).toHaveBeenLastCalledWith(true, 'cars', 'SET_OPTIONS_PANEL_OPEN');
+
+    // Select option 8 (Volvo) - overlay remains visible and isOpen must remain true
+    const rrsOption8 = wrapper.getByTestId('rrs-option_cars_8');
+    fireEvent.mouseDown(rrsOption8);
+    expect(onListenSpy).toHaveBeenLastCalledWith(true, 'cars', 'SET_MULTISELECT_OPTIONS');
+
+    // Select option 9 (Zonda) - isOpen must remain true
+    const rrsOption9 = wrapper.getByTestId('rrs-option_cars_9');
+    fireEvent.mouseDown(rrsOption9);
+    expect(onListenSpy).toHaveBeenLastCalledWith(true, 'cars', 'SET_MULTISELECT_OPTIONS');
+
+    // Deselect option 8 (Volvo) - isOpen must remain true
+    fireEvent.mouseDown(rrsOption8);
+    expect(onListenSpy).toHaveBeenLastCalledWith(true, 'cars', 'SET_MULTISELECT_OPTIONS');
+
+    // Close panel by clicking the label/overlay
+    const label = wrapper.getByTestId('rrs-label_cars');
+    fireEvent.mouseDown(label);
+    expect(onListenSpy).toHaveBeenLastCalledWith(false, 'cars', 'SET_OPTIONS_PANEL_CLOSED');
+  });
+
+  test('invokes onListen with isOpen=false when option is selected in single-select', () => {
+    const onListenSpy = jest.fn();
+    const wrapper = render(<Select name="cars" options={BASIC_OPTIONS} onListen={onListenSpy} />);
+
+    // Initial mount action is INITIALISE (isOpen=false)
+    expect(onListenSpy).toHaveBeenCalledWith(false, 'cars', 'INITIALISE');
+
+    // Open options panel
+    const select = wrapper.getByTestId('cars');
+    fireEvent.mouseDown(select);
+    expect(onListenSpy).toHaveBeenLastCalledWith(true, 'cars', 'SET_OPTIONS_PANEL_OPEN');
+
+    // Select option 8 (Volvo) - panel closes, isOpen must be false
+    const rrsOption8 = wrapper.getByTestId('rrs-option_cars_8');
+    fireEvent.mouseDown(rrsOption8);
+    expect(onListenSpy).toHaveBeenLastCalledWith(false, 'cars', 'SET_SINGLESELECT_OPTIONS');
+  });
+});

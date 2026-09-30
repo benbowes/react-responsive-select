@@ -283,6 +283,30 @@ describe('Keyboard MultiSelect', () => {
       });
     });
 
+    test('hitting **ENTER** key on highlighted option while open should invoke onListen with isOpen=true', () => {
+      const onListenSpy = jest.fn();
+      const wrapper = render(<Select multiselect name="cars" options={MULTISELECT_OPTIONS} onListen={onListenSpy} />);
+
+      const select = wrapper.getByTestId('cars');
+
+      // Focus
+      act(() => select.focus());
+
+      // Open panel
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+
+      // Navigate down to Fiat
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+      fireEvent.keyDown(select, { key: 'Down', keyCode: 40 });
+
+      // Select it with Enter key
+      fireEvent.keyDown(select, { key: 'Enter', keyCode: 13 });
+
+      // Verify onListen was called with isOpen=true for SET_MULTISELECT_OPTIONS
+      expect(onListenSpy).toHaveBeenLastCalledWith(true, 'cars', 'SET_MULTISELECT_OPTIONS');
+    });
+
     test("hitting **ESC** key should close the options panel and keep the user's last selection, or the initial selection, but not blur the Select Input", () => {
       const submitSpy = jest.fn();
       const wrapper = render(
