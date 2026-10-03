@@ -81,14 +81,7 @@ export class Select extends React.Component<IProps, IState> {
 
     /* Allow user to listen to actions being fired */
     if (onListen) {
-      const isOpen =
-        Boolean(nextState.isOptionsPanelOpen) ||
-        [
-          actionTypes.SET_OPTIONS_PANEL_OPEN,
-          actionTypes.SET_NEXT_SELECTED_INDEX,
-          actionTypes.SET_NEXT_SELECTED_INDEX_ALPHA_NUMERIC,
-          actionTypes.SET_IS_DRAGGING,
-        ].some((actionType: string) => action.type === actionType);
+      const isOpen = Boolean(nextState.isOptionsPanelOpen);
 
       onListen(isOpen, name, action.type);
     }
