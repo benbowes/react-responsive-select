@@ -45,4 +45,31 @@ describe('MultiSelect', () => {
     const labelText = wrapper.getByTestId('rrs-label_cars').textContent;
     expect(labelText && labelText.trim()).toEqual('Zonda+ 2');
   });
+
+  test('MouseDown on an option will trigger onChange with selected options and altered: true', () => {
+    const changeSpy = jest.fn();
+    const wrapper = render(
+      <Select
+        multiselect={true}
+        noSelectionLabel="Please select"
+        name="cars"
+        options={BASIC_OPTIONS}
+        onChange={changeSpy}
+      />
+    );
+
+    // Open options panel
+    const select = wrapper.getByTestId('cars');
+    fireEvent.mouseDown(select);
+
+    // Click option 8 (Volvo)
+    const rrsOption8 = wrapper.getByTestId('rrs-option_cars_8');
+    fireEvent.mouseDown(rrsOption8);
+
+    expect(changeSpy).toHaveBeenCalledTimes(1);
+    expect(changeSpy).toHaveBeenCalledWith({
+      options: [{ name: 'cars', text: 'Volvo', value: 'volvo' }],
+      altered: true,
+    });
+  });
 });
