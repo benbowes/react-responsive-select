@@ -41,13 +41,17 @@ export class Select extends React.Component<IProps, IState> {
     });
   }
 
-  public componentDidUpdate(_prevProps: IProps, prevState: IState): boolean {
+  public componentDidUpdate(prevProps: IProps, prevState: IState): boolean {
     const { singleSelectSelectedOption, multiSelectSelectedOptions, multiselect, altered } = this.state;
     const { onChange } = this.props;
 
     if (this.firstLoad) {
       this.firstLoad = false;
       return false;
+    }
+
+    if (prevProps.disabled !== this.props.disabled) {
+      this.setState({ disabled: this.props.options.length === 0 || Boolean(this.props.disabled) });
     }
 
     if (multiselect) {
